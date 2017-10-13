@@ -1,0 +1,2425 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="React Native, iOS" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Better Late Than Never">
+<meta property="og:type" content="website">
+<meta property="og:title" content="FlyOceanFish&#39; Blog">
+<meta property="og:url" content="http://yoursite.com/page/2/index.html">
+<meta property="og:site_name" content="FlyOceanFish&#39; Blog">
+<meta property="og:description" content="Better Late Than Never">
+<meta property="og:locale" content="zh-Hans">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="FlyOceanFish&#39; Blog">
+<meta name="twitter:description" content="Better Late Than Never">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/page/2/"/>
+
+
+
+
+
+  <title>FlyOceanFish' Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left 
+  page-home">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">FlyOceanFish' Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">You Believe,You Can</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+  <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/13/iOS中3DES加密解密/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="FlyOceanFish">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FlyOceanFish' Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/10/13/iOS中3DES加密解密/" itemprop="url">iOS中3DES加密解密</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-13T21:32:34+08:00">
+                2017-10-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/10/13/iOS中3DES加密解密/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/10/13/iOS中3DES加密解密/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="加密"><a href="#加密" class="headerlink" title="加密"></a>加密</h2><p>加密分为对称加密和非对称加密。</p>
+<ul>
+<li>对称性加密算法，信息接收双方都需事先知道密匙和加解密算法且其密匙是相同的，之后便是对数据进行 加解密了;</li>
+<li>非对称算法与之不同，发送双方A,B事先均生成一堆密匙，然后A将自己的公有密匙发送给B，B将自己的公有密匙发送给A，如果A要给B发送消息，则先需要用B的公有密匙进行消息加密，然后发送给B端，此时B端再用自己的私有密匙进行消息解密，B向A发送消息时为同样的道理。</li>
+</ul>
+<h4 id="对称加密"><a href="#对称加密" class="headerlink" title="对称加密"></a>对称加密</h4><p>对称加密常见的AES、DES、3DES。DES是一种分组数据加密技术（先将数据分成固定长度的小数据块，之后进行加密），速度较快，适用于大量数据加密，而3DES是一种基于DES的加密算法，使用3个不同密匙对同一个分组数据块进行3次加密，如此以使得密文强度更高;AES相比较其他两种具有更高的速度和资源使用效率。</p>
+<h4 id="非对称加密"><a href="#非对称加密" class="headerlink" title="非对称加密"></a>非对称加密</h4><p>非对称加密常见RSA、DSA、ECC。RSA和DSA的安全性及其它各方面性能都差不多，而ECC较之则有着很多的性能优越，包括处理速度，带宽要求，存储空间等等。</p>
+<p><strong><em>我们采用的是3DES，代码如下：</em></strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div></pre></td><td class="code"><pre><div class="line">#import &quot;DESTools.h&quot;</div><div class="line">#import &lt;CommonCrypto/CommonCrypto.h&gt;</div><div class="line">#import &quot;GTMBase64.h&quot;</div><div class="line">#import &quot;GTMDefines.h&quot;</div><div class="line"></div><div class="line">//加密解密的key,与后台一致</div><div class="line">#define USER_KEY @&quot;xxxxxx&quot;</div><div class="line">//初始化向量，与后台一致</div><div class="line">#define initIv    @&quot;xxx&quot;</div><div class="line"></div><div class="line">@implementation DESTools</div><div class="line"></div><div class="line">+ (NSString *)encryptWithText:(NSString *)sText</div><div class="line">&#123;</div><div class="line">    //kCCEncrypt 加密</div><div class="line">    return [self encrypt:sText encryptOrDecrypt:kCCEncrypt key:USER_KEY];</div><div class="line">&#125;</div><div class="line"></div><div class="line">+ (NSString *)decryptWithText:(NSString *)sText</div><div class="line">&#123;</div><div class="line">    //kCCDecrypt 解密</div><div class="line">    return [self encrypt:sText encryptOrDecrypt:kCCDecrypt key:USER_KEY];</div><div class="line">&#125;</div><div class="line"></div><div class="line">+ (NSString *)encrypt:(NSString *)sText encryptOrDecrypt:(CCOperation)encryptOperation key:(NSString *)key</div><div class="line">&#123;</div><div class="line">    const void *dataIn;</div><div class="line">    size_t dataInLength;</div><div class="line"></div><div class="line">    if (encryptOperation == kCCDecrypt)//传递过来的是decrypt 解码</div><div class="line">    &#123;</div><div class="line">        //解码 base64</div><div class="line">        NSData *decryptData = [GTMBase64 decodeData:[sText dataUsingEncoding:NSUTF8StringEncoding]];//转成utf-8并decode</div><div class="line">        dataInLength = [decryptData length];</div><div class="line">        dataIn = [decryptData bytes];</div><div class="line">    &#125;</div><div class="line">    else  //encrypt</div><div class="line">    &#123;</div><div class="line">        NSData* encryptData = [sText dataUsingEncoding:NSUTF8StringEncoding];</div><div class="line">        dataInLength = [encryptData length];</div><div class="line">        dataIn = (const void *)[encryptData bytes];</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /*</div><div class="line">     DES加密 ：用CCCrypt函数加密一下，然后用base64编码下，传过去</div><div class="line">     DES解密 ：把收到的数据根据base64，decode一下，然后再用CCCrypt函数解密，得到原本的数据</div><div class="line">     */</div><div class="line">    CCCryptorStatus ccStatus;</div><div class="line">    uint8_t *dataOut = NULL; //可以理解位type/typedef 的缩写（有效的维护了代码，比如：一个人用int，一个人用long。最好用typedef来定义）</div><div class="line">    size_t dataOutAvailable = 0; //size_t  是操作符sizeof返回的结果类型</div><div class="line">    size_t dataOutMoved = 0;</div><div class="line"></div><div class="line">    dataOutAvailable = (dataInLength + kCCBlockSizeDES) &amp; ~(kCCBlockSizeDES - 1);</div><div class="line">    dataOut = malloc( dataOutAvailable * sizeof(uint8_t));</div><div class="line">    memset((void *)dataOut, 0x0, dataOutAvailable);//将已开辟内存空间buffer的首 1 个字节的值设为值 0</div><div class="line"></div><div class="line">    const void *vkey = (const void *) [key UTF8String];</div><div class="line">    const void *iv = (const void *) [initIv UTF8String];</div><div class="line"></div><div class="line">    //CCCrypt函数 加密/解密</div><div class="line">    ccStatus = CCCrypt(encryptOperation,//  加密/解密</div><div class="line">                       kCCAlgorithm3DES,//  加密根据哪个标准（des，3des，aes。。。。）</div><div class="line">                       kCCOptionPKCS7Padding,//  选项分组密码算法(des:对每块分组加一次密  3DES：对每块分组加三个不同的密)</div><div class="line">                       vkey,  //密钥    加密和解密的密钥必须一致</div><div class="line">                       kCCKeySize3DES,//   DES 密钥的大小（kCCKeySizeDES=8）</div><div class="line">                       iv, //  可选的初始矢量</div><div class="line">                       dataIn, // 数据的存储单元</div><div class="line">                       dataInLength,// 数据的大小</div><div class="line">                       (void *)dataOut,// 用于返回数据</div><div class="line">                       dataOutAvailable,</div><div class="line">                       &amp;dataOutMoved);</div><div class="line"></div><div class="line">    NSString *result = nil;</div><div class="line"></div><div class="line">    if (encryptOperation == kCCDecrypt)//encryptOperation==1  解码</div><div class="line">    &#123;</div><div class="line">        //得到解密出来的data数据，改变为utf-8的字符串</div><div class="line">        result = [[NSString alloc] initWithData:[NSData dataWithBytes:(const void *)dataOut length:(NSUInteger)dataOutMoved] encoding:NSUTF8StringEncoding] ;</div><div class="line">    &#125;</div><div class="line">    else //encryptOperation==0  （加密过程中，把加好密的数据转成base64的）</div><div class="line">    &#123;</div><div class="line">        //编码 base64</div><div class="line">        NSData *data = [NSData dataWithBytes:(const void *)dataOut length:(NSUInteger)dataOutMoved];</div><div class="line">        result = [GTMBase64 stringByEncodingData:data];</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    return result;</div><div class="line">&#125;</div><div class="line">@end</div></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/13/React Native源码分析原理（一）(基于0.48版本)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="FlyOceanFish">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FlyOceanFish' Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/10/13/React Native源码分析原理（一）(基于0.48版本)/" itemprop="url">React Native源码分析原理（一）(基于0.48版本)</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-13T21:32:34+08:00">
+                2017-10-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/React-Native/" itemprop="url" rel="index">
+                    <span itemprop="name">React Native</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/10/13/React Native源码分析原理（一）(基于0.48版本)/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/10/13/React Native源码分析原理（一）(基于0.48版本)/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <ul>
+<li><a href="http://www.jianshu.com/p/8324b379c020" target="_blank" rel="external">React Native源码分析原理（一）(基于0.48版本)</a></li>
+<li><a href="http://www.jianshu.com/p/0688b24950f4" target="_blank" rel="external">React Native源码分析原理（二）(基于0.48版本)</a><h3 id="React和React-Native初步认识"><a href="#React和React-Native初步认识" class="headerlink" title="React和React Native初步认识"></a>React和React Native初步认识</h3>说起Facebook的React Native就不得不说一下React，React是个什么东东呢？<blockquote>
+<p>React 是一个用于构建用户界面的 JAVASCRIPT 库。<br>React主要用于构建UI，很多人认为 React 是 MVC 中的 V（视图）。<br>React 起源于 Facebook 的内部项目，用来架设 Instagram 的网站，并于 2013 年 5 月开源。<br>React 拥有较高的性能，代码逻辑非常简单，越来越多的人已开始关注和使用它。</p>
+</blockquote>
+</li>
+</ul>
+<p><strong><em>React</em></strong></p>
+<blockquote>
+<p>1.声明式设计 −React采用声明范式，可以轻松描述应用。<br>2.高效 −React通过对DOM的模拟，最大限度地减少与DOM的交互。<br>3.灵活 −React可以与已知的库或框架很好地配合。<br>4.JSX − JSX 是 JavaScript 语法的扩展。React 开发不一定使用 JSX ，但我们建议使用它。<br>5.组件 − 通过 React 构建组件，使得代码更加容易得到复用，能够很好的应用在大项目的开发中。<br>6.单向响应的数据流 − React 实现了单向响应的数据流，从而减少了重复代码，这也是它为什么比传统数据绑定更简单。</p>
+</blockquote>
+<p>根据以上内容相信大家对React有了一个初步认识。其实高效、简单使用是React最大的特点了。</p>
+<p><strong><em>React Native</em></strong></p>
+<p>React Native说白了就是让React拥有了与原生APP交互，能够写接近原生APP的功能，就像它的两个单词一样，一个React，一个Native。有了它就能让js和oc或Android能够方便的相互调用，实现了能够通过js开发接近原生的APP的功能。是的，非常接近原生APP的体检，尤其绘制出的视图全部都是原生的！但是它与混合开发是不同的，一般我们说的混合开发是原生APP和html混合开发，但是体验上是比较差的。React Native也秉承了React的理念 <code>Learn Once, Write Anywhere</code>,而不是混合开发所追崇的<code>Write Once,Run Anywhere</code>。现在像携程、腾讯等这样的公司已经都使用了React Native写项目了，所以是时候大家也跟进一波，不管用不用，先学习攒着嘛！哈哈。毕竟技多不压身的嘛。</p>
+<h3 id="通讯框架图和几个核心类的作用"><a href="#通讯框架图和几个核心类的作用" class="headerlink" title="通讯框架图和几个核心类的作用"></a>通讯框架图和几个核心类的作用</h3><p>首先让我们看看React Native的js与oc交互框架（个人整理的，非官方的）。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/6644906-cb4d495b7b74ffd4.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="通讯图.001.jpeg"></p>
+<ul>
+<li><p><code>RCTCxxxBridge.h</code> oc与js之间的调用都是通过这个桥梁(0.44以前是RCTBatchedBridge.h这个类)。这个桥梁持有各个具体功能类和一个jsThread,它的作用其实就是一个调度的作用。注意所有js代码的执行都是在此jsThread中执行，这个Thread是放在runloop中的，会保持一直运行的。此线程也是大家常听说的js线程。一个项目中最好只有一个Bridge，要不是比较消耗性能的。</p>
+<ul>
+<li><code>JSCExecutor.h</code> 所有的js与oc的通信都是通过此类来实现的</li>
+<li><code>BatchedBridge.js</code>这个js文件仅仅是一个导入文件。导入了<code>MessageQueue.js</code>这个文件。<ul>
+<li><code>MessageQueue.js</code>这个文件是js端与oc通信的一个桥梁文件，里边有个计时器将要调用oc方法的事件放入一个queue中，当oc没有及时的在消息队列中调js的时候, 大于5ms后js就会调用这个回调, 主动调用oc</li>
+</ul>
+</li>
+<li><code>NativeModule.js</code> 实现了js调用oc代码。大家注意这个调用其实都是oc先调用js文件，执行js，在这时候传入适当的参数，然后实现了js调用oc方法哦。</li>
+</ul>
+</li>
+<li><p><code>RCTBridgeModule.h</code> 这个类非常重要，只要想与js实现通信，这个协议必须实现。如果不实现此协议我们js在调用原生方法就会报错，RN在内部会将第一检验的就是类有没有实现这个协议。除了一个标识的作用，还给我们提供了几个宏供我们使用。这几个宏也是js调用原生的具体实现</p>
+</li>
+<li><code>RCTUIManager.h</code>    <code>UIManage.js</code>这两个类一个是在oc端，一个是在js端，通过这两个类RN将我们的component转换成了我们原生的视图类。该类实现了视图的创建、查找、删除等功能。创建View的时候，每个View都有一个</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/13/iOS中将数字用符合隔开(比如逗号)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="FlyOceanFish">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FlyOceanFish' Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/10/13/iOS中将数字用符合隔开(比如逗号)/" itemprop="url">pod install vs. pod update</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-13T21:32:34+08:00">
+                2017-10-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/10/13/iOS中将数字用符合隔开(比如逗号)/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/10/13/iOS中将数字用符合隔开(比如逗号)/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>这次项目中遇到一个需求，将数字每隔3个用逗号隔开。因为如果数字太大确实看着有点眼花。<br>　　所以就想着写了一个NSString的category，用起来效果还不错，代码如下：</p>
+<h3 id="h的声明"><a href="#h的声明" class="headerlink" title=".h的声明"></a>.h的声明</h3><pre><code>#import &lt;Foundation/Foundation.h&gt;
+
+@interface NSString (NumberSplitWithComma)
+/**
+ *数字以逗号隔开 例：123，321.11
+ */
+- (NSString *)ld_numberSplitWithComma;
+/**
+ *@param puctutation 符合
+ *数字以某个符合隔开 例：123，321.11
+ */
+- (NSString *)ld_numberSplitWithPunctutaion:(NSString *)puctutation;
+@end
+</code></pre><h3 id="m文件的实现"><a href="#m文件的实现" class="headerlink" title=".m文件的实现"></a>.m文件的实现</h3><pre><code>#import &quot;NSString+NumberSplitWithComma.h&quot;
+
+@implementation NSString (NumberSplitWithComma)
+
+- (NSString *)ld_numberSplitWithComma{
+    if ([self private_isNumber]) {
+        NSMutableString *muString = [NSMutableString tringWithString:self];
+        return [self private_insert:muString withPunctuation:@&quot;,&quot;];
+    }else{
+        return self;
+    }
+}
+- (NSString *)ld_numberSplitWithPunctutaion:(NSString *)puctutation{
+    if ([self private_isNumber]) {
+         NSMutableString *muString = [NSMutableString stringWithString:self];
+         return [self private_insert:muString withPunctuation:puctutation];
+     }else{
+         return self;
+     }
+}
+- (NSMutableString *)private_insert:(NSMutableString *)string withPunctuation:(NSString *)punctuation{
+    NSUInteger maxLength = string.length;
+    if ([string containsString:punctuation]) {
+        maxLength = [string rangeOfString:punctuation].location;
+    }else if ([string containsString:@&quot;.&quot;]){
+        maxLength = [string rangeOfString:@&quot;.&quot;].location;
+    }
+    if (maxLength-([string containsString:@&quot;-&quot;]?1:0)&gt;3) {
+        [string insertString:punctuation atIndex:(maxLength-3)];
+        [self private_insert:string withPunctuation:punctuation];
+    }else{
+        return string;
+    }
+    return string;
+}
+ - (Boolean)private_isNumber{
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@&quot;SELF MATCHES %@&quot;,@&quot;^[-0-9.]*$&quot;];
+    if ([predicate evaluateWithObject:self]) {
+        return YES;
+     }
+    return NO;
+ }
+</code></pre><h1 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h1><p>　　有简友反应可以使用NSNumberFormatter，然后研究了一番，确实能够很方便的达到效果。<br>1、通过使用formatter style，苹果帮我们定义好的格式。</p>
+<pre><code>NSNumberFormatter *numberFormatter =   [[NSNumberFormatter alloc] init];
+[numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
+NSString *formattedNumberString = [numberFormatter stringFromNumber:@122344.4563];
+NSLog(@&quot;formattedNumberString: %@&quot;, formattedNumberString);
+// Output for locale en_US: &quot;formattedNumberString: formattedNumberString: 122,344.453&quot;
+</code></pre><p>NSNumberFormatter 的numberStyle是一个枚举</p>
+<pre><code>    typedef NS_ENUM(NSUInteger, NSNumberFormatterStyle) {
+NSNumberFormatterNoStyle = kCFNumberFormatterNoStyle,四舍五入
+NSNumberFormatterDecimalStyle = kCFNumberFormatterDecimalStyle,金额 100,200,300.123
+NSNumberFormatterCurrencyStyle = kCFNumberFormatterCurrencyStyle,货币 $100,200,300.12
+NSNumberFormatterPercentStyle = kCFNumberFormatterPercentStyle,百分比 12%
+NSNumberFormatterScientificStyle = kCFNumberFormatterScientificStyle,科学计数法 1.234E8
+NSNumberFormatterSpellOutStyle = kCFNumberFormatterSpellOutStyle,口语 One...
+NSNumberFormatterOrdinalStyle NS_ENUM_AVAILABLE(10_11, 9_0) = kCFNumberFormatterOrdinalStyle,
+NSNumberFormatterCurrencyISOCodeStyle NS_ENUM_AVAILABLE(10_11, 9_0) = kCFNumberFormatterCurrencyISOCodeStyle,
+NSNumberFormatterCurrencyPluralStyle NS_ENUM_AVAILABLE(10_11, 9_0) = kCFNumberFormatterCurrencyPluralStyle,
+NSNumberFormatterCurrencyAccountingStyle NS_ENUM_AVAILABLE(10_11, 9_0) = kCFNumberFormatterCurrencyAccountingStyle,
+};
+</code></pre><p>２、通过一个格式字符串自定义格式</p>
+<pre><code>NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+[numberFormatter setPositiveFormat:@&quot;###0.##&quot;];
+NSString *formattedNumberString = [numberFormatter stringFromNumber:@122344.4563];
+NSLog(@&quot;formattedNumberString: %@&quot;, formattedNumberString);
+// Output for locale en_US: &quot;formattedNumberString: formattedNumberString: 122,344.45&quot;
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/13/iOS小知识积累(长期更新)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="FlyOceanFish">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FlyOceanFish' Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/10/13/iOS小知识积累(长期更新)/" itemprop="url">iOS小知识积累(长期更新)</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-13T21:32:34+08:00">
+                2017-10-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/10/13/iOS小知识积累(长期更新)/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/10/13/iOS小知识积累(长期更新)/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><strong><em>以前工作中有很多小的知识点，但是有时候只是用了，没有真正积累下来，有时候也会忘记。所以写这篇文章就是慢慢的将以前小的知识点或者之后用到的用文字的形式记录下来。【码字、分享不容易，各位的关注是小的动力！动动亲的小手指关注一下我哈。】</em></strong><br>1、_Nullable和_Nonnull(Xcode 6.3 )<br>_Nullable表示可能是NULL或nil；_Nonnull表示不应该是NULL或nil。如果不遵循会有警告<br>如果需要每个属性或每个方法都去指定nonnull和nullable，是一件非常繁琐的事。苹果为了减轻我们的工作量，专门提供了两个宏：NS_ASSUME_NONNULL_BEGIN和NS_ASSUME_NONNULL_END。<br>2、__kindof(Xcode 6.3 )<br>表示我们不用强转类型了。比如：</p>
+<pre><code>- (__kindof UITableViewCell *)dequeueReusableCellWithIdentifier:(NSString *)identifier;
+</code></pre><p>我们我可以直接用某个cell接收，不用再写（SomeCell*）这种形式强转了。</p>
+<pre><code>@property (nonatomic, readonly, copy) NSArray&lt;__kindof UIView *&gt; *subviews;
+</code></pre><p>这样，写下面的代码时就没有任何警告了：</p>
+<pre><code>UIButton *button = view.subviews.lastObject;
+</code></pre><p>3、instancetype、id、NSObject<br>instancetype 与 id 不一样, instancetype 只能在方法声明中作为返回类型使用。我们写方法返回的时候用instancetype而不用id了。instancetype代表当前类的类型。</p>
+<ul>
+<li>id关键字在编译时不被检查，而NSObject在编译时会被检查是否被调用一些错误方法。</li>
+<li>id可以是任何对象，包括非NSObject对象</li>
+<li>定义id的时候不使用*，是一个指针，NSObject却需要。</li>
+</ul>
+<p>4、Storyboard References (iOS 9)<br>可以帮我们简化Storyboard,平时我们的做法是将一个大的Storyboard人为的去分成几个小的，然后代码组装起来。Storyboard References可以帮我们简化这一步。如果本身有一个Storyboard很负责，可以选择其中联系很大的一部分，然后点击 Xcode 的菜单栏，选择”Editor-&gt;Refactor to Storyboard”。这时候就有一个独立的Storyboard了。<br>5、打印当前ViewController 的名字<br>这个对于我们拿到一个陌生的代码，调试的时候非常方便。比如我们运行一个APP，看到一个界面，但是想知道对应哪个ViewController的时候。</p>
+<ul>
+<li><p>添加Symbolic Exception<br><img src="http://upload-images.jianshu.io/upload_images/6644906-649d65ae020b72cb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="A7AB9D87-CF83-4F63-8D66-9C5A113B76ED.png"></p>
+</li>
+<li><p>添加Symob和Action<br><img src="http://upload-images.jianshu.io/upload_images/6644906-6aca286b93c6de2b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="73D79C18-5E28-4A87-B039-4DDA566FD5F7.png"></p>
+</li>
+</ul>
+<p>6、Autolayout中Intrinstic Size、Compression Resistance Priority、Compression Resistance Priority</p>
+<ul>
+<li>Intrinstic Size就是不用设置frame，视图通过内容、字体大小等属性就能获得的大小。我们设置的Content Hugging Priority和Compression Resistance Priority都是针对于这个的。</li>
+<li>Content Hugging Priority 内容拥抱，就是想变小的优先级</li>
+<li>Compression Resistance Priority抗压缩，就是想变大的优先级</li>
+</ul>
+<p><img src="http://upload-images.jianshu.io/upload_images/6644906-625f6cbcf66800cf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="A90EC537-5342-47B0-8207-9F3DBC0AB8A3.png"><br>如上图视图内容比文字内容宽，这个时候我们想要视图变小，与文字大小一样（此时intrinsic的大小就是文字区域部分的大小）。所以只要改变Content Hugging Priority的Horizontal的优先级变大就好了<br>7、topLayoutGuide&amp;&amp; bottomLayoutGuide<br>这两个属性可以理解为性表示不希望被透明的状态栏或导航栏（UITabBar、UIToolBar、NavigationBar等）遮挡的内容范围的最高或最低位置。这个属性的值是它的length属性的值。如下：</p>
+<pre><code>[view mas_makeConstraints:^(MASConstraintMaker *make) {
+    make.top.mas_equalTo(self.mas_topLayoutGuideBottom);
+    make.leading.mas_equalTo(self.view.mas_leading);
+    make.trailing.mas_equalTo(self.view.mas_trailing);
+    make.bottom.mas_equalTo(self.mas_bottomLayoutGuideTop);
+}];
+</code></pre><p>8、Autolayout中约束LayoutConstraint的有效无效（8.0）<br>有时候我们经常遇到一个view在不同的场景下约束不同，通常做法就是在不同场景下先删除再增加这样操作，这样效率反而不高。我们可以通过active这个属性设置生效不生效。</p>
+<pre><code>self.mLayoutConstraintWidth.active = YES;
+</code></pre><p>9、隐藏导航栏返回按钮旁边的文字</p>
+<pre><code>[[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(0, -60) forBarMetrics:UIBarMetricsDefault];
+</code></pre><p>10、替换返回按钮图片<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">UIImage *bgImage = [[UIImage imageNamed:@&quot;return&quot;] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];</div><div class="line">[[UINavigationBar appearance] setBackIndicatorImage:bgImage];</div><div class="line">[[UINavigationBar appearance] setBackIndicatorTransitionMaskImage:bgImage];</div></pre></td></tr></table></figure></p>
+<p>11、头文件导入<br>@class 在.h文件时引入其他.h文件的时候，效率更高</p>
+<p>#include “” 自己写的文件</p>
+<p>#include &lt;&gt; 引入系统的</p>
+<p>#import &lt;&gt; 用于包含系统文件</p>
+<p>#import “”自己写的文件，搜索路径更广<br>import比include更好，能够避免文件的重复导入，效率更高<br>不过还有一个更好的的方式<a href="https://stackoverflow.com/questions/18947516/import-vs-import-ios-7/18947634#" target="_blank" rel="external">@import</a>，这种方式让我们不必在设置里边添加包了，它会帮我们自动关联。<br>12、内存管理语义</p>
+<ul>
+<li><strong><em>assign</em></strong> “设置方法”只会执行针对”纯量类型”(例如CGFloat或NSInteger等)的简单赋值操作</li>
+<li><strong><em>strong</em></strong> 此特质表明该属性定义了一种”拥有关系”。为这种属性设置新值时，设置方法会先保留新值，并释放旧值，然后再将新值设置上去。</li>
+<li><strong><em>weak</em></strong> （5.0以上，可以说是对unsafe_unretained的一个升级,更安全，但是由于要遍历是否已经销毁，并且设置成nil，所以是消耗性能）此特质表明该属性定义了一种”非拥有关系”。为这种属性设置新值时，设置方法既不保留新值，也不释放旧值。此特质同assign类似，然而在属性所指的对象遭到摧毁时，属性值也会清空(nil)。</li>
+<li><strong><em>unsafe_unretained</em></strong> (5.0以下必须使用而不能使用weak，优点比weak快，缺点容易造成野指针)此特质的语义和assign相同，但是它使用于”对象类型”，该特质表达一种”非拥有关系”，当对象遭到摧毁时，属性值不会自动清空（”不安全”,unsafe）这一点与weak有区别。</li>
+<li><strong><em>copy</em></strong> 此特质所表达的所属关系与strong类似。然而设置方法并不保留新值，而是将其”拷贝”。警惕NSMutableArray为copy的时候奔溃问题。copy之后是NSArray添加对象会crash。<br>13、查找或判断xib是否存在<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">NSString *path = [[NSBundle mainBundle] pathForResource:NSStringFromClass(className) ofType:@&quot;nib&quot;];</div><div class="line">Boolean exist = [[NSFileManager defaultManager] fileExistsAtPath:path];</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>备注：其实关键就是Typ是”nib”而不是”xib”。因为我们打出的包，系统将我们的xib文件编译成了以nib为结尾的文件。<br>14、UI_APPEARANCE_SELECTOR<br>当我们自定义控件的时候可以在属性后边增加这个声明。代表支持appearance方法。如果你自己调用了setXX方法，则appearance方法失效。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">@property (nonatomic, assign) CGFloat selectionIndicatorHeight UI_APPEARANCE_SELECTOR;</div></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[XXXClass appearance].selectionIndicatorHeight = xxxx</div></pre></td></tr></table></figure>
+<p>15、旋转动画方向问题<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">button.transform = CGAffineTransformRotate(button.transform,M_PI);</div></pre></td></tr></table></figure></p>
+<p>我们先旋转180顺时针<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">button.transform = CGAffineTransformIdentity;</div></pre></td></tr></table></figure></p>
+<p>当我们调用上句话的时候，是顺时针旋转180返回原位置，但是很多时候我们想原路返回，其实就是想逆时针返回。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">button.transform = CGAffineTransformRotate(button.transform,M_PI-0.0001);</div></pre></td></tr></table></figure></p>
+<p>只要这么设置就会逆时针返回了。旋转动画选择了最短路径返回</p>
+<p>16、纯代码布局，添加约束<br>如果我们使用纯代码布局，则需要以下代码约束才能起作用；默认左右是有16像素间距的，设置左右各-16才能靠边(这个如果有其他好办法可以留言给我)</p>
+<pre><code>self.view.translatesAutoresizingMaskIntoConstraints = NO;
+</code></pre><p>17、NSDate和NSDateFormatter<br>NSDate：是获取的时间没有时区概念，所以获取的是0时区的时间。</p>
+<pre><code>[NSDate date]//获取的时间与当前时间差8个小时
+</code></pre><p>NSDateFormatter：将日期格式成我们想要的。同时会根据时区、地域给我们做相应的计算。(看注释)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">NSDateFormatter *formatter = [[NSDateFormatter alloc] init];</div><div class="line">formatter.dateFormat = @&quot;yyyy-MM-dd HH:mm:ss&quot;;</div><div class="line">NSTimeZone *timeZone = [NSTimeZone localTimeZone];</div><div class="line">//  formatter.locale = [NSLocale currentLocale];</div><div class="line"> formatter.timeZone = timeZone;</div><div class="line">NSDate *currentDate = [NSDate date];</div><div class="line">NSString *currentString = [formatter stringFromDate:currentDate];//会将currentDate增加8个小时，获取我们当前时区的时间</div><div class="line">NSDate *date = [formatter dateFromString:@&quot;2017-8-31 9:51:00&quot;];//获取的date是针对0时区的时间，所以会减去8个小时</div></pre></td></tr></table></figure>
+<p>以上代码可以看到我们可以设置timeZone和locale。如果我们只设置local照样能够输出我们想要的结果。但是二者有什么区别呢？</p>
+<ul>
+<li>local是设置区域的。配合setTimeStyle:、setDateStyle:这些方法可以控制日期输出不同的格式。因为每个地方的格式不同。  <a href="https://developer.apple.com/library/content/documentation/MacOSX/Conceptual/BPInternational/InternationalizingYourCode/InternationalizingYourCode.html" target="_blank" rel="external">Formatting Data Using the Locale Settings</a></li>
+</ul>
+<p><img src="http://upload-images.jianshu.io/upload_images/6644906-320495bdfa8f9c47.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="7FAEF832-CBCD-41A2-A4EE-4056FBF1B931.png"></p>
+<ul>
+<li>timeZone设置时区的。主要用来将时间转换成不同时区。</li>
+</ul>
+<p>所以在代码格式化的时候，建议设置timezone来格式化我们的时期</p>
+<p>18、Xcode关闭控制台打印不用信息</p>
+<p> Xcode-&gt;Edit Scheme -&gt; Run -&gt; Arguments, 在Environment Variables里边添加 OS_ACTIVITY_MODE ＝ disable</p>
+<p>19、NSObject中isKindOfClass、isMemberOfClass、isSubclassOfClass区别</p>
+<p>isSubclassOfClass和isKindOfClass的作用基本上是一致的，只不过一个是类方法，一个是对象方法。<br>isKindOfClass来确定一个对象是否是一个类的成员，或者是派生自该类的成员,<br>isMemberOfClass只能确定一个对象是否是当前类的成员.<br>isMemberOfClass 筛选条件更为苛刻，只有当类型完全匹配的时候才会返回YES。</p>
+<p>20、判断当前queue是否是main queue<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">static void *mainQueueKey = &amp;mainQueueKey;</div><div class="line">static dispatch_once_t onceToken;</div><div class="line">dispatch_once(&amp;onceToken, ^&#123;</div><div class="line">  dispatch_queue_set_specific(dispatch_get_main_queue(),</div><div class="line">                              mainQueueKey, mainQueueKey, NULL);</div><div class="line">&#125;);</div><div class="line">return dispatch_get_specific(mainQueueKey) == mainQueueKey;</div></pre></td></tr></table></figure></p>
+<p>21、为什么有的属性要用copy，而不用strong</p>
+<p>像NSString和NSArray这两类，在给变量赋值的时候，如果来源是可变字符串或可变数组的时候，使用copy能够避免原来变量对现在变量的影响。如果用strong的话，原来变量改变时同时会影响我们现在的变量。我们大多数期望的结果是两个变量相互独立，互补影响的，所以使用copy能够避免这类问题<br>22、SEL、IMP</p>
+<p>SEL 函数的ID，相当于将函数的名字用一个唯一识别符与之相对应。<br>IMP 本质是函数指针。其实就是函数的实现，我们在调用方法的时候是一层一层的查找，最终找到了IMP，如果直接调用IMP将会更有效率</p>
+<p>23、消息的转发</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/6644906-9209401db1a78dc4.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="44181-09a882edcb98d535.jpg"><br>runtime在调用方法的时候如果找不到会直接奔溃。如果在当前类找不到的时候，会开始顺序的调用系统的三个方法，如果再找不到会直接crash。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">1.+(Bool) resolveInstanceMethod:(SEL)sel // 对应实例方法</div><div class="line">  + (Bool)resolveClassMethod:(SEL)sel // 对应类方法</div><div class="line">我们可以在这个方法中调用class_addMethod将方法加入就不会crash</div><div class="line">2.- (id)forwardingTargetForSelector:(SEL)aSelector//可以改变查找方法的对象</div><div class="line">3.- (void)forwardInvocation:(NSInvocation *)anInvocation//搭配- (NSMethodSignature *)methodSignatureForSelector:(SEL)aSelector这个使用。通过传递过来的NSInvocation对象，我们可以对此重新注入调用对象、方法、参数等</div></pre></td></tr></table></figure></p>
+<p>24、<code>NSObject</code>的description和debugDescription方法<br>当我们在工程中使用model(继承NSObject)的时候，在断点或者log调试中有时候需要将对象打印到控制台中，但是我们自己写的model打印出的是对象的地址。如果需要打印出有效的信息，这时我们可以重写descrition或者debugDescription方法，打印出我们想要的信息。例如对象的所有属性的值。<strong><em>默认情况下debugDescription调用的是description方法</em></strong></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/13/iOS自定义相机界面/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="FlyOceanFish">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FlyOceanFish' Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/10/13/iOS自定义相机界面/" itemprop="url">iOS自定义相机界面</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-13T21:32:34+08:00">
+                2017-10-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/10/13/iOS自定义相机界面/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/10/13/iOS自定义相机界面/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>由于项目中需要拍照功能，但是系统原生的相机功能根本满足不了项目的需要，所以就只能自定义一个相加了。苹果再AVFoundation框架中给我们提供了各个api，我们完全可以通过这些api自定义一个满足我们需求的相机。</p>
+<h2 id="关键类"><a href="#关键类" class="headerlink" title="关键类"></a>关键类</h2><p>AVCaptureSession 负责输入流和输出流的管理。<br>AVCaptureDeviceInput 输入流。连接输入采集设备的<br>AVCaptureStillImageOutput 输出流。AVCaptureOutput的子类，主要是负责采集图片数据的，不过这个类再10.0以后废弃掉了，改用AVCapturePhotoOutput这个替换，这个类能够支持RAW格式的图片<br>AVCaptureVideoPreviewLayer 集成CALayer，负责将采集的视频展示出来的一个类，提供了一个预览功能而已</p>
+<h2 id="实现过程"><a href="#实现过程" class="headerlink" title="实现过程"></a>实现过程</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div><div class="line">199</div><div class="line">200</div><div class="line">201</div><div class="line">202</div><div class="line">203</div><div class="line">204</div><div class="line">205</div><div class="line">206</div><div class="line">207</div><div class="line">208</div><div class="line">209</div><div class="line">210</div><div class="line">211</div><div class="line">212</div><div class="line">213</div><div class="line">214</div><div class="line">215</div><div class="line">216</div><div class="line">217</div><div class="line">218</div><div class="line">219</div><div class="line">220</div><div class="line">221</div><div class="line">222</div><div class="line">223</div><div class="line">224</div><div class="line">225</div><div class="line">226</div><div class="line">227</div><div class="line">228</div><div class="line">229</div><div class="line">230</div><div class="line">231</div><div class="line">232</div><div class="line">233</div><div class="line">234</div><div class="line">235</div><div class="line">236</div><div class="line">237</div><div class="line">238</div><div class="line">239</div><div class="line">240</div><div class="line">241</div><div class="line">242</div><div class="line">243</div><div class="line">244</div><div class="line">245</div><div class="line">246</div><div class="line">247</div><div class="line">248</div><div class="line">249</div><div class="line">250</div><div class="line">251</div><div class="line">252</div><div class="line">253</div><div class="line">254</div><div class="line">255</div><div class="line">256</div><div class="line">257</div><div class="line">258</div><div class="line">259</div><div class="line">260</div><div class="line">261</div><div class="line">262</div><div class="line">263</div><div class="line">264</div><div class="line">265</div><div class="line">266</div><div class="line">267</div><div class="line">268</div><div class="line">269</div><div class="line">270</div><div class="line">271</div><div class="line">272</div><div class="line">273</div><div class="line">274</div><div class="line">275</div><div class="line">276</div><div class="line">277</div><div class="line">278</div><div class="line">279</div><div class="line">280</div><div class="line">281</div><div class="line">282</div><div class="line">283</div><div class="line">284</div><div class="line">285</div><div class="line">286</div><div class="line">287</div><div class="line">288</div><div class="line">289</div><div class="line">290</div><div class="line">291</div><div class="line">292</div><div class="line">293</div><div class="line">294</div><div class="line">295</div><div class="line">296</div><div class="line">297</div><div class="line">298</div><div class="line">299</div><div class="line">300</div><div class="line">301</div><div class="line">302</div><div class="line">303</div><div class="line">304</div><div class="line">305</div><div class="line">306</div><div class="line">307</div><div class="line">308</div><div class="line">309</div><div class="line">310</div><div class="line">311</div><div class="line">312</div><div class="line">313</div><div class="line">314</div><div class="line">315</div><div class="line">316</div><div class="line">317</div></pre></td><td class="code"><pre><div class="line">#import &quot;TakePictureViewController.h&quot;</div><div class="line">#import &lt;AVFoundation/AVFoundation.h&gt;</div><div class="line">#import &quot;UIImage+Rotate.h&quot;</div><div class="line">#import &quot;UIControl+Custom.h&quot;</div><div class="line"></div><div class="line">#define KSCREEN_WIDTH            [[UIScreen mainScreen] bounds].size.width</div><div class="line">#define KSCREEN_HEIGHT           [[UIScreen mainScreen] bounds].size.height</div><div class="line"></div><div class="line">typedef NS_ENUM(NSInteger, AVCamSetupResult ) &#123;</div><div class="line">    AVCamSetupResultSuccess,</div><div class="line">    AVCamSetupResultCameraNotAuthorized,</div><div class="line">    AVCamSetupResultSessionConfigurationFailed</div><div class="line">&#125;;</div><div class="line">@interface TakePictureViewController ()</div><div class="line">&#123;</div><div class="line">    BOOL lightOn;</div><div class="line">    AVCaptureDevice *device;</div><div class="line">    ActivityIndicatorTipView *activityView;</div><div class="line">&#125;</div><div class="line">// AVCaptureSession对象来执行输入设备和输出设备之间的数据传递</div><div class="line"></div><div class="line">@property (nonatomic, strong)AVCaptureSession *session;</div><div class="line">// AVCaptureDeviceInput对象是输入流</div><div class="line"></div><div class="line">@property (nonatomic, strong)AVCaptureDeviceInput *videoInput;</div><div class="line"></div><div class="line">// 照片输出流对象</div><div class="line"></div><div class="line">@property (nonatomic, strong)AVCaptureStillImageOutput *stillImageOutput;</div><div class="line"></div><div class="line">// 预览图层，来显示照相机拍摄到的画面</div><div class="line"></div><div class="line">@property (nonatomic, strong)AVCaptureVideoPreviewLayer *previewLayer;</div><div class="line">// 切换前后镜头的按钮</div><div class="line"></div><div class="line">@property (nonatomic, strong)UIButton *toggleButton;</div><div class="line"></div><div class="line">// 放置预览图层的View</div><div class="line">@property (nonatomic, strong)UIView *cameraShowView;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">// 用来展示拍照获取的照片</div><div class="line"></div><div class="line">@property (nonatomic, strong)UIImageView *imageShowView;</div><div class="line"></div><div class="line">@property (nonatomic,strong) UIView *overlayView;</div><div class="line"></div><div class="line">@property (nonatomic) dispatch_queue_t sessionQueue;</div><div class="line"></div><div class="line">@property (nonatomic) AVCamSetupResult setupResult;</div><div class="line"></div><div class="line">@end</div><div class="line"></div><div class="line">@implementation TakePictureViewController</div><div class="line"></div><div class="line">-(BOOL)prefersStatusBarHidden</div><div class="line">&#123;</div><div class="line">    return YES;</div><div class="line">&#125;</div><div class="line"></div><div class="line">-(instancetype)init</div><div class="line">&#123;</div><div class="line">    self = [super init];</div><div class="line">    if (self)</div><div class="line">    &#123;</div><div class="line">        [self initAll];</div><div class="line">    &#125;</div><div class="line">    return self;</div><div class="line">&#125;</div><div class="line">- (void)initAll&#123;</div><div class="line">    [self initialSession];</div><div class="line">    [self initCameraShowView];</div><div class="line">    [self.view addSubview:self.overlayView];</div><div class="line">    [self initAVDevice];</div><div class="line">    [self setUpCameraLayer];</div><div class="line">&#125;</div><div class="line">- (void)initialSession</div><div class="line">&#123;</div><div class="line">    self.session = [[AVCaptureSession alloc] init];</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (void)initCameraShowView</div><div class="line">&#123;</div><div class="line"></div><div class="line">    self.cameraShowView = [[UIView alloc] initWithFrame:self.view.frame];</div><div class="line"></div><div class="line">    [self.view addSubview:self.cameraShowView];</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 这是获取前后摄像头对象的方法</div><div class="line"></div><div class="line">- (AVCaptureDevice *)cameraWithPosition:(AVCaptureDevicePosition)position</div><div class="line">&#123;</div><div class="line">    NSArray *devices = [AVCaptureDevice devicesWithMediaType:AVMediaTypeVideo];</div><div class="line"></div><div class="line">    for (AVCaptureDevice *captureDevice in devices)</div><div class="line">    &#123;</div><div class="line">        if (captureDevice.position == position)</div><div class="line">        &#123;</div><div class="line">            return captureDevice;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    return nil;</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (AVCaptureDevice *)frontCamera</div><div class="line">&#123;</div><div class="line">    return [self cameraWithPosition:AVCaptureDevicePositionFront];</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (AVCaptureDevice *)backCamera</div><div class="line">&#123;</div><div class="line">    return [self cameraWithPosition:AVCaptureDevicePositionBack];</div><div class="line">&#125;</div><div class="line">/**</div><div class="line"> 设备手电筒</div><div class="line"> */</div><div class="line">-(void)initAVDevice</div><div class="line">&#123;</div><div class="line">    device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];</div><div class="line"></div><div class="line">    if (![device hasTorch])</div><div class="line">    &#123;</div><div class="line">        //无手电筒</div><div class="line">        [[[UIAlertView alloc] initWithTitle:@&quot;tishi&quot; message:@&quot;无手电筒&quot; delegate:nil cancelButtonTitle:@&quot;确定&quot; otherButtonTitles:nil, nil] show];</div><div class="line">    &#125;</div><div class="line">    lightOn = NO;</div><div class="line">&#125;</div><div class="line">- (void)configureSession&#123;</div><div class="line"></div><div class="line">    if ( self.setupResult != AVCamSetupResultSuccess ) &#123;</div><div class="line">        return;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    [self.session beginConfiguration];//保证对AVCaptureSession设置的原子性与commitConfiguration配对使用</div><div class="line"></div><div class="line">    self.videoInput = [[AVCaptureDeviceInput alloc] initWithDevice:[self backCamera] error:nil];</div><div class="line"></div><div class="line">    self.stillImageOutput = [[AVCaptureStillImageOutput alloc] init];</div><div class="line">     // 输出流的设置参数AVVideoCodecJPEG参数表示以JPEG的图片格式输出图片</div><div class="line">    NSDictionary *outputSettings = [[NSDictionary alloc] initWithObjectsAndKeys:AVVideoCodecJPEG,AVVideoCodecKey,@(0.1),AVVideoQualityKey,nil];</div><div class="line"></div><div class="line">    [self.stillImageOutput setOutputSettings:outputSettings];</div><div class="line"></div><div class="line">    if ([self.session canAddInput:self.videoInput])</div><div class="line">    &#123;</div><div class="line">        [self.session addInput:self.videoInput];</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    if ([self.session canAddOutput:self.stillImageOutput])</div><div class="line">    &#123;</div><div class="line">        [self.session addOutput:self.stillImageOutput];</div><div class="line">    &#125;</div><div class="line">    [self.session commitConfiguration];</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (void)viewDidLoad &#123;</div><div class="line">    [super viewDidLoad];</div><div class="line">    self.view.backgroundColor = [UIColor whiteColor];</div><div class="line">    self.sessionQueue = dispatch_queue_create(&quot;session queue&quot;, DISPATCH_QUEUE_SERIAL);</div><div class="line">    switch ( [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo] )</div><div class="line">    &#123;</div><div class="line">        case AVAuthorizationStatusAuthorized:</div><div class="line">        &#123;</div><div class="line">            break;</div><div class="line">        &#125;</div><div class="line">        case AVAuthorizationStatusNotDetermined:</div><div class="line">        &#123;</div><div class="line">            dispatch_suspend( self.sessionQueue );</div><div class="line">            [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo completionHandler:^( BOOL granted ) &#123;</div><div class="line">                if ( ! granted ) &#123;</div><div class="line">                    self.setupResult = AVCamSetupResultCameraNotAuthorized;</div><div class="line">                &#125;</div><div class="line">                dispatch_resume( self.sessionQueue );</div><div class="line">            &#125;];</div><div class="line">            break;</div><div class="line">        &#125;</div><div class="line">        default:</div><div class="line">        &#123;</div><div class="line">            self.setupResult = AVCamSetupResultCameraNotAuthorized;</div><div class="line">            break;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    dispatch_async(self.sessionQueue, ^&#123;</div><div class="line">        [self configureSession];</div><div class="line">    &#125;);</div><div class="line">&#125;</div><div class="line">- (void)viewWillAppear:(BOOL)animated</div><div class="line">&#123;</div><div class="line">    [super viewWillAppear:animated];</div><div class="line"></div><div class="line">    dispatch_async( self.sessionQueue, ^&#123;</div><div class="line">        switch ( self.setupResult )</div><div class="line">        &#123;</div><div class="line">            case AVCamSetupResultSuccess:</div><div class="line">            &#123;</div><div class="line">                [self.session startRunning];</div><div class="line">                break;</div><div class="line">            &#125;</div><div class="line">            case AVCamSetupResultCameraNotAuthorized:</div><div class="line">            &#123;</div><div class="line">                dispatch_async( dispatch_get_main_queue(), ^&#123;</div><div class="line">                    NSString *message = @&quot;请允许拍照权限，以用来扫描二维码&quot;;</div><div class="line">                    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@&quot;提示&quot; message:message preferredStyle:UIAlertControllerStyleAlert];</div><div class="line">                    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@&quot;确定&quot; style:UIAlertActionStyleCancel handler:nil];</div><div class="line">                    [alertController addAction:cancelAction];</div><div class="line">                    UIAlertAction *settingsAction = [UIAlertAction actionWithTitle:@&quot;设置&quot; style:UIAlertActionStyleDefault handler:^( UIAlertAction *action ) &#123;</div><div class="line">                        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString] options:@&#123;&#125; completionHandler:nil];</div><div class="line">                    &#125;];</div><div class="line">                    [alertController addAction:settingsAction];</div><div class="line">                    [self presentViewController:alertController animated:YES completion:nil];</div><div class="line">                &#125; );</div><div class="line">                break;</div><div class="line">            &#125;</div><div class="line">            case AVCamSetupResultSessionConfigurationFailed:</div><div class="line">            &#123;</div><div class="line">                dispatch_async( dispatch_get_main_queue(), ^&#123;</div><div class="line">                    NSString *message = @&quot;没有拍照权限，所以不能扫描二维码&quot;;</div><div class="line">                    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@&quot;提示&quot; message:message preferredStyle:UIAlertControllerStyleAlert];</div><div class="line">                    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@&quot;确定&quot; style:UIAlertActionStyleCancel handler:nil];</div><div class="line">                    [alertController addAction:cancelAction];</div><div class="line">                    [self presentViewController:alertController animated:YES completion:nil];</div><div class="line">                &#125; );</div><div class="line">                break;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125; );</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (void)viewDidDisappear:(BOOL)animated</div><div class="line">&#123;</div><div class="line">    [super viewDidDisappear:animated];</div><div class="line">    dispatch_async( self.sessionQueue, ^&#123;</div><div class="line">        if ( self.setupResult == AVCamSetupResultSuccess ) &#123;</div><div class="line">            [self.session stopRunning];</div><div class="line">        &#125;</div><div class="line">    &#125; );</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (void)setUpCameraLayer</div><div class="line">&#123;</div><div class="line">    if (self.previewLayer == nil)</div><div class="line">    &#123;</div><div class="line">        self.previewLayer = [[AVCaptureVideoPreviewLayer alloc] initWithSession:self.session];</div><div class="line"></div><div class="line">        UIView * view = self.cameraShowView;</div><div class="line"></div><div class="line">        CALayer * viewLayer = [view layer];</div><div class="line"></div><div class="line">        // UIView的clipsToBounds属性和CALayer的setMasksToBounds属性表达的意思是一致的,决定子视图的显示范围。当取值为YES的时候，剪裁超出父视图范围的子视图部分，当取值为NO时，不剪裁子视图。</div><div class="line"></div><div class="line">        [viewLayer setMasksToBounds:YES];</div><div class="line"></div><div class="line">        CGRect bounds = [view bounds];</div><div class="line"></div><div class="line">        [self.previewLayer setFrame:bounds];</div><div class="line"></div><div class="line">        [self.previewLayer setVideoGravity:AVLayerVideoGravityResizeAspect];</div><div class="line"></div><div class="line">        [viewLayer addSublayer:self.previewLayer];</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">/**</div><div class="line"> 打开设备手电筒</div><div class="line"> */</div><div class="line">-(void) actionTurnOn</div><div class="line">&#123;</div><div class="line">    [device lockForConfiguration:nil];</div><div class="line"></div><div class="line">    [device setTorchMode:AVCaptureTorchModeOn];</div><div class="line"></div><div class="line">    [device unlockForConfiguration];</div><div class="line">&#125;</div><div class="line">/**</div><div class="line"> 关闭设备手电筒</div><div class="line"> */</div><div class="line">-(void) actionTurnOff</div><div class="line">&#123;</div><div class="line">    [device lockForConfiguration:nil];</div><div class="line"></div><div class="line">    [device setTorchMode: AVCaptureTorchModeOff];</div><div class="line"></div><div class="line">    [device unlockForConfiguration];</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">// 拍照</div><div class="line"></div><div class="line">- (void)actionStartCamera</div><div class="line">&#123;</div><div class="line">    dispatch_async(self.sessionQueue, ^&#123;</div><div class="line">        AVCaptureConnection *videoConnection = [self.stillImageOutput connectionWithMediaType:AVMediaTypeVideo];</div><div class="line"></div><div class="line">        if (!videoConnection)</div><div class="line">        &#123;</div><div class="line">            return;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        [self.stillImageOutput  captureStillImageAsynchronouslyFromConnection:videoConnection completionHandler:^(CMSampleBufferRef imageDataSampleBuffer, NSError *error) &#123;</div><div class="line"></div><div class="line">            if (imageDataSampleBuffer == NULL) &#123;</div><div class="line"></div><div class="line">                return;</div><div class="line"></div><div class="line">            &#125;</div><div class="line"></div><div class="line">            NSData *imageData = [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageDataSampleBuffer];</div><div class="line"></div><div class="line">            UIImage *originalImage = [UIImage imageWithData:imageData];</div><div class="line">            //1.旋转照片</div><div class="line">            UIImage *rotateImage = [originalImage rotate:UIImageOrientationRight];</div><div class="line">    &#125;);</div><div class="line">&#125;</div><div class="line">@end</div></pre></td></tr></table></figure>
+<h2 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h2><p>1、AVCaptureSession的配置过程和startRunning是阻挡主线程的一个耗时操作，所以我们放到另外的queue中操作，能够避免阻挡主线程<br>2、由于我们拍照不需要质量非常高的照片，所以我们通过setOutputSettings设置了图片质量，这样减少了很大一部分内存，可以根据情况来设置图片的质量。<br>3、拍完照片图片是倒立的，所以我们做了一个旋转操作，将图片正立了过来</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/13/macOS各个文件夹的作用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="FlyOceanFish">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FlyOceanFish' Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/10/13/macOS各个文件夹的作用/" itemprop="url">macOS各个文件夹的作用</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-13T21:32:34+08:00">
+                2017-10-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/10/13/macOS各个文件夹的作用/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/10/13/macOS各个文件夹的作用/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>以前大家对于Linux系统可能不是非常熟悉，如果是后台服务器的会非常熟悉，但是作为我们前端开发的可能就不太熟悉了。但是由于苹果的Mac电脑的越来越普及，大家对于系统下的文件夹有所了解还是有一定帮助的。</p>
+<ul>
+<li>/bin<br>目录包含了引导启动所需的命令或普通用户可能用的命令(可能在引导启动后)。这些命令都是二进制文件的可执行程序( bin是binary - -二进制的简称)，多是系统中重要的系统文件。  </li>
+<li>/dev<br>目录包括所有设备的设备文件。设备文件用特定的约定命名，这在设备列表中说明。<br>设备文件在安装时由系统产生，以后可以用/dev/makedev 描述。/dev/makedev.local 是系统管理员为本地设备文件(或连接)写的描述文稿(即如一些非标准设备驱动不是标准makedev的一部分)</li>
+<li>/etc<br>目录包含各种系统配置文件，下面说明其中的一些。其他的你应该知道它们属于哪个程序，并阅读该程序的man页。许多网络配置文件也在/etc中</li>
+<li>/etc/rc.d<br>启动的配置文件和脚本</li>
+<li>/home<br>用户主目录的基点，比如用户user的主目录就是/home/user，可以用~user表示</li>
+<li>/lib<br>标准程序设计库，又叫动态链接共享库，作用类似windows里的.dll文件</li>
+<li>/sbin<br>系统管理命令，这里存放的是系统管理员使用的管理程序</li>
+<li>/tmp<br>公用的临时文件存储点</li>
+<li>/root<br>系统管理员的主目录（呵呵，特权阶级）</li>
+<li>/mnt<br>系统提供这个目录是让用户临时挂载其他的文件系统。</li>
+<li>/lost+found<br>这个目录平时是空的，系统非正常关机而留下“无家可归”的文件（windows下叫什么.chk）就在这里</li>
+<li>/proc<br>虚拟的目录，是系统内存的映射。可直接访问这个目录来获取系统信息。</li>
+<li>/var<br>某些大文件的溢出区，比方说各种服务的日志文件</li>
+<li><strong><em>/usr</em></strong><br>是个很重要的目录，通常这一文件系统很大，因为所有程序安装在这里。/usr 里的所有文件一般来自linux发行版(distribution )；本地安装的程序和其他东西在/usr/local 下，因为这样可以在升级新版系统或新发行版时无须重新安装全部程序。/usr 目录下的许多内容是可选的，但这些功能会使用户使用系统更加有效。/usr可容纳许多大型的软件包和它们的配置文件。</li>
+<li>/usr/x11r6<br>存放x window的目录</li>
+<li>/usr/bin<br>集中了几乎所有用户命令，是系统的软件库。另有些命令在/bin 或/usr/local/bin 中</li>
+<li>/usr/sbin<br>包括了根文件系统不必要的系统管理命令</li>
+<li>/usr/include<br>包含了c语言的头文件，这些文件多以. h结尾，用来描述c语言程序中用到的数据结构、子过程和常量。为了保持一致性，这实际上应该放在/usr/lib 下，但习惯上一直沿用了这个名字。</li>
+<li>/usr/lib<br>常用的动态链接库和软件包的配置文件</li>
+<li>/usr/src<br>源代码，linux内核的源代码就放在/usr/src/linux里</li>
+<li>/usr/local<br>本地安装的软件和其他文件放在这里。这与/usr很相似。用户可能会在这发现一些比较大的软件包</li>
+<li>/usr/local/bin<br>本地增加的命令 （就是在shell终端里执行的一些非系统命令）</li>
+<li>/usr/local/lib<br>本地增加的库</li>
+</ul>
+<p>大家其实有兴趣的话需要关注的就是/usr路径下的文件夹，因为这个文件夹下的所有的东西都与我们用户相关的，尤其跟我们关系最大的就是就是/usr/local和其下边的文件夹</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/13/pod install vs. pod update/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="FlyOceanFish">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FlyOceanFish' Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/10/13/pod install vs. pod update/" itemprop="url">pod install vs. pod update</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-13T21:32:34+08:00">
+                2017-10-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/10/13/pod install vs. pod update/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/10/13/pod install vs. pod update/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="背景"><a href="#背景" class="headerlink" title="背景　　"></a>背景　　</h1><p>　　作为iOS管理第三方包很好用的一个工具CocoaPods，大部分在使用过程中一开始使用pod install,之后就一直使用pod update。其实这种做法是不对，本篇文章将详细介绍这几个命令的区别，也希望iOS开发者能够合理使用这几个命名</p>
+<h2 id="pod-init"><a href="#pod-init" class="headerlink" title="pod init"></a>pod init</h2><p>　　初始化一个工程，此时会产生Podfile这么一个文件，我们可以添加需要引入的第三方包</p>
+<h2 id="pod-install"><a href="#pod-install" class="headerlink" title="pod install"></a>pod install</h2><pre><code>pod install --verbose
+</code></pre><p><strong><em>用这个命令可以看到所有的执行操作</em></strong><br>　　第一次构建工程时要使用该命令，但是如果我们编辑了Podfile文件，例如添加、删除、更新了一个pod也会使用该命令</p>
+<ul>
+<li>我们运行这个命令的时候，开始下载安装新的pods，它会将我们每一个第三方包的版本写入一个叫Podfile.lock的文件。这个文件包含了我们安装的所有的第三方包的信息</li>
+<li>当我们运行这个命令的时候，它只会下载不在Podfile.lock文件里的第三方包<ul>
+<li>对于Podfile.lock里边有的详细的第三方包（有版本)，它只会下载对应的版本，不管这个第三方包有没有新的版本</li>
+<li>如果Podfile.lock里边没有的第三方包，它将下载你Podfile里边写的（例如pod ‘MyPod’, ‘~&gt;1.2’），如果不写版本默认下载最新的版本</li>
+</ul>
+</li>
+</ul>
+<h2 id="pod-update"><a href="#pod-update" class="headerlink" title="pod update"></a>pod update</h2><p>　　如果我们运行pod update PODNAME 将只更新这一个第三方包到最新的版本<br>如果我们直接运行pod update 没有pod名称，它将会更新我们所有的第三方包</p>
+<h2 id="pod-outdated"><a href="#pod-outdated" class="headerlink" title="pod outdated"></a>pod outdated</h2><p>　　将列出所有的在Podfile.lock文件里的所有第三方包现在对应的最新的版本</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>　　如果我们在Podfile文件增加、减少、或者改变了版本的时候运行pod install；如果我们想更新第三包的时候使用pod update命令</p>
+<p>接下来一篇我将详细介绍如果创建自己的spec。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/13/在mac上快速搭建Android、iOS自动打包环境(一)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="FlyOceanFish">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FlyOceanFish' Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/10/13/在mac上快速搭建Android、iOS自动打包环境(一)/" itemprop="url">在mac上快速搭建Android、iOS自动打包环境(一)</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-13T21:32:34+08:00">
+                2017-10-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/10/13/在mac上快速搭建Android、iOS自动打包环境(一)/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/10/13/在mac上快速搭建Android、iOS自动打包环境(一)/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>本文实现了jenkins+fastlane自动打包Android、iOS，然后上传到蒲公英上，最后通过邮件通知相关人员</p>
+<h1 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h1><ul>
+<li><a href="https://jenkins.io" target="_blank" rel="external">jenkins</a></li>
+<li><a href="https://github.com/fastlane/fastlane" target="_blank" rel="external">fastlane</a></li>
+<li>Homebrew</li>
+</ul>
+<h1 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h1><p>1、 安装brew，如果电脑已经安装，可以忽略</p>
+<blockquote>
+<p>curl -LsSf <a href="http://github.com/mxcl/homebrew/tarball/master" target="_blank" rel="external">http://github.com/mxcl/homebrew/tarball/master</a> | sudo tar xvz -C/usr/local –strip 1</p>
+</blockquote>
+<p>2、 安装java环境</p>
+<blockquote>
+<p>brew cask install java</p>
+</blockquote>
+<p>3、安装jenkins</p>
+<blockquote>
+<p>brew install jenkins</p>
+</blockquote>
+<p>4、设置端口</p>
+<blockquote>
+<p>java -jar /usr/local/Cellar/jenkins/2.67/libexec/jenkins.war –httpPort=8080</p>
+</blockquote>
+<p>5、启动jenkins</p>
+<blockquote>
+<p>jenkins</p>
+</blockquote>
+<p>到这步jenkins已经安装完毕，在浏览器中输入<a href="http://localhost:8080" target="_blank" rel="external">http://localhost:8080</a> 即可出现以下界面:</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/6644906-e7bd74cf75b6b438.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="4046DB34-2FB9-481F-A81C-2B3924F33C72.png"><br>6、在终端命令行输入以下命令获取密码，填入输入框之后点击continue</p>
+<blockquote>
+<p>cat /Users/wrf/.jenkins/secrets/initialAdminPassword<br>7、之后出现以下界面，点击install suggested plugin。这步操作安装的插件基本包括了常规使用的全部</p>
+</blockquote>
+<p><img src="http://upload-images.jianshu.io/upload_images/6644906-4bb3b4f4d3d86e8c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="7FCE5BB6-C6D6-4DD6-B60C-510523C6BA33.png"></p>
+<p>8、之后会看见如下界面，如果出现红叉的代表安装失败，只要点击retry即可，基本都会安装成功。之后创建账号就行了。整个jenkins已经安装成功</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/6644906-673e05f3f6de2730.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="E1BFCF45-4DCC-44DD-B30E-18674C91098A.png"><br>9、fastlane安装</p>
+<blockquote>
+<p>brew cask install fastlane</p>
+</blockquote>
+<p>　　至此整个环境已经完全搭好，第二篇文章将详细介绍android、iOS的打包流程。</p>
+<h1 id="遇到的坑"><a href="#遇到的坑" class="headerlink" title="遇到的坑"></a><em>遇到的坑</em></h1><p>　　在这个安装过程中遇到一个坑，研究了好久好不容易解决了。如果通过jenkins官方下载的.dmg文件安装，发现打包都是超时，打包不成功。通过命令行安装的jenkins能正确打包。</p>
+<pre><code>ERROR: Timeout after 10 minutes
+ERROR: Error fetching remote repo &apos;origin&apos;
+</code></pre><p>　　研究之后主要原因其实是这两种方式安装成功之后的安装路径不一样，一个是在shared路径下，一个是在/User/用户名这个路径下</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/13/在mac上快速搭建Android、iOS自动打包环境(三)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="FlyOceanFish">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FlyOceanFish' Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/10/13/在mac上快速搭建Android、iOS自动打包环境(三)/" itemprop="url">在mac上快速搭建Android、iOS自动打包环境(三)</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-13T21:32:34+08:00">
+                2017-10-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/10/13/在mac上快速搭建Android、iOS自动打包环境(三)/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/10/13/在mac上快速搭建Android、iOS自动打包环境(三)/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>接上一篇iOS自动打包文章，本文将介绍Android的自动打包。</p>
+<h1 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h1><p>　　Android的SDK已经安装好（这个网上教程一大堆，如果不会的可以自行搜索，实在搞不定的可以留言）</p>
+<h1 id="Android自动打包"><a href="#Android自动打包" class="headerlink" title="Android自动打包"></a>Android自动打包</h1><p>　　其实Android的自动打包与iOS的自动打包基本一样，主要由于开发工具的不同，所以不同点都是由于开发工具不同造成。<br><strong><em>本文将写出与iOS的不同的地方，前边几步相同的就省略了</em></strong><br>1、 <strong><em>配置gradle</em></strong></p>
+<ul>
+<li>找到“构建”-&gt;“增加构建步骤”-&gt;“Excute Shell”。这一步由于服务器上的gradlew一直获取不到权限<br><img src="http://upload-images.jianshu.io/upload_images/6644906-39e67a7b9138b591.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="4ADDE352-E751-4379-8BA2-2402F36ECB5C.png"></li>
+<li>找到“构建”-&gt;“增加构建步骤”-&gt;“Invoke Gradle Script”，选择”Use Gradle Wrapper”。其中Build File 代表build.gradle的路径<br><img src="http://upload-images.jianshu.io/upload_images/6644906-c37c70459c0bee8d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="83CAA3F9-9675-46DE-9332-A8B3C4D579C0.png"></li>
+</ul>
+<p>2、配置上传apk脚本<br>      curl -F “file=@app/build/outputs/apk/app-debug.apk” -F “uKey=4acbf7559e513f1f6081294723ea4d0f” -F “_api_key=d9e87e9febbf20dd4f384876bdf72a22” <a href="https://qiniu-storage.pgyer.com/apiv1/app/upload" target="_blank" rel="external">https://qiniu-storage.pgyer.com/apiv1/app/upload</a></p>
+<p>3、如果构建的时候报找不到“ ANDROID_HOME”，则就在“系统设置”-&gt;“全局属性”中增加，然后“系统管理”-&gt;“读取设置”重新启动Jenkins。<br><img src="http://upload-images.jianshu.io/upload_images/6644906-b7b42037ef20691c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="A658B2DA-D10F-484F-8782-0F77210CC615.png"></p>
+<p>　　很庆幸自己坚持了这么久了，已经把《在mac上快速搭建Android、iOS自动打包环境》这一个系列完成。感性简友的支持。如果自己在搭建过程中有任何问题可以联系我。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/13/在mac上快速搭建Android、iOS自动打包环境(二)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="FlyOceanFish">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FlyOceanFish' Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/10/13/在mac上快速搭建Android、iOS自动打包环境(二)/" itemprop="url">在mac上快速搭建Android、iOS自动打包环境(二)</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-13T21:32:34+08:00">
+                2017-10-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/10/13/在mac上快速搭建Android、iOS自动打包环境(二)/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/10/13/在mac上快速搭建Android、iOS自动打包环境(二)/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>接上一篇文章，环境已经搭建好，紧接着就是开始创建项目，自动编译工程了。</p>
+<p>#自动打包iOS项目</p>
+<ul>
+<li>点击下图的新建项目</li>
+</ul>
+<p><img src="http://upload-images.jianshu.io/upload_images/6644906-9726bf015d2cde77.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="5E049239-E505-47E3-817F-8FBC8736B5D4.png"></p>
+<ul>
+<li>输入一个名字，选择构建一个自由风格的项目，然后点击OK</li>
+</ul>
+<p><img src="http://upload-images.jianshu.io/upload_images/6644906-195089799f629836.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="E8218566-45F0-4B98-86CD-DCB2EBC6CABF.png"></p>
+<ul>
+<li>接下来就是出现如下图，配置git或svn账号，配置Excute shell<br>   1.　<strong><em>配置git账号和打包分支</em></strong><br>　　首先配置的是git账号，由于作者用的gitlab管理源代码，所以选择了git，然后填写Repository URL和Credentials。Credentials点击Add之后选择Username with password,填写自己的账号;最后填写Branches to build。这里我选择了develop分支，这里填写其实非常灵活，有兴趣的可以自行研究一下。<br><img src="http://upload-images.jianshu.io/upload_images/6644906-a99870397b8753c0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="D607C119-F9D7-497B-9522-E7A582598ABE.png"><br>最终配置图如下：</li>
+</ul>
+<p><img src="http://upload-images.jianshu.io/upload_images/6644906-d98bc56830c552ae.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="11E5C43A-EB0B-4333-8883-227DBEDC5002.png"><br>　　2.　<strong><em>脚本设置</em></strong><br>　　这一步主要用来打包 ipa 并上传到蒲公英。我们点击“增加构建步骤”，选择 “Execute Shell”。输入下列脚本:</p>
+<pre><code>IPANAME=&quot;jinkens-myapp&quot;
+fastlane gym --export_method ad-hoc --                     output_name ${IPANAME}
+curl -F &quot;file=@${IPANAME}.ipa&quot; -F    &quot;uKey=USER_KEY&quot; -F &quot;_api_key=API_KEY&quot;    https://qiniu-storage.pgyer.com/apiv1/app/upload
+</code></pre><p>注意：<br>    　　其中，USER_KEY 和 API_KEY 可以在蒲公英的「账户设置」中找到，之后进行相应替换。<br>export_method 可以根据打包类型进行相应设置。可选的值有：app-store、ad-hoc、　development、enterprise。对于 Xcode 8.3 以下的版本，则不需要设置 export_method。<br>设置好之后，类似界面如下所示：<br><img src="http://upload-images.jianshu.io/upload_images/6644906-68e35d3aea302a09.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="42B25C98-F734-4401-81DC-A2379AA4B046.png"><br>3.　<strong><em>配置邮箱插件，自动打包之后能够自动发邮件通知</em></strong><br>　　点击系统管理-&gt;系统设置 找到“Extended E-mail Notification”，填写相应的信息之后。（注意:“系统管理员邮件地址”要填写发送邮件的账号）</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/6644906-ed5de6fe69a856c7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="B8BE5A3A-BAE3-467B-A15E-90996B566480.png"></p>
+<p>4.　<strong><em>配置项目的邮件通知</em></strong><br>　　　点击“增加构建后操作步骤”-&gt;”Editable Email Notification”，填写相应的信息如下图:</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/6644906-e52f63285c4590e8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="F2A2F314-9A91-4A96-9509-7CCAF7348EAC.png"></p>
+<p>　　最后选择Triggers 选择sucees和failure两个即可，之后选择相应的发送人员就好了。<br>　　保存点击立即构建，见证奇迹的时刻到了。几分钟后则会收到邮件</p>
+<p>##邮件表达式详解：##<br>${BUILD_LOG, maxLines, escapeHtml} -显示最终构建日志。<br>maxLines – 显示该日志最多显示的行数，默认250行。<br>escapeHtml -如果为true，格式化HTML。默认false。<br>${BUILD_LOG_REGEX, regex, linesBefore, linesAfter, maxMatches, showTruncatedLines, substText, escapeHtml, matchedLineHtmlStyle} -按正则表达式匹配显示构建日志的行数。<br>匹配符合该正则表达式的行数。参阅java.util.regex.Pattern，默认“(?i)\b(error|exception|fatal|fail(ed|ure)|un(defined|resolved))\b”。<br>linesBefore -包含在匹配行之前的行编号。行数会与当前的另一个行匹配或者linesAfter重叠，默认0。<br>linesAfter -包含在匹配行之后的行编号。行数会与当前的另一个行匹配或者linesBefore重叠，默认0。<br>maxMatches -匹配的最大数量，如果为0，则包含所有匹配。默认为0。<br>showTruncatedLines -如果为true，包含[…truncated ### lines…]行。默认为true。<br>substText -如果非空，把这部分文字插入该邮件，而不是整行。默认为空。<br>escapeHtml -如果为true，格式化HTML。默认false。<br>matchedLineHtmlStyle -如果非空，输出HTML。匹配的行数将变为<b style="”your-style-value”"> html escaped matched line </b>格式。默认为空。<br>${BUILD_NUMBER} -显示当前构建的编号。<br>${BUILD_STATUS} -显示当前构建的状态(失败、成功等等)<br>${BUILD_URL} -显示当前构建的URL地址。<br>${CHANGES, showPaths, format, pathFormat} -显示上一次构建之后的变化。<br>showPaths – 如果为 true,显示提交修改后的地址。默认false。<br>format – 遍历提交信息，一个包含%X的字符串，其中%a表示作者，%d表示日期，%m表示消息，%p表示路径，%r表示版本。注意，并不是所有的版本系统都支持%d和%r。如果指定showPaths将被忽略。默认“[%a] %m\n”。<br>pathFormat -一个包含“%p”的字符串，用来标示怎么打印字符串。<br>${CHANGES_SINCE_LAST_SUCCESS, reverse, format, showPaths, changesFormat, pathFormat} -显示上一次成功构建之后的变化。<br>reverse -在顶部标示新近的构建。默认false。<br>format -遍历构建信息，一个包含%X的字符串，其中%c为所有的改变，%n为构建编号。默认”Changes for Build #%n\n%c\n”。<br>showPaths, changesFormat, pathFormat – 分别定义如${CHANGES}的showPaths、format和pathFormat参数。<br>${CHANGES_SINCE_LAST_UNSTABLE, reverse, format, showPaths, changesFormat, pathFormat} -显示显示上一次不稳固或者成功的构建之后的变化。<br>reverse -在顶部标示新近的构建。默认false。<br>format -遍历构建信息，一个包含%X的字符串，其中%c为所有的改变，%n为构建编号。默认”Changes for Build #%n\n%c\n”。<br>showPaths, changesFormat, pathFormat -分别定义如${CHANGES}的showPaths、format和pathFormat参数。<br>${ENV, var} – 显示一个环境变量。<br>var – 显示该环境变量的名称。如果为空，显示所有，默认为空。<br>${FAILED_TESTS} -如果有失败的测试，显示这些失败的单元测试信息。<br>${JENKINS_URL} -显示Jenkins服务器的地址。(你能在“系统配置”页改变它)。<br>${HUDSON_URL} -不推荐，请使用$JENKINS_URL<br>${PROJECT_NAME} -显示项目的名称。<br>${PROJECT_URL} -显示项目的URL。<br>${SVN_REVISION} -显示SVN的版本号。<br>${CAUSE} -显示谁、通过什么渠道触发这次构建。<br>${JELLY_SCRIPT, template} -从一个Jelly脚本模板中自定义消息内容。有两种模板可供配置：HTML和TEXT。你可以在$JENKINS_HOME/email-templates下自定义替换它。当使用自动义模板时，”template”参数的名称不包含“.jelly”。<br>template -模板名称，默认”html”。<br>${FILE, path} -包含一个指定文件的内容<br>path -文件路径，注意，是工作区目录的相对路径。<br>${TEST_COUNTS, var} -显示测试的数量。<br>var – 默认“total”。<br>total -所有测试的数量。<br>fail -失败测试的数量。<br>skip -跳过测试的数量。</p>
+<p>下一篇将详细介绍Android的自动打包过程，Android的打包比iOS的打包稍微麻烦一些。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+  </section>
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
+  </nav>
+
+
+
+          </div>
+          
+
+
+          
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="FlyOceanFish" />
+            
+              <p class="site-author-name" itemprop="name">FlyOceanFish</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">FlyOceanFish</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.3"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=5.1.3"></script>
+
+
+  
+
+</body>
+</html>
