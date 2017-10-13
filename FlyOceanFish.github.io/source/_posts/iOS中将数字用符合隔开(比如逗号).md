@@ -1,5 +1,5 @@
 ---
-title: pod install vs. pod update # 这是标题
+title: iOS中将数字用符合隔开(比如逗号) # 这是标题
 categories:  # 这里写的分类会自动汇集到 categories 页面上，分类可以多级
 - iOS # 一级分类
 tags:   # 这里写的标签会自动汇集到 tags 页面上
