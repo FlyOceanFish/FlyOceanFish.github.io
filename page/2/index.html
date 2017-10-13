@@ -160,7 +160,7 @@
       </a>
     </div>
       
-        <p class="site-subtitle">You Believe,You Can</p>
+        <h1 class="site-subtitle" itemprop="description">You Believe,You Can</h1>
       
   </div>
 
@@ -279,9 +279,9 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/10/13/iOS中3DES加密解密/" itemprop="url">iOS中3DES加密解密</a></h1>
+                <a class="post-title-link" href="/2017/10/13/iOS中3DES加密解密/" itemprop="url">iOS中3DES加密解密</a></h2>
         
 
         <div class="post-meta">
@@ -293,7 +293,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-13T16:27:04+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-13T21:32:34+08:00">
                 2017-10-13
               </time>
             
@@ -328,6 +328,17 @@
           
 
           
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/10/13/iOS中3DES加密解密/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/10/13/iOS中3DES加密解密/" itemprop="commentCount"></span>
+                </a>
+              </span>
             
           
 
@@ -411,7 +422,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/13/Rect Native(>0.45)通过cocopods初始化工程/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/13/React Native源码分析原理（一）(基于0.48版本)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="FlyOceanFish">
@@ -428,9 +439,9 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/10/13/Rect Native(>0.45)通过cocopods初始化工程/" itemprop="url">Rect Native(>0.45)通过cocopods初始化工程</a></h1>
+                <a class="post-title-link" href="/2017/10/13/React Native源码分析原理（一）(基于0.48版本)/" itemprop="url">React Native源码分析原理（一）(基于0.48版本)</a></h2>
         
 
         <div class="post-meta">
@@ -442,7 +453,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-13T16:27:04+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-13T21:32:34+08:00">
                 2017-10-13
               </time>
             
@@ -478,6 +489,17 @@
 
           
             
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/10/13/React Native源码分析原理（一）(基于0.48版本)/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/10/13/React Native源码分析原理（一）(基于0.48版本)/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -504,24 +526,37 @@
       
         
           
-            <p>由于React Native 0.45以上版本增加了4个依赖包，并且被墙了，所以大家在初始化工程之后运行会报错，就是因为缺少了文件。其实就是Bridge文件或者它所依赖的文件。0.45以后的bidge开始使用了RCTCxxBridge,之前都是RCTBatchedBridge，根据Facebook的官方资料RCTBatchedBridge慢慢会被废弃掉的，建议使用RCTCxxBridge。因为使用RCTCxxBridge我们就必须导入被墙的4个依赖包，就会点繁琐。使用RCTBatchedBridge比较简单不用翻墙的。一下是两个Bridge对应的不同Podfile。</p>
-<h3 id="RCTBatchedBridge对应的Podfile文件内容"><a href="#RCTBatchedBridge对应的Podfile文件内容" class="headerlink" title="RCTBatchedBridge对应的Podfile文件内容"></a>RCTBatchedBridge对应的Podfile文件内容</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"># Uncomment the next line to define a global platform for your project</div><div class="line"># platform :ios, &apos;9.0&apos;</div><div class="line"></div><div class="line">target &apos;TestReactNative&apos; do</div><div class="line">  # Uncomment the next line if you&apos;re using Swift or would like to use dynamic frameworks</div><div class="line">  # use_frameworks!</div><div class="line"></div><div class="line">  # Pods for TestReactNative</div><div class="line">  pod &apos;React&apos;, :path =&gt; &apos;../node_modules/react-native&apos;, :subspecs =&gt; [</div><div class="line">    &apos;Core&apos;,</div><div class="line">    &apos;DevSupport&apos;, # 如果RN版本 &gt;= 0.43，则需要加入此行才能开启开发者菜单</div><div class="line">    &apos;RCTText&apos;,</div><div class="line">    &apos;RCTNetwork&apos;,</div><div class="line">    &apos;RCTWebSocket&apos;, # 这个模块是用于调试功能的</div><div class="line">    &apos;BatchedBridge&apos;//这个是重点，在ReactNative提供的官方例子中没导入，所以按照官方文档去做初始化的工程会报错</div><div class="line">    # 在这里继续添加你所需要的模块</div><div class="line">  ]</div><div class="line">  # 如果你的RN版本 &gt;= 0.42.0，请加入下面这行</div><div class="line">  pod &quot;Yoga&quot;, :path =&gt; &quot;../node_modules/react-native/ReactCommon/yoga&quot;</div><div class="line">end</div></pre></td></tr></table></figure>
-<h3 id="RCTCxxBridge对应的Podfile文件内容"><a href="#RCTCxxBridge对应的Podfile文件内容" class="headerlink" title="RCTCxxBridge对应的Podfile文件内容"></a>RCTCxxBridge对应的Podfile文件内容</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"># Uncomment the next line to define a global platform for your project</div><div class="line"># platform :ios, &apos;9.0&apos;</div><div class="line">react_native_path = &apos;../node_modules/react-native&apos;</div><div class="line"></div><div class="line">target &apos;StudyReactNative&apos; do</div><div class="line">  # Uncomment the next line if you&apos;re using Swift or would like to use dynamic frameworks</div><div class="line">  use_frameworks!</div><div class="line"></div><div class="line">  # Native Navigation!</div><div class="line">  #pod &apos;native-navigation&apos;, :path =&gt; &apos;../node_modules/native-navigation&apos;</div><div class="line"></div><div class="line">  # To use CocoaPods with React Native, you need to add this specific Yoga spec as well</div><div class="line">  pod &apos;Yoga&apos;, :path =&gt; react_native_path + &apos;/ReactCommon/yoga&apos;</div><div class="line"></div><div class="line">  # Third party deps</div><div class="line">  pod &apos;DoubleConversion&apos;, :podspec =&gt; react_native_path + &apos;/third-party-podspecs/DoubleConversion.podspec&apos;</div><div class="line">  pod &apos;GLog&apos;, :podspec =&gt; react_native_path + &apos;/third-party-podspecs/GLog.podspec&apos;</div><div class="line">  pod &apos;Folly&apos;, :podspec =&gt; react_native_path + &apos;/third-party-podspecs/Folly.podspec&apos;</div><div class="line"></div><div class="line">  # You don&apos;t necessarily need all of these subspecs, but this would be a typical setup.</div><div class="line">  pod &apos;React&apos;, :path =&gt; react_native_path, :subspecs =&gt; [</div><div class="line">    &apos;Core&apos;,</div><div class="line">    &apos;CxxBridge&apos;,</div><div class="line">    &apos;RCTText&apos;,</div><div class="line">    &apos;RCTNetwork&apos;,</div><div class="line">    &apos;RCTWebSocket&apos;, # needed for debugging</div><div class="line">    &apos;RCTImage&apos;,</div><div class="line">    &apos;RCTNetwork&apos;,</div><div class="line">    # Add any other subspecs you want to use in your project</div><div class="line">    &apos;DevSupport&apos;</div><div class="line">  ]</div><div class="line">end</div></pre></td></tr></table></figure>
-<p>这里因为导入了四个包，被墙了所以要翻墙。</p>
-<p>四个包的地址<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">fetch_and_unpack glog-0.3.4.tar.gz https://github.com/google/glog/archive/v0.3.4.tar.gz &quot;\&quot;$SCRIPTDIR/ios-configure-glog.sh\&quot;&quot;</div><div class="line">fetch_and_unpack double-conversion-1.1.5.tar.gz https://github.com/google/double-conversion/archive/v1.1.5.tar.gz</div><div class="line">fetch_and_unpack boost_1_63_0.tar.gz https://github.com/react-native-community/boost-for-react-native/releases/download/v1.63.0-0/boost_1_63_0.tar.gz</div><div class="line">fetch_and_unpack folly-2016.09.26.00.tar.gz https://github.com/facebook/folly/archive/v2016.09.26.00.tar.gz</div></pre></td></tr></table></figure></p>
-<p>其实可以通过上边地址自己下载下来放到<br>XXReactNative工程/node_modules/react-native/third-party文件夹下<br>如果没有third-party这个文件夹就新建一个。</p>
-<p>也可以通过百度云盘<a href="https://pan.baidu.com/s/1kVDUAZ9#list/path=%2F" target="_blank" rel="external">third-party</a>下载下来解压缩之后放到XXReactNative工程/node_modules/react-native这个路径下就可以了<br>之后运行pod install即可<br><img src="http://upload-images.jianshu.io/upload_images/6644906-01d13bd37248e3e4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="7DC30CAE-BDB1-439A-810E-1BE35FCC8EA4.png"></p>
-<h2 id="更新以前的工程"><a href="#更新以前的工程" class="headerlink" title="更新以前的工程"></a>更新以前的工程</h2><p>我通过以上方法来更新我以前的工程，同时替换package.json为最新的，发现报错。此时需要我们yarn  install或npm install，然后在ios工程的根目录下执行pod install</p>
-<h2 id="‘boost-iterator-iterator-adaptor-hpp’-file-not-found"><a href="#‘boost-iterator-iterator-adaptor-hpp’-file-not-found" class="headerlink" title="‘boost/iterator/iterator_adaptor.hpp’ file not found"></a>‘boost/iterator/iterator_adaptor.hpp’ file not found</h2><ul>
-<li><p>/Users/Vanessa/.rncache 中 boost_1_63_0.tar.gz， double-conversion-1.1.5.tar.gz， folly-2016.09.26.00.tar.gz， glog-0.3.4.tar.gz 文件下载不完整</p>
-</li>
-<li><p>node_modules/react-native/third-party 文件不完整</p>
+            <ul>
+<li><a href="http://www.jianshu.com/p/8324b379c020" target="_blank" rel="external">React Native源码分析原理（一）(基于0.48版本)</a></li>
+<li><a href="http://www.jianshu.com/p/0688b24950f4" target="_blank" rel="external">React Native源码分析原理（二）(基于0.48版本)</a><h3 id="React和React-Native初步认识"><a href="#React和React-Native初步认识" class="headerlink" title="React和React Native初步认识"></a>React和React Native初步认识</h3>说起Facebook的React Native就不得不说一下React，React是个什么东东呢？<blockquote>
+<p>React 是一个用于构建用户界面的 JAVASCRIPT 库。<br>React主要用于构建UI，很多人认为 React 是 MVC 中的 V（视图）。<br>React 起源于 Facebook 的内部项目，用来架设 Instagram 的网站，并于 2013 年 5 月开源。<br>React 拥有较高的性能，代码逻辑非常简单，越来越多的人已开始关注和使用它。</p>
+</blockquote>
 </li>
 </ul>
-<p>解决方案：</p>
-<p>删除 .rncache 后重新下载，或手动下载后放入 .rncache 中</p>
-<p>把以上文件解压后放入 node_modules/react-native/third-party 下</p>
-<p>Clean &amp; Build</p>
+<p><strong><em>React</em></strong></p>
+<blockquote>
+<p>1.声明式设计 −React采用声明范式，可以轻松描述应用。<br>2.高效 −React通过对DOM的模拟，最大限度地减少与DOM的交互。<br>3.灵活 −React可以与已知的库或框架很好地配合。<br>4.JSX − JSX 是 JavaScript 语法的扩展。React 开发不一定使用 JSX ，但我们建议使用它。<br>5.组件 − 通过 React 构建组件，使得代码更加容易得到复用，能够很好的应用在大项目的开发中。<br>6.单向响应的数据流 − React 实现了单向响应的数据流，从而减少了重复代码，这也是它为什么比传统数据绑定更简单。</p>
+</blockquote>
+<p>根据以上内容相信大家对React有了一个初步认识。其实高效、简单使用是React最大的特点了。</p>
+<p><strong><em>React Native</em></strong></p>
+<p>React Native说白了就是让React拥有了与原生APP交互，能够写接近原生APP的功能，就像它的两个单词一样，一个React，一个Native。有了它就能让js和oc或Android能够方便的相互调用，实现了能够通过js开发接近原生的APP的功能。是的，非常接近原生APP的体检，尤其绘制出的视图全部都是原生的！但是它与混合开发是不同的，一般我们说的混合开发是原生APP和html混合开发，但是体验上是比较差的。React Native也秉承了React的理念 <code>Learn Once, Write Anywhere</code>,而不是混合开发所追崇的<code>Write Once,Run Anywhere</code>。现在像携程、腾讯等这样的公司已经都使用了React Native写项目了，所以是时候大家也跟进一波，不管用不用，先学习攒着嘛！哈哈。毕竟技多不压身的嘛。</p>
+<h3 id="通讯框架图和几个核心类的作用"><a href="#通讯框架图和几个核心类的作用" class="headerlink" title="通讯框架图和几个核心类的作用"></a>通讯框架图和几个核心类的作用</h3><p>首先让我们看看React Native的js与oc交互框架（个人整理的，非官方的）。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/6644906-cb4d495b7b74ffd4.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="通讯图.001.jpeg"></p>
+<ul>
+<li><p><code>RCTCxxxBridge.h</code> oc与js之间的调用都是通过这个桥梁(0.44以前是RCTBatchedBridge.h这个类)。这个桥梁持有各个具体功能类和一个jsThread,它的作用其实就是一个调度的作用。注意所有js代码的执行都是在此jsThread中执行，这个Thread是放在runloop中的，会保持一直运行的。此线程也是大家常听说的js线程。一个项目中最好只有一个Bridge，要不是比较消耗性能的。</p>
+<ul>
+<li><code>JSCExecutor.h</code> 所有的js与oc的通信都是通过此类来实现的</li>
+<li><code>BatchedBridge.js</code>这个js文件仅仅是一个导入文件。导入了<code>MessageQueue.js</code>这个文件。<ul>
+<li><code>MessageQueue.js</code>这个文件是js端与oc通信的一个桥梁文件，里边有个计时器将要调用oc方法的事件放入一个queue中，当oc没有及时的在消息队列中调js的时候, 大于5ms后js就会调用这个回调, 主动调用oc</li>
+</ul>
+</li>
+<li><code>NativeModule.js</code> 实现了js调用oc代码。大家注意这个调用其实都是oc先调用js文件，执行js，在这时候传入适当的参数，然后实现了js调用oc方法哦。</li>
+</ul>
+</li>
+<li><p><code>RCTBridgeModule.h</code> 这个类非常重要，只要想与js实现通信，这个协议必须实现。如果不实现此协议我们js在调用原生方法就会报错，RN在内部会将第一检验的就是类有没有实现这个协议。除了一个标识的作用，还给我们提供了几个宏供我们使用。这几个宏也是js调用原生的具体实现</p>
+</li>
+<li><code>RCTUIManager.h</code>    <code>UIManage.js</code>这两个类一个是在oc端，一个是在js端，通过这两个类RN将我们的component转换成了我们原生的视图类。该类实现了视图的创建、查找、删除等功能。创建View的时候，每个View都有一个</li>
+</ul>
 
           
         
@@ -587,9 +622,9 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/10/13/iOS中将数字用符合隔开(比如逗号)/" itemprop="url">pod install vs. pod update</a></h1>
+                <a class="post-title-link" href="/2017/10/13/iOS中将数字用符合隔开(比如逗号)/" itemprop="url">pod install vs. pod update</a></h2>
         
 
         <div class="post-meta">
@@ -601,7 +636,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-13T16:27:04+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-13T21:32:34+08:00">
                 2017-10-13
               </time>
             
@@ -636,6 +671,17 @@
           
 
           
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/10/13/iOS中将数字用符合隔开(比如逗号)/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/10/13/iOS中将数字用符合隔开(比如逗号)/" itemprop="commentCount"></span>
+                </a>
+              </span>
             
           
 
@@ -792,319 +838,6 @@ NSLog(@&quot;formattedNumberString: %@&quot;, formattedNumberString);
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/13/iOS自定义相机界面/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="FlyOceanFish">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="FlyOceanFish' Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/10/13/iOS自定义相机界面/" itemprop="url">iOS自定义相机界面</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-13T16:27:04+08:00">
-                2017-10-13
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/iOS/" itemprop="url" rel="index">
-                    <span itemprop="name">iOS</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>由于项目中需要拍照功能，但是系统原生的相机功能根本满足不了项目的需要，所以就只能自定义一个相加了。苹果再AVFoundation框架中给我们提供了各个api，我们完全可以通过这些api自定义一个满足我们需求的相机。</p>
-<h2 id="关键类"><a href="#关键类" class="headerlink" title="关键类"></a>关键类</h2><p>AVCaptureSession 负责输入流和输出流的管理。<br>AVCaptureDeviceInput 输入流。连接输入采集设备的<br>AVCaptureStillImageOutput 输出流。AVCaptureOutput的子类，主要是负责采集图片数据的，不过这个类再10.0以后废弃掉了，改用AVCapturePhotoOutput这个替换，这个类能够支持RAW格式的图片<br>AVCaptureVideoPreviewLayer 集成CALayer，负责将采集的视频展示出来的一个类，提供了一个预览功能而已</p>
-<h2 id="实现过程"><a href="#实现过程" class="headerlink" title="实现过程"></a>实现过程</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div><div class="line">199</div><div class="line">200</div><div class="line">201</div><div class="line">202</div><div class="line">203</div><div class="line">204</div><div class="line">205</div><div class="line">206</div><div class="line">207</div><div class="line">208</div><div class="line">209</div><div class="line">210</div><div class="line">211</div><div class="line">212</div><div class="line">213</div><div class="line">214</div><div class="line">215</div><div class="line">216</div><div class="line">217</div><div class="line">218</div><div class="line">219</div><div class="line">220</div><div class="line">221</div><div class="line">222</div><div class="line">223</div><div class="line">224</div><div class="line">225</div><div class="line">226</div><div class="line">227</div><div class="line">228</div><div class="line">229</div><div class="line">230</div><div class="line">231</div><div class="line">232</div><div class="line">233</div><div class="line">234</div><div class="line">235</div><div class="line">236</div><div class="line">237</div><div class="line">238</div><div class="line">239</div><div class="line">240</div><div class="line">241</div><div class="line">242</div><div class="line">243</div><div class="line">244</div><div class="line">245</div><div class="line">246</div><div class="line">247</div><div class="line">248</div><div class="line">249</div><div class="line">250</div><div class="line">251</div><div class="line">252</div><div class="line">253</div><div class="line">254</div><div class="line">255</div><div class="line">256</div><div class="line">257</div><div class="line">258</div><div class="line">259</div><div class="line">260</div><div class="line">261</div><div class="line">262</div><div class="line">263</div><div class="line">264</div><div class="line">265</div><div class="line">266</div><div class="line">267</div><div class="line">268</div><div class="line">269</div><div class="line">270</div><div class="line">271</div><div class="line">272</div><div class="line">273</div><div class="line">274</div><div class="line">275</div><div class="line">276</div><div class="line">277</div><div class="line">278</div><div class="line">279</div><div class="line">280</div><div class="line">281</div><div class="line">282</div><div class="line">283</div><div class="line">284</div><div class="line">285</div><div class="line">286</div><div class="line">287</div><div class="line">288</div><div class="line">289</div><div class="line">290</div><div class="line">291</div><div class="line">292</div><div class="line">293</div><div class="line">294</div><div class="line">295</div><div class="line">296</div><div class="line">297</div><div class="line">298</div><div class="line">299</div><div class="line">300</div><div class="line">301</div><div class="line">302</div><div class="line">303</div><div class="line">304</div><div class="line">305</div><div class="line">306</div><div class="line">307</div><div class="line">308</div><div class="line">309</div><div class="line">310</div><div class="line">311</div><div class="line">312</div><div class="line">313</div><div class="line">314</div><div class="line">315</div><div class="line">316</div><div class="line">317</div></pre></td><td class="code"><pre><div class="line">#import &quot;TakePictureViewController.h&quot;</div><div class="line">#import &lt;AVFoundation/AVFoundation.h&gt;</div><div class="line">#import &quot;UIImage+Rotate.h&quot;</div><div class="line">#import &quot;UIControl+Custom.h&quot;</div><div class="line"></div><div class="line">#define KSCREEN_WIDTH            [[UIScreen mainScreen] bounds].size.width</div><div class="line">#define KSCREEN_HEIGHT           [[UIScreen mainScreen] bounds].size.height</div><div class="line"></div><div class="line">typedef NS_ENUM(NSInteger, AVCamSetupResult ) &#123;</div><div class="line">    AVCamSetupResultSuccess,</div><div class="line">    AVCamSetupResultCameraNotAuthorized,</div><div class="line">    AVCamSetupResultSessionConfigurationFailed</div><div class="line">&#125;;</div><div class="line">@interface TakePictureViewController ()</div><div class="line">&#123;</div><div class="line">    BOOL lightOn;</div><div class="line">    AVCaptureDevice *device;</div><div class="line">    ActivityIndicatorTipView *activityView;</div><div class="line">&#125;</div><div class="line">// AVCaptureSession对象来执行输入设备和输出设备之间的数据传递</div><div class="line"></div><div class="line">@property (nonatomic, strong)AVCaptureSession *session;</div><div class="line">// AVCaptureDeviceInput对象是输入流</div><div class="line"></div><div class="line">@property (nonatomic, strong)AVCaptureDeviceInput *videoInput;</div><div class="line"></div><div class="line">// 照片输出流对象</div><div class="line"></div><div class="line">@property (nonatomic, strong)AVCaptureStillImageOutput *stillImageOutput;</div><div class="line"></div><div class="line">// 预览图层，来显示照相机拍摄到的画面</div><div class="line"></div><div class="line">@property (nonatomic, strong)AVCaptureVideoPreviewLayer *previewLayer;</div><div class="line">// 切换前后镜头的按钮</div><div class="line"></div><div class="line">@property (nonatomic, strong)UIButton *toggleButton;</div><div class="line"></div><div class="line">// 放置预览图层的View</div><div class="line">@property (nonatomic, strong)UIView *cameraShowView;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">// 用来展示拍照获取的照片</div><div class="line"></div><div class="line">@property (nonatomic, strong)UIImageView *imageShowView;</div><div class="line"></div><div class="line">@property (nonatomic,strong) UIView *overlayView;</div><div class="line"></div><div class="line">@property (nonatomic) dispatch_queue_t sessionQueue;</div><div class="line"></div><div class="line">@property (nonatomic) AVCamSetupResult setupResult;</div><div class="line"></div><div class="line">@end</div><div class="line"></div><div class="line">@implementation TakePictureViewController</div><div class="line"></div><div class="line">-(BOOL)prefersStatusBarHidden</div><div class="line">&#123;</div><div class="line">    return YES;</div><div class="line">&#125;</div><div class="line"></div><div class="line">-(instancetype)init</div><div class="line">&#123;</div><div class="line">    self = [super init];</div><div class="line">    if (self)</div><div class="line">    &#123;</div><div class="line">        [self initAll];</div><div class="line">    &#125;</div><div class="line">    return self;</div><div class="line">&#125;</div><div class="line">- (void)initAll&#123;</div><div class="line">    [self initialSession];</div><div class="line">    [self initCameraShowView];</div><div class="line">    [self.view addSubview:self.overlayView];</div><div class="line">    [self initAVDevice];</div><div class="line">    [self setUpCameraLayer];</div><div class="line">&#125;</div><div class="line">- (void)initialSession</div><div class="line">&#123;</div><div class="line">    self.session = [[AVCaptureSession alloc] init];</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (void)initCameraShowView</div><div class="line">&#123;</div><div class="line"></div><div class="line">    self.cameraShowView = [[UIView alloc] initWithFrame:self.view.frame];</div><div class="line"></div><div class="line">    [self.view addSubview:self.cameraShowView];</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 这是获取前后摄像头对象的方法</div><div class="line"></div><div class="line">- (AVCaptureDevice *)cameraWithPosition:(AVCaptureDevicePosition)position</div><div class="line">&#123;</div><div class="line">    NSArray *devices = [AVCaptureDevice devicesWithMediaType:AVMediaTypeVideo];</div><div class="line"></div><div class="line">    for (AVCaptureDevice *captureDevice in devices)</div><div class="line">    &#123;</div><div class="line">        if (captureDevice.position == position)</div><div class="line">        &#123;</div><div class="line">            return captureDevice;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    return nil;</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (AVCaptureDevice *)frontCamera</div><div class="line">&#123;</div><div class="line">    return [self cameraWithPosition:AVCaptureDevicePositionFront];</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (AVCaptureDevice *)backCamera</div><div class="line">&#123;</div><div class="line">    return [self cameraWithPosition:AVCaptureDevicePositionBack];</div><div class="line">&#125;</div><div class="line">/**</div><div class="line"> 设备手电筒</div><div class="line"> */</div><div class="line">-(void)initAVDevice</div><div class="line">&#123;</div><div class="line">    device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];</div><div class="line"></div><div class="line">    if (![device hasTorch])</div><div class="line">    &#123;</div><div class="line">        //无手电筒</div><div class="line">        [[[UIAlertView alloc] initWithTitle:@&quot;tishi&quot; message:@&quot;无手电筒&quot; delegate:nil cancelButtonTitle:@&quot;确定&quot; otherButtonTitles:nil, nil] show];</div><div class="line">    &#125;</div><div class="line">    lightOn = NO;</div><div class="line">&#125;</div><div class="line">- (void)configureSession&#123;</div><div class="line"></div><div class="line">    if ( self.setupResult != AVCamSetupResultSuccess ) &#123;</div><div class="line">        return;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    [self.session beginConfiguration];//保证对AVCaptureSession设置的原子性与commitConfiguration配对使用</div><div class="line"></div><div class="line">    self.videoInput = [[AVCaptureDeviceInput alloc] initWithDevice:[self backCamera] error:nil];</div><div class="line"></div><div class="line">    self.stillImageOutput = [[AVCaptureStillImageOutput alloc] init];</div><div class="line">     // 输出流的设置参数AVVideoCodecJPEG参数表示以JPEG的图片格式输出图片</div><div class="line">    NSDictionary *outputSettings = [[NSDictionary alloc] initWithObjectsAndKeys:AVVideoCodecJPEG,AVVideoCodecKey,@(0.1),AVVideoQualityKey,nil];</div><div class="line"></div><div class="line">    [self.stillImageOutput setOutputSettings:outputSettings];</div><div class="line"></div><div class="line">    if ([self.session canAddInput:self.videoInput])</div><div class="line">    &#123;</div><div class="line">        [self.session addInput:self.videoInput];</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    if ([self.session canAddOutput:self.stillImageOutput])</div><div class="line">    &#123;</div><div class="line">        [self.session addOutput:self.stillImageOutput];</div><div class="line">    &#125;</div><div class="line">    [self.session commitConfiguration];</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (void)viewDidLoad &#123;</div><div class="line">    [super viewDidLoad];</div><div class="line">    self.view.backgroundColor = [UIColor whiteColor];</div><div class="line">    self.sessionQueue = dispatch_queue_create(&quot;session queue&quot;, DISPATCH_QUEUE_SERIAL);</div><div class="line">    switch ( [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo] )</div><div class="line">    &#123;</div><div class="line">        case AVAuthorizationStatusAuthorized:</div><div class="line">        &#123;</div><div class="line">            break;</div><div class="line">        &#125;</div><div class="line">        case AVAuthorizationStatusNotDetermined:</div><div class="line">        &#123;</div><div class="line">            dispatch_suspend( self.sessionQueue );</div><div class="line">            [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo completionHandler:^( BOOL granted ) &#123;</div><div class="line">                if ( ! granted ) &#123;</div><div class="line">                    self.setupResult = AVCamSetupResultCameraNotAuthorized;</div><div class="line">                &#125;</div><div class="line">                dispatch_resume( self.sessionQueue );</div><div class="line">            &#125;];</div><div class="line">            break;</div><div class="line">        &#125;</div><div class="line">        default:</div><div class="line">        &#123;</div><div class="line">            self.setupResult = AVCamSetupResultCameraNotAuthorized;</div><div class="line">            break;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    dispatch_async(self.sessionQueue, ^&#123;</div><div class="line">        [self configureSession];</div><div class="line">    &#125;);</div><div class="line">&#125;</div><div class="line">- (void)viewWillAppear:(BOOL)animated</div><div class="line">&#123;</div><div class="line">    [super viewWillAppear:animated];</div><div class="line"></div><div class="line">    dispatch_async( self.sessionQueue, ^&#123;</div><div class="line">        switch ( self.setupResult )</div><div class="line">        &#123;</div><div class="line">            case AVCamSetupResultSuccess:</div><div class="line">            &#123;</div><div class="line">                [self.session startRunning];</div><div class="line">                break;</div><div class="line">            &#125;</div><div class="line">            case AVCamSetupResultCameraNotAuthorized:</div><div class="line">            &#123;</div><div class="line">                dispatch_async( dispatch_get_main_queue(), ^&#123;</div><div class="line">                    NSString *message = @&quot;请允许拍照权限，以用来扫描二维码&quot;;</div><div class="line">                    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@&quot;提示&quot; message:message preferredStyle:UIAlertControllerStyleAlert];</div><div class="line">                    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@&quot;确定&quot; style:UIAlertActionStyleCancel handler:nil];</div><div class="line">                    [alertController addAction:cancelAction];</div><div class="line">                    UIAlertAction *settingsAction = [UIAlertAction actionWithTitle:@&quot;设置&quot; style:UIAlertActionStyleDefault handler:^( UIAlertAction *action ) &#123;</div><div class="line">                        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString] options:@&#123;&#125; completionHandler:nil];</div><div class="line">                    &#125;];</div><div class="line">                    [alertController addAction:settingsAction];</div><div class="line">                    [self presentViewController:alertController animated:YES completion:nil];</div><div class="line">                &#125; );</div><div class="line">                break;</div><div class="line">            &#125;</div><div class="line">            case AVCamSetupResultSessionConfigurationFailed:</div><div class="line">            &#123;</div><div class="line">                dispatch_async( dispatch_get_main_queue(), ^&#123;</div><div class="line">                    NSString *message = @&quot;没有拍照权限，所以不能扫描二维码&quot;;</div><div class="line">                    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@&quot;提示&quot; message:message preferredStyle:UIAlertControllerStyleAlert];</div><div class="line">                    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@&quot;确定&quot; style:UIAlertActionStyleCancel handler:nil];</div><div class="line">                    [alertController addAction:cancelAction];</div><div class="line">                    [self presentViewController:alertController animated:YES completion:nil];</div><div class="line">                &#125; );</div><div class="line">                break;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125; );</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (void)viewDidDisappear:(BOOL)animated</div><div class="line">&#123;</div><div class="line">    [super viewDidDisappear:animated];</div><div class="line">    dispatch_async( self.sessionQueue, ^&#123;</div><div class="line">        if ( self.setupResult == AVCamSetupResultSuccess ) &#123;</div><div class="line">            [self.session stopRunning];</div><div class="line">        &#125;</div><div class="line">    &#125; );</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (void)setUpCameraLayer</div><div class="line">&#123;</div><div class="line">    if (self.previewLayer == nil)</div><div class="line">    &#123;</div><div class="line">        self.previewLayer = [[AVCaptureVideoPreviewLayer alloc] initWithSession:self.session];</div><div class="line"></div><div class="line">        UIView * view = self.cameraShowView;</div><div class="line"></div><div class="line">        CALayer * viewLayer = [view layer];</div><div class="line"></div><div class="line">        // UIView的clipsToBounds属性和CALayer的setMasksToBounds属性表达的意思是一致的,决定子视图的显示范围。当取值为YES的时候，剪裁超出父视图范围的子视图部分，当取值为NO时，不剪裁子视图。</div><div class="line"></div><div class="line">        [viewLayer setMasksToBounds:YES];</div><div class="line"></div><div class="line">        CGRect bounds = [view bounds];</div><div class="line"></div><div class="line">        [self.previewLayer setFrame:bounds];</div><div class="line"></div><div class="line">        [self.previewLayer setVideoGravity:AVLayerVideoGravityResizeAspect];</div><div class="line"></div><div class="line">        [viewLayer addSublayer:self.previewLayer];</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">/**</div><div class="line"> 打开设备手电筒</div><div class="line"> */</div><div class="line">-(void) actionTurnOn</div><div class="line">&#123;</div><div class="line">    [device lockForConfiguration:nil];</div><div class="line"></div><div class="line">    [device setTorchMode:AVCaptureTorchModeOn];</div><div class="line"></div><div class="line">    [device unlockForConfiguration];</div><div class="line">&#125;</div><div class="line">/**</div><div class="line"> 关闭设备手电筒</div><div class="line"> */</div><div class="line">-(void) actionTurnOff</div><div class="line">&#123;</div><div class="line">    [device lockForConfiguration:nil];</div><div class="line"></div><div class="line">    [device setTorchMode: AVCaptureTorchModeOff];</div><div class="line"></div><div class="line">    [device unlockForConfiguration];</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">// 拍照</div><div class="line"></div><div class="line">- (void)actionStartCamera</div><div class="line">&#123;</div><div class="line">    dispatch_async(self.sessionQueue, ^&#123;</div><div class="line">        AVCaptureConnection *videoConnection = [self.stillImageOutput connectionWithMediaType:AVMediaTypeVideo];</div><div class="line"></div><div class="line">        if (!videoConnection)</div><div class="line">        &#123;</div><div class="line">            return;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        [self.stillImageOutput  captureStillImageAsynchronouslyFromConnection:videoConnection completionHandler:^(CMSampleBufferRef imageDataSampleBuffer, NSError *error) &#123;</div><div class="line"></div><div class="line">            if (imageDataSampleBuffer == NULL) &#123;</div><div class="line"></div><div class="line">                return;</div><div class="line"></div><div class="line">            &#125;</div><div class="line"></div><div class="line">            NSData *imageData = [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageDataSampleBuffer];</div><div class="line"></div><div class="line">            UIImage *originalImage = [UIImage imageWithData:imageData];</div><div class="line">            //1.旋转照片</div><div class="line">            UIImage *rotateImage = [originalImage rotate:UIImageOrientationRight];</div><div class="line">    &#125;);</div><div class="line">&#125;</div><div class="line">@end</div></pre></td></tr></table></figure>
-<h2 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h2><p>1、AVCaptureSession的配置过程和startRunning是阻挡主线程的一个耗时操作，所以我们放到另外的queue中操作，能够避免阻挡主线程<br>2、由于我们拍照不需要质量非常高的照片，所以我们通过setOutputSettings设置了图片质量，这样减少了很大一部分内存，可以根据情况来设置图片的质量。<br>3、拍完照片图片是倒立的，所以我们做了一个旋转操作，将图片正立了过来</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/13/macOS各个文件夹的作用/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="FlyOceanFish">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="FlyOceanFish' Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/10/13/macOS各个文件夹的作用/" itemprop="url">macOS各个文件夹的作用</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-13T16:27:04+08:00">
-                2017-10-13
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/iOS/" itemprop="url" rel="index">
-                    <span itemprop="name">iOS</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>以前大家对于Linux系统可能不是非常熟悉，如果是后台服务器的会非常熟悉，但是作为我们前端开发的可能就不太熟悉了。但是由于苹果的Mac电脑的越来越普及，大家对于系统下的文件夹有所了解还是有一定帮助的。</p>
-<ul>
-<li>/bin<br>目录包含了引导启动所需的命令或普通用户可能用的命令(可能在引导启动后)。这些命令都是二进制文件的可执行程序( bin是binary - -二进制的简称)，多是系统中重要的系统文件。  </li>
-<li>/dev<br>目录包括所有设备的设备文件。设备文件用特定的约定命名，这在设备列表中说明。<br>设备文件在安装时由系统产生，以后可以用/dev/makedev 描述。/dev/makedev.local 是系统管理员为本地设备文件(或连接)写的描述文稿(即如一些非标准设备驱动不是标准makedev的一部分)</li>
-<li>/etc<br>目录包含各种系统配置文件，下面说明其中的一些。其他的你应该知道它们属于哪个程序，并阅读该程序的man页。许多网络配置文件也在/etc中</li>
-<li>/etc/rc.d<br>启动的配置文件和脚本</li>
-<li>/home<br>用户主目录的基点，比如用户user的主目录就是/home/user，可以用~user表示</li>
-<li>/lib<br>标准程序设计库，又叫动态链接共享库，作用类似windows里的.dll文件</li>
-<li>/sbin<br>系统管理命令，这里存放的是系统管理员使用的管理程序</li>
-<li>/tmp<br>公用的临时文件存储点</li>
-<li>/root<br>系统管理员的主目录（呵呵，特权阶级）</li>
-<li>/mnt<br>系统提供这个目录是让用户临时挂载其他的文件系统。</li>
-<li>/lost+found<br>这个目录平时是空的，系统非正常关机而留下“无家可归”的文件（windows下叫什么.chk）就在这里</li>
-<li>/proc<br>虚拟的目录，是系统内存的映射。可直接访问这个目录来获取系统信息。</li>
-<li>/var<br>某些大文件的溢出区，比方说各种服务的日志文件</li>
-<li><strong><em>/usr</em></strong><br>是个很重要的目录，通常这一文件系统很大，因为所有程序安装在这里。/usr 里的所有文件一般来自linux发行版(distribution )；本地安装的程序和其他东西在/usr/local 下，因为这样可以在升级新版系统或新发行版时无须重新安装全部程序。/usr 目录下的许多内容是可选的，但这些功能会使用户使用系统更加有效。/usr可容纳许多大型的软件包和它们的配置文件。</li>
-<li>/usr/x11r6<br>存放x window的目录</li>
-<li>/usr/bin<br>集中了几乎所有用户命令，是系统的软件库。另有些命令在/bin 或/usr/local/bin 中</li>
-<li>/usr/sbin<br>包括了根文件系统不必要的系统管理命令</li>
-<li>/usr/include<br>包含了c语言的头文件，这些文件多以. h结尾，用来描述c语言程序中用到的数据结构、子过程和常量。为了保持一致性，这实际上应该放在/usr/lib 下，但习惯上一直沿用了这个名字。</li>
-<li>/usr/lib<br>常用的动态链接库和软件包的配置文件</li>
-<li>/usr/src<br>源代码，linux内核的源代码就放在/usr/src/linux里</li>
-<li>/usr/local<br>本地安装的软件和其他文件放在这里。这与/usr很相似。用户可能会在这发现一些比较大的软件包</li>
-<li>/usr/local/bin<br>本地增加的命令 （就是在shell终端里执行的一些非系统命令）</li>
-<li>/usr/local/lib<br>本地增加的库</li>
-</ul>
-<p>大家其实有兴趣的话需要关注的就是/usr路径下的文件夹，因为这个文件夹下的所有的东西都与我们用户相关的，尤其跟我们关系最大的就是就是/usr/local和其下边的文件夹</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/13/iOS小知识积累(长期更新)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1122,9 +855,9 @@ NSLog(@&quot;formattedNumberString: %@&quot;, formattedNumberString);
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/10/13/iOS小知识积累(长期更新)/" itemprop="url">iOS小知识积累(长期更新)</a></h1>
+                <a class="post-title-link" href="/2017/10/13/iOS小知识积累(长期更新)/" itemprop="url">iOS小知识积累(长期更新)</a></h2>
         
 
         <div class="post-meta">
@@ -1136,7 +869,7 @@ NSLog(@&quot;formattedNumberString: %@&quot;, formattedNumberString);
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-13T16:27:04+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-13T21:32:34+08:00">
                 2017-10-13
               </time>
             
@@ -1171,6 +904,17 @@ NSLog(@&quot;formattedNumberString: %@&quot;, formattedNumberString);
           
 
           
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/10/13/iOS小知识积累(长期更新)/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/10/13/iOS小知识积累(长期更新)/" itemprop="commentCount"></span>
+                </a>
+              </span>
             
           
 
@@ -1328,7 +1072,7 @@ NSLog(@&quot;formattedNumberString: %@&quot;, formattedNumberString);
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/13/pod install vs. pod update/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/13/iOS自定义相机界面/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="FlyOceanFish">
@@ -1345,9 +1089,9 @@ NSLog(@&quot;formattedNumberString: %@&quot;, formattedNumberString);
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/10/13/pod install vs. pod update/" itemprop="url">pod install vs. pod update</a></h1>
+                <a class="post-title-link" href="/2017/10/13/iOS自定义相机界面/" itemprop="url">iOS自定义相机界面</a></h2>
         
 
         <div class="post-meta">
@@ -1359,7 +1103,7 @@ NSLog(@&quot;formattedNumberString: %@&quot;, formattedNumberString);
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-13T16:27:04+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-13T21:32:34+08:00">
                 2017-10-13
               </time>
             
@@ -1394,6 +1138,352 @@ NSLog(@&quot;formattedNumberString: %@&quot;, formattedNumberString);
           
 
           
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/10/13/iOS自定义相机界面/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/10/13/iOS自定义相机界面/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>由于项目中需要拍照功能，但是系统原生的相机功能根本满足不了项目的需要，所以就只能自定义一个相加了。苹果再AVFoundation框架中给我们提供了各个api，我们完全可以通过这些api自定义一个满足我们需求的相机。</p>
+<h2 id="关键类"><a href="#关键类" class="headerlink" title="关键类"></a>关键类</h2><p>AVCaptureSession 负责输入流和输出流的管理。<br>AVCaptureDeviceInput 输入流。连接输入采集设备的<br>AVCaptureStillImageOutput 输出流。AVCaptureOutput的子类，主要是负责采集图片数据的，不过这个类再10.0以后废弃掉了，改用AVCapturePhotoOutput这个替换，这个类能够支持RAW格式的图片<br>AVCaptureVideoPreviewLayer 集成CALayer，负责将采集的视频展示出来的一个类，提供了一个预览功能而已</p>
+<h2 id="实现过程"><a href="#实现过程" class="headerlink" title="实现过程"></a>实现过程</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div><div class="line">199</div><div class="line">200</div><div class="line">201</div><div class="line">202</div><div class="line">203</div><div class="line">204</div><div class="line">205</div><div class="line">206</div><div class="line">207</div><div class="line">208</div><div class="line">209</div><div class="line">210</div><div class="line">211</div><div class="line">212</div><div class="line">213</div><div class="line">214</div><div class="line">215</div><div class="line">216</div><div class="line">217</div><div class="line">218</div><div class="line">219</div><div class="line">220</div><div class="line">221</div><div class="line">222</div><div class="line">223</div><div class="line">224</div><div class="line">225</div><div class="line">226</div><div class="line">227</div><div class="line">228</div><div class="line">229</div><div class="line">230</div><div class="line">231</div><div class="line">232</div><div class="line">233</div><div class="line">234</div><div class="line">235</div><div class="line">236</div><div class="line">237</div><div class="line">238</div><div class="line">239</div><div class="line">240</div><div class="line">241</div><div class="line">242</div><div class="line">243</div><div class="line">244</div><div class="line">245</div><div class="line">246</div><div class="line">247</div><div class="line">248</div><div class="line">249</div><div class="line">250</div><div class="line">251</div><div class="line">252</div><div class="line">253</div><div class="line">254</div><div class="line">255</div><div class="line">256</div><div class="line">257</div><div class="line">258</div><div class="line">259</div><div class="line">260</div><div class="line">261</div><div class="line">262</div><div class="line">263</div><div class="line">264</div><div class="line">265</div><div class="line">266</div><div class="line">267</div><div class="line">268</div><div class="line">269</div><div class="line">270</div><div class="line">271</div><div class="line">272</div><div class="line">273</div><div class="line">274</div><div class="line">275</div><div class="line">276</div><div class="line">277</div><div class="line">278</div><div class="line">279</div><div class="line">280</div><div class="line">281</div><div class="line">282</div><div class="line">283</div><div class="line">284</div><div class="line">285</div><div class="line">286</div><div class="line">287</div><div class="line">288</div><div class="line">289</div><div class="line">290</div><div class="line">291</div><div class="line">292</div><div class="line">293</div><div class="line">294</div><div class="line">295</div><div class="line">296</div><div class="line">297</div><div class="line">298</div><div class="line">299</div><div class="line">300</div><div class="line">301</div><div class="line">302</div><div class="line">303</div><div class="line">304</div><div class="line">305</div><div class="line">306</div><div class="line">307</div><div class="line">308</div><div class="line">309</div><div class="line">310</div><div class="line">311</div><div class="line">312</div><div class="line">313</div><div class="line">314</div><div class="line">315</div><div class="line">316</div><div class="line">317</div></pre></td><td class="code"><pre><div class="line">#import &quot;TakePictureViewController.h&quot;</div><div class="line">#import &lt;AVFoundation/AVFoundation.h&gt;</div><div class="line">#import &quot;UIImage+Rotate.h&quot;</div><div class="line">#import &quot;UIControl+Custom.h&quot;</div><div class="line"></div><div class="line">#define KSCREEN_WIDTH            [[UIScreen mainScreen] bounds].size.width</div><div class="line">#define KSCREEN_HEIGHT           [[UIScreen mainScreen] bounds].size.height</div><div class="line"></div><div class="line">typedef NS_ENUM(NSInteger, AVCamSetupResult ) &#123;</div><div class="line">    AVCamSetupResultSuccess,</div><div class="line">    AVCamSetupResultCameraNotAuthorized,</div><div class="line">    AVCamSetupResultSessionConfigurationFailed</div><div class="line">&#125;;</div><div class="line">@interface TakePictureViewController ()</div><div class="line">&#123;</div><div class="line">    BOOL lightOn;</div><div class="line">    AVCaptureDevice *device;</div><div class="line">    ActivityIndicatorTipView *activityView;</div><div class="line">&#125;</div><div class="line">// AVCaptureSession对象来执行输入设备和输出设备之间的数据传递</div><div class="line"></div><div class="line">@property (nonatomic, strong)AVCaptureSession *session;</div><div class="line">// AVCaptureDeviceInput对象是输入流</div><div class="line"></div><div class="line">@property (nonatomic, strong)AVCaptureDeviceInput *videoInput;</div><div class="line"></div><div class="line">// 照片输出流对象</div><div class="line"></div><div class="line">@property (nonatomic, strong)AVCaptureStillImageOutput *stillImageOutput;</div><div class="line"></div><div class="line">// 预览图层，来显示照相机拍摄到的画面</div><div class="line"></div><div class="line">@property (nonatomic, strong)AVCaptureVideoPreviewLayer *previewLayer;</div><div class="line">// 切换前后镜头的按钮</div><div class="line"></div><div class="line">@property (nonatomic, strong)UIButton *toggleButton;</div><div class="line"></div><div class="line">// 放置预览图层的View</div><div class="line">@property (nonatomic, strong)UIView *cameraShowView;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">// 用来展示拍照获取的照片</div><div class="line"></div><div class="line">@property (nonatomic, strong)UIImageView *imageShowView;</div><div class="line"></div><div class="line">@property (nonatomic,strong) UIView *overlayView;</div><div class="line"></div><div class="line">@property (nonatomic) dispatch_queue_t sessionQueue;</div><div class="line"></div><div class="line">@property (nonatomic) AVCamSetupResult setupResult;</div><div class="line"></div><div class="line">@end</div><div class="line"></div><div class="line">@implementation TakePictureViewController</div><div class="line"></div><div class="line">-(BOOL)prefersStatusBarHidden</div><div class="line">&#123;</div><div class="line">    return YES;</div><div class="line">&#125;</div><div class="line"></div><div class="line">-(instancetype)init</div><div class="line">&#123;</div><div class="line">    self = [super init];</div><div class="line">    if (self)</div><div class="line">    &#123;</div><div class="line">        [self initAll];</div><div class="line">    &#125;</div><div class="line">    return self;</div><div class="line">&#125;</div><div class="line">- (void)initAll&#123;</div><div class="line">    [self initialSession];</div><div class="line">    [self initCameraShowView];</div><div class="line">    [self.view addSubview:self.overlayView];</div><div class="line">    [self initAVDevice];</div><div class="line">    [self setUpCameraLayer];</div><div class="line">&#125;</div><div class="line">- (void)initialSession</div><div class="line">&#123;</div><div class="line">    self.session = [[AVCaptureSession alloc] init];</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (void)initCameraShowView</div><div class="line">&#123;</div><div class="line"></div><div class="line">    self.cameraShowView = [[UIView alloc] initWithFrame:self.view.frame];</div><div class="line"></div><div class="line">    [self.view addSubview:self.cameraShowView];</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 这是获取前后摄像头对象的方法</div><div class="line"></div><div class="line">- (AVCaptureDevice *)cameraWithPosition:(AVCaptureDevicePosition)position</div><div class="line">&#123;</div><div class="line">    NSArray *devices = [AVCaptureDevice devicesWithMediaType:AVMediaTypeVideo];</div><div class="line"></div><div class="line">    for (AVCaptureDevice *captureDevice in devices)</div><div class="line">    &#123;</div><div class="line">        if (captureDevice.position == position)</div><div class="line">        &#123;</div><div class="line">            return captureDevice;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    return nil;</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (AVCaptureDevice *)frontCamera</div><div class="line">&#123;</div><div class="line">    return [self cameraWithPosition:AVCaptureDevicePositionFront];</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (AVCaptureDevice *)backCamera</div><div class="line">&#123;</div><div class="line">    return [self cameraWithPosition:AVCaptureDevicePositionBack];</div><div class="line">&#125;</div><div class="line">/**</div><div class="line"> 设备手电筒</div><div class="line"> */</div><div class="line">-(void)initAVDevice</div><div class="line">&#123;</div><div class="line">    device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];</div><div class="line"></div><div class="line">    if (![device hasTorch])</div><div class="line">    &#123;</div><div class="line">        //无手电筒</div><div class="line">        [[[UIAlertView alloc] initWithTitle:@&quot;tishi&quot; message:@&quot;无手电筒&quot; delegate:nil cancelButtonTitle:@&quot;确定&quot; otherButtonTitles:nil, nil] show];</div><div class="line">    &#125;</div><div class="line">    lightOn = NO;</div><div class="line">&#125;</div><div class="line">- (void)configureSession&#123;</div><div class="line"></div><div class="line">    if ( self.setupResult != AVCamSetupResultSuccess ) &#123;</div><div class="line">        return;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    [self.session beginConfiguration];//保证对AVCaptureSession设置的原子性与commitConfiguration配对使用</div><div class="line"></div><div class="line">    self.videoInput = [[AVCaptureDeviceInput alloc] initWithDevice:[self backCamera] error:nil];</div><div class="line"></div><div class="line">    self.stillImageOutput = [[AVCaptureStillImageOutput alloc] init];</div><div class="line">     // 输出流的设置参数AVVideoCodecJPEG参数表示以JPEG的图片格式输出图片</div><div class="line">    NSDictionary *outputSettings = [[NSDictionary alloc] initWithObjectsAndKeys:AVVideoCodecJPEG,AVVideoCodecKey,@(0.1),AVVideoQualityKey,nil];</div><div class="line"></div><div class="line">    [self.stillImageOutput setOutputSettings:outputSettings];</div><div class="line"></div><div class="line">    if ([self.session canAddInput:self.videoInput])</div><div class="line">    &#123;</div><div class="line">        [self.session addInput:self.videoInput];</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    if ([self.session canAddOutput:self.stillImageOutput])</div><div class="line">    &#123;</div><div class="line">        [self.session addOutput:self.stillImageOutput];</div><div class="line">    &#125;</div><div class="line">    [self.session commitConfiguration];</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (void)viewDidLoad &#123;</div><div class="line">    [super viewDidLoad];</div><div class="line">    self.view.backgroundColor = [UIColor whiteColor];</div><div class="line">    self.sessionQueue = dispatch_queue_create(&quot;session queue&quot;, DISPATCH_QUEUE_SERIAL);</div><div class="line">    switch ( [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo] )</div><div class="line">    &#123;</div><div class="line">        case AVAuthorizationStatusAuthorized:</div><div class="line">        &#123;</div><div class="line">            break;</div><div class="line">        &#125;</div><div class="line">        case AVAuthorizationStatusNotDetermined:</div><div class="line">        &#123;</div><div class="line">            dispatch_suspend( self.sessionQueue );</div><div class="line">            [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo completionHandler:^( BOOL granted ) &#123;</div><div class="line">                if ( ! granted ) &#123;</div><div class="line">                    self.setupResult = AVCamSetupResultCameraNotAuthorized;</div><div class="line">                &#125;</div><div class="line">                dispatch_resume( self.sessionQueue );</div><div class="line">            &#125;];</div><div class="line">            break;</div><div class="line">        &#125;</div><div class="line">        default:</div><div class="line">        &#123;</div><div class="line">            self.setupResult = AVCamSetupResultCameraNotAuthorized;</div><div class="line">            break;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    dispatch_async(self.sessionQueue, ^&#123;</div><div class="line">        [self configureSession];</div><div class="line">    &#125;);</div><div class="line">&#125;</div><div class="line">- (void)viewWillAppear:(BOOL)animated</div><div class="line">&#123;</div><div class="line">    [super viewWillAppear:animated];</div><div class="line"></div><div class="line">    dispatch_async( self.sessionQueue, ^&#123;</div><div class="line">        switch ( self.setupResult )</div><div class="line">        &#123;</div><div class="line">            case AVCamSetupResultSuccess:</div><div class="line">            &#123;</div><div class="line">                [self.session startRunning];</div><div class="line">                break;</div><div class="line">            &#125;</div><div class="line">            case AVCamSetupResultCameraNotAuthorized:</div><div class="line">            &#123;</div><div class="line">                dispatch_async( dispatch_get_main_queue(), ^&#123;</div><div class="line">                    NSString *message = @&quot;请允许拍照权限，以用来扫描二维码&quot;;</div><div class="line">                    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@&quot;提示&quot; message:message preferredStyle:UIAlertControllerStyleAlert];</div><div class="line">                    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@&quot;确定&quot; style:UIAlertActionStyleCancel handler:nil];</div><div class="line">                    [alertController addAction:cancelAction];</div><div class="line">                    UIAlertAction *settingsAction = [UIAlertAction actionWithTitle:@&quot;设置&quot; style:UIAlertActionStyleDefault handler:^( UIAlertAction *action ) &#123;</div><div class="line">                        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString] options:@&#123;&#125; completionHandler:nil];</div><div class="line">                    &#125;];</div><div class="line">                    [alertController addAction:settingsAction];</div><div class="line">                    [self presentViewController:alertController animated:YES completion:nil];</div><div class="line">                &#125; );</div><div class="line">                break;</div><div class="line">            &#125;</div><div class="line">            case AVCamSetupResultSessionConfigurationFailed:</div><div class="line">            &#123;</div><div class="line">                dispatch_async( dispatch_get_main_queue(), ^&#123;</div><div class="line">                    NSString *message = @&quot;没有拍照权限，所以不能扫描二维码&quot;;</div><div class="line">                    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@&quot;提示&quot; message:message preferredStyle:UIAlertControllerStyleAlert];</div><div class="line">                    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@&quot;确定&quot; style:UIAlertActionStyleCancel handler:nil];</div><div class="line">                    [alertController addAction:cancelAction];</div><div class="line">                    [self presentViewController:alertController animated:YES completion:nil];</div><div class="line">                &#125; );</div><div class="line">                break;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125; );</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (void)viewDidDisappear:(BOOL)animated</div><div class="line">&#123;</div><div class="line">    [super viewDidDisappear:animated];</div><div class="line">    dispatch_async( self.sessionQueue, ^&#123;</div><div class="line">        if ( self.setupResult == AVCamSetupResultSuccess ) &#123;</div><div class="line">            [self.session stopRunning];</div><div class="line">        &#125;</div><div class="line">    &#125; );</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (void)setUpCameraLayer</div><div class="line">&#123;</div><div class="line">    if (self.previewLayer == nil)</div><div class="line">    &#123;</div><div class="line">        self.previewLayer = [[AVCaptureVideoPreviewLayer alloc] initWithSession:self.session];</div><div class="line"></div><div class="line">        UIView * view = self.cameraShowView;</div><div class="line"></div><div class="line">        CALayer * viewLayer = [view layer];</div><div class="line"></div><div class="line">        // UIView的clipsToBounds属性和CALayer的setMasksToBounds属性表达的意思是一致的,决定子视图的显示范围。当取值为YES的时候，剪裁超出父视图范围的子视图部分，当取值为NO时，不剪裁子视图。</div><div class="line"></div><div class="line">        [viewLayer setMasksToBounds:YES];</div><div class="line"></div><div class="line">        CGRect bounds = [view bounds];</div><div class="line"></div><div class="line">        [self.previewLayer setFrame:bounds];</div><div class="line"></div><div class="line">        [self.previewLayer setVideoGravity:AVLayerVideoGravityResizeAspect];</div><div class="line"></div><div class="line">        [viewLayer addSublayer:self.previewLayer];</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">/**</div><div class="line"> 打开设备手电筒</div><div class="line"> */</div><div class="line">-(void) actionTurnOn</div><div class="line">&#123;</div><div class="line">    [device lockForConfiguration:nil];</div><div class="line"></div><div class="line">    [device setTorchMode:AVCaptureTorchModeOn];</div><div class="line"></div><div class="line">    [device unlockForConfiguration];</div><div class="line">&#125;</div><div class="line">/**</div><div class="line"> 关闭设备手电筒</div><div class="line"> */</div><div class="line">-(void) actionTurnOff</div><div class="line">&#123;</div><div class="line">    [device lockForConfiguration:nil];</div><div class="line"></div><div class="line">    [device setTorchMode: AVCaptureTorchModeOff];</div><div class="line"></div><div class="line">    [device unlockForConfiguration];</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">// 拍照</div><div class="line"></div><div class="line">- (void)actionStartCamera</div><div class="line">&#123;</div><div class="line">    dispatch_async(self.sessionQueue, ^&#123;</div><div class="line">        AVCaptureConnection *videoConnection = [self.stillImageOutput connectionWithMediaType:AVMediaTypeVideo];</div><div class="line"></div><div class="line">        if (!videoConnection)</div><div class="line">        &#123;</div><div class="line">            return;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        [self.stillImageOutput  captureStillImageAsynchronouslyFromConnection:videoConnection completionHandler:^(CMSampleBufferRef imageDataSampleBuffer, NSError *error) &#123;</div><div class="line"></div><div class="line">            if (imageDataSampleBuffer == NULL) &#123;</div><div class="line"></div><div class="line">                return;</div><div class="line"></div><div class="line">            &#125;</div><div class="line"></div><div class="line">            NSData *imageData = [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageDataSampleBuffer];</div><div class="line"></div><div class="line">            UIImage *originalImage = [UIImage imageWithData:imageData];</div><div class="line">            //1.旋转照片</div><div class="line">            UIImage *rotateImage = [originalImage rotate:UIImageOrientationRight];</div><div class="line">    &#125;);</div><div class="line">&#125;</div><div class="line">@end</div></pre></td></tr></table></figure>
+<h2 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h2><p>1、AVCaptureSession的配置过程和startRunning是阻挡主线程的一个耗时操作，所以我们放到另外的queue中操作，能够避免阻挡主线程<br>2、由于我们拍照不需要质量非常高的照片，所以我们通过setOutputSettings设置了图片质量，这样减少了很大一部分内存，可以根据情况来设置图片的质量。<br>3、拍完照片图片是倒立的，所以我们做了一个旋转操作，将图片正立了过来</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/13/macOS各个文件夹的作用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="FlyOceanFish">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FlyOceanFish' Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/10/13/macOS各个文件夹的作用/" itemprop="url">macOS各个文件夹的作用</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-13T21:32:34+08:00">
+                2017-10-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/10/13/macOS各个文件夹的作用/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/10/13/macOS各个文件夹的作用/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>以前大家对于Linux系统可能不是非常熟悉，如果是后台服务器的会非常熟悉，但是作为我们前端开发的可能就不太熟悉了。但是由于苹果的Mac电脑的越来越普及，大家对于系统下的文件夹有所了解还是有一定帮助的。</p>
+<ul>
+<li>/bin<br>目录包含了引导启动所需的命令或普通用户可能用的命令(可能在引导启动后)。这些命令都是二进制文件的可执行程序( bin是binary - -二进制的简称)，多是系统中重要的系统文件。  </li>
+<li>/dev<br>目录包括所有设备的设备文件。设备文件用特定的约定命名，这在设备列表中说明。<br>设备文件在安装时由系统产生，以后可以用/dev/makedev 描述。/dev/makedev.local 是系统管理员为本地设备文件(或连接)写的描述文稿(即如一些非标准设备驱动不是标准makedev的一部分)</li>
+<li>/etc<br>目录包含各种系统配置文件，下面说明其中的一些。其他的你应该知道它们属于哪个程序，并阅读该程序的man页。许多网络配置文件也在/etc中</li>
+<li>/etc/rc.d<br>启动的配置文件和脚本</li>
+<li>/home<br>用户主目录的基点，比如用户user的主目录就是/home/user，可以用~user表示</li>
+<li>/lib<br>标准程序设计库，又叫动态链接共享库，作用类似windows里的.dll文件</li>
+<li>/sbin<br>系统管理命令，这里存放的是系统管理员使用的管理程序</li>
+<li>/tmp<br>公用的临时文件存储点</li>
+<li>/root<br>系统管理员的主目录（呵呵，特权阶级）</li>
+<li>/mnt<br>系统提供这个目录是让用户临时挂载其他的文件系统。</li>
+<li>/lost+found<br>这个目录平时是空的，系统非正常关机而留下“无家可归”的文件（windows下叫什么.chk）就在这里</li>
+<li>/proc<br>虚拟的目录，是系统内存的映射。可直接访问这个目录来获取系统信息。</li>
+<li>/var<br>某些大文件的溢出区，比方说各种服务的日志文件</li>
+<li><strong><em>/usr</em></strong><br>是个很重要的目录，通常这一文件系统很大，因为所有程序安装在这里。/usr 里的所有文件一般来自linux发行版(distribution )；本地安装的程序和其他东西在/usr/local 下，因为这样可以在升级新版系统或新发行版时无须重新安装全部程序。/usr 目录下的许多内容是可选的，但这些功能会使用户使用系统更加有效。/usr可容纳许多大型的软件包和它们的配置文件。</li>
+<li>/usr/x11r6<br>存放x window的目录</li>
+<li>/usr/bin<br>集中了几乎所有用户命令，是系统的软件库。另有些命令在/bin 或/usr/local/bin 中</li>
+<li>/usr/sbin<br>包括了根文件系统不必要的系统管理命令</li>
+<li>/usr/include<br>包含了c语言的头文件，这些文件多以. h结尾，用来描述c语言程序中用到的数据结构、子过程和常量。为了保持一致性，这实际上应该放在/usr/lib 下，但习惯上一直沿用了这个名字。</li>
+<li>/usr/lib<br>常用的动态链接库和软件包的配置文件</li>
+<li>/usr/src<br>源代码，linux内核的源代码就放在/usr/src/linux里</li>
+<li>/usr/local<br>本地安装的软件和其他文件放在这里。这与/usr很相似。用户可能会在这发现一些比较大的软件包</li>
+<li>/usr/local/bin<br>本地增加的命令 （就是在shell终端里执行的一些非系统命令）</li>
+<li>/usr/local/lib<br>本地增加的库</li>
+</ul>
+<p>大家其实有兴趣的话需要关注的就是/usr路径下的文件夹，因为这个文件夹下的所有的东西都与我们用户相关的，尤其跟我们关系最大的就是就是/usr/local和其下边的文件夹</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/13/pod install vs. pod update/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="FlyOceanFish">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FlyOceanFish' Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/10/13/pod install vs. pod update/" itemprop="url">pod install vs. pod update</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-13T21:32:34+08:00">
+                2017-10-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/10/13/pod install vs. pod update/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/10/13/pod install vs. pod update/" itemprop="commentCount"></span>
+                </a>
+              </span>
             
           
 
@@ -1502,9 +1592,9 @@ NSLog(@&quot;formattedNumberString: %@&quot;, formattedNumberString);
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/10/13/在mac上快速搭建Android、iOS自动打包环境(一)/" itemprop="url">在mac上快速搭建Android、iOS自动打包环境(一)</a></h1>
+                <a class="post-title-link" href="/2017/10/13/在mac上快速搭建Android、iOS自动打包环境(一)/" itemprop="url">在mac上快速搭建Android、iOS自动打包环境(一)</a></h2>
         
 
         <div class="post-meta">
@@ -1516,7 +1606,7 @@ NSLog(@&quot;formattedNumberString: %@&quot;, formattedNumberString);
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-13T16:27:04+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-13T21:32:34+08:00">
                 2017-10-13
               </time>
             
@@ -1551,6 +1641,17 @@ NSLog(@&quot;formattedNumberString: %@&quot;, formattedNumberString);
           
 
           
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/10/13/在mac上快速搭建Android、iOS自动打包环境(一)/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/10/13/在mac上快速搭建Android、iOS自动打包环境(一)/" itemprop="commentCount"></span>
+                </a>
+              </span>
             
           
 
@@ -1668,7 +1769,7 @@ ERROR: Error fetching remote repo &apos;origin&apos;
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/13/在mac上快速搭建Android、iOS自动打包环境(二)/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/13/在mac上快速搭建Android、iOS自动打包环境(三)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="FlyOceanFish">
@@ -1685,9 +1786,9 @@ ERROR: Error fetching remote repo &apos;origin&apos;
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/10/13/在mac上快速搭建Android、iOS自动打包环境(二)/" itemprop="url">在mac上快速搭建Android、iOS自动打包环境(二)</a></h1>
+                <a class="post-title-link" href="/2017/10/13/在mac上快速搭建Android、iOS自动打包环境(三)/" itemprop="url">在mac上快速搭建Android、iOS自动打包环境(三)</a></h2>
         
 
         <div class="post-meta">
@@ -1699,7 +1800,7 @@ ERROR: Error fetching remote repo &apos;origin&apos;
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-13T16:27:04+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-13T21:32:34+08:00">
                 2017-10-13
               </time>
             
@@ -1734,6 +1835,179 @@ ERROR: Error fetching remote repo &apos;origin&apos;
           
 
           
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/10/13/在mac上快速搭建Android、iOS自动打包环境(三)/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/10/13/在mac上快速搭建Android、iOS自动打包环境(三)/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>接上一篇iOS自动打包文章，本文将介绍Android的自动打包。</p>
+<h1 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h1><p>　　Android的SDK已经安装好（这个网上教程一大堆，如果不会的可以自行搜索，实在搞不定的可以留言）</p>
+<h1 id="Android自动打包"><a href="#Android自动打包" class="headerlink" title="Android自动打包"></a>Android自动打包</h1><p>　　其实Android的自动打包与iOS的自动打包基本一样，主要由于开发工具的不同，所以不同点都是由于开发工具不同造成。<br><strong><em>本文将写出与iOS的不同的地方，前边几步相同的就省略了</em></strong><br>1、 <strong><em>配置gradle</em></strong></p>
+<ul>
+<li>找到“构建”-&gt;“增加构建步骤”-&gt;“Excute Shell”。这一步由于服务器上的gradlew一直获取不到权限<br><img src="http://upload-images.jianshu.io/upload_images/6644906-39e67a7b9138b591.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="4ADDE352-E751-4379-8BA2-2402F36ECB5C.png"></li>
+<li>找到“构建”-&gt;“增加构建步骤”-&gt;“Invoke Gradle Script”，选择”Use Gradle Wrapper”。其中Build File 代表build.gradle的路径<br><img src="http://upload-images.jianshu.io/upload_images/6644906-c37c70459c0bee8d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="83CAA3F9-9675-46DE-9332-A8B3C4D579C0.png"></li>
+</ul>
+<p>2、配置上传apk脚本<br>      curl -F “file=@app/build/outputs/apk/app-debug.apk” -F “uKey=4acbf7559e513f1f6081294723ea4d0f” -F “_api_key=d9e87e9febbf20dd4f384876bdf72a22” <a href="https://qiniu-storage.pgyer.com/apiv1/app/upload" target="_blank" rel="external">https://qiniu-storage.pgyer.com/apiv1/app/upload</a></p>
+<p>3、如果构建的时候报找不到“ ANDROID_HOME”，则就在“系统设置”-&gt;“全局属性”中增加，然后“系统管理”-&gt;“读取设置”重新启动Jenkins。<br><img src="http://upload-images.jianshu.io/upload_images/6644906-b7b42037ef20691c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="A658B2DA-D10F-484F-8782-0F77210CC615.png"></p>
+<p>　　很庆幸自己坚持了这么久了，已经把《在mac上快速搭建Android、iOS自动打包环境》这一个系列完成。感性简友的支持。如果自己在搭建过程中有任何问题可以联系我。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/13/在mac上快速搭建Android、iOS自动打包环境(二)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="FlyOceanFish">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FlyOceanFish' Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/10/13/在mac上快速搭建Android、iOS自动打包环境(二)/" itemprop="url">在mac上快速搭建Android、iOS自动打包环境(二)</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-13T21:32:34+08:00">
+                2017-10-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/10/13/在mac上快速搭建Android、iOS自动打包环境(二)/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/10/13/在mac上快速搭建Android、iOS自动打包环境(二)/" itemprop="commentCount"></span>
+                </a>
+              </span>
             
           
 
@@ -1820,184 +2094,6 @@ curl -F &quot;file=@${IPANAME}.ipa&quot; -F    &quot;uKey=USER_KEY&quot; -F &quo
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/13/NSObject的+load和+initialize详解/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="FlyOceanFish">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="FlyOceanFish' Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/10/13/NSObject的+load和+initialize详解/" itemprop="url">NSObject的+load和+initialize详解</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-13T16:27:04+08:00">
-                2017-10-13
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/iOS/" itemprop="url" rel="index">
-                    <span itemprop="name">iOS</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>文章比较长，第一部分通过runtime的源码介绍了load和initialize两个方法的本质；第二部门通过实例演示了这个两个方法的调用；第三部分就是结论和应用场景</p>
-<p>#通过runtime源码解析load和initialize</p>
-<h2 id="load"><a href="#load" class="headerlink" title="+load"></a>+load</h2><p><img src="http://upload-images.jianshu.io/upload_images/6644906-034736b3848e3b2d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="ADDBC8A1-E2D9-4BCE-8A87-B60FDCC2FB13.png"><br>通过调用堆栈，我们可以看出系统首先调用的是load_images方法</p>
-<h3 id="load-images"><a href="#load-images" class="headerlink" title="load_images"></a>load_images</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">void load_images(const char *path __unused, const struct mach_header *mh)</div><div class="line">&#123;</div><div class="line">    // Return without taking locks if there are no +load methods here.</div><div class="line">    if (!hasLoadMethods((const headerType *)mh)) return;</div><div class="line"></div><div class="line">    recursive_mutex_locker_t lock(loadMethodLock);</div><div class="line"></div><div class="line">    // Discover load methods</div><div class="line">    &#123;</div><div class="line">        rwlock_writer_t lock2(runtimeLock);</div><div class="line">        prepare_load_methods((const headerType *)mh);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    // Call +load methods (without runtimeLock - re-entrant)</div><div class="line">    call_load_methods();</div><div class="line">&#125;</div><div class="line">首先是将所有的load搜索到，放到一个列表中等待调用，然后call_load_methods循环遍历调用</div></pre></td></tr></table></figure>
-<h4 id="prepare-load-methods"><a href="#prepare-load-methods" class="headerlink" title="prepare_load_methods"></a>prepare_load_methods</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div></pre></td><td class="code"><pre><div class="line">void prepare_load_methods(const headerType *mhdr)</div><div class="line">&#123;</div><div class="line">    Module mods;</div><div class="line">    unsigned int midx;</div><div class="line"></div><div class="line">    header_info *hi;</div><div class="line">    for (hi = FirstHeader; hi; hi = hi-&gt;getNext()) &#123;</div><div class="line">        if (mhdr == hi-&gt;mhdr()) break;</div><div class="line">    &#125;</div><div class="line">    if (!hi) return;</div><div class="line"></div><div class="line">    if (hi-&gt;info()-&gt;isReplacement()) &#123;</div><div class="line">        // Ignore any classes in this image</div><div class="line">        return;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    // Major loop - process all modules in the image</div><div class="line">    mods = hi-&gt;mod_ptr;</div><div class="line">    for (midx = 0; midx &lt; hi-&gt;mod_count; midx += 1)</div><div class="line">    &#123;</div><div class="line">        unsigned int index;</div><div class="line"></div><div class="line">        // Skip module containing no classes</div><div class="line">        if (mods[midx].symtab == nil)</div><div class="line">            continue;</div><div class="line"></div><div class="line">        // Minor loop - process all the classes in given module</div><div class="line">        for (index = 0; index &lt; mods[midx].symtab-&gt;cls_def_cnt; index += 1)</div><div class="line">        &#123;</div><div class="line">            // Locate the class description pointer</div><div class="line">            Class cls = (Class)mods[midx].symtab-&gt;defs[index];</div><div class="line">            if (cls-&gt;info &amp; CLS_CONNECTED) &#123;</div><div class="line">                schedule_class_load(cls);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">    // Major loop - process all modules in the header</div><div class="line">    mods = hi-&gt;mod_ptr;</div><div class="line"></div><div class="line">    // NOTE: The module and category lists are traversed backwards</div><div class="line">    // to preserve the pre-10.4 processing order. Changing the order</div><div class="line">    // would have a small chance of introducing binary compatibility bugs.</div><div class="line">    midx = (unsigned int)hi-&gt;mod_count;</div><div class="line">    while (midx-- &gt; 0) &#123;</div><div class="line">        unsigned int index;</div><div class="line">        unsigned int total;</div><div class="line">        Symtab symtab = mods[midx].symtab;</div><div class="line"></div><div class="line">        // Nothing to do for a module without a symbol table</div><div class="line">        if (mods[midx].symtab == nil)</div><div class="line">            continue;</div><div class="line">        // Total entries in symbol table (class entries followed</div><div class="line">        // by category entries)</div><div class="line">        total = mods[midx].symtab-&gt;cls_def_cnt +</div><div class="line">            mods[midx].symtab-&gt;cat_def_cnt;</div><div class="line"></div><div class="line">        // Minor loop - register all categories from given module</div><div class="line">        index = total;</div><div class="line">        while (index-- &gt; mods[midx].symtab-&gt;cls_def_cnt) &#123;</div><div class="line">            old_category *cat = (old_category *)symtab-&gt;defs[index];</div><div class="line">            add_category_to_loadable_list((Category)cat);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>这个方法主要是两个核心方法schedule_class_load和add_category_to_loadable_list主要干了两件事<br>1、获取了所有类后,遍历列表，将其中有+load方法的类加入loadable_class；<br>2、获取所有的类别，遍历列表，将其中有+load方法的类加入loadable_categories.<br>接下来让我们看看schedule_class_load<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">static void schedule_class_load(Class cls)</div><div class="line">&#123;</div><div class="line">    if (cls-&gt;info &amp; CLS_LOADED) return;</div><div class="line">    if (cls-&gt;superclass) schedule_class_load(cls-&gt;superclass);</div><div class="line">    add_class_to_loadable_list(cls);</div><div class="line">    cls-&gt;info |= CLS_LOADED;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>从以上代码可以看出在加载类的load方法的时候，首先是先将父类加入到loadable_class，之后才是子类。所以保证了<strong>父类一定是在子类先调用</strong>！</p>
-<p>####call_load_methods<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">void call_load_methods(void)</div><div class="line">&#123;</div><div class="line">    static bool loading = NO;</div><div class="line">    bool more_categories;</div><div class="line"></div><div class="line">    loadMethodLock.assertLocked();</div><div class="line"></div><div class="line">    // Re-entrant calls do nothing; the outermost call will finish the job.</div><div class="line">    if (loading) return;</div><div class="line">    loading = YES;</div><div class="line"></div><div class="line">    void *pool = objc_autoreleasePoolPush();</div><div class="line"></div><div class="line">    do &#123;</div><div class="line">        // 1. Repeatedly call class +loads until there aren&apos;t any more</div><div class="line">        while (loadable_classes_used &gt; 0) &#123;</div><div class="line">            call_class_loads();</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        // 2. Call category +loads ONCE</div><div class="line">        more_categories = call_category_loads();</div><div class="line"></div><div class="line">        // 3. Run more +loads if there are classes OR more untried categories</div><div class="line">    &#125; while (loadable_classes_used &gt; 0  ||  more_categories);</div><div class="line"></div><div class="line">    objc_autoreleasePoolPop(pool);</div><div class="line"></div><div class="line">    loading = NO;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>call_load_methods循环遍历，首先是调用了class的load方法，然后调用了category的方法<br>接下来让我们看看call_class_loads的代码实现<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">static void call_class_loads(void)</div><div class="line">&#123;</div><div class="line">    int i;</div><div class="line"></div><div class="line">    // Detach current loadable list.</div><div class="line">    struct loadable_class *classes = loadable_classes;</div><div class="line">    int used = loadable_classes_used;</div><div class="line">    loadable_classes = nil;</div><div class="line">    loadable_classes_allocated = 0;</div><div class="line">    loadable_classes_used = 0;</div><div class="line"></div><div class="line">    // Call all +loads for the detached list.</div><div class="line">    for (i = 0; i &lt; used; i++) &#123;</div><div class="line">        Class cls = classes[i].cls;</div><div class="line">        load_method_t load_method = (load_method_t)classes[i].method;</div><div class="line">        if (!cls) continue;</div><div class="line"></div><div class="line">        if (PrintLoading) &#123;</div><div class="line">            _objc_inform(&quot;LOAD: +[%s load]\n&quot;, cls-&gt;nameForLogging());</div><div class="line">        &#125;</div><div class="line">        (*load_method)(cls, SEL_load);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    // Destroy the detached list.</div><div class="line">    if (classes) free(classes);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>核心方法是 (<em>load_method)(cls, SEL_load),`typedef void(</em>load_method_t)(id, SEL);`可以看到load_method是一个函数指针，所以是直接调用了内存地址！</p>
-<p>##+initialize</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/6644906-6cb08b0bb9e17df1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="98779EDD-737F-498D-AD9E-B02508958DDB.png"><br>一样我们通过调用堆栈可以看到系统调用的是_class_initialize方法</p>
-<p>##_class_initialize</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div></pre></td><td class="code"><pre><div class="line">void _class_initialize(Class cls)</div><div class="line">&#123;</div><div class="line">    assert(!cls-&gt;isMetaClass());</div><div class="line"></div><div class="line">    Class supercls;</div><div class="line">    bool reallyInitialize = NO;</div><div class="line"></div><div class="line">    // Make sure super is done initializing BEFORE beginning to initialize cls.</div><div class="line">    // See note about deadlock above.</div><div class="line">    supercls = cls-&gt;superclass;</div><div class="line">    if (supercls  &amp;&amp;  !supercls-&gt;isInitialized()) &#123;</div><div class="line">        _class_initialize(supercls);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    // Try to atomically set CLS_INITIALIZING.</div><div class="line">    &#123;</div><div class="line">        monitor_locker_t lock(classInitLock);</div><div class="line">        if (!cls-&gt;isInitialized() &amp;&amp; !cls-&gt;isInitializing()) &#123;</div><div class="line">            cls-&gt;setInitializing();</div><div class="line">            reallyInitialize = YES;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    if (reallyInitialize) &#123;</div><div class="line">        // We successfully set the CLS_INITIALIZING bit. Initialize the class.</div><div class="line"></div><div class="line">        // Record that we&apos;re initializing this class so we can message it.</div><div class="line">        _setThisThreadIsInitializingClass(cls);</div><div class="line"></div><div class="line">        // Send the +initialize message.</div><div class="line">        // Note that +initialize is sent to the superclass (again) if</div><div class="line">        // this class doesn&apos;t implement +initialize. 2157218</div><div class="line">        if (PrintInitializing) &#123;</div><div class="line">            _objc_inform(&quot;INITIALIZE: calling +[%s initialize]&quot;,</div><div class="line">                         cls-&gt;nameForLogging());</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        // Exceptions: A +initialize call that throws an exception</div><div class="line">        // is deemed to be a complete and successful +initialize.</div><div class="line">        @try &#123;</div><div class="line">            callInitialize(cls);</div><div class="line"></div><div class="line">            if (PrintInitializing) &#123;</div><div class="line">                _objc_inform(&quot;INITIALIZE: finished +[%s initialize]&quot;,</div><div class="line">                             cls-&gt;nameForLogging());</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        @catch (...) &#123;</div><div class="line">            if (PrintInitializing) &#123;</div><div class="line">                _objc_inform(&quot;INITIALIZE: +[%s initialize] threw an exception&quot;,</div><div class="line">                             cls-&gt;nameForLogging());</div><div class="line">            &#125;</div><div class="line">            @throw;</div><div class="line">        &#125;</div><div class="line">        @finally &#123;</div><div class="line">            // Done initializing.</div><div class="line">            // If the superclass is also done initializing, then update</div><div class="line">            //   the info bits and notify waiting threads.</div><div class="line">            // If not, update them later. (This can happen if this +initialize</div><div class="line">            //   was itself triggered from inside a superclass +initialize.)</div><div class="line">            monitor_locker_t lock(classInitLock);</div><div class="line">            if (!supercls  ||  supercls-&gt;isInitialized()) &#123;</div><div class="line">                _finishInitializing(cls, supercls);</div><div class="line">            &#125; else &#123;</div><div class="line">                _finishInitializingAfter(cls, supercls);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        return;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    else if (cls-&gt;isInitializing()) &#123;</div><div class="line">        // We couldn&apos;t set INITIALIZING because INITIALIZING was already set.</div><div class="line">        // If this thread set it earlier, continue normally.</div><div class="line">        // If some other thread set it, block until initialize is done.</div><div class="line">        // It&apos;s ok if INITIALIZING changes to INITIALIZED while we&apos;re here,</div><div class="line">        //   because we safely check for INITIALIZED inside the lock</div><div class="line">        //   before blocking.</div><div class="line">        if (_thisThreadIsInitializingClass(cls)) &#123;</div><div class="line">            return;</div><div class="line">        &#125; else &#123;</div><div class="line">            waitForInitializeToComplete(cls);</div><div class="line">            return;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    else if (cls-&gt;isInitialized()) &#123;</div><div class="line">        // Set CLS_INITIALIZING failed because someone else already</div><div class="line">        //   initialized the class. Continue normally.</div><div class="line">        // NOTE this check must come AFTER the ISINITIALIZING case.</div><div class="line">        // Otherwise: Another thread is initializing this class. ISINITIALIZED</div><div class="line">        //   is false. Skip this clause. Then the other thread finishes</div><div class="line">        //   initialization and sets INITIALIZING=no and INITIALIZED=yes.</div><div class="line">        //   Skip the ISINITIALIZING clause. Die horribly.</div><div class="line">        return;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    else &#123;</div><div class="line">        // We shouldn&apos;t be here.</div><div class="line">        _objc_fatal(&quot;thread-safe class init in objc runtime is buggy!&quot;);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>核心方法就是callInitialize接下来让我们看看该方法的实现</p>
-<p>##callInitialize<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">void callInitialize(Class cls)</div><div class="line">&#123;</div><div class="line">    ((void(*)(Class, SEL))objc_msgSend)(cls, SEL_initialize);</div><div class="line">    asm(&quot;&quot;);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>通过该实现我们可以看出其实initialize的本质就是objc_msgSend，所以遵循消息的转发机制。</p>
-<hr>
-<p>#示例演示<br><strong>Animal 父类</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">@implementation Animal</div><div class="line">+(void)load&#123;</div><div class="line">    NSLog(@&quot;Animal load&quot;);</div><div class="line">&#125;</div><div class="line">+(void)initialize&#123;</div><div class="line">    NSLog(@&quot;Animal initialize&quot;);</div><div class="line">&#125;</div><div class="line">@end</div></pre></td></tr></table></figure></p>
-<p><strong>Dog 子类</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">+(void)load&#123;</div><div class="line">    NSLog(@&quot;Dog load&quot;);</div><div class="line">&#125;</div><div class="line">//分两种情况，一种注释掉该代码，一种打开该代码</div><div class="line">//+(void)initialize&#123;</div><div class="line">//    NSLog(@&quot;Dog initialize&quot;);</div><div class="line">//&#125;</div><div class="line"></div><div class="line">**测试代码**</div><div class="line">````Objective-C</div><div class="line">    Animal *animal = [[Animal alloc] init];</div><div class="line">    Animal *animal2 = [[Animal alloc] init];</div><div class="line">    Animal *animal3 = [[Animal alloc] init];</div><div class="line">    Dog *dog = [[Dog alloc] init];</div><div class="line">    Dog *dog2 = [[Dog alloc] init];</div></pre></td></tr></table></figure></p>
-<ul>
-<li>未注释代码时，打印结果<br>2017-07-31 14:24:47.671 test[53134:5737864] Animal load<br>2017-07-31 14:24:47.809 test[53134:5737864] Dog load<br>2017-07-31 14:24:48.112 test[53134:5737864] Animal initialize<br>2017-07-31 14:24:48.112 test[53134:5737864] Dog initialize</li>
-<li>注释掉代码时，打印结果<br>2017-07-31 14:39:03.916 testaa[53659:5814782] Animal load<br>2017-07-31 14:39:03.917 testaa[53659:5814782] Dog load<br>2017-07-31 14:39:03.966 testaa[53659:5814782] Animal initialize<br>2017-07-31 14:39:03.967 testaa[53659:5814782] Animal initialize</li>
-</ul>
-<p>通过两次打印看到以下现象：</p>
-<ul>
-<li>第一次测试load initialize各打印了一次，并且load比initialize提前打印<br><strong>原因：+ load是应用一启动就调动，+ initialize是我们调用该类方法的时候才会调用，而且这两个方法理论上只会调用一次。</strong></li>
-<li>第二次测试Animal的initialize打印了两次<br><strong>原因：initialize遵循的是objc_msgSend消息的转发机制，第一次打印是因为我们实例化了Animal并且调用了方法；第二次打印是因为Dog子类没有实现该方法，根据消息转发机制的原理，所以会向上查找父类是否实现了该方法，所以调用了父类的initialize的方法了。所以父类的initialize可能会被调用多次所以建议以下写法：</strong></li>
-</ul>
-<figure class="highlight plain"><figcaption><span>(void)initialize &#123;</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">  if (self == [ClassName self]) &#123;</div><div class="line">    // ... do the initialization ...</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>我们可以做个以下尝试Dog不继承Animal，然后在Compile Source中将Dog的顺序拖到Animal之前。<br>如下图：<br><img src="http://upload-images.jianshu.io/upload_images/6644906-88388b9eb906803e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="D790F51D-98BD-4963-B7A9-D7DEE037FE45.png"><br> <strong>可以观察到Dog的Load在Animal之前打印。所以在没有继承关系的时候Load的调用顺序跟我们的Compile Source的排列顺序有关。有继承关系的，父类一定比子类先调用</strong></p>
-<p>#结论</p>
-<ul>
-<li>+load方法是在程序一启动的时候就会调用，并且在main函数之前，是根据Xcode中Compile Sources的顺序调用的。其内部本质是通过函数<strong>内存地址</strong>的方式实现的。所以在有继承关系的时候子类与父类没有任何关系，不会相互影响。</li>
-<li>+initialize方法是我们在第一次使用该类的时候即调用某个方法的时候系统开始调用 ，是一种懒加载的方式。其内部本质是通过<strong>objc_msgSend</strong>发送消息实现的,因此也拥有objc_msgSend带来的特性,也就是说子类会继承父类的方法实现,而分类的实现也会覆盖元类。</li>
-</ul>
-<p>我们常用<a href="http://nshipster.com/method-swizzling/" target="_blank" rel="external">Method Swizzling</a>建议一定要在Load方法中实现。<br><a href="https://stackoverflow.com/questions/30585088/objective-c-cases-when-it-is-useful-to-override-initialize-and-load?lq=1" target="_blank" rel="external">stackoverflow使用场景讨论</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2042,7 +2138,7 @@ curl -F &quot;file=@${IPANAME}.ipa&quot; -F    &quot;uKey=USER_KEY&quot; -F &quo
                 alt="FlyOceanFish" />
             
               <p class="site-author-name" itemprop="name">FlyOceanFish</p>
-              <p class="site-description motion-element" itemprop="description">Better Late Than Never</p>
+              <p class="site-description motion-element" itemprop="description"></p>
           </div>
 
           <nav class="site-state motion-element">
@@ -2063,7 +2159,7 @@ curl -F &quot;file=@${IPANAME}.ipa&quot; -F    &quot;uKey=USER_KEY&quot; -F &quo
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">2</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -2074,7 +2170,7 @@ curl -F &quot;file=@${IPANAME}.ipa&quot; -F    &quot;uKey=USER_KEY&quot; -F &quo
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -2252,6 +2348,14 @@ curl -F &quot;file=@${IPANAME}.ipa&quot; -F    &quot;uKey=USER_KEY&quot; -F &quo
 
   
 
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+
+  
+
 
 
 
@@ -2289,6 +2393,21 @@ curl -F &quot;file=@${IPANAME}.ipa&quot; -F    &quot;uKey=USER_KEY&quot; -F &quo
   
 
   
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
 
   
   
@@ -2296,6 +2415,9 @@ curl -F &quot;file=@${IPANAME}.ipa&quot; -F    &quot;uKey=USER_KEY&quot; -F &quo
   
 
   
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.3"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=5.1.3"></script>
+
 
   
 
