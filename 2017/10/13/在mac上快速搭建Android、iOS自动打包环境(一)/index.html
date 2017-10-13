@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="React Native, iOS" />
+  <meta name="keywords" content="iOS," />
 
 
 
@@ -79,17 +79,22 @@
 
 
 
-<meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta name="description" content="本文实现了jenkins+fastlane自动打包Android、iOS，然后上传到蒲公英上，最后通过邮件通知相关人员 工具 jenkins fastlane Homebrew  步骤1、 安装brew，如果电脑已经安装，可以忽略  curl -LsSf http://github.com/mxcl/homebrew/tarball/master | sudo tar xvz -C/usr/loc">
+<meta name="keywords" content="iOS">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://yoursite.com/2017/10/13/hello-world/index.html">
+<meta property="og:title" content="在mac上快速搭建Android、iOS自动打包环境(一)">
+<meta property="og:url" content="http://yoursite.com/2017/10/13/在mac上快速搭建Android、iOS自动打包环境(一)/index.html">
 <meta property="og:site_name" content="FlyOceanFish">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="本文实现了jenkins+fastlane自动打包Android、iOS，然后上传到蒲公英上，最后通过邮件通知相关人员 工具 jenkins fastlane Homebrew  步骤1、 安装brew，如果电脑已经安装，可以忽略  curl -LsSf http://github.com/mxcl/homebrew/tarball/master | sudo tar xvz -C/usr/loc">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-10-13T05:37:20.000Z">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/6644906-e7bd74cf75b6b438.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/6644906-4bb3b4f4d3d86e8c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/6644906-673e05f3f6de2730.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2017-10-13T08:44:49.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta name="twitter:title" content="在mac上快速搭建Android、iOS自动打包环境(一)">
+<meta name="twitter:description" content="本文实现了jenkins+fastlane自动打包Android、iOS，然后上传到蒲公英上，最后通过邮件通知相关人员 工具 jenkins fastlane Homebrew  步骤1、 安装brew，如果电脑已经安装，可以忽略  curl -LsSf http://github.com/mxcl/homebrew/tarball/master | sudo tar xvz -C/usr/loc">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/6644906-e7bd74cf75b6b438.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
 
@@ -119,13 +124,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/10/13/hello-world/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/10/13/在mac上快速搭建Android、iOS自动打包环境(一)/"/>
 
 
 
 
 
-  <title>Hello World | FlyOceanFish</title>
+  <title>在mac上快速搭建Android、iOS自动打包环境(一) | FlyOceanFish</title>
   
 
 
@@ -262,7 +267,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/13/hello-world/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/13/在mac上快速搭建Android、iOS自动打包环境(一)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="FlyOceanFish">
@@ -279,7 +284,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Hello World</h1>
+          <h1 class="post-title" itemprop="name headline">在mac上快速搭建Android、iOS自动打包环境(一)</h1>
         
 
         <div class="post-meta">
@@ -291,7 +296,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-13T13:37:20+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-13T16:27:04+08:00">
                 2017-10-13
               </time>
             
@@ -301,6 +306,28 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -329,15 +356,49 @@
       
 
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+        <p>本文实现了jenkins+fastlane自动打包Android、iOS，然后上传到蒲公英上，最后通过邮件通知相关人员</p>
+<h1 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h1><ul>
+<li><a href="https://jenkins.io" target="_blank" rel="external">jenkins</a></li>
+<li><a href="https://github.com/fastlane/fastlane" target="_blank" rel="external">fastlane</a></li>
+<li>Homebrew</li>
+</ul>
+<h1 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h1><p>1、 安装brew，如果电脑已经安装，可以忽略</p>
+<blockquote>
+<p>curl -LsSf <a href="http://github.com/mxcl/homebrew/tarball/master" target="_blank" rel="external">http://github.com/mxcl/homebrew/tarball/master</a> | sudo tar xvz -C/usr/local –strip 1</p>
+</blockquote>
+<p>2、 安装java环境</p>
+<blockquote>
+<p>brew cask install java</p>
+</blockquote>
+<p>3、安装jenkins</p>
+<blockquote>
+<p>brew install jenkins</p>
+</blockquote>
+<p>4、设置端口</p>
+<blockquote>
+<p>java -jar /usr/local/Cellar/jenkins/2.67/libexec/jenkins.war –httpPort=8080</p>
+</blockquote>
+<p>5、启动jenkins</p>
+<blockquote>
+<p>jenkins</p>
+</blockquote>
+<p>到这步jenkins已经安装完毕，在浏览器中输入<a href="http://localhost:8080" target="_blank" rel="external">http://localhost:8080</a> 即可出现以下界面:</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/6644906-e7bd74cf75b6b438.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="4046DB34-2FB9-481F-A81C-2B3924F33C72.png"><br>6、在终端命令行输入以下命令获取密码，填入输入框之后点击continue</p>
+<blockquote>
+<p>cat /Users/wrf/.jenkins/secrets/initialAdminPassword<br>7、之后出现以下界面，点击install suggested plugin。这步操作安装的插件基本包括了常规使用的全部</p>
+</blockquote>
+<p><img src="http://upload-images.jianshu.io/upload_images/6644906-4bb3b4f4d3d86e8c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="7FCE5BB6-C6D6-4DD6-B60C-510523C6BA33.png"></p>
+<p>8、之后会看见如下界面，如果出现红叉的代表安装失败，只要点击retry即可，基本都会安装成功。之后创建账号就行了。整个jenkins已经安装成功</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/6644906-673e05f3f6de2730.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="E1BFCF45-4DCC-44DD-B30E-18674C91098A.png"><br>9、fastlane安装</p>
+<blockquote>
+<p>brew cask install fastlane</p>
+</blockquote>
+<p>　　至此整个环境已经完全搭好，第二篇文章将详细介绍android、iOS的打包流程。</p>
+<p>#<em>遇到的坑</em></p>
+<p>　　在这个安装过程中遇到一个坑，研究了好久好不容易解决了。如果通过jenkins官方下载的.dmg文件安装，发现打包都是超时，打包不成功。通过命令行安装的jenkins能正确打包。</p>
+<pre><code>ERROR: Timeout after 10 minutes
+ERROR: Error fetching remote repo &apos;origin&apos;
+</code></pre><p>　　研究之后主要原因其实是这两种方式安装成功之后的安装路径不一样，一个是在shared路径下，一个是在/User/用户名这个路径下</p>
 
       
     </div>
@@ -353,6 +414,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+        </div>
+      
 
       
       
@@ -362,14 +429,18 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2017/10/13/在mac上快速搭建Android、iOS自动打包环境(二)/" rel="next" title="在mac上快速搭建Android、iOS自动打包环境(二)">
+                <i class="fa fa-chevron-left"></i> 在mac上快速搭建Android、iOS自动打包环境(二)
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/10/13/手把手教你创建Cocoapods的podspec/" rel="prev" title="手把手教你创建Cocoapods的podspec">
-                手把手教你创建Cocoapods的podspec <i class="fa fa-chevron-right"></i>
+              <a href="/2017/10/13/pod install vs. pod update/" rel="prev" title="pod install vs. pod update">
+                pod install vs. pod update <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -508,7 +579,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Quick-Start"><span class="nav-number">1.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-a-new-post"><span class="nav-number">1.1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-server"><span class="nav-number">1.2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generate-static-files"><span class="nav-number">1.3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deploy-to-remote-sites"><span class="nav-number">1.4.</span> <span class="nav-text">Deploy to remote sites</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#工具"><span class="nav-number">1.</span> <span class="nav-text">工具</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#步骤"><span class="nav-number">2.</span> <span class="nav-text">步骤</span></a></li></ol></div>
             
 
           </div>

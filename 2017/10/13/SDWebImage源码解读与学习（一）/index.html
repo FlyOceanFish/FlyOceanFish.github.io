@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="React Native, iOS" />
+  <meta name="keywords" content="iOS," />
 
 
 
@@ -79,17 +79,20 @@
 
 
 
-<meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta name="description" content="SDWebImage可以说是一个家喻户晓的一个优秀的图片加载框架，极大的方便了我们加载网络图片。好的代码和框架都是我们学习的资源，所以我将一点一点的，从全局到局部的思路对SDWebImage的源码进行解读。 首先让我们了解一下这么优秀的框架都干了啥，有哪些优点！ ##优点  通过UIImageView、 UIButton的category的方式实现，可以让我们方便的引入和使用 异步下载图片 在内存">
+<meta name="keywords" content="iOS">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://yoursite.com/2017/10/13/hello-world/index.html">
+<meta property="og:title" content="SDWebImage源码解读与学习（一）">
+<meta property="og:url" content="http://yoursite.com/2017/10/13/SDWebImage源码解读与学习（一）/index.html">
 <meta property="og:site_name" content="FlyOceanFish">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="SDWebImage可以说是一个家喻户晓的一个优秀的图片加载框架，极大的方便了我们加载网络图片。好的代码和框架都是我们学习的资源，所以我将一点一点的，从全局到局部的思路对SDWebImage的源码进行解读。 首先让我们了解一下这么优秀的框架都干了啥，有哪些优点！ ##优点  通过UIImageView、 UIButton的category的方式实现，可以让我们方便的引入和使用 异步下载图片 在内存">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-10-13T05:37:20.000Z">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/6644906-69c145b9f4f11725.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2017-10-13T08:47:46.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta name="twitter:title" content="SDWebImage源码解读与学习（一）">
+<meta name="twitter:description" content="SDWebImage可以说是一个家喻户晓的一个优秀的图片加载框架，极大的方便了我们加载网络图片。好的代码和框架都是我们学习的资源，所以我将一点一点的，从全局到局部的思路对SDWebImage的源码进行解读。 首先让我们了解一下这么优秀的框架都干了啥，有哪些优点！ ##优点  通过UIImageView、 UIButton的category的方式实现，可以让我们方便的引入和使用 异步下载图片 在内存">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/6644906-69c145b9f4f11725.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
 
@@ -119,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/10/13/hello-world/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/10/13/SDWebImage源码解读与学习（一）/"/>
 
 
 
 
 
-  <title>Hello World | FlyOceanFish</title>
+  <title>SDWebImage源码解读与学习（一） | FlyOceanFish</title>
   
 
 
@@ -262,7 +265,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/13/hello-world/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/13/SDWebImage源码解读与学习（一）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="FlyOceanFish">
@@ -279,7 +282,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Hello World</h1>
+          <h1 class="post-title" itemprop="name headline">SDWebImage源码解读与学习（一）</h1>
         
 
         <div class="post-meta">
@@ -291,7 +294,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-13T13:37:20+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-13T16:27:04+08:00">
                 2017-10-13
               </time>
             
@@ -301,6 +304,28 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -329,15 +354,25 @@
       
 
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+        <p>SDWebImage可以说是一个家喻户晓的一个优秀的图片加载框架，极大的方便了我们加载网络图片。好的代码和框架都是我们学习的资源，所以我将一点一点的，从全局到局部的思路对SDWebImage的源码进行解读。</p>
+<p>首先让我们了解一下这么优秀的框架都干了啥，有哪些优点！</p>
+<p>##优点</p>
+<ul>
+<li>通过UIImageView、 UIButton的category的方式实现，可以让我们方便的引入和使用</li>
+<li>异步下载图片</li>
+<li>在内存和硬盘上异步缓存图片，有自动过期处理机制</li>
+<li>在后台实现了图片解压</li>
+<li>保证了同样的图片地址不会下载多次</li>
+<li>保证了主线程永远不会被阻塞</li>
+<li>使用GCD和ARC</li>
+<li>支持UIImage (JPEG, PNG, …)</li>
+<li><strong><em>支持WebP</em></strong></li>
+</ul>
+<h2 id="SDWebImage框架类图"><a href="#SDWebImage框架类图" class="headerlink" title="SDWebImage框架类图"></a>SDWebImage框架类图</h2><p>通过此图我们可以了解到SDWebImage整个框架的设计思路，可以看到SDWebImage有哪些核心类和方法(如果不清晰，建议下载下来看)</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/6644906-69c145b9f4f11725.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="SDWebImage框架类图.png"></p>
+<p>##核心类的作用<br><strong><em>SDWebImageManager</em></strong><br>通过调用各个不同的类实现了缓存查询和图片的下载<br><strong><em>SDWebImageDownloader</em></strong><br>在内部通过调用下载类去下载我们需要的图片，这个类是通过设计模式的外观模式实现的。即使以后通过其他方式的下载，只要重写一个下载类更改此类的逻辑就好，根本影响不到我们本身代码的调用<br><strong><em>SDWebImageDownloaderOperation</em></strong><br>一个线程，继承于NSOperation，内部通过NSURLRequest和NSURLSession的方式实现图片的下载<br><strong><em>SDWebImageDecoder</em></strong><br>实现了图片的解码<br><strong><em>NSData+ImageContentType</em></strong><br>判断出图片的格式。jpeg、png、gif、tiff、webp<br><strong><em>SDImageCache</em></strong><br>在磁盘或内存图片的缓存和读取。当达到内存警告的时候，清除内存的缓存;当程序UIApplicationWillTerminateNotification时，清除磁盘缓存<br><strong><em>SDImageCacheConfig</em></strong><br>主要配合SDImageCache使用，帮我们配置是否需要解压缩图片、是否关闭iCloud备份、是否缓存到内存、缓存时间、缓存大小<br><strong><em>SDWebImageCompat</em></strong><br>根据屏幕的Scale生成不同Scale的图片<br><strong><em>UIImage+MultiFormat</em></strong><br>根据图片的类型生成不同的图片，包括gif、webp、和其他三种大的类型图片的生成方式<br><strong><em>UIView+WebCache</em></strong><br>将所有的UIView的category的图片下载操作提取出来，做成公用的下载方法</p>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">#import &lt;SDWebImage/UIImageView+WebCache.h&gt;</div><div class="line">...</div><div class="line">[imageView sd_setImageWithURL:[NSURL URLWithString:@&quot;http://www.domain.com/path/to/image.jpg&quot;]</div><div class="line">             placeholderImage:[UIImage imageNamed:@&quot;placeholder.png&quot;]];</div></pre></td></tr></table></figure>
+<p>可以看到如果我们UIButton、UIImageView如果想使用网络图片，直接调用一个方法即可实现我们想要的，是不是很简单啊？？</p>
 
       
     </div>
@@ -353,6 +388,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+        </div>
+      
 
       
       
@@ -362,14 +403,18 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2017/10/13/UIPageViewController使用和控件的封装/" rel="next" title="UIPageViewController使用和控件的封装">
+                <i class="fa fa-chevron-left"></i> UIPageViewController使用和控件的封装
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/10/13/手把手教你创建Cocoapods的podspec/" rel="prev" title="手把手教你创建Cocoapods的podspec">
-                手把手教你创建Cocoapods的podspec <i class="fa fa-chevron-right"></i>
+              <a href="/2017/10/13/在mac上快速搭建Android、iOS自动打包环境(三)/" rel="prev" title="在mac上快速搭建Android、iOS自动打包环境(三)">
+                在mac上快速搭建Android、iOS自动打包环境(三) <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -508,7 +553,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Quick-Start"><span class="nav-number">1.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-a-new-post"><span class="nav-number">1.1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-server"><span class="nav-number">1.2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generate-static-files"><span class="nav-number">1.3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deploy-to-remote-sites"><span class="nav-number">1.4.</span> <span class="nav-text">Deploy to remote sites</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#SDWebImage框架类图"><span class="nav-number">1.</span> <span class="nav-text">SDWebImage框架类图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用"><span class="nav-number">2.</span> <span class="nav-text">使用</span></a></li></ol></div>
             
 
           </div>
