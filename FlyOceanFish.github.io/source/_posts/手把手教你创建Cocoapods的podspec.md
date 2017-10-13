@@ -6,7 +6,7 @@ tags:   # 这里写的标签会自动汇集到 tags 页面上
 - iOS
 ---
 现在大部分iOS项目都是在用Cocoapods来管理项目了，但是当我们自己写的一个公有或者私有项目的时候，想要支持Cocoapods，那应该怎么做呢？本教程手把手的教大家如何创建podsepc
-##步骤
+## 步骤
 1. github上创建自己的共有项目
 ![2220EA18-9E12-4891-B409-EB99776CBA78.png](http://upload-images.jianshu.io/upload_images/6644906-af82c503463a2495.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 2.  创建自己的Xcode工程，并提交到该repository
@@ -169,7 +169,7 @@ end
 此时我们运行pod spec lint则会见到如下图
 ![EDBCCFB9-6125-4816-8CEE-DD7178C06CB0.png](http://upload-images.jianshu.io/upload_images/6644906-e7ff39a2608266f9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 到这步整个制作过程已经完成接下来让我们发布自己spec
-##发布到CocoaPods
+## 发布到CocoaPods
 CocoaPods 0.33中加入了 Trunk 服务，使用 Trunk 服务可以方便的发布自己的Pod。要想使用 Trunk 服务，首先需要使用如下命令注册自己的电脑。这很简单，只要你指明你的邮箱地址（spec文件中的）和名称即可。CocoaPods 会给你填写的邮箱发送验证邮件，点击邮件中的链接就可通过验证。
 1. 注册
     pod trunk register 978456068@qq.com "FlyOceanFish"
@@ -187,6 +187,6 @@ CocoaPods 0.33中加入了 Trunk 服务，使用 Trunk 服务可以方便的发�
 
 不过此时我们pod search还搜不到我们的podspec。因为还没审核通过要等个几天，然后运行pod setup更新本地的spec，再搜索一下试试看。
 
-##参考链接
+## 参考链接
 [CocoaPods](https://guides.cocoapods.org/using/index.html)
 [between 'pod spec lint' and 'pod lib lint'?](https://stackoverflow.com/questions/32304421/whats-the-difference-between-pod-spec-lint-and-pod-lib-lint)

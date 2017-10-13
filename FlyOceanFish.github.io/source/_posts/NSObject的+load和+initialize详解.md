@@ -8,12 +8,12 @@ tags:   # 这里写的标签会自动汇集到 tags 页面上
 文章比较长，第一部分通过runtime的源码介绍了load和initialize两个方法的本质；第二部门通过实例演示了这个两个方法的调用；第三部分就是结论和应用场景
 
 #通过runtime源码解析load和initialize
-##+load
+## +load
 
 ![ADDBC8A1-E2D9-4BCE-8A87-B60FDCC2FB13.png](http://upload-images.jianshu.io/upload_images/6644906-034736b3848e3b2d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 通过调用堆栈，我们可以看出系统首先调用的是load_images方法
 
-###load_images
+### load_images
 ````
 void load_images(const char *path __unused, const struct mach_header *mh)
 {

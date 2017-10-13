@@ -13,7 +13,7 @@ tags:   # 这里写的标签会自动汇集到 tags 页面上
     This method defines what it means for instances to be equal. For example, a container object might define two containers as equal if their corresponding objects all respond YES to an isEqual:  request. See the NSData, NSDictionary, NSArray, and NSString class   specifications for examples of the use of this method.
 
     If two objects are equal, they must have the same hash value. This last point is particularly important if you define isEqual: in a subclass and intend to put instances of that subclass into a collection. Make sure you also define hash in your subclass.
-# #自定义对象，重写isEqual方法
+## 自定义对象，重写isEqual方法
 ``` Objective-C
 @implementation Person
 - (instancetype)initWithName:(NSString *)name andSex:(NSString *)sex{
@@ -74,9 +74,9 @@ tags:   # 这里写的标签会自动汇集到 tags 页面上
 }
 ```
 
-##总结
+## 总结
 如果两个对象相等，则hash必须要相等
-##参考
+## 参考
 [Equality](http://nshipster.com/equality/)
 [Apple Developer Documentation](https://developer.apple.com/documentation/objectivec/1418956-nsobject/1418795-isequal?language=objc)
 [Implementing Equality and Hashing](https://www.mikeash.com/pyblog/friday-qa-2010-06-18-implementing-equality-and-hashing.html)

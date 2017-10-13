@@ -85,10 +85,10 @@ XXReactNative工程/node_modules/react-native/third-party文件夹下
 之后运行pod install即可
 ![7DC30CAE-BDB1-439A-810E-1BE35FCC8EA4.png](http://upload-images.jianshu.io/upload_images/6644906-01d13bd37248e3e4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
-##更新以前的工程
+## 更新以前的工程
 我通过以上方法来更新我以前的工程，同时替换package.json为最新的，发现报错。此时需要我们yarn  install或npm install，然后在ios工程的根目录下执行pod install
 
-##‘boost/iterator/iterator_adaptor.hpp’ file not found
+## ‘boost/iterator/iterator_adaptor.hpp’ file not found
 
 * /Users/Vanessa/.rncache 中 boost_1_63_0.tar.gz， double-conversion-1.1.5.tar.gz， folly-2016.09.26.00.tar.gz， glog-0.3.4.tar.gz 文件下载不完整
 

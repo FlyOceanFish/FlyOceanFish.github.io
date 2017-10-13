@@ -7,14 +7,14 @@ tags:   # 这里写的标签会自动汇集到 tags 页面上
 - iOS
 ---
 今天心血来潮，就想尝试一下将RN工程单独嵌入到原生工程中，所以就做了尝试，本文是通过cocopods集成RN到现有工程的，但是其中也遇到一个问题，怎么编译都不过。
-#依赖包
+# 依赖包
 React Native的植入过程同时需要React和React Native两个node依赖包，所以需要我们创建package.json文件和正确的RN文件目录结构
 > 对于一个典型的React Native项目来说，一般package.json和index.ios.js等文件会放在项目的根目录下。而iOS相关的原生代码会放在一个名为ios/的子目录中,这里也同时放着你的Xcode项目文件（.xcodeproj）。
 
 ![88161340-E7F4-46B0-86A9-5A13DCCDA819.png](http://upload-images.jianshu.io/upload_images/6644906-30b409760b9414ae.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 按照上图的目录结构创建
-###package.json
+### package.json
 ````json
 {
 	"name": "TestReactNative",
@@ -39,11 +39,11 @@ React Native的植入过程同时需要React和React Native两个node依赖包�
 	}
 }
 ````
-#安装依赖包
+# 安装依赖包
 使用npm（node包管理器，Node package manager）来安装React和React Native模块。这些模块会被安装到项目根目录下的node_modules/目录中。 在包含有package.json文件的目录（一般也就是项目根目录）中运行下列命令来安装：
 >npm install
 
-#新建index.ios.js
+# 新建index.ios.js
 这个是随便一个index.ios.js即可,我是从一个RN的初始化工程复制了一个出来
 ````javascrip
 /**
@@ -101,10 +101,10 @@ const styles = StyleSheet.create({
 AppRegistry.registerComponent('TestReactNative', () => DemoApp);
 ````
 至此RN的相关依赖已经配置好，接下来就该配置cocopods了
-#cocopods配置
+# cocopods配置
 1、***创建Podfile，如果已经有了可以忽略此步骤***
 ```` jsp
-##在iOS原生代码所在的目录中（也就是`.xcodeproj`文件所在的目录）执行：
+## 在iOS原生代码所在的目录中（也就是`.xcodeproj`文件所在的目录）执行：
 $ pod init
 ````
 Podfile文件内容如下:
@@ -180,13 +180,13 @@ $ npm start
 # 在项目的根目录中执行：
 $ react-native run-ios
 ````
-#坑
+# 坑
 不知道大家有没有注意我们package.json中react-native中的版本是"0.44.3"，而为什么不是最新版46的呢？？这就是一个很大的坑！从45版本开始RN有4个文件被墙了，所以如果大于44版本的react-native会一直编译不过
 ***有以下3个解决方案：***
 1、不导入最新的包，导入44版本
 2、翻墙呗。。。。
 3、[下载被墙的4个依赖包，手工导入](http://blog.csdn.net/u013751625/article/details/75046147)
-###优化加载速度
+### 优化加载速度
 在原生调用RN的时候有点慢。大家在集成的时候会发现加载的过程挺慢的，可以压缩加载本地文件，这样加载就快了。通常我们可以将文件放到服务器上，然后通过IP地址来加载，这种方式其实也是比较慢的，最好的方式就是将文件提前下载到本地，通过一定的更新机制确保本地文件时最新的，通过使用这种方式加载就很快了。
 - 到当前项目的根目录中执行:
 ````

@@ -8,7 +8,7 @@ tags:   # 这里写的标签会自动汇集到 tags 页面上
 SDWebImage可以说是一个家喻户晓的一个优秀的图片加载框架，极大的方便了我们加载网络图片。好的代码和框架都是我们学习的资源，所以我将一点一点的，从全局到局部的思路对SDWebImage的源码进行解读。
 
 首先让我们了解一下这么优秀的框架都干了啥，有哪些优点！
-##优点
+## 优点
 -  通过UIImageView、 UIButton的category的方式实现，可以让我们方便的引入和使用
 - 异步下载图片
 - 在内存和硬盘上异步缓存图片，有自动过期处理机制
@@ -23,7 +23,7 @@ SDWebImage可以说是一个家喻户晓的一个优秀的图片加载框架，�
 通过此图我们可以了解到SDWebImage整个框架的设计思路，可以看到SDWebImage有哪些核心类和方法(如果不清晰，建议下载下来看)
 
 ![SDWebImage框架类图.png](http://upload-images.jianshu.io/upload_images/6644906-69c145b9f4f11725.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-##核心类的作用
+## 核心类的作用
 ***SDWebImageManager***
 通过调用各个不同的类实现了缓存查询和图片的下载
 ***SDWebImageDownloader***

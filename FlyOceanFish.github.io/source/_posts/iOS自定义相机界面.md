@@ -5,14 +5,14 @@ categories:  # 这里写的分类会自动汇集到 categories 页面上，分�
 tags:   # 这里写的标签会自动汇集到 tags 页面上
 - iOS
 ---
-##背景
+## 背景
 由于项目中需要拍照功能，但是系统原生的相机功能根本满足不了项目的需要，所以就只能自定义一个相加了。苹果再AVFoundation框架中给我们提供了各个api，我们完全可以通过这些api自定义一个满足我们需求的相机。
-##关键类
+## 关键类
 AVCaptureSession 负责输入流和输出流的管理。
 AVCaptureDeviceInput 输入流。连接输入采集设备的
 AVCaptureStillImageOutput 输出流。AVCaptureOutput的子类，主要是负责采集图片数据的，不过这个类再10.0以后废弃掉了，改用AVCapturePhotoOutput这个替换，这个类能够支持RAW格式的图片
 AVCaptureVideoPreviewLayer 集成CALayer，负责将采集的视频展示出来的一个类，提供了一个预览功能而已
-##实现过程
+## 实现过程
 
 ````Objective-C
 #import "TakePictureViewController.h"
@@ -333,7 +333,7 @@ typedef NS_ENUM(NSInteger, AVCamSetupResult ) {
 }
 @end
 ````
-##注意点
+## 注意点
 1、AVCaptureSession的配置过程和startRunning是阻挡主线程的一个耗时操作，所以我们放到另外的queue中操作，能够避免阻挡主线程
 2、由于我们拍照不需要质量非常高的照片，所以我们通过setOutputSettings设置了图片质量，这样减少了很大一部分内存，可以根据情况来设置图片的质量。
 3、拍完照片图片是倒立的，所以我们做了一个旋转操作，将图片正立了过来

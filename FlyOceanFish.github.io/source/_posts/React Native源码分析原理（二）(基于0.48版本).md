@@ -10,7 +10,7 @@ tags:   # 这里写的标签会自动汇集到 tags 页面上
 * [React Native源码分析原理（二）(基于0.48版本)](http://www.jianshu.com/p/0688b24950f4)
 
 上一篇文章大家如果仔细阅读揣摩对RN有了一个初步的认识了，接下来将基于上一篇文章的这种初步认识然我们详细了解一下RN的启动过程
-###启动过程
+### 启动过程
 [RCTRootView initWithBundleURL:...]
 [RCTBridge initWithBundleURL:...]
 [RCTBridge setUp]

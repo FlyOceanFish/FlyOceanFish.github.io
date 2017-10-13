@@ -34,5 +34,5 @@ SDWebImage源码解读与学习（一）我写的这篇文章已经详细介绍�
 ![BBAFDDF7-B13B-48DE-9BA9-8553756AD727.png](http://upload-images.jianshu.io/upload_images/6644906-68fa443f8341635a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 如上图则直接调用callCompletionBlockForOperation:completion:image:data:error:cacheType:finished:url这个方法,这个方法最终回调到UIView+WebCache这个类中，此类然后通过判断是UIImageView或UIButton将图片设置到视图上。
 
-###总结
+### 总结
 整个加载过程就是这样，可以看到SDWebImageManager就像一个大脑一样，负责调度各个类完成图片下载、缓存的功能，让各个类各司其职。

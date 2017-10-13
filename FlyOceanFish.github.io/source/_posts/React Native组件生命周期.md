@@ -6,7 +6,7 @@ tags:   # 这里写的标签会自动汇集到 tags 页面上
 - React Native # 可配置多个标签，注意格式
 - iOS
 ---
-##生命周期
+## 生命周期
 RN的Component如同iOS中ViewController一样，同样具有自己的生命周期，如果大家对于ViewController的生命周期熟悉的话，相信看明白也不在话下的
 
 

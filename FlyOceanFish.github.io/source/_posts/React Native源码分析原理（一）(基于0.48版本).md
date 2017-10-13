@@ -8,7 +8,7 @@ tags:   # 这里写的标签会自动汇集到 tags 页面上
 ---
 * [React Native源码分析原理（一）(基于0.48版本)](http://www.jianshu.com/p/8324b379c020)
 * [React Native源码分析原理（二）(基于0.48版本)](http://www.jianshu.com/p/0688b24950f4)
-###React和React Native初步认识
+### React和React Native初步认识
 说起Facebook的React Native就不得不说一下React，React是个什么东东呢？
 >React 是一个用于构建用户界面的 JAVASCRIPT 库。
 React主要用于构建UI，很多人认为 React 是 MVC 中的 V（视图）。
@@ -30,7 +30,7 @@ React 拥有较高的性能，代码逻辑非常简单，越来越多的人已�
 
 React Native说白了就是让React拥有了与原生APP交互，能够写接近原生APP的功能，就像它的两个单词一样，一个React，一个Native。有了它就能让js和oc或Android能够方便的相互调用，实现了能够通过js开发接近原生的APP的功能。是的，非常接近原生APP的体检，尤其绘制出的视图全部都是原生的！但是它与混合开发是不同的，一般我们说的混合开发是原生APP和html混合开发，但是体验上是比较差的。React Native也秉承了React的理念 `Learn Once, Write Anywhere`,而不是混合开发所追崇的`Write Once,Run Anywhere`。现在像携程、腾讯等这样的公司已经都使用了React Native写项目了，所以是时候大家也跟进一波，不管用不用，先学习攒着嘛！哈哈。毕竟技多不压身的嘛。
 
-###通讯框架图和几个核心类的作用
+### 通讯框架图和几个核心类的作用
 
 首先让我们看看React Native的js与oc交互框架（个人整理的，非官方的）。
 

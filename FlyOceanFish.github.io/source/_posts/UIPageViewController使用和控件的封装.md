@@ -5,10 +5,10 @@ categories:  # 这里写的分类会自动汇集到 categories 页面上，分�
 tags:   # 这里写的标签会自动汇集到 tags 页面上
 - iOS
 ---
-##背景
+## 背景
 我们经常会遇到一个场景，就是同时有几个视图需要左右滑动显示。大家可能会通过UIScrollview来实现，也能实现。但是如果不自己实现一些懒加载、缓存其实对性能还是有浪费的。接下来我们就让U闪亮登场。UIPageViewController加载不同的UIViewController可以有效的将不同逻辑进行了分离，减轻了总UIViewController的负担。
 我通过UIPageViewController简单封装了一个工具，就是加载不同的视图，支持上下滑动、左右滑动。并且具有懒加载和缓存的功能，在一定程度上提高了性能。
-####初始化
+#### 初始化
 ``` Objective-C
     self.array = @[[FirstViewController class],[SecondViewController class],[FirstViewController class]];
 //实例化UIPageViewController，并且指定方向和动画。可以设置options。UIPageViewControllerOptionInterPageSpacingKey两个视图的间距
@@ -57,7 +57,7 @@ typedef NS_ENUM(NSInteger, UIPageViewControllerNavigationDirection) {
     return index;
 }
 ````
-####代理方法
+#### 代理方法
 ````
 //向后滑动的时候，调用此方法。获取之前显示过的UIViewController
 - (nullable UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController{
@@ -86,8 +86,8 @@ typedef NS_ENUM(NSInteger, UIPageViewControllerNavigationDirection) {
 上边就是UIPageViewController的基本用法。大家可以自行去探索一下。其实挺好玩的，也可以实现一下显示两个视图，看起来就是一本打开的书的效果。
 下边是我封装的一个工具类，大家可以参考一下。只要传入你需要显示的UIViewController
 的class名字就可以。
-##效果图
+## 效果图
 ![效果.png](http://upload-images.jianshu.io/upload_images/6644906-c23a7e673aca129a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-##控件地址
+## 控件地址
 ***大家觉着有用别忘了star一下哦！***
 [YTOSectionsViewController](https://github.com/FlyOceanFish/YTOSectionsViewController)

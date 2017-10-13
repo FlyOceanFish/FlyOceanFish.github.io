@@ -7,7 +7,7 @@ tags:   # 这里写的标签会自动汇集到 tags 页面上
 - Objective-C
 ---
 NSInvocation是命令模式的一种实现，它包含选择器、方法签名、相应的参数以及目标对象。所谓的方法签名，即方法所对应的返回值类型和参数类型。当NSInvocatio被调用，它会在运行时通过目标对象去寻找对应的方法，从而确保唯一性，可以用[receiver message]来解释。实际开发过程中直接创建NSInvocation的情况不多见，这些事情通常交给系统来做。比如bang的JSPatch中arm64方法替换的实现就是利用runtime消息转发最后一步中的NSInvocation实现的。
-###正文
+### 正文
 基于这种命令模式，可以利用NSInvocation调用任意SEL甚至block。NSInvocation与NSMethodSignature配合来完成调用。NSMethodSignature这个类的对象保存了方法的名称、参数和返回值
 - SEL
 系统`NSObject`自带的`performSelector`默认只支持一个参数，我们可以给NSObject增加一个category，增加以下方法就可以支持多个参数的调用了
@@ -40,7 +40,7 @@ NSInvocation是命令模式的一种实现，它包含选择器、方法签名�
 
 ![FCB4F1F5-1F15-4FDC-A3AE-C1DC95AF32BF.png](http://upload-images.jianshu.io/upload_images/6644906-c1af7b09f14982c9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
-###block
+### block
 ````
 static id invokeBlock(id block ,NSArray *arguments) {
     if (block == nil) return nil;
@@ -95,7 +95,7 @@ static id invokeBlock(id block ,NSArray *arguments) {
 
 
 
-###SEL与block比较
+### SEL与block比较
  > -  invocation
 SEL既有target也有selector，block只有target
 >- signature
@@ -103,7 +103,7 @@ SEL既有target也有selector，block只有target
 >- type
 以OC对象为例：SEL的type为@，block的type会跟上具体类型，如@"NSString"
 
-###再谈block
+### 再谈block
 在block的invocation中有这样的代码
 ````
 const char *_Block_signature(void *);
@@ -160,7 +160,7 @@ static id invokeBlock(id block ,NSArray *arguments) {
 ````
 ![17D15BD3-98AA-46E9-BAD4-2747E16DD677.png](http://upload-images.jianshu.io/upload_images/6644906-143e6ac30788e9c1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
-###NSInvocation.h
+### NSInvocation.h
 ````
 @interface NSInvocation : NSObject {
 @private

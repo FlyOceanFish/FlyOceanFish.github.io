@@ -7,7 +7,7 @@ tags:   # 这里写的标签会自动汇集到 tags 页面上
 ---
 这次项目中遇到一个需求，将数字每隔3个用逗号隔开。因为如果数字太大确实看着有点眼花。
 　　所以就想着写了一个NSString的category，用起来效果还不错，代码如下：
-###.h的声明
+### .h的声明
     #import <Foundation/Foundation.h>
 
     @interface NSString (NumberSplitWithComma)
@@ -21,7 +21,7 @@ tags:   # 这里写的标签会自动汇集到 tags 页面上
      */
     - (NSString *)ld_numberSplitWithPunctutaion:(NSString *)puctutation;
     @end
-###.m文件的实现
+### .m文件的实现
     #import "NSString+NumberSplitWithComma.h"
 
     @implementation NSString (NumberSplitWithComma)
