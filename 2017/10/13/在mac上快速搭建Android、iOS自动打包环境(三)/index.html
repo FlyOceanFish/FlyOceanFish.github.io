@@ -79,21 +79,21 @@
 
 
 
-<meta name="description" content="接上一篇iOS自动打包文章，本文将介绍Android的自动打包。 #准备工作　　Android的SDK已经安装好（这个网上教程一大堆，如果不会的可以自行搜索，实在搞不定的可以留言） #Android自动打包　　其实Android的自动打包与iOS的自动打包基本一样，主要由于开发工具的不同，所以不同点都是由于开发工具不同造成。本文将写出与iOS的不同的地方，前边几步相同的就省略了1、 配置gradl">
+<meta name="description" content="接上一篇iOS自动打包文章，本文将介绍Android的自动打包。 准备工作　　Android的SDK已经安装好（这个网上教程一大堆，如果不会的可以自行搜索，实在搞不定的可以留言） Android自动打包　　其实Android的自动打包与iOS的自动打包基本一样，主要由于开发工具的不同，所以不同点都是由于开发工具不同造成。本文将写出与iOS的不同的地方，前边几步相同的就省略了1、 配置gradle">
 <meta name="keywords" content="iOS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="在mac上快速搭建Android、iOS自动打包环境(三)">
 <meta property="og:url" content="http://yoursite.com/2017/10/13/在mac上快速搭建Android、iOS自动打包环境(三)/index.html">
 <meta property="og:site_name" content="FlyOceanFish&#39; Blog">
-<meta property="og:description" content="接上一篇iOS自动打包文章，本文将介绍Android的自动打包。 #准备工作　　Android的SDK已经安装好（这个网上教程一大堆，如果不会的可以自行搜索，实在搞不定的可以留言） #Android自动打包　　其实Android的自动打包与iOS的自动打包基本一样，主要由于开发工具的不同，所以不同点都是由于开发工具不同造成。本文将写出与iOS的不同的地方，前边几步相同的就省略了1、 配置gradl">
+<meta property="og:description" content="接上一篇iOS自动打包文章，本文将介绍Android的自动打包。 准备工作　　Android的SDK已经安装好（这个网上教程一大堆，如果不会的可以自行搜索，实在搞不定的可以留言） Android自动打包　　其实Android的自动打包与iOS的自动打包基本一样，主要由于开发工具的不同，所以不同点都是由于开发工具不同造成。本文将写出与iOS的不同的地方，前边几步相同的就省略了1、 配置gradle">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/6644906-39e67a7b9138b591.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/6644906-c37c70459c0bee8d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/6644906-b7b42037ef20691c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2017-10-13T08:45:41.000Z">
+<meta property="og:updated_time" content="2017-10-13T09:22:50.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="在mac上快速搭建Android、iOS自动打包环境(三)">
-<meta name="twitter:description" content="接上一篇iOS自动打包文章，本文将介绍Android的自动打包。 #准备工作　　Android的SDK已经安装好（这个网上教程一大堆，如果不会的可以自行搜索，实在搞不定的可以留言） #Android自动打包　　其实Android的自动打包与iOS的自动打包基本一样，主要由于开发工具的不同，所以不同点都是由于开发工具不同造成。本文将写出与iOS的不同的地方，前边几步相同的就省略了1、 配置gradl">
+<meta name="twitter:description" content="接上一篇iOS自动打包文章，本文将介绍Android的自动打包。 准备工作　　Android的SDK已经安装好（这个网上教程一大堆，如果不会的可以自行搜索，实在搞不定的可以留言） Android自动打包　　其实Android的自动打包与iOS的自动打包基本一样，主要由于开发工具的不同，所以不同点都是由于开发工具不同造成。本文将写出与iOS的不同的地方，前边几步相同的就省略了1、 配置gradle">
 <meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/6644906-39e67a7b9138b591.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
@@ -357,8 +357,8 @@
 
       
         <p>接上一篇iOS自动打包文章，本文将介绍Android的自动打包。</p>
-<p>#准备工作<br>　　Android的SDK已经安装好（这个网上教程一大堆，如果不会的可以自行搜索，实在搞不定的可以留言）</p>
-<p>#Android自动打包<br>　　其实Android的自动打包与iOS的自动打包基本一样，主要由于开发工具的不同，所以不同点都是由于开发工具不同造成。<br><strong><em>本文将写出与iOS的不同的地方，前边几步相同的就省略了</em></strong><br>1、 <strong><em>配置gradle</em></strong></p>
+<h1 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h1><p>　　Android的SDK已经安装好（这个网上教程一大堆，如果不会的可以自行搜索，实在搞不定的可以留言）</p>
+<h1 id="Android自动打包"><a href="#Android自动打包" class="headerlink" title="Android自动打包"></a>Android自动打包</h1><p>　　其实Android的自动打包与iOS的自动打包基本一样，主要由于开发工具的不同，所以不同点都是由于开发工具不同造成。<br><strong><em>本文将写出与iOS的不同的地方，前边几步相同的就省略了</em></strong><br>1、 <strong><em>配置gradle</em></strong></p>
 <ul>
 <li>找到“构建”-&gt;“增加构建步骤”-&gt;“Excute Shell”。这一步由于服务器上的gradlew一直获取不到权限<br><img src="http://upload-images.jianshu.io/upload_images/6644906-39e67a7b9138b591.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="4ADDE352-E751-4379-8BA2-2402F36ECB5C.png"></li>
 <li>找到“构建”-&gt;“增加构建步骤”-&gt;“Invoke Gradle Script”，选择”Use Gradle Wrapper”。其中Build File 代表build.gradle的路径<br><img src="http://upload-images.jianshu.io/upload_images/6644906-c37c70459c0bee8d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="83CAA3F9-9675-46DE-9332-A8B3C4D579C0.png"></li>
@@ -460,8 +460,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -527,6 +536,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#准备工作"><span class="nav-number">1.</span> <span class="nav-text">准备工作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Android自动打包"><span class="nav-number">2.</span> <span class="nav-text">Android自动打包</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

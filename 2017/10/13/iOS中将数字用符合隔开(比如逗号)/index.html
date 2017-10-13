@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="这次项目中遇到一个需求，将数字每隔3个用逗号隔开。因为如果数字太大确实看着有点眼花。　　所以就想着写了一个NSString的category，用起来效果还不错，代码如下： ###.h的声明 #import &amp;lt;Foundation/Foundation.h&amp;gt;  @interface NSString (NumberSplitWithComma) /**  *数字以逗号隔开 例：123，3">
+<meta name="description" content="这次项目中遇到一个需求，将数字每隔3个用逗号隔开。因为如果数字太大确实看着有点眼花。　　所以就想着写了一个NSString的category，用起来效果还不错，代码如下： .h的声明#import &amp;lt;Foundation/Foundation.h&amp;gt;  @interface NSString (NumberSplitWithComma) /**  *数字以逗号隔开 例：123，321.1">
 <meta name="keywords" content="iOS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="pod install vs. pod update">
 <meta property="og:url" content="http://yoursite.com/2017/10/13/iOS中将数字用符合隔开(比如逗号)/index.html">
 <meta property="og:site_name" content="FlyOceanFish&#39; Blog">
-<meta property="og:description" content="这次项目中遇到一个需求，将数字每隔3个用逗号隔开。因为如果数字太大确实看着有点眼花。　　所以就想着写了一个NSString的category，用起来效果还不错，代码如下： ###.h的声明 #import &amp;lt;Foundation/Foundation.h&amp;gt;  @interface NSString (NumberSplitWithComma) /**  *数字以逗号隔开 例：123，3">
+<meta property="og:description" content="这次项目中遇到一个需求，将数字每隔3个用逗号隔开。因为如果数字太大确实看着有点眼花。　　所以就想着写了一个NSString的category，用起来效果还不错，代码如下： .h的声明#import &amp;lt;Foundation/Foundation.h&amp;gt;  @interface NSString (NumberSplitWithComma) /**  *数字以逗号隔开 例：123，321.1">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-10-13T08:46:32.000Z">
+<meta property="og:updated_time" content="2017-10-13T09:14:54.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="pod install vs. pod update">
-<meta name="twitter:description" content="这次项目中遇到一个需求，将数字每隔3个用逗号隔开。因为如果数字太大确实看着有点眼花。　　所以就想着写了一个NSString的category，用起来效果还不错，代码如下： ###.h的声明 #import &amp;lt;Foundation/Foundation.h&amp;gt;  @interface NSString (NumberSplitWithComma) /**  *数字以逗号隔开 例：123，3">
+<meta name="twitter:description" content="这次项目中遇到一个需求，将数字每隔3个用逗号隔开。因为如果数字太大确实看着有点眼花。　　所以就想着写了一个NSString的category，用起来效果还不错，代码如下： .h的声明#import &amp;lt;Foundation/Foundation.h&amp;gt;  @interface NSString (NumberSplitWithComma) /**  *数字以逗号隔开 例：123，321.1">
 
 
 
@@ -353,8 +353,7 @@
 
       
         <p>这次项目中遇到一个需求，将数字每隔3个用逗号隔开。因为如果数字太大确实看着有点眼花。<br>　　所以就想着写了一个NSString的category，用起来效果还不错，代码如下：</p>
-<p>###.h的声明</p>
-<pre><code>#import &lt;Foundation/Foundation.h&gt;
+<h3 id="h的声明"><a href="#h的声明" class="headerlink" title=".h的声明"></a>.h的声明</h3><pre><code>#import &lt;Foundation/Foundation.h&gt;
 
 @interface NSString (NumberSplitWithComma)
 /**
@@ -367,8 +366,7 @@
  */
 - (NSString *)ld_numberSplitWithPunctutaion:(NSString *)puctutation;
 @end
-</code></pre><p>###.m文件的实现</p>
-<pre><code>#import &quot;NSString+NumberSplitWithComma.h&quot;
+</code></pre><h3 id="m文件的实现"><a href="#m文件的实现" class="headerlink" title=".m文件的实现"></a>.m文件的实现</h3><pre><code>#import &quot;NSString+NumberSplitWithComma.h&quot;
 
 @implementation NSString (NumberSplitWithComma)
 
@@ -615,7 +613,7 @@ NSLog(@&quot;formattedNumberString: %@&quot;, formattedNumberString);
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#补充"><span class="nav-number">1.</span> <span class="nav-text">补充</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#h的声明"><span class="nav-number">1.</span> <span class="nav-text">.h的声明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#m文件的实现"><span class="nav-number">2.</span> <span class="nav-text">.m文件的实现</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#补充"><span class="nav-number"></span> <span class="nav-text">补充</span></a></div>
             
 
           </div>

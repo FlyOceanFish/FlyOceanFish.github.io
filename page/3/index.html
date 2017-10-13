@@ -498,8 +498,7 @@
         
           
             <p>现在大部分iOS项目都是在用Cocoapods来管理项目了，但是当我们自己写的一个公有或者私有项目的时候，想要支持Cocoapods，那应该怎么做呢？本教程手把手的教大家如何创建podsepc</p>
-<p>##步骤</p>
-<ol>
+<h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><ol>
 <li>github上创建自己的共有项目<br><img src="http://upload-images.jianshu.io/upload_images/6644906-af82c503463a2495.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="2220EA18-9E12-4891-B409-EB99776CBA78.png"></li>
 <li>创建自己的Xcode工程，并提交到该repository<br><img src="http://upload-images.jianshu.io/upload_images/6644906-b677f02da468d7cb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="0EF5DF0F-67C1-41D4-B3BA-5F8A8BB0BE78.png"></li>
 <li><p>创建podspec文件<br>我们cd当我们项目的根目录下。本项目中就是上图的文件夹下。执行如下命令：</p>
@@ -515,7 +514,7 @@
 </ol>
 <p><img src="http://upload-images.jianshu.io/upload_images/6644906-8ee99362e9e96299.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="AECADD88-FAD7-4B9C-BD73-701B7AC40282.png"><br>如果见到如上图，则代表验证通过；如果没有通过的话按照提示进行修改即可。<br>备注：这个命令是本地校验的，还要pod spec lint 这个是本地和远程校验。如果此时我们用pod spec lint会报错，因为我们还有发布一个版本，就是第6步还没做呢。</p>
 <ol>
-<li>在github上创建一个发布版本<br><img src="http://upload-images.jianshu.io/upload_images/6644906-d8d193f003b2720b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="3EF1084F-7DF7-403E-8CE7-519AB42194E0.png"><br>此时我们运行pod spec lint则会见到如下图<br><img src="http://upload-images.jianshu.io/upload_images/6644906-e7ff39a2608266f9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="EDBCCFB9-6125-4816-8CEE-DD7178C06CB0.png"><br>到这步整个制作过程已经完成接下来让我们发布自己spec<br>##发布到CocoaPods<br>CocoaPods 0.33中加入了 Trunk 服务，使用 Trunk 服务可以方便的发布自己的Pod。要想使用 Trunk 服务，首先需要使用如下命令注册自己的电脑。这很简单，只要你指明你的邮箱地址（spec文件中的）和名称即可。CocoaPods 会给你填写的邮箱发送验证邮件，点击邮件中的链接就可通过验证。</li>
+<li>在github上创建一个发布版本<br><img src="http://upload-images.jianshu.io/upload_images/6644906-d8d193f003b2720b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="3EF1084F-7DF7-403E-8CE7-519AB42194E0.png"><br>此时我们运行pod spec lint则会见到如下图<br><img src="http://upload-images.jianshu.io/upload_images/6644906-e7ff39a2608266f9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="EDBCCFB9-6125-4816-8CEE-DD7178C06CB0.png"><br>到这步整个制作过程已经完成接下来让我们发布自己spec<h2 id="发布到CocoaPods"><a href="#发布到CocoaPods" class="headerlink" title="发布到CocoaPods"></a>发布到CocoaPods</h2>CocoaPods 0.33中加入了 Trunk 服务，使用 Trunk 服务可以方便的发布自己的Pod。要想使用 Trunk 服务，首先需要使用如下命令注册自己的电脑。这很简单，只要你指明你的邮箱地址（spec文件中的）和名称即可。CocoaPods 会给你填写的邮箱发送验证邮件，点击邮件中的链接就可通过验证。</li>
 <li>注册<br> pod trunk register 978456068@qq.com “FlyOceanFish”</li>
 </ol>
 <p>2、验证是否注册成功</p>
@@ -524,7 +523,7 @@
 <pre><code>pod trunk push
 </code></pre><p><img src="http://upload-images.jianshu.io/upload_images/6644906-870e654c65f46478.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="7FA508FC-B6CB-4ED1-B31E-1799F83BCE6F.png"><br>此图代表我们已经发布成功</p>
 <p>不过此时我们pod search还搜不到我们的podspec。因为还没审核通过要等个几天，然后运行pod setup更新本地的spec，再搜索一下试试看。</p>
-<p>##参考链接<br><a href="https://guides.cocoapods.org/using/index.html" target="_blank" rel="external">CocoaPods</a><br><a href="https://stackoverflow.com/questions/32304421/whats-the-difference-between-pod-spec-lint-and-pod-lib-lint" target="_blank" rel="external">between ‘pod spec lint’ and ‘pod lib lint’?</a></p>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><a href="https://guides.cocoapods.org/using/index.html" target="_blank" rel="external">CocoaPods</a><br><a href="https://stackoverflow.com/questions/32304421/whats-the-difference-between-pod-spec-lint-and-pod-lib-lint" target="_blank" rel="external">between ‘pod spec lint’ and ‘pod lib lint’?</a></p>
 
           
         

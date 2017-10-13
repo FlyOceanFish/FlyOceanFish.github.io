@@ -92,7 +92,7 @@
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/6644906-7d6e794aee939298.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/6644906-a7027f4456efa0bd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/6644906-68fa443f8341635a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2017-10-13T08:48:30.000Z">
+<meta property="og:updated_time" content="2017-10-13T09:16:35.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SDWebImage源码解读与学习（二）">
 <meta name="twitter:description" content="SDWebImage源码解读与学习（一）我写的这篇文章已经详细介绍了SDWebImage框架中所有的核心类和具体作用，结尾处也简单示例了一下SDWebImage的使用，相信大家对SDWebImage已经有了一个大体的认识。这次我将带领大家解读一下SDWebImage加载网络图片这个过程。 1、当我们给UIImageView设置图片URL是，首先调用的是UIView+WebCache这个catego">
@@ -368,7 +368,7 @@
 <p><img src="http://upload-images.jianshu.io/upload_images/6644906-a7027f4456efa0bd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="F7419FF6-36E7-44D6-802B-1ACE0F31ECC7.png"></p>
 <p><strong>如果判断条件不成立:</strong></p>
 <p><img src="http://upload-images.jianshu.io/upload_images/6644906-68fa443f8341635a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="BBAFDDF7-B13B-48DE-9BA9-8553756AD727.png"><br>如上图则直接调用callCompletionBlockForOperation:completion:image:data:error:cacheType:finished:url这个方法,这个方法最终回调到UIView+WebCache这个类中，此类然后通过判断是UIImageView或UIButton将图片设置到视图上。</p>
-<p>###总结<br>整个加载过程就是这样，可以看到SDWebImageManager就像一个大脑一样，负责调度各个类完成图片下载、缓存的功能，让各个类各司其职。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>整个加载过程就是这样，可以看到SDWebImageManager就像一个大脑一样，负责调度各个类完成图片下载、缓存的功能，让各个类各司其职。</p>
 
       
     </div>
@@ -463,8 +463,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -530,6 +539,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">1.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

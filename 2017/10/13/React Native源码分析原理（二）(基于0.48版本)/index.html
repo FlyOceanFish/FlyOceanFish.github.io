@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="React Native源码分析原理（一）(基于0.48版本) React Native源码分析原理（二）(基于0.48版本)  上一篇文章大家如果仔细阅读揣摩对RN有了一个初步的认识了，接下来将基于上一篇文章的这种初步认识然我们详细了解一下RN的启动过程 ###启动过程[RCTRootView initWithBundleURL:…][RCTBridge initWithBundleURL:…">
+<meta name="description" content="React Native源码分析原理（一）(基于0.48版本) React Native源码分析原理（二）(基于0.48版本)  上一篇文章大家如果仔细阅读揣摩对RN有了一个初步的认识了，接下来将基于上一篇文章的这种初步认识然我们详细了解一下RN的启动过程 启动过程[RCTRootView initWithBundleURL:…][RCTBridge initWithBundleURL:…][R">
 <meta name="keywords" content="React Native,iOS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="React Native源码分析原理（二）(基于0.48版本)">
 <meta property="og:url" content="http://yoursite.com/2017/10/13/React Native源码分析原理（二）(基于0.48版本)/index.html">
 <meta property="og:site_name" content="FlyOceanFish&#39; Blog">
-<meta property="og:description" content="React Native源码分析原理（一）(基于0.48版本) React Native源码分析原理（二）(基于0.48版本)  上一篇文章大家如果仔细阅读揣摩对RN有了一个初步的认识了，接下来将基于上一篇文章的这种初步认识然我们详细了解一下RN的启动过程 ###启动过程[RCTRootView initWithBundleURL:…][RCTBridge initWithBundleURL:…">
+<meta property="og:description" content="React Native源码分析原理（一）(基于0.48版本) React Native源码分析原理（二）(基于0.48版本)  上一篇文章大家如果仔细阅读揣摩对RN有了一个初步的认识了，接下来将基于上一篇文章的这种初步认识然我们详细了解一下RN的启动过程 启动过程[RCTRootView initWithBundleURL:…][RCTBridge initWithBundleURL:…][R">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-10-13T08:41:32.000Z">
+<meta property="og:updated_time" content="2017-10-13T09:16:03.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="React Native源码分析原理（二）(基于0.48版本)">
-<meta name="twitter:description" content="React Native源码分析原理（一）(基于0.48版本) React Native源码分析原理（二）(基于0.48版本)  上一篇文章大家如果仔细阅读揣摩对RN有了一个初步的认识了，接下来将基于上一篇文章的这种初步认识然我们详细了解一下RN的启动过程 ###启动过程[RCTRootView initWithBundleURL:…][RCTBridge initWithBundleURL:…">
+<meta name="twitter:description" content="React Native源码分析原理（一）(基于0.48版本) React Native源码分析原理（二）(基于0.48版本)  上一篇文章大家如果仔细阅读揣摩对RN有了一个初步的认识了，接下来将基于上一篇文章的这种初步认识然我们详细了解一下RN的启动过程 启动过程[RCTRootView initWithBundleURL:…][RCTBridge initWithBundleURL:…][R">
 
 
 
@@ -357,7 +357,7 @@
 <li><a href="http://www.jianshu.com/p/0688b24950f4" target="_blank" rel="external">React Native源码分析原理（二）(基于0.48版本)</a></li>
 </ul>
 <p>上一篇文章大家如果仔细阅读揣摩对RN有了一个初步的认识了，接下来将基于上一篇文章的这种初步认识然我们详细了解一下RN的启动过程</p>
-<p>###启动过程<br>[RCTRootView initWithBundleURL:…]<br>[RCTBridge initWithBundleURL:…]<br>[RCTBridge setUp]<br>初始化batchedBridge<br>[RCTCxxBridge start]<br>开启一个线程jsThread用于js<br>[RCTCxxBridge _initModulesWithDispatchGroup]<br>初始化JSCExecutorFactory, 用于执行js代码以及处理回调 JSCExecutor::JSCExecutor()<br>JSCExecutor::initOnJSVMThread()<br>installGlobalProxy -&gt; nativeModuleProxy<br>RCTJavaScriptLoader -&gt; 加载js代码<br>[RCTCxxBridge executeSourceCode]<br>[RCTRootView initWithBridge:…]<br>[RCTRootView bundleFinishedLoading]<br>初始化RCTRootContentView<br>[RCTRootView runApplication]//是Native调用js的一个完美例子。本质调用了AppRegistry的runApplication方法<br>我们初始化RN工程一般都是如下代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@&quot;index.ios&quot; fallbackResource:nil];</div><div class="line"></div><div class="line">RCTRootView *rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation</div><div class="line">                                                    moduleName:@&quot;AwesomeProject&quot;</div><div class="line">                                             initialProperties:nil</div><div class="line">                                                 launchOptions:launchOptions];</div></pre></td></tr></table></figure></p>
+<h3 id="启动过程"><a href="#启动过程" class="headerlink" title="启动过程"></a>启动过程</h3><p>[RCTRootView initWithBundleURL:…]<br>[RCTBridge initWithBundleURL:…]<br>[RCTBridge setUp]<br>初始化batchedBridge<br>[RCTCxxBridge start]<br>开启一个线程jsThread用于js<br>[RCTCxxBridge _initModulesWithDispatchGroup]<br>初始化JSCExecutorFactory, 用于执行js代码以及处理回调 JSCExecutor::JSCExecutor()<br>JSCExecutor::initOnJSVMThread()<br>installGlobalProxy -&gt; nativeModuleProxy<br>RCTJavaScriptLoader -&gt; 加载js代码<br>[RCTCxxBridge executeSourceCode]<br>[RCTRootView initWithBridge:…]<br>[RCTRootView bundleFinishedLoading]<br>初始化RCTRootContentView<br>[RCTRootView runApplication]//是Native调用js的一个完美例子。本质调用了AppRegistry的runApplication方法<br>我们初始化RN工程一般都是如下代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@&quot;index.ios&quot; fallbackResource:nil];</div><div class="line"></div><div class="line">RCTRootView *rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation</div><div class="line">                                                    moduleName:@&quot;AwesomeProject&quot;</div><div class="line">                                             initialProperties:nil</div><div class="line">                                                 launchOptions:launchOptions];</div></pre></td></tr></table></figure></p>
 <p>1、 获取到app的js入口文件的NSURL<br>2 、初始化RCTRootView, 传递的参数moduleName:@”AwesomeProject”是我们在入口的js文件中注册的, initialProperties:nil, 将作为js中的跟view的props, 可以用来传递需要的初始数据</p>
 <p>进入RCTRootView初始化中，其实很简单<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">RCTBridge *bridge = [[RCTBridge alloc] initWithBundleURL:bundleURL</div><div class="line">                                          moduleProvider:nil</div><div class="line">                                           launchOptions:launchOptions];</div><div class="line"></div><div class="line">return [self initWithBridge:bridge moduleName:moduleName initialProperties:initialProperties];</div></pre></td></tr></table></figure></p>
 <p>就实例化了一个RCTBridge，这个RCTBridge的实例其实就是一个外壳而已，接下来我们看看内部，为啥是一个外壳。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[self setUp];</div></pre></td></tr></table></figure></p>
@@ -481,8 +481,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -548,6 +557,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#启动过程"><span class="nav-number">1.</span> <span class="nav-text">启动过程</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

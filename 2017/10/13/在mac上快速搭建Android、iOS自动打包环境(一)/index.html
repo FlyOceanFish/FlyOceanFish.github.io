@@ -90,7 +90,7 @@
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/6644906-e7bd74cf75b6b438.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/6644906-4bb3b4f4d3d86e8c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/6644906-673e05f3f6de2730.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2017-10-13T08:44:49.000Z">
+<meta property="og:updated_time" content="2017-10-13T09:14:13.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="在mac上快速搭建Android、iOS自动打包环境(一)">
 <meta name="twitter:description" content="本文实现了jenkins+fastlane自动打包Android、iOS，然后上传到蒲公英上，最后通过邮件通知相关人员 工具 jenkins fastlane Homebrew  步骤1、 安装brew，如果电脑已经安装，可以忽略  curl -LsSf http://github.com/mxcl/homebrew/tarball/master | sudo tar xvz -C/usr/loc">
@@ -394,8 +394,7 @@
 <p>brew cask install fastlane</p>
 </blockquote>
 <p>　　至此整个环境已经完全搭好，第二篇文章将详细介绍android、iOS的打包流程。</p>
-<p>#<em>遇到的坑</em></p>
-<p>　　在这个安装过程中遇到一个坑，研究了好久好不容易解决了。如果通过jenkins官方下载的.dmg文件安装，发现打包都是超时，打包不成功。通过命令行安装的jenkins能正确打包。</p>
+<h1 id="遇到的坑"><a href="#遇到的坑" class="headerlink" title="遇到的坑"></a><em>遇到的坑</em></h1><p>　　在这个安装过程中遇到一个坑，研究了好久好不容易解决了。如果通过jenkins官方下载的.dmg文件安装，发现打包都是超时，打包不成功。通过命令行安装的jenkins能正确打包。</p>
 <pre><code>ERROR: Timeout after 10 minutes
 ERROR: Error fetching remote repo &apos;origin&apos;
 </code></pre><p>　　研究之后主要原因其实是这两种方式安装成功之后的安装路径不一样，一个是在shared路径下，一个是在/User/用户名这个路径下</p>
@@ -579,7 +578,7 @@ ERROR: Error fetching remote repo &apos;origin&apos;
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#工具"><span class="nav-number">1.</span> <span class="nav-text">工具</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#步骤"><span class="nav-number">2.</span> <span class="nav-text">步骤</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#工具"><span class="nav-number">1.</span> <span class="nav-text">工具</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#步骤"><span class="nav-number">2.</span> <span class="nav-text">步骤</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#遇到的坑"><span class="nav-number">3.</span> <span class="nav-text">遇到的坑</span></a></li></ol></div>
             
 
           </div>
