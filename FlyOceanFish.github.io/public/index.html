@@ -98,7 +98,7 @@
     root: '/',
     scheme: 'Pisces',
     version: '5.1.3',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
     fancybox: true,
     tabs: true,
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
@@ -329,17 +329,6 @@
 
           
             
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/10/16/React Native项目实践总结/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/10/16/React Native项目实践总结/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
           
 
           
@@ -380,6 +369,8 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div></pre></td><td class="code"><pre><div class="line">import &#123;Platform&#125; from &apos;react-native&apos;;</div><div class="line">import &#123;Navigation&#125; from &apos;react-native-navigation&apos;;</div><div class="line">import &#123;registerScreens,registerScreenVisibilityListener&#125; from &apos;./Screens/index&apos;;</div><div class="line"></div><div class="line">import Icons from &apos;./Assets/Icon&apos;;</div><div class="line"></div><div class="line">// screen related book keeping</div><div class="line">registerScreens();</div><div class="line">registerScreenVisibilityListener();</div><div class="line"></div><div class="line">const tabs = [&#123;</div><div class="line">        label: &apos;推荐&apos;,</div><div class="line">        screen: &apos;com.fof.FlyOceanMovies.MovieList&apos;,</div><div class="line">        icon: &#123;uri:Icons.star,scale:4.6&#125;,</div><div class="line">        title: &apos;热门推荐&apos;,</div><div class="line">    &#125;,</div><div class="line">    &#123;</div><div class="line">        label: &apos;北美票房&apos;,</div><div class="line">        screen: &apos;com.fof.FlyOceanMovies.USBoxList&apos;,</div><div class="line">        icon: &#123;uri:Icons.featured,scale:1.1&#125;,</div><div class="line">        title: &apos;北美票房&apos;,</div><div class="line">    &#125;,</div><div class="line">    &#123;</div><div class="line">        label: &apos;搜索&apos;,</div><div class="line">        screen: &apos;com.fof.FlyOceanMovies.SearchForm&apos;,</div><div class="line">        icon: &#123;uri:Icons.search,scale:1.2&#125;,</div><div class="line">        title: &apos;搜索&apos;,</div><div class="line">    &#125;</div><div class="line">    ];</div><div class="line"></div><div class="line">// this will start our app</div><div class="line">Navigation.startTabBasedApp(&#123;</div><div class="line">    tabs,</div><div class="line">    animationType: Platform.OS === &apos;ios&apos; ? &apos;slide-down&apos; : &apos;fade&apos;,</div><div class="line">    tabsStyle: &#123;</div><div class="line">        tabBarBackgroundColor: &apos;#003a66&apos;,</div><div class="line">        tabBarButtonColor: &apos;#ffffff&apos;,</div><div class="line">        tabBarSelectedButtonColor: &apos;#ff505c&apos;,</div><div class="line">        tabFontFamily: &apos;BioRhyme-Bold&apos;,</div><div class="line">    &#125;,</div><div class="line">    appStyle: &#123;</div><div class="line">        tabBarBackgroundColor: &apos;#003a66&apos;,</div><div class="line">        navBarButtonColor: &apos;#ffffff&apos;,</div><div class="line">        tabBarButtonColor: &apos;#ffffff&apos;,</div><div class="line">        navBarTextColor: &apos;#ffffff&apos;,</div><div class="line">        tabBarSelectedButtonColor: &apos;#ff505c&apos;,</div><div class="line">        navigationBarColor: &apos;#003a66&apos;,</div><div class="line">        navBarBackgroundColor: &apos;#003a66&apos;,</div><div class="line">        statusBarColor: &apos;#002b4c&apos;,</div><div class="line">        tabFontFamily: &apos;BioRhyme-Bold&apos;,</div><div class="line">    &#125;,</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
 <p>2、各个子页面<br>MovieList：首页<br>USBoxList：北美票房<br>SearchForm：搜索<br>MovieDetail：详情<br>Login：登录界面<br>SearchResult：搜索结果页<br>Main.js：相当于CSS样式，其实就是布局</p>
 <p>其中MovieList自己实现了相当于iOS的segmentcontrol的效果使用到了ReactNative中的动画。</p>
+<p>下图详细概括了RN中动画内容，所谓得此图得天下。哈哈</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/6644906-d9ea24281e635f4a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="React Native 动画.png"></p>
 <p>还有一些其他的关注点我都在代码加了注释，大家有兴趣可以详细看一下代码，由于里边包括了我两个阶段的所有代码，所以大家要耐心看哦。</p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>学习React Native有一段时间了，写这个项目其实不是很熟练，踩了不少坑，写的也不是非常的快。但是没遇到一个坑都停下来好好思考复习巩固自己没掌握的知识，让自己也提升了不少。所以万里之行始于足下，掌握知识的最快方法就是行动起来，找个项目从0开始，完整的写完一个项目。不仅验证了自己所学的知识，同时在写项目中能够学到之前没学到的知识,也巩固了自己的新知识。</p>
 <p><a href="https://github.com/FlyOceanFish/FlyOceanMovies" target="_blank" rel="external">项目完整代码</a></p>
@@ -497,17 +488,6 @@
           
 
           
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/10/14/在mac上快速搭建Android、iOS自动打包环境(三)/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/10/14/在mac上快速搭建Android、iOS自动打包环境(三)/" itemprop="commentCount"></span>
-                </a>
-              </span>
             
           
 
@@ -659,17 +639,6 @@
           
 
           
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/10/14/在mac上快速搭建Android、iOS自动打包环境(二)/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/10/14/在mac上快速搭建Android、iOS自动打包环境(二)/" itemprop="commentCount"></span>
-                </a>
-              </span>
             
           
 
@@ -835,17 +804,6 @@ curl -F &quot;file=@${IPANAME}.ipa&quot; -F    &quot;uKey=USER_KEY&quot; -F &quo
           
 
           
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/10/14/在mac上快速搭建Android、iOS自动打包环境(一)/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/10/14/在mac上快速搭建Android、iOS自动打包环境(一)/" itemprop="commentCount"></span>
-                </a>
-              </span>
             
           
 
@@ -1030,17 +988,6 @@ ERROR: Error fetching remote repo &apos;origin&apos;
 
           
             
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/10/14/React Native源码分析原理（二）(基于0.48版本)/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/10/14/React Native源码分析原理（二）(基于0.48版本)/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
           
 
           
@@ -1215,17 +1162,6 @@ ERROR: Error fetching remote repo &apos;origin&apos;
 
           
             
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/10/14/React Native源码分析原理（一）(基于0.48版本)/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/10/14/React Native源码分析原理（一）(基于0.48版本)/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
           
 
           
@@ -1398,17 +1334,6 @@ ERROR: Error fetching remote repo &apos;origin&apos;
 
           
             
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/10/14/SDWebImage源码解读与学习（二）/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/10/14/SDWebImage源码解读与学习（二）/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
           
 
           
@@ -1561,17 +1486,6 @@ ERROR: Error fetching remote repo &apos;origin&apos;
 
           
             
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/10/14/SDWebImage源码解读与学习（一）/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/10/14/SDWebImage源码解读与学习（一）/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
           
 
           
@@ -1664,7 +1578,7 @@ ERROR: Error fetching remote repo &apos;origin&apos;
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/14/NSObject的+load和+initialize详解/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/14/iOS中3DES加密解密/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="FlyOceanFish">
@@ -1683,7 +1597,7 @@ ERROR: Error fetching remote repo &apos;origin&apos;
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/10/14/NSObject的+load和+initialize详解/" itemprop="url">NSObject的+load和+initialize详解</a></h2>
+                <a class="post-title-link" href="/2017/10/14/iOS中3DES加密解密/" itemprop="url">iOS中3DES加密解密</a></h2>
         
 
         <div class="post-meta">
@@ -1731,17 +1645,6 @@ ERROR: Error fetching remote repo &apos;origin&apos;
 
           
             
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/10/14/NSObject的+load和+initialize详解/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/10/14/NSObject的+load和+initialize详解/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
           
 
           
@@ -1768,43 +1671,14 @@ ERROR: Error fetching remote repo &apos;origin&apos;
       
         
           
-            <p>文章比较长，第一部分通过runtime的源码介绍了load和initialize两个方法的本质；第二部门通过实例演示了这个两个方法的调用；第三部分就是结论和应用场景</p>
-<p>#通过runtime源码解析load和initialize</p>
-<h2 id="load"><a href="#load" class="headerlink" title="+load"></a>+load</h2><p><img src="http://upload-images.jianshu.io/upload_images/6644906-034736b3848e3b2d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="ADDBC8A1-E2D9-4BCE-8A87-B60FDCC2FB13.png"><br>通过调用堆栈，我们可以看出系统首先调用的是load_images方法</p>
-<h3 id="load-images"><a href="#load-images" class="headerlink" title="load_images"></a>load_images</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">void load_images(const char *path __unused, const struct mach_header *mh)</div><div class="line">&#123;</div><div class="line">    // Return without taking locks if there are no +load methods here.</div><div class="line">    if (!hasLoadMethods((const headerType *)mh)) return;</div><div class="line"></div><div class="line">    recursive_mutex_locker_t lock(loadMethodLock);</div><div class="line"></div><div class="line">    // Discover load methods</div><div class="line">    &#123;</div><div class="line">        rwlock_writer_t lock2(runtimeLock);</div><div class="line">        prepare_load_methods((const headerType *)mh);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    // Call +load methods (without runtimeLock - re-entrant)</div><div class="line">    call_load_methods();</div><div class="line">&#125;</div><div class="line">首先是将所有的load搜索到，放到一个列表中等待调用，然后call_load_methods循环遍历调用</div></pre></td></tr></table></figure>
-<h4 id="prepare-load-methods"><a href="#prepare-load-methods" class="headerlink" title="prepare_load_methods"></a>prepare_load_methods</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div></pre></td><td class="code"><pre><div class="line">void prepare_load_methods(const headerType *mhdr)</div><div class="line">&#123;</div><div class="line">    Module mods;</div><div class="line">    unsigned int midx;</div><div class="line"></div><div class="line">    header_info *hi;</div><div class="line">    for (hi = FirstHeader; hi; hi = hi-&gt;getNext()) &#123;</div><div class="line">        if (mhdr == hi-&gt;mhdr()) break;</div><div class="line">    &#125;</div><div class="line">    if (!hi) return;</div><div class="line"></div><div class="line">    if (hi-&gt;info()-&gt;isReplacement()) &#123;</div><div class="line">        // Ignore any classes in this image</div><div class="line">        return;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    // Major loop - process all modules in the image</div><div class="line">    mods = hi-&gt;mod_ptr;</div><div class="line">    for (midx = 0; midx &lt; hi-&gt;mod_count; midx += 1)</div><div class="line">    &#123;</div><div class="line">        unsigned int index;</div><div class="line"></div><div class="line">        // Skip module containing no classes</div><div class="line">        if (mods[midx].symtab == nil)</div><div class="line">            continue;</div><div class="line"></div><div class="line">        // Minor loop - process all the classes in given module</div><div class="line">        for (index = 0; index &lt; mods[midx].symtab-&gt;cls_def_cnt; index += 1)</div><div class="line">        &#123;</div><div class="line">            // Locate the class description pointer</div><div class="line">            Class cls = (Class)mods[midx].symtab-&gt;defs[index];</div><div class="line">            if (cls-&gt;info &amp; CLS_CONNECTED) &#123;</div><div class="line">                schedule_class_load(cls);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">    // Major loop - process all modules in the header</div><div class="line">    mods = hi-&gt;mod_ptr;</div><div class="line"></div><div class="line">    // NOTE: The module and category lists are traversed backwards</div><div class="line">    // to preserve the pre-10.4 processing order. Changing the order</div><div class="line">    // would have a small chance of introducing binary compatibility bugs.</div><div class="line">    midx = (unsigned int)hi-&gt;mod_count;</div><div class="line">    while (midx-- &gt; 0) &#123;</div><div class="line">        unsigned int index;</div><div class="line">        unsigned int total;</div><div class="line">        Symtab symtab = mods[midx].symtab;</div><div class="line"></div><div class="line">        // Nothing to do for a module without a symbol table</div><div class="line">        if (mods[midx].symtab == nil)</div><div class="line">            continue;</div><div class="line">        // Total entries in symbol table (class entries followed</div><div class="line">        // by category entries)</div><div class="line">        total = mods[midx].symtab-&gt;cls_def_cnt +</div><div class="line">            mods[midx].symtab-&gt;cat_def_cnt;</div><div class="line"></div><div class="line">        // Minor loop - register all categories from given module</div><div class="line">        index = total;</div><div class="line">        while (index-- &gt; mods[midx].symtab-&gt;cls_def_cnt) &#123;</div><div class="line">            old_category *cat = (old_category *)symtab-&gt;defs[index];</div><div class="line">            add_category_to_loadable_list((Category)cat);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>这个方法主要是两个核心方法schedule_class_load和add_category_to_loadable_list主要干了两件事<br>1、获取了所有类后,遍历列表，将其中有+load方法的类加入loadable_class；<br>2、获取所有的类别，遍历列表，将其中有+load方法的类加入loadable_categories.<br>接下来让我们看看schedule_class_load<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">static void schedule_class_load(Class cls)</div><div class="line">&#123;</div><div class="line">    if (cls-&gt;info &amp; CLS_LOADED) return;</div><div class="line">    if (cls-&gt;superclass) schedule_class_load(cls-&gt;superclass);</div><div class="line">    add_class_to_loadable_list(cls);</div><div class="line">    cls-&gt;info |= CLS_LOADED;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>从以上代码可以看出在加载类的load方法的时候，首先是先将父类加入到loadable_class，之后才是子类。所以保证了<strong>父类一定是在子类先调用</strong>！</p>
-<p>####call_load_methods<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">void call_load_methods(void)</div><div class="line">&#123;</div><div class="line">    static bool loading = NO;</div><div class="line">    bool more_categories;</div><div class="line"></div><div class="line">    loadMethodLock.assertLocked();</div><div class="line"></div><div class="line">    // Re-entrant calls do nothing; the outermost call will finish the job.</div><div class="line">    if (loading) return;</div><div class="line">    loading = YES;</div><div class="line"></div><div class="line">    void *pool = objc_autoreleasePoolPush();</div><div class="line"></div><div class="line">    do &#123;</div><div class="line">        // 1. Repeatedly call class +loads until there aren&apos;t any more</div><div class="line">        while (loadable_classes_used &gt; 0) &#123;</div><div class="line">            call_class_loads();</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        // 2. Call category +loads ONCE</div><div class="line">        more_categories = call_category_loads();</div><div class="line"></div><div class="line">        // 3. Run more +loads if there are classes OR more untried categories</div><div class="line">    &#125; while (loadable_classes_used &gt; 0  ||  more_categories);</div><div class="line"></div><div class="line">    objc_autoreleasePoolPop(pool);</div><div class="line"></div><div class="line">    loading = NO;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>call_load_methods循环遍历，首先是调用了class的load方法，然后调用了category的方法<br>接下来让我们看看call_class_loads的代码实现<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">static void call_class_loads(void)</div><div class="line">&#123;</div><div class="line">    int i;</div><div class="line"></div><div class="line">    // Detach current loadable list.</div><div class="line">    struct loadable_class *classes = loadable_classes;</div><div class="line">    int used = loadable_classes_used;</div><div class="line">    loadable_classes = nil;</div><div class="line">    loadable_classes_allocated = 0;</div><div class="line">    loadable_classes_used = 0;</div><div class="line"></div><div class="line">    // Call all +loads for the detached list.</div><div class="line">    for (i = 0; i &lt; used; i++) &#123;</div><div class="line">        Class cls = classes[i].cls;</div><div class="line">        load_method_t load_method = (load_method_t)classes[i].method;</div><div class="line">        if (!cls) continue;</div><div class="line"></div><div class="line">        if (PrintLoading) &#123;</div><div class="line">            _objc_inform(&quot;LOAD: +[%s load]\n&quot;, cls-&gt;nameForLogging());</div><div class="line">        &#125;</div><div class="line">        (*load_method)(cls, SEL_load);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    // Destroy the detached list.</div><div class="line">    if (classes) free(classes);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>核心方法是 (<em>load_method)(cls, SEL_load),`typedef void(</em>load_method_t)(id, SEL);`可以看到load_method是一个函数指针，所以是直接调用了内存地址！</p>
-<p>##+initialize</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/6644906-6cb08b0bb9e17df1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="98779EDD-737F-498D-AD9E-B02508958DDB.png"><br>一样我们通过调用堆栈可以看到系统调用的是_class_initialize方法</p>
-<p>##_class_initialize</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div></pre></td><td class="code"><pre><div class="line">void _class_initialize(Class cls)</div><div class="line">&#123;</div><div class="line">    assert(!cls-&gt;isMetaClass());</div><div class="line"></div><div class="line">    Class supercls;</div><div class="line">    bool reallyInitialize = NO;</div><div class="line"></div><div class="line">    // Make sure super is done initializing BEFORE beginning to initialize cls.</div><div class="line">    // See note about deadlock above.</div><div class="line">    supercls = cls-&gt;superclass;</div><div class="line">    if (supercls  &amp;&amp;  !supercls-&gt;isInitialized()) &#123;</div><div class="line">        _class_initialize(supercls);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    // Try to atomically set CLS_INITIALIZING.</div><div class="line">    &#123;</div><div class="line">        monitor_locker_t lock(classInitLock);</div><div class="line">        if (!cls-&gt;isInitialized() &amp;&amp; !cls-&gt;isInitializing()) &#123;</div><div class="line">            cls-&gt;setInitializing();</div><div class="line">            reallyInitialize = YES;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    if (reallyInitialize) &#123;</div><div class="line">        // We successfully set the CLS_INITIALIZING bit. Initialize the class.</div><div class="line"></div><div class="line">        // Record that we&apos;re initializing this class so we can message it.</div><div class="line">        _setThisThreadIsInitializingClass(cls);</div><div class="line"></div><div class="line">        // Send the +initialize message.</div><div class="line">        // Note that +initialize is sent to the superclass (again) if</div><div class="line">        // this class doesn&apos;t implement +initialize. 2157218</div><div class="line">        if (PrintInitializing) &#123;</div><div class="line">            _objc_inform(&quot;INITIALIZE: calling +[%s initialize]&quot;,</div><div class="line">                         cls-&gt;nameForLogging());</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        // Exceptions: A +initialize call that throws an exception</div><div class="line">        // is deemed to be a complete and successful +initialize.</div><div class="line">        @try &#123;</div><div class="line">            callInitialize(cls);</div><div class="line"></div><div class="line">            if (PrintInitializing) &#123;</div><div class="line">                _objc_inform(&quot;INITIALIZE: finished +[%s initialize]&quot;,</div><div class="line">                             cls-&gt;nameForLogging());</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        @catch (...) &#123;</div><div class="line">            if (PrintInitializing) &#123;</div><div class="line">                _objc_inform(&quot;INITIALIZE: +[%s initialize] threw an exception&quot;,</div><div class="line">                             cls-&gt;nameForLogging());</div><div class="line">            &#125;</div><div class="line">            @throw;</div><div class="line">        &#125;</div><div class="line">        @finally &#123;</div><div class="line">            // Done initializing.</div><div class="line">            // If the superclass is also done initializing, then update</div><div class="line">            //   the info bits and notify waiting threads.</div><div class="line">            // If not, update them later. (This can happen if this +initialize</div><div class="line">            //   was itself triggered from inside a superclass +initialize.)</div><div class="line">            monitor_locker_t lock(classInitLock);</div><div class="line">            if (!supercls  ||  supercls-&gt;isInitialized()) &#123;</div><div class="line">                _finishInitializing(cls, supercls);</div><div class="line">            &#125; else &#123;</div><div class="line">                _finishInitializingAfter(cls, supercls);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        return;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    else if (cls-&gt;isInitializing()) &#123;</div><div class="line">        // We couldn&apos;t set INITIALIZING because INITIALIZING was already set.</div><div class="line">        // If this thread set it earlier, continue normally.</div><div class="line">        // If some other thread set it, block until initialize is done.</div><div class="line">        // It&apos;s ok if INITIALIZING changes to INITIALIZED while we&apos;re here,</div><div class="line">        //   because we safely check for INITIALIZED inside the lock</div><div class="line">        //   before blocking.</div><div class="line">        if (_thisThreadIsInitializingClass(cls)) &#123;</div><div class="line">            return;</div><div class="line">        &#125; else &#123;</div><div class="line">            waitForInitializeToComplete(cls);</div><div class="line">            return;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    else if (cls-&gt;isInitialized()) &#123;</div><div class="line">        // Set CLS_INITIALIZING failed because someone else already</div><div class="line">        //   initialized the class. Continue normally.</div><div class="line">        // NOTE this check must come AFTER the ISINITIALIZING case.</div><div class="line">        // Otherwise: Another thread is initializing this class. ISINITIALIZED</div><div class="line">        //   is false. Skip this clause. Then the other thread finishes</div><div class="line">        //   initialization and sets INITIALIZING=no and INITIALIZED=yes.</div><div class="line">        //   Skip the ISINITIALIZING clause. Die horribly.</div><div class="line">        return;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    else &#123;</div><div class="line">        // We shouldn&apos;t be here.</div><div class="line">        _objc_fatal(&quot;thread-safe class init in objc runtime is buggy!&quot;);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>核心方法就是callInitialize接下来让我们看看该方法的实现</p>
-<p>##callInitialize<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">void callInitialize(Class cls)</div><div class="line">&#123;</div><div class="line">    ((void(*)(Class, SEL))objc_msgSend)(cls, SEL_initialize);</div><div class="line">    asm(&quot;&quot;);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>通过该实现我们可以看出其实initialize的本质就是objc_msgSend，所以遵循消息的转发机制。</p>
-<hr>
-<p>#示例演示<br><strong>Animal 父类</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">@implementation Animal</div><div class="line">+(void)load&#123;</div><div class="line">    NSLog(@&quot;Animal load&quot;);</div><div class="line">&#125;</div><div class="line">+(void)initialize&#123;</div><div class="line">    NSLog(@&quot;Animal initialize&quot;);</div><div class="line">&#125;</div><div class="line">@end</div></pre></td></tr></table></figure></p>
-<p><strong>Dog 子类</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">+(void)load&#123;</div><div class="line">    NSLog(@&quot;Dog load&quot;);</div><div class="line">&#125;</div><div class="line">//分两种情况，一种注释掉该代码，一种打开该代码</div><div class="line">//+(void)initialize&#123;</div><div class="line">//    NSLog(@&quot;Dog initialize&quot;);</div><div class="line">//&#125;</div><div class="line"></div><div class="line">**测试代码**</div><div class="line">````Objective-C</div><div class="line">    Animal *animal = [[Animal alloc] init];</div><div class="line">    Animal *animal2 = [[Animal alloc] init];</div><div class="line">    Animal *animal3 = [[Animal alloc] init];</div><div class="line">    Dog *dog = [[Dog alloc] init];</div><div class="line">    Dog *dog2 = [[Dog alloc] init];</div></pre></td></tr></table></figure></p>
+            <h2 id="加密"><a href="#加密" class="headerlink" title="加密"></a>加密</h2><p>加密分为对称加密和非对称加密。</p>
 <ul>
-<li>未注释代码时，打印结果<br>2017-07-31 14:24:47.671 test[53134:5737864] Animal load<br>2017-07-31 14:24:47.809 test[53134:5737864] Dog load<br>2017-07-31 14:24:48.112 test[53134:5737864] Animal initialize<br>2017-07-31 14:24:48.112 test[53134:5737864] Dog initialize</li>
-<li>注释掉代码时，打印结果<br>2017-07-31 14:39:03.916 testaa[53659:5814782] Animal load<br>2017-07-31 14:39:03.917 testaa[53659:5814782] Dog load<br>2017-07-31 14:39:03.966 testaa[53659:5814782] Animal initialize<br>2017-07-31 14:39:03.967 testaa[53659:5814782] Animal initialize</li>
+<li>对称性加密算法，信息接收双方都需事先知道密匙和加解密算法且其密匙是相同的，之后便是对数据进行 加解密了;</li>
+<li>非对称算法与之不同，发送双方A,B事先均生成一堆密匙，然后A将自己的公有密匙发送给B，B将自己的公有密匙发送给A，如果A要给B发送消息，则先需要用B的公有密匙进行消息加密，然后发送给B端，此时B端再用自己的私有密匙进行消息解密，B向A发送消息时为同样的道理。</li>
 </ul>
-<p>通过两次打印看到以下现象：</p>
-<ul>
-<li>第一次测试load initialize各打印了一次，并且load比initialize提前打印<br><strong>原因：+ load是应用一启动就调动，+ initialize是我们调用该类方法的时候才会调用，而且这两个方法理论上只会调用一次。</strong></li>
-<li>第二次测试Animal的initialize打印了两次<br><strong>原因：initialize遵循的是objc_msgSend消息的转发机制，第一次打印是因为我们实例化了Animal并且调用了方法；第二次打印是因为Dog子类没有实现该方法，根据消息转发机制的原理，所以会向上查找父类是否实现了该方法，所以调用了父类的initialize的方法了。所以父类的initialize可能会被调用多次所以建议以下写法：</strong></li>
-</ul>
-<figure class="highlight plain"><figcaption><span>(void)initialize &#123;</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">  if (self == [ClassName self]) &#123;</div><div class="line">    // ... do the initialization ...</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>我们可以做个以下尝试Dog不继承Animal，然后在Compile Source中将Dog的顺序拖到Animal之前。<br>如下图：<br><img src="http://upload-images.jianshu.io/upload_images/6644906-88388b9eb906803e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="D790F51D-98BD-4963-B7A9-D7DEE037FE45.png"><br> <strong>可以观察到Dog的Load在Animal之前打印。所以在没有继承关系的时候Load的调用顺序跟我们的Compile Source的排列顺序有关。有继承关系的，父类一定比子类先调用</strong></p>
-<p>#结论</p>
-<ul>
-<li>+load方法是在程序一启动的时候就会调用，并且在main函数之前，是根据Xcode中Compile Sources的顺序调用的。其内部本质是通过函数<strong>内存地址</strong>的方式实现的。所以在有继承关系的时候子类与父类没有任何关系，不会相互影响。</li>
-<li>+initialize方法是我们在第一次使用该类的时候即调用某个方法的时候系统开始调用 ，是一种懒加载的方式。其内部本质是通过<strong>objc_msgSend</strong>发送消息实现的,因此也拥有objc_msgSend带来的特性,也就是说子类会继承父类的方法实现,而分类的实现也会覆盖元类。</li>
-</ul>
-<p>我们常用<a href="http://nshipster.com/method-swizzling/" target="_blank" rel="external">Method Swizzling</a>建议一定要在Load方法中实现。<br><a href="https://stackoverflow.com/questions/30585088/objective-c-cases-when-it-is-useful-to-override-initialize-and-load?lq=1" target="_blank" rel="external">stackoverflow使用场景讨论</a></p>
+<h4 id="对称加密"><a href="#对称加密" class="headerlink" title="对称加密"></a>对称加密</h4><p>对称加密常见的AES、DES、3DES。DES是一种分组数据加密技术（先将数据分成固定长度的小数据块，之后进行加密），速度较快，适用于大量数据加密，而3DES是一种基于DES的加密算法，使用3个不同密匙对同一个分组数据块进行3次加密，如此以使得密文强度更高;AES相比较其他两种具有更高的速度和资源使用效率。</p>
+<h4 id="非对称加密"><a href="#非对称加密" class="headerlink" title="非对称加密"></a>非对称加密</h4><p>非对称加密常见RSA、DSA、ECC。RSA和DSA的安全性及其它各方面性能都差不多，而ECC较之则有着很多的性能优越，包括处理速度，带宽要求，存储空间等等。</p>
+<p><strong><em>我们采用的是3DES，代码如下：</em></strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div></pre></td><td class="code"><pre><div class="line">#import &quot;DESTools.h&quot;</div><div class="line">#import &lt;CommonCrypto/CommonCrypto.h&gt;</div><div class="line">#import &quot;GTMBase64.h&quot;</div><div class="line">#import &quot;GTMDefines.h&quot;</div><div class="line"></div><div class="line">//加密解密的key,与后台一致</div><div class="line">#define USER_KEY @&quot;xxxxxx&quot;</div><div class="line">//初始化向量，与后台一致</div><div class="line">#define initIv    @&quot;xxx&quot;</div><div class="line"></div><div class="line">@implementation DESTools</div><div class="line"></div><div class="line">+ (NSString *)encryptWithText:(NSString *)sText</div><div class="line">&#123;</div><div class="line">    //kCCEncrypt 加密</div><div class="line">    return [self encrypt:sText encryptOrDecrypt:kCCEncrypt key:USER_KEY];</div><div class="line">&#125;</div><div class="line"></div><div class="line">+ (NSString *)decryptWithText:(NSString *)sText</div><div class="line">&#123;</div><div class="line">    //kCCDecrypt 解密</div><div class="line">    return [self encrypt:sText encryptOrDecrypt:kCCDecrypt key:USER_KEY];</div><div class="line">&#125;</div><div class="line"></div><div class="line">+ (NSString *)encrypt:(NSString *)sText encryptOrDecrypt:(CCOperation)encryptOperation key:(NSString *)key</div><div class="line">&#123;</div><div class="line">    const void *dataIn;</div><div class="line">    size_t dataInLength;</div><div class="line"></div><div class="line">    if (encryptOperation == kCCDecrypt)//传递过来的是decrypt 解码</div><div class="line">    &#123;</div><div class="line">        //解码 base64</div><div class="line">        NSData *decryptData = [GTMBase64 decodeData:[sText dataUsingEncoding:NSUTF8StringEncoding]];//转成utf-8并decode</div><div class="line">        dataInLength = [decryptData length];</div><div class="line">        dataIn = [decryptData bytes];</div><div class="line">    &#125;</div><div class="line">    else  //encrypt</div><div class="line">    &#123;</div><div class="line">        NSData* encryptData = [sText dataUsingEncoding:NSUTF8StringEncoding];</div><div class="line">        dataInLength = [encryptData length];</div><div class="line">        dataIn = (const void *)[encryptData bytes];</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /*</div><div class="line">     DES加密 ：用CCCrypt函数加密一下，然后用base64编码下，传过去</div><div class="line">     DES解密 ：把收到的数据根据base64，decode一下，然后再用CCCrypt函数解密，得到原本的数据</div><div class="line">     */</div><div class="line">    CCCryptorStatus ccStatus;</div><div class="line">    uint8_t *dataOut = NULL; //可以理解位type/typedef 的缩写（有效的维护了代码，比如：一个人用int，一个人用long。最好用typedef来定义）</div><div class="line">    size_t dataOutAvailable = 0; //size_t  是操作符sizeof返回的结果类型</div><div class="line">    size_t dataOutMoved = 0;</div><div class="line"></div><div class="line">    dataOutAvailable = (dataInLength + kCCBlockSizeDES) &amp; ~(kCCBlockSizeDES - 1);</div><div class="line">    dataOut = malloc( dataOutAvailable * sizeof(uint8_t));</div><div class="line">    memset((void *)dataOut, 0x0, dataOutAvailable);//将已开辟内存空间buffer的首 1 个字节的值设为值 0</div><div class="line"></div><div class="line">    const void *vkey = (const void *) [key UTF8String];</div><div class="line">    const void *iv = (const void *) [initIv UTF8String];</div><div class="line"></div><div class="line">    //CCCrypt函数 加密/解密</div><div class="line">    ccStatus = CCCrypt(encryptOperation,//  加密/解密</div><div class="line">                       kCCAlgorithm3DES,//  加密根据哪个标准（des，3des，aes。。。。）</div><div class="line">                       kCCOptionPKCS7Padding,//  选项分组密码算法(des:对每块分组加一次密  3DES：对每块分组加三个不同的密)</div><div class="line">                       vkey,  //密钥    加密和解密的密钥必须一致</div><div class="line">                       kCCKeySize3DES,//   DES 密钥的大小（kCCKeySizeDES=8）</div><div class="line">                       iv, //  可选的初始矢量</div><div class="line">                       dataIn, // 数据的存储单元</div><div class="line">                       dataInLength,// 数据的大小</div><div class="line">                       (void *)dataOut,// 用于返回数据</div><div class="line">                       dataOutAvailable,</div><div class="line">                       &amp;dataOutMoved);</div><div class="line"></div><div class="line">    NSString *result = nil;</div><div class="line"></div><div class="line">    if (encryptOperation == kCCDecrypt)//encryptOperation==1  解码</div><div class="line">    &#123;</div><div class="line">        //得到解密出来的data数据，改变为utf-8的字符串</div><div class="line">        result = [[NSString alloc] initWithData:[NSData dataWithBytes:(const void *)dataOut length:(NSUInteger)dataOutMoved] encoding:NSUTF8StringEncoding] ;</div><div class="line">    &#125;</div><div class="line">    else //encryptOperation==0  （加密过程中，把加好密的数据转成base64的）</div><div class="line">    &#123;</div><div class="line">        //编码 base64</div><div class="line">        NSData *data = [NSData dataWithBytes:(const void *)dataOut length:(NSUInteger)dataOutMoved];</div><div class="line">        result = [GTMBase64 stringByEncodingData:data];</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    return result;</div><div class="line">&#125;</div><div class="line">@end</div></pre></td></tr></table></figure></p>
 
           
         
@@ -1919,17 +1793,6 @@ ERROR: Error fetching remote repo &apos;origin&apos;
           
 
           
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/10/14/UIPageViewController使用和控件的封装/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/10/14/UIPageViewController使用和控件的封装/" itemprop="commentCount"></span>
-                </a>
-              </span>
             
           
 
@@ -2156,6 +2019,8 @@ ERROR: Error fetching remote repo &apos;origin&apos;
       <div class="back-to-top">
         <i class="fa fa-arrow-up"></i>
         
+          <span id="scrollpercent"><span>0</span>%</span>
+        
       </div>
     
 
@@ -2266,14 +2131,6 @@ ERROR: Error fetching remote repo &apos;origin&apos;
 
   
 
-
-  
-
-    
-      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
-    
-
-    
 
   
 

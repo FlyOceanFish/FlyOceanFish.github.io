@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="FlyOceanFish&#39; Blog">
 <meta property="og:description" content="这次项目中遇到一个需求，将数字每隔3个用逗号隔开。因为如果数字太大确实看着有点眼花。　　所以就想着写了一个NSString的category，用起来效果还不错，代码如下： .h的声明#import &amp;lt;Foundation/Foundation.h&amp;gt;  @interface NSString (NumberSplitWithComma) /**  *数字以逗号隔开 例：123，321.1">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-10-16T08:45:26.000Z">
+<meta property="og:updated_time" content="2017-10-16T13:34:48.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS中将数字用符合隔开(比如逗号)">
 <meta name="twitter:description" content="这次项目中遇到一个需求，将数字每隔3个用逗号隔开。因为如果数字太大确实看着有点眼花。　　所以就想着写了一个NSString的category，用起来效果还不错，代码如下： .h的声明#import &amp;lt;Foundation/Foundation.h&amp;gt;  @interface NSString (NumberSplitWithComma) /**  *数字以逗号隔开 例：123，321.1">
@@ -100,7 +100,7 @@
     root: '/',
     scheme: 'Pisces',
     version: '5.1.3',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
     fancybox: true,
     tabs: true,
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
@@ -328,17 +328,6 @@
 
           
             
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/10/14/iOS中将数字用符合隔开(比如逗号)/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/10/14/iOS中将数字用符合隔开(比如逗号)/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
           
 
           
@@ -484,8 +473,8 @@ NSLog(@&quot;formattedNumberString: %@&quot;, formattedNumberString);
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/10/14/React Native组件生命周期/" rel="prev" title="React Native组件生命周期">
-                React Native组件生命周期 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/10/14/NSObject的+load和+initialize详解/" rel="prev" title="NSObject的+load和+initialize详解">
+                NSObject的+load和+initialize详解 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -514,16 +503,6 @@ NSLog(@&quot;formattedNumberString: %@&quot;, formattedNumberString);
 
 
           
-
-  
-    <div class="comments" id="comments">
-      <div id="disqus_thread">
-        <noscript>
-          Please enable JavaScript to view the
-          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
-        </noscript>
-      </div>
-    </div>
 
   
 
@@ -693,6 +672,8 @@ NSLog(@&quot;formattedNumberString: %@&quot;, formattedNumberString);
       <div class="back-to-top">
         <i class="fa fa-arrow-up"></i>
         
+          <span id="scrollpercent"><span>0</span>%</span>
+        
       </div>
     
 
@@ -807,26 +788,6 @@ NSLog(@&quot;formattedNumberString: %@&quot;, formattedNumberString);
 
   
 
-
-  
-
-    
-      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
-    
-
-    
-      <script type="text/javascript">
-        var disqus_config = function () {
-          this.page.url = 'http://yoursite.com/2017/10/14/iOS中将数字用符合隔开(比如逗号)/';
-          this.page.identifier = '2017/10/14/iOS中将数字用符合隔开(比如逗号)/';
-          this.page.title = 'iOS中将数字用符合隔开(比如逗号)';
-        };
-        var d = document, s = d.createElement('script');
-        s.src = 'https://.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', '' + +new Date());
-        (d.head || d.body).appendChild(s);
-      </script>
-    
 
   
 

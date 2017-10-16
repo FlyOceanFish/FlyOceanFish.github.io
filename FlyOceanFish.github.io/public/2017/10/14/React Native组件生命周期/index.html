@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="React Native,iOS," />
+  <meta name="keywords" content="iOS,React Native," />
 
 
 
@@ -80,7 +80,7 @@
 
 
 <meta name="description" content="生命周期RN的Component如同iOS中ViewController一样，同样具有自己的生命周期，如果大家对于ViewController的生命周期熟悉的话，相信看明白也不在话下的">
-<meta name="keywords" content="React Native,iOS">
+<meta name="keywords" content="iOS,React Native">
 <meta property="og:type" content="article">
 <meta property="og:title" content="React Native组件生命周期">
 <meta property="og:url" content="http://yoursite.com/2017/10/14/React Native组件生命周期/index.html">
@@ -88,7 +88,7 @@
 <meta property="og:description" content="生命周期RN的Component如同iOS中ViewController一样，同样具有自己的生命周期，如果大家对于ViewController的生命周期熟悉的话，相信看明白也不在话下的">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/6644906-f3f49bf47382bddf.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2017-10-16T08:45:26.000Z">
+<meta property="og:updated_time" content="2017-10-16T13:34:48.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="React Native组件生命周期">
 <meta name="twitter:description" content="生命周期RN的Component如同iOS中ViewController一样，同样具有自己的生命周期，如果大家对于ViewController的生命周期熟悉的话，相信看明白也不在话下的">
@@ -102,7 +102,7 @@
     root: '/',
     scheme: 'Pisces',
     version: '5.1.3',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
     fancybox: true,
     tabs: true,
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
@@ -330,17 +330,6 @@
 
           
             
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/10/14/React Native组件生命周期/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/10/14/React Native组件生命周期/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
           
 
           
@@ -384,9 +373,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/React-Native/" rel="tag"># React Native</a>
-          
             <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+            <a href="/tags/React-Native/" rel="tag"># React Native</a>
           
         </div>
       
@@ -399,8 +388,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/10/14/iOS中将数字用符合隔开(比如逗号)/" rel="next" title="iOS中将数字用符合隔开(比如逗号)">
-                <i class="fa fa-chevron-left"></i> iOS中将数字用符合隔开(比如逗号)
+              <a href="/2017/10/14/手把手教你创建Cocoapods的podspec/" rel="next" title="手把手教你创建Cocoapods的podspec">
+                <i class="fa fa-chevron-left"></i> 手把手教你创建Cocoapods的podspec
               </a>
             
           </div>
@@ -409,8 +398,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/10/14/iOS中3DES加密解密/" rel="prev" title="iOS中3DES加密解密">
-                iOS中3DES加密解密 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/10/14/将RN工程嵌入到现有原生iOS应用/" rel="prev" title="将RN工程嵌入到现有原生iOS应用">
+                将RN工程嵌入到现有原生iOS应用 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -439,16 +428,6 @@
 
 
           
-
-  
-    <div class="comments" id="comments">
-      <div id="disqus_thread">
-        <noscript>
-          Please enable JavaScript to view the
-          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
-        </noscript>
-      </div>
-    </div>
 
   
 
@@ -618,6 +597,8 @@
       <div class="back-to-top">
         <i class="fa fa-arrow-up"></i>
         
+          <span id="scrollpercent"><span>0</span>%</span>
+        
       </div>
     
 
@@ -732,26 +713,6 @@
 
   
 
-
-  
-
-    
-      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
-    
-
-    
-      <script type="text/javascript">
-        var disqus_config = function () {
-          this.page.url = 'http://yoursite.com/2017/10/14/React Native组件生命周期/';
-          this.page.identifier = '2017/10/14/React Native组件生命周期/';
-          this.page.title = 'React Native组件生命周期';
-        };
-        var d = document, s = d.createElement('script');
-        s.src = 'https://.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', '' + +new Date());
-        (d.head || d.body).appendChild(s);
-      </script>
-    
 
   
 

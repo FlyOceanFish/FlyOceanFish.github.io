@@ -98,7 +98,7 @@
     root: '/',
     scheme: 'Pisces',
     version: '5.1.3',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
     fancybox: true,
     tabs: true,
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
@@ -262,7 +262,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/14/iOS中3DES加密解密/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/14/iOS中isEqual:方法详解/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="FlyOceanFish">
@@ -281,7 +281,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/10/14/iOS中3DES加密解密/" itemprop="url">iOS中3DES加密解密</a></h2>
+                <a class="post-title-link" href="/2017/10/14/iOS中isEqual:方法详解/" itemprop="url">iOS中isEqual:方法详解</a></h2>
         
 
         <div class="post-meta">
@@ -329,17 +329,6 @@
 
           
             
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/10/14/iOS中3DES加密解密/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/10/14/iOS中3DES加密解密/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
           
 
           
@@ -366,14 +355,18 @@
       
         
           
-            <h2 id="加密"><a href="#加密" class="headerlink" title="加密"></a>加密</h2><p>加密分为对称加密和非对称加密。</p>
-<ul>
-<li>对称性加密算法，信息接收双方都需事先知道密匙和加解密算法且其密匙是相同的，之后便是对数据进行 加解密了;</li>
-<li>非对称算法与之不同，发送双方A,B事先均生成一堆密匙，然后A将自己的公有密匙发送给B，B将自己的公有密匙发送给A，如果A要给B发送消息，则先需要用B的公有密匙进行消息加密，然后发送给B端，此时B端再用自己的私有密匙进行消息解密，B向A发送消息时为同样的道理。</li>
-</ul>
-<h4 id="对称加密"><a href="#对称加密" class="headerlink" title="对称加密"></a>对称加密</h4><p>对称加密常见的AES、DES、3DES。DES是一种分组数据加密技术（先将数据分成固定长度的小数据块，之后进行加密），速度较快，适用于大量数据加密，而3DES是一种基于DES的加密算法，使用3个不同密匙对同一个分组数据块进行3次加密，如此以使得密文强度更高;AES相比较其他两种具有更高的速度和资源使用效率。</p>
-<h4 id="非对称加密"><a href="#非对称加密" class="headerlink" title="非对称加密"></a>非对称加密</h4><p>非对称加密常见RSA、DSA、ECC。RSA和DSA的安全性及其它各方面性能都差不多，而ECC较之则有着很多的性能优越，包括处理速度，带宽要求，存储空间等等。</p>
-<p><strong><em>我们采用的是3DES，代码如下：</em></strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div></pre></td><td class="code"><pre><div class="line">#import &quot;DESTools.h&quot;</div><div class="line">#import &lt;CommonCrypto/CommonCrypto.h&gt;</div><div class="line">#import &quot;GTMBase64.h&quot;</div><div class="line">#import &quot;GTMDefines.h&quot;</div><div class="line"></div><div class="line">//加密解密的key,与后台一致</div><div class="line">#define USER_KEY @&quot;xxxxxx&quot;</div><div class="line">//初始化向量，与后台一致</div><div class="line">#define initIv    @&quot;xxx&quot;</div><div class="line"></div><div class="line">@implementation DESTools</div><div class="line"></div><div class="line">+ (NSString *)encryptWithText:(NSString *)sText</div><div class="line">&#123;</div><div class="line">    //kCCEncrypt 加密</div><div class="line">    return [self encrypt:sText encryptOrDecrypt:kCCEncrypt key:USER_KEY];</div><div class="line">&#125;</div><div class="line"></div><div class="line">+ (NSString *)decryptWithText:(NSString *)sText</div><div class="line">&#123;</div><div class="line">    //kCCDecrypt 解密</div><div class="line">    return [self encrypt:sText encryptOrDecrypt:kCCDecrypt key:USER_KEY];</div><div class="line">&#125;</div><div class="line"></div><div class="line">+ (NSString *)encrypt:(NSString *)sText encryptOrDecrypt:(CCOperation)encryptOperation key:(NSString *)key</div><div class="line">&#123;</div><div class="line">    const void *dataIn;</div><div class="line">    size_t dataInLength;</div><div class="line"></div><div class="line">    if (encryptOperation == kCCDecrypt)//传递过来的是decrypt 解码</div><div class="line">    &#123;</div><div class="line">        //解码 base64</div><div class="line">        NSData *decryptData = [GTMBase64 decodeData:[sText dataUsingEncoding:NSUTF8StringEncoding]];//转成utf-8并decode</div><div class="line">        dataInLength = [decryptData length];</div><div class="line">        dataIn = [decryptData bytes];</div><div class="line">    &#125;</div><div class="line">    else  //encrypt</div><div class="line">    &#123;</div><div class="line">        NSData* encryptData = [sText dataUsingEncoding:NSUTF8StringEncoding];</div><div class="line">        dataInLength = [encryptData length];</div><div class="line">        dataIn = (const void *)[encryptData bytes];</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /*</div><div class="line">     DES加密 ：用CCCrypt函数加密一下，然后用base64编码下，传过去</div><div class="line">     DES解密 ：把收到的数据根据base64，decode一下，然后再用CCCrypt函数解密，得到原本的数据</div><div class="line">     */</div><div class="line">    CCCryptorStatus ccStatus;</div><div class="line">    uint8_t *dataOut = NULL; //可以理解位type/typedef 的缩写（有效的维护了代码，比如：一个人用int，一个人用long。最好用typedef来定义）</div><div class="line">    size_t dataOutAvailable = 0; //size_t  是操作符sizeof返回的结果类型</div><div class="line">    size_t dataOutMoved = 0;</div><div class="line"></div><div class="line">    dataOutAvailable = (dataInLength + kCCBlockSizeDES) &amp; ~(kCCBlockSizeDES - 1);</div><div class="line">    dataOut = malloc( dataOutAvailable * sizeof(uint8_t));</div><div class="line">    memset((void *)dataOut, 0x0, dataOutAvailable);//将已开辟内存空间buffer的首 1 个字节的值设为值 0</div><div class="line"></div><div class="line">    const void *vkey = (const void *) [key UTF8String];</div><div class="line">    const void *iv = (const void *) [initIv UTF8String];</div><div class="line"></div><div class="line">    //CCCrypt函数 加密/解密</div><div class="line">    ccStatus = CCCrypt(encryptOperation,//  加密/解密</div><div class="line">                       kCCAlgorithm3DES,//  加密根据哪个标准（des，3des，aes。。。。）</div><div class="line">                       kCCOptionPKCS7Padding,//  选项分组密码算法(des:对每块分组加一次密  3DES：对每块分组加三个不同的密)</div><div class="line">                       vkey,  //密钥    加密和解密的密钥必须一致</div><div class="line">                       kCCKeySize3DES,//   DES 密钥的大小（kCCKeySizeDES=8）</div><div class="line">                       iv, //  可选的初始矢量</div><div class="line">                       dataIn, // 数据的存储单元</div><div class="line">                       dataInLength,// 数据的大小</div><div class="line">                       (void *)dataOut,// 用于返回数据</div><div class="line">                       dataOutAvailable,</div><div class="line">                       &amp;dataOutMoved);</div><div class="line"></div><div class="line">    NSString *result = nil;</div><div class="line"></div><div class="line">    if (encryptOperation == kCCDecrypt)//encryptOperation==1  解码</div><div class="line">    &#123;</div><div class="line">        //得到解密出来的data数据，改变为utf-8的字符串</div><div class="line">        result = [[NSString alloc] initWithData:[NSData dataWithBytes:(const void *)dataOut length:(NSUInteger)dataOutMoved] encoding:NSUTF8StringEncoding] ;</div><div class="line">    &#125;</div><div class="line">    else //encryptOperation==0  （加密过程中，把加好密的数据转成base64的）</div><div class="line">    &#123;</div><div class="line">        //编码 base64</div><div class="line">        NSData *data = [NSData dataWithBytes:(const void *)dataOut length:(NSUInteger)dataOutMoved];</div><div class="line">        result = [GTMBase64 stringByEncodingData:data];</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    return result;</div><div class="line">&#125;</div><div class="line">@end</div></pre></td></tr></table></figure></p>
+            <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>　　大家对于这个方法其实再熟悉不过了，比较对象的时候用这个方法，如果使用==针对对象则仅仅比较的是内存地址的引用。但是大家可能会忽略另一个细节，对象的hash值</p>
+<p>引用苹果官方的一句话：</p>
+<pre><code>This method defines what it means for instances to be equal. For example, a container object might define two containers as equal if their corresponding objects all respond YES to an isEqual:  request. See the NSData, NSDictionary, NSArray, and NSString class   specifications for examples of the use of this method.
+
+If two objects are equal, they must have the same hash value. This last point is particularly important if you define isEqual: in a subclass and intend to put instances of that subclass into a collection. Make sure you also define hash in your subclass.
+</code></pre><h2 id="自定义对象，重写isEqual方法"><a href="#自定义对象，重写isEqual方法" class="headerlink" title="自定义对象，重写isEqual方法"></a>自定义对象，重写isEqual方法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">@implementation Person</div><div class="line">- (instancetype)initWithName:(NSString *)name andSex:(NSString *)sex&#123;</div><div class="line">    self = [super init];</div><div class="line">    if (self) &#123;</div><div class="line">        self.name = name;</div><div class="line">        self.sex = sex;</div><div class="line">    &#125;</div><div class="line">    return self;</div><div class="line">&#125;</div><div class="line">- (BOOL)isEqual:(id)object &#123;</div><div class="line">    if (self == object) &#123;</div><div class="line">        return YES;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    if (![object isKindOfClass:[Person class]]) &#123;</div><div class="line">        return NO;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    return [self isEqualToPerson:(Person *)object];</div><div class="line">&#125;</div><div class="line">- (BOOL)isEqualToPerson:(Person *)person &#123;</div><div class="line">    if (!person) &#123;</div><div class="line">        return NO;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    BOOL haveEqualNames = (!self.name &amp;&amp; !person.name) || [self.name isEqualToString:person.name];</div><div class="line">    BOOL haveEqualSex = (!self.sex &amp;&amp; !person.sex) || [self.sex isEqualToString:person.sex];</div><div class="line"></div><div class="line">    return haveEqualNames &amp;&amp; haveEqualSex;</div><div class="line">&#125;</div><div class="line">-(NSUInteger)hash&#123;</div><div class="line">    return self.name.hash^self.sex.hash;</div><div class="line">&#125;</div><div class="line">@end</div></pre></td></tr></table></figure>
+<p>上边代码是我定义的Person类并且重写了isEqual方法，大家可能发现了我还重写了hash方法。如果不重写hash方法会出现什么问题呢？？</p>
+<p>正常比较两个对象是否相等已经够用了，但是如果我们使用NSSet等等这样与hash相关的类就会产生问题了。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">Person *person1 = [[Person alloc] initWithName:@&quot;ocean&quot; andSex:@&quot;boy&quot;];</div><div class="line">Person *person2 = [[Person alloc] initWithName:@&quot;ocean&quot; andSex:@&quot;boy&quot;];</div><div class="line">NSSet *set = [NSSet setWithObjects:person1,person2, nil];</div><div class="line">NSLog(@&quot;set---%@&quot;,set);</div><div class="line">if ([person1 isEqual:person2]) &#123;</div><div class="line">    NSLog(@&quot;相等&quot;);</div><div class="line">&#125;else&#123;</div><div class="line">    NSLog(@&quot;不相等&quot;);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>如果我们不重写hash方法set打印出来后会有两个对象，是由于系统默认给我们实现了一个hash方法，perons1和person2的hash值不相等。如果重写了则只会打印出一个对象。</p>
+<p>系统默认实现<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">-(NSUInteger)hash&#123;</div><div class="line">    return (NSUInteger)self</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>如果两个对象相等，则hash必须要相等</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="http://nshipster.com/equality/" target="_blank" rel="external">Equality</a><br><a href="https://developer.apple.com/documentation/objectivec/1418956-nsobject/1418795-isequal?language=objc" target="_blank" rel="external">Apple Developer Documentation</a><br><a href="https://www.mikeash.com/pyblog/friday-qa-2010-06-18-implementing-equality-and-hashing.html" target="_blank" rel="external">Implementing Equality and Hashing</a></p>
 
           
         
@@ -422,7 +415,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/14/React Native组件生命周期/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/14/NSObject的+load和+initialize详解/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="FlyOceanFish">
@@ -441,7 +434,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/10/14/React Native组件生命周期/" itemprop="url">React Native组件生命周期</a></h2>
+                <a class="post-title-link" href="/2017/10/14/NSObject的+load和+initialize详解/" itemprop="url">NSObject的+load和+initialize详解</a></h2>
         
 
         <div class="post-meta">
@@ -476,8 +469,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/React-Native/" itemprop="url" rel="index">
-                    <span itemprop="name">React Native</span>
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
                   </a>
                 </span>
 
@@ -488,17 +481,6 @@
           
 
           
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/10/14/React Native组件生命周期/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/10/14/React Native组件生命周期/" itemprop="commentCount"></span>
-                </a>
-              </span>
             
           
 
@@ -526,8 +508,43 @@
       
         
           
-            <h2 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h2><p>RN的Component如同iOS中ViewController一样，同样具有自己的生命周期，如果大家对于ViewController的生命周期熟悉的话，相信看明白也不在话下的</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/6644906-f3f49bf47382bddf.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Component生命周期.jpeg"></p>
+            <p>文章比较长，第一部分通过runtime的源码介绍了load和initialize两个方法的本质；第二部门通过实例演示了这个两个方法的调用；第三部分就是结论和应用场景</p>
+<p>#通过runtime源码解析load和initialize</p>
+<h2 id="load"><a href="#load" class="headerlink" title="+load"></a>+load</h2><p><img src="http://upload-images.jianshu.io/upload_images/6644906-034736b3848e3b2d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="ADDBC8A1-E2D9-4BCE-8A87-B60FDCC2FB13.png"><br>通过调用堆栈，我们可以看出系统首先调用的是load_images方法</p>
+<h3 id="load-images"><a href="#load-images" class="headerlink" title="load_images"></a>load_images</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">void load_images(const char *path __unused, const struct mach_header *mh)</div><div class="line">&#123;</div><div class="line">    // Return without taking locks if there are no +load methods here.</div><div class="line">    if (!hasLoadMethods((const headerType *)mh)) return;</div><div class="line"></div><div class="line">    recursive_mutex_locker_t lock(loadMethodLock);</div><div class="line"></div><div class="line">    // Discover load methods</div><div class="line">    &#123;</div><div class="line">        rwlock_writer_t lock2(runtimeLock);</div><div class="line">        prepare_load_methods((const headerType *)mh);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    // Call +load methods (without runtimeLock - re-entrant)</div><div class="line">    call_load_methods();</div><div class="line">&#125;</div><div class="line">首先是将所有的load搜索到，放到一个列表中等待调用，然后call_load_methods循环遍历调用</div></pre></td></tr></table></figure>
+<h4 id="prepare-load-methods"><a href="#prepare-load-methods" class="headerlink" title="prepare_load_methods"></a>prepare_load_methods</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div></pre></td><td class="code"><pre><div class="line">void prepare_load_methods(const headerType *mhdr)</div><div class="line">&#123;</div><div class="line">    Module mods;</div><div class="line">    unsigned int midx;</div><div class="line"></div><div class="line">    header_info *hi;</div><div class="line">    for (hi = FirstHeader; hi; hi = hi-&gt;getNext()) &#123;</div><div class="line">        if (mhdr == hi-&gt;mhdr()) break;</div><div class="line">    &#125;</div><div class="line">    if (!hi) return;</div><div class="line"></div><div class="line">    if (hi-&gt;info()-&gt;isReplacement()) &#123;</div><div class="line">        // Ignore any classes in this image</div><div class="line">        return;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    // Major loop - process all modules in the image</div><div class="line">    mods = hi-&gt;mod_ptr;</div><div class="line">    for (midx = 0; midx &lt; hi-&gt;mod_count; midx += 1)</div><div class="line">    &#123;</div><div class="line">        unsigned int index;</div><div class="line"></div><div class="line">        // Skip module containing no classes</div><div class="line">        if (mods[midx].symtab == nil)</div><div class="line">            continue;</div><div class="line"></div><div class="line">        // Minor loop - process all the classes in given module</div><div class="line">        for (index = 0; index &lt; mods[midx].symtab-&gt;cls_def_cnt; index += 1)</div><div class="line">        &#123;</div><div class="line">            // Locate the class description pointer</div><div class="line">            Class cls = (Class)mods[midx].symtab-&gt;defs[index];</div><div class="line">            if (cls-&gt;info &amp; CLS_CONNECTED) &#123;</div><div class="line">                schedule_class_load(cls);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">    // Major loop - process all modules in the header</div><div class="line">    mods = hi-&gt;mod_ptr;</div><div class="line"></div><div class="line">    // NOTE: The module and category lists are traversed backwards</div><div class="line">    // to preserve the pre-10.4 processing order. Changing the order</div><div class="line">    // would have a small chance of introducing binary compatibility bugs.</div><div class="line">    midx = (unsigned int)hi-&gt;mod_count;</div><div class="line">    while (midx-- &gt; 0) &#123;</div><div class="line">        unsigned int index;</div><div class="line">        unsigned int total;</div><div class="line">        Symtab symtab = mods[midx].symtab;</div><div class="line"></div><div class="line">        // Nothing to do for a module without a symbol table</div><div class="line">        if (mods[midx].symtab == nil)</div><div class="line">            continue;</div><div class="line">        // Total entries in symbol table (class entries followed</div><div class="line">        // by category entries)</div><div class="line">        total = mods[midx].symtab-&gt;cls_def_cnt +</div><div class="line">            mods[midx].symtab-&gt;cat_def_cnt;</div><div class="line"></div><div class="line">        // Minor loop - register all categories from given module</div><div class="line">        index = total;</div><div class="line">        while (index-- &gt; mods[midx].symtab-&gt;cls_def_cnt) &#123;</div><div class="line">            old_category *cat = (old_category *)symtab-&gt;defs[index];</div><div class="line">            add_category_to_loadable_list((Category)cat);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这个方法主要是两个核心方法schedule_class_load和add_category_to_loadable_list主要干了两件事<br>1、获取了所有类后,遍历列表，将其中有+load方法的类加入loadable_class；<br>2、获取所有的类别，遍历列表，将其中有+load方法的类加入loadable_categories.<br>接下来让我们看看schedule_class_load<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">static void schedule_class_load(Class cls)</div><div class="line">&#123;</div><div class="line">    if (cls-&gt;info &amp; CLS_LOADED) return;</div><div class="line">    if (cls-&gt;superclass) schedule_class_load(cls-&gt;superclass);</div><div class="line">    add_class_to_loadable_list(cls);</div><div class="line">    cls-&gt;info |= CLS_LOADED;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>从以上代码可以看出在加载类的load方法的时候，首先是先将父类加入到loadable_class，之后才是子类。所以保证了<strong>父类一定是在子类先调用</strong>！</p>
+<p>####call_load_methods<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">void call_load_methods(void)</div><div class="line">&#123;</div><div class="line">    static bool loading = NO;</div><div class="line">    bool more_categories;</div><div class="line"></div><div class="line">    loadMethodLock.assertLocked();</div><div class="line"></div><div class="line">    // Re-entrant calls do nothing; the outermost call will finish the job.</div><div class="line">    if (loading) return;</div><div class="line">    loading = YES;</div><div class="line"></div><div class="line">    void *pool = objc_autoreleasePoolPush();</div><div class="line"></div><div class="line">    do &#123;</div><div class="line">        // 1. Repeatedly call class +loads until there aren&apos;t any more</div><div class="line">        while (loadable_classes_used &gt; 0) &#123;</div><div class="line">            call_class_loads();</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        // 2. Call category +loads ONCE</div><div class="line">        more_categories = call_category_loads();</div><div class="line"></div><div class="line">        // 3. Run more +loads if there are classes OR more untried categories</div><div class="line">    &#125; while (loadable_classes_used &gt; 0  ||  more_categories);</div><div class="line"></div><div class="line">    objc_autoreleasePoolPop(pool);</div><div class="line"></div><div class="line">    loading = NO;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>call_load_methods循环遍历，首先是调用了class的load方法，然后调用了category的方法<br>接下来让我们看看call_class_loads的代码实现<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">static void call_class_loads(void)</div><div class="line">&#123;</div><div class="line">    int i;</div><div class="line"></div><div class="line">    // Detach current loadable list.</div><div class="line">    struct loadable_class *classes = loadable_classes;</div><div class="line">    int used = loadable_classes_used;</div><div class="line">    loadable_classes = nil;</div><div class="line">    loadable_classes_allocated = 0;</div><div class="line">    loadable_classes_used = 0;</div><div class="line"></div><div class="line">    // Call all +loads for the detached list.</div><div class="line">    for (i = 0; i &lt; used; i++) &#123;</div><div class="line">        Class cls = classes[i].cls;</div><div class="line">        load_method_t load_method = (load_method_t)classes[i].method;</div><div class="line">        if (!cls) continue;</div><div class="line"></div><div class="line">        if (PrintLoading) &#123;</div><div class="line">            _objc_inform(&quot;LOAD: +[%s load]\n&quot;, cls-&gt;nameForLogging());</div><div class="line">        &#125;</div><div class="line">        (*load_method)(cls, SEL_load);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    // Destroy the detached list.</div><div class="line">    if (classes) free(classes);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>核心方法是 (<em>load_method)(cls, SEL_load),`typedef void(</em>load_method_t)(id, SEL);`可以看到load_method是一个函数指针，所以是直接调用了内存地址！</p>
+<p>##+initialize</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/6644906-6cb08b0bb9e17df1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="98779EDD-737F-498D-AD9E-B02508958DDB.png"><br>一样我们通过调用堆栈可以看到系统调用的是_class_initialize方法</p>
+<p>##_class_initialize</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div></pre></td><td class="code"><pre><div class="line">void _class_initialize(Class cls)</div><div class="line">&#123;</div><div class="line">    assert(!cls-&gt;isMetaClass());</div><div class="line"></div><div class="line">    Class supercls;</div><div class="line">    bool reallyInitialize = NO;</div><div class="line"></div><div class="line">    // Make sure super is done initializing BEFORE beginning to initialize cls.</div><div class="line">    // See note about deadlock above.</div><div class="line">    supercls = cls-&gt;superclass;</div><div class="line">    if (supercls  &amp;&amp;  !supercls-&gt;isInitialized()) &#123;</div><div class="line">        _class_initialize(supercls);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    // Try to atomically set CLS_INITIALIZING.</div><div class="line">    &#123;</div><div class="line">        monitor_locker_t lock(classInitLock);</div><div class="line">        if (!cls-&gt;isInitialized() &amp;&amp; !cls-&gt;isInitializing()) &#123;</div><div class="line">            cls-&gt;setInitializing();</div><div class="line">            reallyInitialize = YES;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    if (reallyInitialize) &#123;</div><div class="line">        // We successfully set the CLS_INITIALIZING bit. Initialize the class.</div><div class="line"></div><div class="line">        // Record that we&apos;re initializing this class so we can message it.</div><div class="line">        _setThisThreadIsInitializingClass(cls);</div><div class="line"></div><div class="line">        // Send the +initialize message.</div><div class="line">        // Note that +initialize is sent to the superclass (again) if</div><div class="line">        // this class doesn&apos;t implement +initialize. 2157218</div><div class="line">        if (PrintInitializing) &#123;</div><div class="line">            _objc_inform(&quot;INITIALIZE: calling +[%s initialize]&quot;,</div><div class="line">                         cls-&gt;nameForLogging());</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        // Exceptions: A +initialize call that throws an exception</div><div class="line">        // is deemed to be a complete and successful +initialize.</div><div class="line">        @try &#123;</div><div class="line">            callInitialize(cls);</div><div class="line"></div><div class="line">            if (PrintInitializing) &#123;</div><div class="line">                _objc_inform(&quot;INITIALIZE: finished +[%s initialize]&quot;,</div><div class="line">                             cls-&gt;nameForLogging());</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        @catch (...) &#123;</div><div class="line">            if (PrintInitializing) &#123;</div><div class="line">                _objc_inform(&quot;INITIALIZE: +[%s initialize] threw an exception&quot;,</div><div class="line">                             cls-&gt;nameForLogging());</div><div class="line">            &#125;</div><div class="line">            @throw;</div><div class="line">        &#125;</div><div class="line">        @finally &#123;</div><div class="line">            // Done initializing.</div><div class="line">            // If the superclass is also done initializing, then update</div><div class="line">            //   the info bits and notify waiting threads.</div><div class="line">            // If not, update them later. (This can happen if this +initialize</div><div class="line">            //   was itself triggered from inside a superclass +initialize.)</div><div class="line">            monitor_locker_t lock(classInitLock);</div><div class="line">            if (!supercls  ||  supercls-&gt;isInitialized()) &#123;</div><div class="line">                _finishInitializing(cls, supercls);</div><div class="line">            &#125; else &#123;</div><div class="line">                _finishInitializingAfter(cls, supercls);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        return;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    else if (cls-&gt;isInitializing()) &#123;</div><div class="line">        // We couldn&apos;t set INITIALIZING because INITIALIZING was already set.</div><div class="line">        // If this thread set it earlier, continue normally.</div><div class="line">        // If some other thread set it, block until initialize is done.</div><div class="line">        // It&apos;s ok if INITIALIZING changes to INITIALIZED while we&apos;re here,</div><div class="line">        //   because we safely check for INITIALIZED inside the lock</div><div class="line">        //   before blocking.</div><div class="line">        if (_thisThreadIsInitializingClass(cls)) &#123;</div><div class="line">            return;</div><div class="line">        &#125; else &#123;</div><div class="line">            waitForInitializeToComplete(cls);</div><div class="line">            return;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    else if (cls-&gt;isInitialized()) &#123;</div><div class="line">        // Set CLS_INITIALIZING failed because someone else already</div><div class="line">        //   initialized the class. Continue normally.</div><div class="line">        // NOTE this check must come AFTER the ISINITIALIZING case.</div><div class="line">        // Otherwise: Another thread is initializing this class. ISINITIALIZED</div><div class="line">        //   is false. Skip this clause. Then the other thread finishes</div><div class="line">        //   initialization and sets INITIALIZING=no and INITIALIZED=yes.</div><div class="line">        //   Skip the ISINITIALIZING clause. Die horribly.</div><div class="line">        return;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    else &#123;</div><div class="line">        // We shouldn&apos;t be here.</div><div class="line">        _objc_fatal(&quot;thread-safe class init in objc runtime is buggy!&quot;);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>核心方法就是callInitialize接下来让我们看看该方法的实现</p>
+<p>##callInitialize<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">void callInitialize(Class cls)</div><div class="line">&#123;</div><div class="line">    ((void(*)(Class, SEL))objc_msgSend)(cls, SEL_initialize);</div><div class="line">    asm(&quot;&quot;);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>通过该实现我们可以看出其实initialize的本质就是objc_msgSend，所以遵循消息的转发机制。</p>
+<hr>
+<p>#示例演示<br><strong>Animal 父类</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">@implementation Animal</div><div class="line">+(void)load&#123;</div><div class="line">    NSLog(@&quot;Animal load&quot;);</div><div class="line">&#125;</div><div class="line">+(void)initialize&#123;</div><div class="line">    NSLog(@&quot;Animal initialize&quot;);</div><div class="line">&#125;</div><div class="line">@end</div></pre></td></tr></table></figure></p>
+<p><strong>Dog 子类</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">+(void)load&#123;</div><div class="line">    NSLog(@&quot;Dog load&quot;);</div><div class="line">&#125;</div><div class="line">//分两种情况，一种注释掉该代码，一种打开该代码</div><div class="line">//+(void)initialize&#123;</div><div class="line">//    NSLog(@&quot;Dog initialize&quot;);</div><div class="line">//&#125;</div><div class="line"></div><div class="line">**测试代码**</div><div class="line">````Objective-C</div><div class="line">    Animal *animal = [[Animal alloc] init];</div><div class="line">    Animal *animal2 = [[Animal alloc] init];</div><div class="line">    Animal *animal3 = [[Animal alloc] init];</div><div class="line">    Dog *dog = [[Dog alloc] init];</div><div class="line">    Dog *dog2 = [[Dog alloc] init];</div></pre></td></tr></table></figure></p>
+<ul>
+<li>未注释代码时，打印结果<br>2017-07-31 14:24:47.671 test[53134:5737864] Animal load<br>2017-07-31 14:24:47.809 test[53134:5737864] Dog load<br>2017-07-31 14:24:48.112 test[53134:5737864] Animal initialize<br>2017-07-31 14:24:48.112 test[53134:5737864] Dog initialize</li>
+<li>注释掉代码时，打印结果<br>2017-07-31 14:39:03.916 testaa[53659:5814782] Animal load<br>2017-07-31 14:39:03.917 testaa[53659:5814782] Dog load<br>2017-07-31 14:39:03.966 testaa[53659:5814782] Animal initialize<br>2017-07-31 14:39:03.967 testaa[53659:5814782] Animal initialize</li>
+</ul>
+<p>通过两次打印看到以下现象：</p>
+<ul>
+<li>第一次测试load initialize各打印了一次，并且load比initialize提前打印<br><strong>原因：+ load是应用一启动就调动，+ initialize是我们调用该类方法的时候才会调用，而且这两个方法理论上只会调用一次。</strong></li>
+<li>第二次测试Animal的initialize打印了两次<br><strong>原因：initialize遵循的是objc_msgSend消息的转发机制，第一次打印是因为我们实例化了Animal并且调用了方法；第二次打印是因为Dog子类没有实现该方法，根据消息转发机制的原理，所以会向上查找父类是否实现了该方法，所以调用了父类的initialize的方法了。所以父类的initialize可能会被调用多次所以建议以下写法：</strong></li>
+</ul>
+<figure class="highlight plain"><figcaption><span>(void)initialize &#123;</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">  if (self == [ClassName self]) &#123;</div><div class="line">    // ... do the initialization ...</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>我们可以做个以下尝试Dog不继承Animal，然后在Compile Source中将Dog的顺序拖到Animal之前。<br>如下图：<br><img src="http://upload-images.jianshu.io/upload_images/6644906-88388b9eb906803e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="D790F51D-98BD-4963-B7A9-D7DEE037FE45.png"><br> <strong>可以观察到Dog的Load在Animal之前打印。所以在没有继承关系的时候Load的调用顺序跟我们的Compile Source的排列顺序有关。有继承关系的，父类一定比子类先调用</strong></p>
+<p>#结论</p>
+<ul>
+<li>+load方法是在程序一启动的时候就会调用，并且在main函数之前，是根据Xcode中Compile Sources的顺序调用的。其内部本质是通过函数<strong>内存地址</strong>的方式实现的。所以在有继承关系的时候子类与父类没有任何关系，不会相互影响。</li>
+<li>+initialize方法是我们在第一次使用该类的时候即调用某个方法的时候系统开始调用 ，是一种懒加载的方式。其内部本质是通过<strong>objc_msgSend</strong>发送消息实现的,因此也拥有objc_msgSend带来的特性,也就是说子类会继承父类的方法实现,而分类的实现也会覆盖元类。</li>
+</ul>
+<p>我们常用<a href="http://nshipster.com/method-swizzling/" target="_blank" rel="external">Method Swizzling</a>建议一定要在Load方法中实现。<br><a href="https://stackoverflow.com/questions/30585088/objective-c-cases-when-it-is-useful-to-override-initialize-and-load?lq=1" target="_blank" rel="external">stackoverflow使用场景讨论</a></p>
 
           
         
@@ -642,17 +659,6 @@
           
 
           
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/10/14/iOS中将数字用符合隔开(比如逗号)/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/10/14/iOS中将数字用符合隔开(比如逗号)/" itemprop="commentCount"></span>
-                </a>
-              </span>
             
           
 
@@ -875,17 +881,6 @@ NSLog(@&quot;formattedNumberString: %@&quot;, formattedNumberString);
           
 
           
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/10/14/iOS小知识积累(长期更新)/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/10/14/iOS小知识积累(长期更新)/" itemprop="commentCount"></span>
-                </a>
-              </span>
             
           
 
@@ -1110,17 +1105,6 @@ NSLog(@&quot;formattedNumberString: %@&quot;, formattedNumberString);
 
           
             
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/10/14/iOS自定义相机界面/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/10/14/iOS自定义相机界面/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
           
 
           
@@ -1265,17 +1249,6 @@ NSLog(@&quot;formattedNumberString: %@&quot;, formattedNumberString);
           
 
           
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/10/14/macOS各个文件夹的作用/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/10/14/macOS各个文件夹的作用/" itemprop="commentCount"></span>
-                </a>
-              </span>
             
           
 
@@ -1445,17 +1418,6 @@ NSLog(@&quot;formattedNumberString: %@&quot;, formattedNumberString);
 
           
             
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/10/14/pod install vs. pod update/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/10/14/pod install vs. pod update/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
           
 
           
@@ -1498,185 +1460,6 @@ NSLog(@&quot;formattedNumberString: %@&quot;, formattedNumberString);
 <h2 id="pod-outdated"><a href="#pod-outdated" class="headerlink" title="pod outdated"></a>pod outdated</h2><p>　　将列出所有的在Podfile.lock文件里的所有第三方包现在对应的最新的版本</p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>　　如果我们在Podfile文件增加、减少、或者改变了版本的时候运行pod install；如果我们想更新第三包的时候使用pod update命令</p>
 <p>接下来一篇我将详细介绍如果创建自己的spec。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/14/手把手教你创建Cocoapods的podspec/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="FlyOceanFish">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="FlyOceanFish' Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/10/14/手把手教你创建Cocoapods的podspec/" itemprop="url">手把手教你创建Cocoapods的podspec</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-14T09:27:00+08:00">
-                2017-10-14
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/iOS/" itemprop="url" rel="index">
-                    <span itemprop="name">iOS</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/10/14/手把手教你创建Cocoapods的podspec/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/10/14/手把手教你创建Cocoapods的podspec/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>现在大部分iOS项目都是在用Cocoapods来管理项目了，但是当我们自己写的一个公有或者私有项目的时候，想要支持Cocoapods，那应该怎么做呢？本教程手把手的教大家如何创建podsepc</p>
-<h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><ol>
-<li>github上创建自己的共有项目<br><img src="http://upload-images.jianshu.io/upload_images/6644906-af82c503463a2495.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="2220EA18-9E12-4891-B409-EB99776CBA78.png"></li>
-<li>创建自己的Xcode工程，并提交到该repository<br><img src="http://upload-images.jianshu.io/upload_images/6644906-b677f02da468d7cb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="0EF5DF0F-67C1-41D4-B3BA-5F8A8BB0BE78.png"></li>
-<li><p>创建podspec文件<br>我们cd当我们项目的根目录下。本项目中就是上图的文件夹下。执行如下命令：</p>
-<pre><code>pod spec create OceanFish git@github.com:FlyOceanFish/CreateOwnSpec.git
-</code></pre></li>
-<li>编辑我们的podspec文件</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div></pre></td><td class="code"><pre><div class="line">#</div><div class="line">#  Be sure to run `pod spec lint OceanFish.podspec&apos; to ensure this is a</div><div class="line">#  valid spec and to remove all comments including this before submitting the spec.</div><div class="line">#</div><div class="line">#  To learn more about Podspec attributes see http://docs.cocoapods.org/specification.html</div><div class="line">#  To see working Podspecs in the CocoaPods repo see https://github.com/CocoaPods/Specs/</div><div class="line">#</div><div class="line"></div><div class="line">Pod::Spec.new do |s|</div><div class="line"></div><div class="line">  # ―――  Spec Metadata  ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #</div><div class="line">  #</div><div class="line">  #  These will help people to find your library, and whilst it</div><div class="line">  #  can feel like a chore to fill in it&apos;s definitely to your advantage. The</div><div class="line">  #  summary should be tweet-length, and the description more in depth.</div><div class="line">  #</div><div class="line"></div><div class="line">  s.name         = &quot;OceanFish&quot;</div><div class="line">  s.version      = &quot;0.0.1&quot;</div><div class="line">  s.summary      = &quot;make a Spec&quot;</div><div class="line"></div><div class="line">  # This description is used to generate tags and improve search results.</div><div class="line">  #   * Think: What does it do? Why did you write it? What is the focus?</div><div class="line">  #   * Try to keep it short, snappy and to the point.</div><div class="line">  #   * Write the description between the DESC delimiters below.</div><div class="line">  #   * Finally, don&apos;t worry about the indent, CocoaPods strips it!</div><div class="line">  s.description  = &lt;&lt;-DESC</div><div class="line">                  手把手叫你如何创建自己的Spec</div><div class="line">                   DESC</div><div class="line"></div><div class="line">  s.homepage     = &quot;https://github.com/FlyOceanFish&quot;</div><div class="line">  # s.screenshots  = &quot;www.example.com/screenshots_1.gif&quot;, &quot;www.example.com/screenshots_2.gif&quot;</div><div class="line"></div><div class="line"></div><div class="line">  # ―――  Spec License  ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #</div><div class="line">  #</div><div class="line">  #  Licensing your code is important. See http://choosealicense.com for more info.</div><div class="line">  #  CocoaPods will detect a license file if there is a named LICENSE*</div><div class="line">  #  Popular ones are &apos;MIT&apos;, &apos;BSD&apos; and &apos;Apache License, Version 2.0&apos;.</div><div class="line">  #</div><div class="line"></div><div class="line">  s.license      = &#123; :type =&gt; &quot;MIT&quot;, :file =&gt; &quot;LICENSE&quot; &#125;</div><div class="line"></div><div class="line"></div><div class="line">  # ――― Author Metadata  ――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #</div><div class="line">  #</div><div class="line">  #  Specify the authors of the library, with email addresses. Email addresses</div><div class="line">  #  of the authors are extracted from the SCM log. E.g. $ git log. CocoaPods also</div><div class="line">  #  accepts just a name if you&apos;d rather not provide an email address.</div><div class="line">  #</div><div class="line">  #  Specify a social_media_url where others can refer to, for example a twitter</div><div class="line">  #  profile URL.</div><div class="line">  #</div><div class="line"></div><div class="line">  s.author             = &#123; &quot;OceanFish&quot; =&gt; &quot;978456068@qq.com&quot; &#125;</div><div class="line">  # Or just: s.author    = &quot;frances&quot;</div><div class="line">  # s.authors            = &#123; &quot;frances&quot; =&gt; &quot;978456068@qq.com&quot; &#125;</div><div class="line">  # s.social_media_url   = &quot;http://twitter.com/frances&quot;</div><div class="line"></div><div class="line">  # ――― Platform Specifics ――――――――――――――――――――――――――――――――――――――――――――――――――――――― #</div><div class="line">  #</div><div class="line">  #  If this Pod runs only on iOS or OS X, then specify the platform and</div><div class="line">  #  the deployment target. You can optionally include the target after the platform.</div><div class="line">  #</div><div class="line"></div><div class="line">  # s.platform     = :ios</div><div class="line">   s.platform     = :ios, &quot;10.3&quot;</div><div class="line"></div><div class="line">  #  When using multiple platforms</div><div class="line">  # s.ios.deployment_target = &quot;5.0&quot;</div><div class="line">  # s.osx.deployment_target = &quot;10.7&quot;</div><div class="line">  # s.watchos.deployment_target = &quot;2.0&quot;</div><div class="line">  # s.tvos.deployment_target = &quot;9.0&quot;</div><div class="line"></div><div class="line"></div><div class="line">  # ――― Source Location ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #</div><div class="line">  #</div><div class="line">  #  Specify the location from where the source should be retrieved.</div><div class="line">  #  Supports git, hg, bzr, svn and HTTP.</div><div class="line">  #</div><div class="line"></div><div class="line">  s.source       = &#123; :git =&gt; &quot;https://github.com/FlyOceanFish/CreateOwnSpec.git&quot;, :tag =&gt; &quot;#&#123;s.version&#125;&quot; &#125;</div><div class="line"></div><div class="line"></div><div class="line">  # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #</div><div class="line">  #</div><div class="line">  #  CocoaPods is smart about how it includes source code. For source files</div><div class="line">  #  giving a folder will include any swift, h, m, mm, c &amp; cpp files.</div><div class="line">  #  For header files it will include any header in the folder.</div><div class="line">  #  Not including the public_header_files will make all headers public.</div><div class="line">  #</div><div class="line"></div><div class="line">  s.source_files  = &quot;FlyOceanFish&quot;, &quot;FlyOceanFish/**/*.&#123;h,m&#125;&quot;</div><div class="line">  #s.exclude_files = &quot;Classes/Exclude&quot;</div><div class="line"></div><div class="line">  # s.public_header_files = &quot;Classes/**/*.h&quot;</div><div class="line"></div><div class="line"></div><div class="line">  # ――― Resources ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #</div><div class="line">  #</div><div class="line">  #  A list of resources included with the Pod. These are copied into the</div><div class="line">  #  target bundle with a build phase script. Anything else will be cleaned.</div><div class="line">  #  You can preserve files from being cleaned, please don&apos;t preserve</div><div class="line">  #  non-essential files like tests, examples and documentation.</div><div class="line">  #</div><div class="line"></div><div class="line">  # s.resource  = &quot;icon.png&quot;</div><div class="line">  # s.resources = &quot;Resources/*.png&quot;</div><div class="line"></div><div class="line">  # s.preserve_paths = &quot;FilesToSave&quot;, &quot;MoreFilesToSave&quot;</div><div class="line"></div><div class="line"></div><div class="line">  # ――― Project Linking ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #</div><div class="line">  #</div><div class="line">  #  Link your library with frameworks, or libraries. Libraries do not include</div><div class="line">  #  the lib prefix of their name.</div><div class="line">  #</div><div class="line"></div><div class="line">  # s.framework  = &quot;SomeFramework&quot;</div><div class="line">  # s.frameworks = &quot;SomeFramework&quot;, &quot;AnotherFramework&quot;</div><div class="line"></div><div class="line">  # s.library   = &quot;iconv&quot;</div><div class="line">  # s.libraries = &quot;iconv&quot;, &quot;xml2&quot;</div><div class="line"></div><div class="line"></div><div class="line">  # ――― Project Settings ――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #</div><div class="line">  #</div><div class="line">  #  If your library depends on compiler flags you can set them in the xcconfig hash</div><div class="line">  #  where they will only apply to your library. If you depend on other Podspecs</div><div class="line">  #  you can include multiple dependencies to ensure it works.</div><div class="line"></div><div class="line">  s.requires_arc = true</div><div class="line"></div><div class="line">  # s.xcconfig = &#123; &quot;HEADER_SEARCH_PATHS&quot; =&gt; &quot;$(SDKROOT)/usr/include/libxml2&quot; &#125;</div><div class="line">  # s.dependency &quot;JSONKit&quot;, &quot;~&gt; 1.4&quot;</div><div class="line"></div><div class="line">end</div></pre></td></tr></table></figure>
-<ol>
-<li><p>执行如下命令进行校验文件的正确性</p>
-<pre><code>pod lib lint
-</code></pre></li>
-</ol>
-<p><img src="http://upload-images.jianshu.io/upload_images/6644906-8ee99362e9e96299.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="AECADD88-FAD7-4B9C-BD73-701B7AC40282.png"><br>如果见到如上图，则代表验证通过；如果没有通过的话按照提示进行修改即可。<br>备注：这个命令是本地校验的，还要pod spec lint 这个是本地和远程校验。如果此时我们用pod spec lint会报错，因为我们还有发布一个版本，就是第6步还没做呢。</p>
-<ol>
-<li>在github上创建一个发布版本<br><img src="http://upload-images.jianshu.io/upload_images/6644906-d8d193f003b2720b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="3EF1084F-7DF7-403E-8CE7-519AB42194E0.png"><br>此时我们运行pod spec lint则会见到如下图<br><img src="http://upload-images.jianshu.io/upload_images/6644906-e7ff39a2608266f9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="EDBCCFB9-6125-4816-8CEE-DD7178C06CB0.png"><br>到这步整个制作过程已经完成接下来让我们发布自己spec<h2 id="发布到CocoaPods"><a href="#发布到CocoaPods" class="headerlink" title="发布到CocoaPods"></a>发布到CocoaPods</h2>CocoaPods 0.33中加入了 Trunk 服务，使用 Trunk 服务可以方便的发布自己的Pod。要想使用 Trunk 服务，首先需要使用如下命令注册自己的电脑。这很简单，只要你指明你的邮箱地址（spec文件中的）和名称即可。CocoaPods 会给你填写的邮箱发送验证邮件，点击邮件中的链接就可通过验证。</li>
-<li>注册<br> pod trunk register 978456068@qq.com “FlyOceanFish”</li>
-</ol>
-<p>2、验证是否注册成功</p>
-<pre><code>pod trunk me
-</code></pre><p><img src="http://upload-images.jianshu.io/upload_images/6644906-1c0e9356bacb2005.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="7117B254-7688-427F-A205-69968ABF3AE3.png"><br>3、发布我们的podspec</p>
-<pre><code>pod trunk push
-</code></pre><p><img src="http://upload-images.jianshu.io/upload_images/6644906-870e654c65f46478.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="7FA508FC-B6CB-4ED1-B31E-1799F83BCE6F.png"><br>此图代表我们已经发布成功</p>
-<p>不过此时我们pod search还搜不到我们的podspec。因为还没审核通过要等个几天，然后运行pod setup更新本地的spec，再搜索一下试试看。</p>
-<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><a href="https://guides.cocoapods.org/using/index.html" target="_blank" rel="external">CocoaPods</a><br><a href="https://stackoverflow.com/questions/32304421/whats-the-difference-between-pod-spec-lint-and-pod-lib-lint" target="_blank" rel="external">between ‘pod spec lint’ and ‘pod lib lint’?</a></p>
 
           
         
@@ -1791,17 +1574,6 @@ NSLog(@&quot;formattedNumberString: %@&quot;, formattedNumberString);
           
 
           
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/10/14/Rect Native(>0.45)通过cocopods初始化工程/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/10/14/Rect Native(>0.45)通过cocopods初始化工程/" itemprop="commentCount"></span>
-                </a>
-              </span>
             
           
 
@@ -1962,17 +1734,6 @@ NSLog(@&quot;formattedNumberString: %@&quot;, formattedNumberString);
 
           
             
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/10/14/NSInvocation/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/10/14/NSInvocation/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
           
 
           
@@ -2022,6 +1783,178 @@ NSLog(@&quot;formattedNumberString: %@&quot;, formattedNumberString);
 <p>既然苹果把API封了，那就自己实现咯，万能的github早有答案<a href="https://github.com/ebf/CTObjectiveCRuntimeAdditions" target="_blank" rel="external">CTObjectiveCRuntimeAdditions</a>把CTBlockDescription.h<br>和CTBlockDescription.m<br>拖到项目中，代码这样写<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line">static id invokeBlock(id block ,NSArray *arguments) &#123;</div><div class="line">    if (block == nil) return nil;</div><div class="line">    id target = [block  copy];</div><div class="line"></div><div class="line">    CTBlockDescription *ct = [[CTBlockDescription alloc] initWithBlock:target];</div><div class="line">    NSMethodSignature *methodSignature = ct.blockSignature;</div><div class="line">    NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:methodSignature];</div><div class="line">    invocation.target = target;</div><div class="line"></div><div class="line">    // invocation 有1个隐藏参数，所以 argument 从1开始</div><div class="line">    if ([arguments isKindOfClass:[NSArray class]]) &#123;</div><div class="line">        NSInteger count = MIN(arguments.count, methodSignature.numberOfArguments - 1);</div><div class="line">        for (int i = 0; i &lt; count; i++) &#123;</div><div class="line">            const char *type = [methodSignature getArgumentTypeAtIndex:1 + i];</div><div class="line">            NSString *typeStr = [NSString stringWithUTF8String:type];</div><div class="line">            if ([typeStr containsString:@&quot;\&quot;&quot;]) &#123;</div><div class="line">                type = [typeStr substringToIndex:1].UTF8String;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            // 需要做参数类型判断然后解析成对应类型，这里默认所有参数均为OC对象</div><div class="line">            if (strcmp(type, &quot;@&quot;) == 0) &#123;</div><div class="line">                id argument = arguments[i];</div><div class="line">                [invocation setArgument:&amp;argument atIndex:1 + i];</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    [invocation invoke];</div><div class="line"></div><div class="line">    id returnVal;</div><div class="line">    const char *type = methodSignature.methodReturnType;</div><div class="line">    NSString *returnType = [NSString stringWithUTF8String:type];</div><div class="line">    if ([returnType containsString:@&quot;\&quot;&quot;]) &#123;</div><div class="line">        type = [returnType substringToIndex:1].UTF8String;</div><div class="line">    &#125;</div><div class="line">    if (strcmp(type, &quot;@&quot;) == 0) &#123;</div><div class="line">        [invocation getReturnValue:&amp;returnVal];</div><div class="line">    &#125;</div><div class="line">    // 需要做返回类型判断。比如返回值为常量需要包装成对象，这里仅以最简单的`@`为例</div><div class="line">    return returnVal;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p><img src="http://upload-images.jianshu.io/upload_images/6644906-143e6ac30788e9c1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="17D15BD3-98AA-46E9-BAD4-2747E16DD677.png"></p>
 <h3 id="NSInvocation-h"><a href="#NSInvocation-h" class="headerlink" title="NSInvocation.h"></a>NSInvocation.h</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div></pre></td><td class="code"><pre><div class="line">@interface NSInvocation : NSObject &#123;</div><div class="line">@private</div><div class="line">    __strong void *_frame;</div><div class="line">    __strong void *_retdata;</div><div class="line">    id _signature;</div><div class="line">    id _container;</div><div class="line">    uint8_t _retainedArgs;</div><div class="line">    uint8_t _reserved[15];</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 通过NSMethodSignature对象创建NSInvocation对象，NSMethodSignature为方法签名类</div><div class="line">+ (NSInvocation *)invocationWithMethodSignature:(NSMethodSignature *)sig;</div><div class="line"></div><div class="line">// 获取NSMethodSignature对象</div><div class="line">@property (readonly, retain) NSMethodSignature *methodSignature;</div><div class="line"></div><div class="line">// 保留参数，它会将传入的所有参数以及target都retain一遍</div><div class="line">- (void)retainArguments;</div><div class="line"></div><div class="line">// 判断参数是否还存在</div><div class="line">// 调用retainArguments之前，值为NO，调用之后值为YES</div><div class="line">@property (readonly) BOOL argumentsRetained;</div><div class="line"></div><div class="line">// 设置消息调用者，注意：target最好不要是局部变量</div><div class="line">@property (nullable, assign) id target;</div><div class="line"></div><div class="line">// 设置要调用的消息</div><div class="line">@property SEL selector;</div><div class="line"></div><div class="line">// 获取消息返回值</div><div class="line">- (void)getReturnValue:(void *)retLoc;</div><div class="line"></div><div class="line">// 设置消息返回值</div><div class="line">- (void)setReturnValue:(void *)retLoc;</div><div class="line"></div><div class="line">// 获取消息参数</div><div class="line">- (void)getArgument:(void *)argumentLocation atIndex:(NSInteger)idx;</div><div class="line"></div><div class="line">// 设置消息参数</div><div class="line">- (void)setArgument:(void *)argumentLocation atIndex:(NSInteger)idx;</div><div class="line"></div><div class="line">// 发送消息，即执行方法</div><div class="line">- (void)invoke;</div><div class="line"></div><div class="line">// target发送消息，既设置了target同时执行方法。这一步要注意在调用此方法之前必须设置了selector和argument</div><div class="line">- (void)invokeWithTarget:(id)target;</div><div class="line"></div><div class="line">@end</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/14/将RN工程嵌入到现有原生iOS应用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="FlyOceanFish">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FlyOceanFish' Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/10/14/将RN工程嵌入到现有原生iOS应用/" itemprop="url">将RN工程嵌入到现有原生iOS应用</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-14T09:27:00+08:00">
+                2017-10-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/React-Native/" itemprop="url" rel="index">
+                    <span itemprop="name">React Native</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>今天心血来潮，就想尝试一下将RN工程单独嵌入到原生工程中，所以就做了尝试，本文是通过cocopods集成RN到现有工程的，但是其中也遇到一个问题，怎么编译都不过。</p>
+<h1 id="依赖包"><a href="#依赖包" class="headerlink" title="依赖包"></a>依赖包</h1><p>React Native的植入过程同时需要React和React Native两个node依赖包，所以需要我们创建package.json文件和正确的RN文件目录结构</p>
+<blockquote>
+<p>对于一个典型的React Native项目来说，一般package.json和index.ios.js等文件会放在项目的根目录下。而iOS相关的原生代码会放在一个名为ios/的子目录中,这里也同时放着你的Xcode项目文件（.xcodeproj）。</p>
+</blockquote>
+<p><img src="http://upload-images.jianshu.io/upload_images/6644906-30b409760b9414ae.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="88161340-E7F4-46B0-86A9-5A13DCCDA819.png"></p>
+<p>按照上图的目录结构创建</p>
+<h3 id="package-json"><a href="#package-json" class="headerlink" title="package.json"></a>package.json</h3><figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">	<span class="attr">"name"</span>: <span class="string">"TestReactNative"</span>,</div><div class="line">	<span class="attr">"version"</span>: <span class="string">"0.0.1"</span>,</div><div class="line">	<span class="attr">"private"</span>: <span class="literal">true</span>,</div><div class="line">	<span class="attr">"scripts"</span>: &#123;</div><div class="line">		<span class="attr">"start"</span>: <span class="string">"node node_modules/react-native/local-cli/cli.js start"</span>,</div><div class="line">		<span class="attr">"test"</span>: <span class="string">"jest"</span></div><div class="line">	&#125;,</div><div class="line">	<span class="attr">"dependencies"</span>: &#123;</div><div class="line">		<span class="attr">"react"</span>: <span class="string">"16.0.0-alpha.6"</span>,</div><div class="line">		<span class="attr">"react-native"</span>: <span class="string">"0.44.3"</span></div><div class="line">	&#125;,</div><div class="line">	<span class="attr">"devDependencies"</span>: &#123;</div><div class="line">		<span class="attr">"babel-jest"</span>: <span class="string">"20.0.3"</span>,</div><div class="line">		<span class="attr">"babel-preset-react-native"</span>: <span class="string">"2.1.0"</span>,</div><div class="line">		<span class="attr">"jest"</span>: <span class="string">"20.0.4"</span>,</div><div class="line">		<span class="attr">"react-test-renderer"</span>: <span class="string">"16.0.0-alpha.6"</span></div><div class="line">	&#125;,</div><div class="line">	<span class="attr">"jest"</span>: &#123;</div><div class="line">		<span class="attr">"preset"</span>: <span class="string">"react-native"</span></div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="安装依赖包"><a href="#安装依赖包" class="headerlink" title="安装依赖包"></a>安装依赖包</h1><p>使用npm（node包管理器，Node package manager）来安装React和React Native模块。这些模块会被安装到项目根目录下的node_modules/目录中。 在包含有package.json文件的目录（一般也就是项目根目录）中运行下列命令来安装：</p>
+<blockquote>
+<p>npm install</p>
+</blockquote>
+<h1 id="新建index-ios-js"><a href="#新建index-ios-js" class="headerlink" title="新建index.ios.js"></a>新建index.ios.js</h1><p>这个是随便一个index.ios.js即可,我是从一个RN的初始化工程复制了一个出来<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * Sample React Native App</div><div class="line"> * https://github.com/facebook/react-native</div><div class="line"> * @flow</div><div class="line"> */</div><div class="line"></div><div class="line">import React, &#123; Component &#125; from &apos;react&apos;;</div><div class="line">import &#123;</div><div class="line">  AppRegistry,</div><div class="line">  StyleSheet,</div><div class="line">  Text,</div><div class="line">  View</div><div class="line">&#125; from &apos;react-native&apos;;</div><div class="line"></div><div class="line">export default class DemoApp extends Component &#123;</div><div class="line">  render() &#123;</div><div class="line">    return (</div><div class="line">      &lt;View style=&#123;styles.container&#125;&gt;</div><div class="line">        &lt;Text style=&#123;styles.welcome&#125;&gt;</div><div class="line">          Welcome to React Native!</div><div class="line">        &lt;/Text&gt;</div><div class="line">        &lt;Text style=&#123;styles.instructions&#125;&gt;</div><div class="line">          To get started, edit index.ios.js</div><div class="line">        &lt;/Text&gt;</div><div class="line">        &lt;Text style=&#123;styles.instructions&#125;&gt;</div><div class="line">          Press Cmd+R to reload,&#123;&apos;\n&apos;&#125;</div><div class="line">          Cmd+D or shake for dev menu</div><div class="line">        &lt;/Text&gt;</div><div class="line">      &lt;/View&gt;</div><div class="line">    );</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">const styles = StyleSheet.create(&#123;</div><div class="line">  container: &#123;</div><div class="line">    flex: 1,</div><div class="line">    justifyContent: &apos;center&apos;,</div><div class="line">    alignItems: &apos;center&apos;,</div><div class="line">    backgroundColor: &apos;#F5FCFF&apos;,</div><div class="line">  &#125;,</div><div class="line">  welcome: &#123;</div><div class="line">    fontSize: 20,</div><div class="line">    textAlign: &apos;center&apos;,</div><div class="line">    margin: 10,</div><div class="line">  &#125;,</div><div class="line">  instructions: &#123;</div><div class="line">    textAlign: &apos;center&apos;,</div><div class="line">    color: &apos;#333333&apos;,</div><div class="line">    marginBottom: 5,</div><div class="line">  &#125;,</div><div class="line">&#125;);</div><div class="line"></div><div class="line">AppRegistry.registerComponent(&apos;TestReactNative&apos;, () =&gt; DemoApp);</div></pre></td></tr></table></figure></p>
+<p>至此RN的相关依赖已经配置好，接下来就该配置cocopods了</p>
+<h1 id="cocopods配置"><a href="#cocopods配置" class="headerlink" title="cocopods配置"></a>cocopods配置</h1><p>1、<strong><em>创建Podfile，如果已经有了可以忽略此步骤</em></strong><br><figure class="highlight jsp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">## 在iOS原生代码所在的目录中（也就是`.xcodeproj`文件所在的目录）执行：</div><div class="line">$ pod init</div></pre></td></tr></table></figure></p>
+<p>Podfile文件内容如下:<br><figure class="highlight jsp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"># Uncomment the next line to define a global platform for your project</div><div class="line"># platform :ios, '9.0'</div><div class="line"></div><div class="line">target <span class="string">'TestReactNative'</span> <span class="keyword">do</span></div><div class="line">  # Uncomment the next line if you're using Swift or would like to use dynamic frameworks</div><div class="line">  # use_frameworks!</div><div class="line"></div><div class="line">  # Pods for TestReactNative</div><div class="line">  pod <span class="string">'React'</span>, :path =&gt; <span class="string">'../node_modules/react-native'</span>, :subspecs =&gt; [</div><div class="line">    <span class="string">'Core'</span>,</div><div class="line">    'DevSupport', # 如果RN版本 &gt;= 0.43，则需要加入此行才能开启开发者菜单</div><div class="line">    <span class="string">'RCTText'</span>,</div><div class="line">    <span class="string">'RCTNetwork'</span>,</div><div class="line">    'RCTWebSocket', # 这个模块是用于调试功能的</div><div class="line">    # 在这里继续添加你所需要的模块</div><div class="line">  ]</div><div class="line">  # 如果你的RN版本 &gt;= 0.42.0，请加入下面这行</div><div class="line">  pod <span class="string">"Yoga"</span>, :path =&gt; <span class="string">"../node_modules/react-native/ReactCommon/yoga"</span></div><div class="line">end</div></pre></td></tr></table></figure></p>
+<p>subspecs就是你依赖的包。可用的subspec都列在<a href="https://github.com/facebook/react-native/blob/master/React.podspec" target="_blank" rel="external">node_modules/react-native/React.podspec
+</a>中，基本都是按其功能命名的。一般来说你首先需要添加Core，这一subspec包含了必须的AppRegistry、StyleSheet、View以及其他的一些React Native核心库。如果你想使用React Native的Text库（即<text>组件），那就需要添加RCTText的subspec。同理，Image需加入RCTImage，等等。<br>2、<strong><em>安装依赖包</em></strong><br>执行pod install<br><img src="http://upload-images.jianshu.io/upload_images/6644906-d2f8ac5ea7e08d21.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="C07B6B3E-1642-4EAC-9814-BE6A55C4527C.png"><br>会看到以上过程则表示安装依赖已经成功<br>3、<strong><em>调用RN工程</em></strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">#import &quot;ViewController.h&quot;</div><div class="line">#import &lt;React/RCTRootView.h&gt;</div><div class="line"></div><div class="line">@interface ViewController ()</div><div class="line"></div><div class="line">@end</div><div class="line"></div><div class="line">@implementation ViewController</div><div class="line"></div><div class="line">- (void)viewDidLoad &#123;</div><div class="line">    [super viewDidLoad];</div><div class="line">    // Do any additional setup after loading the view, typically from a nib.</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (IBAction)actionClick:(id)sender &#123;</div><div class="line">    NSLog(@&quot;High Score Button Pressed&quot;);</div><div class="line">    NSURL *jsCodeLocation = [NSURL</div><div class="line">                             URLWithString:@&quot;http://localhost:8081/index.ios.bundle?platform=ios&quot;];</div><div class="line">    RCTRootView *rootView =</div><div class="line">    [[RCTRootView alloc] initWithBundleURL : jsCodeLocation</div><div class="line">                         moduleName        : @&quot;TestReactNative&quot;</div><div class="line">                         initialProperties :nil</div><div class="line">                          launchOptions    : nil];</div><div class="line">    UIViewController *vc = [[UIViewController alloc] init];</div><div class="line">    vc.view = rootView;</div><div class="line">    [self presentViewController:vc animated:YES completion:nil];</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (void)didReceiveMemoryWarning &#123;</div><div class="line">    [super didReceiveMemoryWarning];</div><div class="line">    // Dispose of any resources that can be recreated.</div><div class="line">&#125;</div><div class="line">@end</div></pre></td></tr></table></figure></text></p>
+<p>至此整集成已经结束，可以直接运行xcode过程，或者通过命令运行工程<br><figure class="highlight jsp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># From the root of your project, where the `node_modules` directory is located.</div><div class="line">$ npm start</div></pre></td></tr></table></figure></p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># 在项目的根目录中执行：</div><div class="line">$ react-<span class="keyword">native</span> run-ios</div></pre></td></tr></table></figure>
+<h1 id="坑"><a href="#坑" class="headerlink" title="坑"></a>坑</h1><p>不知道大家有没有注意我们package.json中react-native中的版本是”0.44.3”，而为什么不是最新版46的呢？？这就是一个很大的坑！从45版本开始RN有4个文件被墙了，所以如果大于44版本的react-native会一直编译不过<br><strong><em>有以下3个解决方案：</em></strong><br>1、不导入最新的包，导入44版本<br>2、翻墙呗。。。。<br>3、<a href="http://blog.csdn.net/u013751625/article/details/75046147" target="_blank" rel="external">下载被墙的4个依赖包，手工导入</a></p>
+<h3 id="优化加载速度"><a href="#优化加载速度" class="headerlink" title="优化加载速度"></a>优化加载速度</h3><p>在原生调用RN的时候有点慢。大家在集成的时候会发现加载的过程挺慢的，可以压缩加载本地文件，这样加载就快了。通常我们可以将文件放到服务器上，然后通过IP地址来加载，这种方式其实也是比较慢的，最好的方式就是将文件提前下载到本地，通过一定的更新机制确保本地文件时最新的，通过使用这种方式加载就很快了。</p>
+<ul>
+<li><p>到当前项目的根目录中执行:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">react-native bundle --platform ios --dev false --entry-file index.ios.js --bundle-output ios/main.jsbundle</div></pre></td></tr></table></figure>
+</li>
+<li><p>将main.jsbundle加载到Xcode工程中，然后通过以下方式获取URL地址来加载</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">NSString *path = [[NSBundle mainBundle] pathForResource:@&quot;main&quot; ofType:@&quot;jsbundle&quot;];</div><div class="line">NSURL *jsCodeLocation = [NSURL URLWithString:path];</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>如果大家在这个过程还有不明白的可以留言给我，我将尽最大努力给大家解决的哦</p>
 
           
         
@@ -2211,6 +2144,8 @@ NSLog(@&quot;formattedNumberString: %@&quot;, formattedNumberString);
       <div class="back-to-top">
         <i class="fa fa-arrow-up"></i>
         
+          <span id="scrollpercent"><span>0</span>%</span>
+        
       </div>
     
 
@@ -2321,14 +2256,6 @@ NSLog(@&quot;formattedNumberString: %@&quot;, formattedNumberString);
 
   
 
-
-  
-
-    
-      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
-    
-
-    
 
   
 
