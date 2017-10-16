@@ -262,7 +262,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/14/UIPageViewController使用和控件的封装/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/14/iOS中isEqual:方法详解/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="FlyOceanFish">
@@ -281,7 +281,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/10/14/UIPageViewController使用和控件的封装/" itemprop="url">UIPageViewController使用和控件的封装</a></h2>
+                <a class="post-title-link" href="/2017/10/14/iOS中isEqual:方法详解/" itemprop="url">iOS中isEqual:方法详解</a></h2>
         
 
         <div class="post-meta">
@@ -355,16 +355,18 @@
       
         
           
-            <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>我们经常会遇到一个场景，就是同时有几个视图需要左右滑动显示。大家可能会通过UIScrollview来实现，也能实现。但是如果不自己实现一些懒加载、缓存其实对性能还是有浪费的。接下来我们就让U闪亮登场。UIPageViewController加载不同的UIViewController可以有效的将不同逻辑进行了分离，减轻了总UIViewController的负担。<br>我通过UIPageViewController简单封装了一个工具，就是加载不同的视图，支持上下滑动、左右滑动。并且具有懒加载和缓存的功能，在一定程度上提高了性能。</p>
-<h4 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">    self.array = @[[FirstViewController class],[SecondViewController class],[FirstViewController class]];</div><div class="line">//实例化UIPageViewController，并且指定方向和动画。可以设置options。UIPageViewControllerOptionInterPageSpacingKey两个视图的间距</div><div class="line">    UIPageViewController *page = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal options:@&#123;UIPageViewControllerOptionInterPageSpacingKey:@10&#125;];</div><div class="line">    page.delegate = self;</div><div class="line">    page.dataSource = self;</div><div class="line">`</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">typedef NS_ENUM(NSInteger, UIPageViewControllerTransitionStyle) &#123;</div><div class="line">    UIPageViewControllerTransitionStylePageCurl = 0, //翻书的效果</div><div class="line">    UIPageViewControllerTransitionStyleScroll = 1 // 正常滑动切换效果</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">typedef NS_ENUM(NSInteger, UIPageViewControllerNavigationDirection) &#123;</div><div class="line">    UIPageViewControllerNavigationDirectionForward,</div><div class="line">    UIPageViewControllerNavigationDirectionReverse</div><div class="line">&#125;;</div><div class="line">其实这两个就是一对。如果是左右滑动的话，一个代表从左到右，另一个就是从右到左；如果上下滑动，一个代表从上到下，另一个就是从下到上。</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">//设置当前显示ViewController,这里通过一个方法集中生成，其实也是做到缓存功能。</div><div class="line">    [page setViewControllers:@[[self private_viewControllerForPage:0]] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];</div><div class="line">    [self addChildViewController:page];</div><div class="line">    [self.view addSubview:page.view];</div><div class="line">    [page didMoveToParentViewController:self];</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">//实例化UIViewController,并且缓存起来</div><div class="line">- (UIViewController *)private_viewControllerForPage:(NSUInteger)pageIndex&#123;</div><div class="line">    if (pageIndex&lt;self.pageViewControllerClasses.count) &#123;</div><div class="line">        if (pageIndex&lt;self.cacheViewControllerArray.count) &#123;</div><div class="line">            return self.cacheViewControllerArray[pageIndex];</div><div class="line">        &#125;else&#123;</div><div class="line">            Class controllerClass =  self.pageViewControllerClasses[pageIndex];</div><div class="line">            UIViewController *controller = [[controllerClass alloc] init];</div><div class="line">            [self.cacheViewControllerArray insertObject:controller atIndex:pageIndex];</div><div class="line">            return controller;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    return nil;</div><div class="line"></div><div class="line">&#125;</div><div class="line">- (NSInteger)private_indexOfViewController:(UIViewController *)viewController&#123;</div><div class="line">    NSInteger index = [self.cacheViewControllerArray indexOfObject:viewController];</div><div class="line">    return index;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h4 id="代理方法"><a href="#代理方法" class="headerlink" title="代理方法"></a>代理方法</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">//向后滑动的时候，调用此方法。获取之前显示过的UIViewController</div><div class="line">- (nullable UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController&#123;</div><div class="line">    NSInteger currentIndex = [self private_indexOfViewController:viewController];</div><div class="line">    if (currentIndex&gt;0) &#123;</div><div class="line">        return [self private_viewControllerForPage:currentIndex-1];</div><div class="line">    &#125;</div><div class="line">    return nil;</div><div class="line">&#125;</div><div class="line">//向前滑动的时候，调用此方法。获取之后要显示的UIViewController</div><div class="line">- (nullable UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController&#123;</div><div class="line">    NSInteger currentIndex = [self private_indexOfViewController:viewController];</div><div class="line">    if (currentIndex&gt;=0) &#123;</div><div class="line">        return [self private_viewControllerForPage:currentIndex+1];</div><div class="line">    &#125;</div><div class="line">    return nil;</div><div class="line">&#125;</div><div class="line">//滑动结束后回调此方法</div><div class="line">- (void)pageViewController:(UIPageViewController *)pageViewController didFinishAnimating:(BOOL)finished previousViewControllers:(NSArray&lt;UIViewController *&gt; *)previousViewControllers transitionCompleted:(BOOL)completed&#123;</div><div class="line">    if (completed&amp;&amp;self.YTOPageViewControllerPageChanged) &#123;</div><div class="line">        self.YTOPageViewControllerPageChanged([self private_indexOfViewController:pageViewController.viewControllers.firstObject]);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>上边就是UIPageViewController的基本用法。大家可以自行去探索一下。其实挺好玩的，也可以实现一下显示两个视图，看起来就是一本打开的书的效果。<br>下边是我封装的一个工具类，大家可以参考一下。只要传入你需要显示的UIViewController<br>的class名字就可以。</p>
-<h2 id="效果图"><a href="#效果图" class="headerlink" title="效果图"></a>效果图</h2><p><img src="http://upload-images.jianshu.io/upload_images/6644906-c23a7e673aca129a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="效果.png"></p>
-<h2 id="控件地址"><a href="#控件地址" class="headerlink" title="控件地址"></a>控件地址</h2><p><strong><em>大家觉着有用别忘了star一下哦！</em></strong><br><a href="https://github.com/FlyOceanFish/YTOSectionsViewController" target="_blank" rel="external">YTOSectionsViewController</a></p>
+            <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>　　大家对于这个方法其实再熟悉不过了，比较对象的时候用这个方法，如果使用==针对对象则仅仅比较的是内存地址的引用。但是大家可能会忽略另一个细节，对象的hash值</p>
+<p>引用苹果官方的一句话：</p>
+<pre><code>This method defines what it means for instances to be equal. For example, a container object might define two containers as equal if their corresponding objects all respond YES to an isEqual:  request. See the NSData, NSDictionary, NSArray, and NSString class   specifications for examples of the use of this method.
+
+If two objects are equal, they must have the same hash value. This last point is particularly important if you define isEqual: in a subclass and intend to put instances of that subclass into a collection. Make sure you also define hash in your subclass.
+</code></pre><h2 id="自定义对象，重写isEqual方法"><a href="#自定义对象，重写isEqual方法" class="headerlink" title="自定义对象，重写isEqual方法"></a>自定义对象，重写isEqual方法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">@implementation Person</div><div class="line">- (instancetype)initWithName:(NSString *)name andSex:(NSString *)sex&#123;</div><div class="line">    self = [super init];</div><div class="line">    if (self) &#123;</div><div class="line">        self.name = name;</div><div class="line">        self.sex = sex;</div><div class="line">    &#125;</div><div class="line">    return self;</div><div class="line">&#125;</div><div class="line">- (BOOL)isEqual:(id)object &#123;</div><div class="line">    if (self == object) &#123;</div><div class="line">        return YES;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    if (![object isKindOfClass:[Person class]]) &#123;</div><div class="line">        return NO;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    return [self isEqualToPerson:(Person *)object];</div><div class="line">&#125;</div><div class="line">- (BOOL)isEqualToPerson:(Person *)person &#123;</div><div class="line">    if (!person) &#123;</div><div class="line">        return NO;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    BOOL haveEqualNames = (!self.name &amp;&amp; !person.name) || [self.name isEqualToString:person.name];</div><div class="line">    BOOL haveEqualSex = (!self.sex &amp;&amp; !person.sex) || [self.sex isEqualToString:person.sex];</div><div class="line"></div><div class="line">    return haveEqualNames &amp;&amp; haveEqualSex;</div><div class="line">&#125;</div><div class="line">-(NSUInteger)hash&#123;</div><div class="line">    return self.name.hash^self.sex.hash;</div><div class="line">&#125;</div><div class="line">@end</div></pre></td></tr></table></figure>
+<p>上边代码是我定义的Person类并且重写了isEqual方法，大家可能发现了我还重写了hash方法。如果不重写hash方法会出现什么问题呢？？</p>
+<p>正常比较两个对象是否相等已经够用了，但是如果我们使用NSSet等等这样与hash相关的类就会产生问题了。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">Person *person1 = [[Person alloc] initWithName:@&quot;ocean&quot; andSex:@&quot;boy&quot;];</div><div class="line">Person *person2 = [[Person alloc] initWithName:@&quot;ocean&quot; andSex:@&quot;boy&quot;];</div><div class="line">NSSet *set = [NSSet setWithObjects:person1,person2, nil];</div><div class="line">NSLog(@&quot;set---%@&quot;,set);</div><div class="line">if ([person1 isEqual:person2]) &#123;</div><div class="line">    NSLog(@&quot;相等&quot;);</div><div class="line">&#125;else&#123;</div><div class="line">    NSLog(@&quot;不相等&quot;);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>如果我们不重写hash方法set打印出来后会有两个对象，是由于系统默认给我们实现了一个hash方法，perons1和person2的hash值不相等。如果重写了则只会打印出一个对象。</p>
+<p>系统默认实现<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">-(NSUInteger)hash&#123;</div><div class="line">    return (NSUInteger)self</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>如果两个对象相等，则hash必须要相等</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="http://nshipster.com/equality/" target="_blank" rel="external">Equality</a><br><a href="https://developer.apple.com/documentation/objectivec/1418956-nsobject/1418795-isequal?language=objc" target="_blank" rel="external">Apple Developer Documentation</a><br><a href="https://www.mikeash.com/pyblog/friday-qa-2010-06-18-implementing-equality-and-hashing.html" target="_blank" rel="external">Implementing Equality and Hashing</a></p>
 
           
         
@@ -591,7 +593,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/14/iOS中将数字用符合隔开(比如逗号)/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/14/iOS中3DES加密解密/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="FlyOceanFish">
@@ -610,7 +612,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/10/14/iOS中将数字用符合隔开(比如逗号)/" itemprop="url">iOS中将数字用符合隔开(比如逗号)</a></h2>
+                <a class="post-title-link" href="/2017/10/14/iOS中3DES加密解密/" itemprop="url">iOS中3DES加密解密</a></h2>
         
 
         <div class="post-meta">
@@ -684,88 +686,15 @@
       
         
           
-            <p>这次项目中遇到一个需求，将数字每隔3个用逗号隔开。因为如果数字太大确实看着有点眼花。<br>　　所以就想着写了一个NSString的category，用起来效果还不错，代码如下：</p>
-<h3 id="h的声明"><a href="#h的声明" class="headerlink" title=".h的声明"></a>.h的声明</h3><pre><code>#import &lt;Foundation/Foundation.h&gt;
+            <h2 id="加密"><a href="#加密" class="headerlink" title="加密"></a>加密</h2><p>加密分为对称加密和非对称加密。</p>
+<ul>
+<li>对称性加密算法，信息接收双方都需事先知道密匙和加解密算法且其密匙是相同的，之后便是对数据进行 加解密了;</li>
+<li>非对称算法与之不同，发送双方A,B事先均生成一堆密匙，然后A将自己的公有密匙发送给B，B将自己的公有密匙发送给A，如果A要给B发送消息，则先需要用B的公有密匙进行消息加密，然后发送给B端，此时B端再用自己的私有密匙进行消息解密，B向A发送消息时为同样的道理。</li>
+</ul>
+<h4 id="对称加密"><a href="#对称加密" class="headerlink" title="对称加密"></a>对称加密</h4><p>对称加密常见的AES、DES、3DES。DES是一种分组数据加密技术（先将数据分成固定长度的小数据块，之后进行加密），速度较快，适用于大量数据加密，而3DES是一种基于DES的加密算法，使用3个不同密匙对同一个分组数据块进行3次加密，如此以使得密文强度更高;AES相比较其他两种具有更高的速度和资源使用效率。</p>
+<h4 id="非对称加密"><a href="#非对称加密" class="headerlink" title="非对称加密"></a>非对称加密</h4><p>非对称加密常见RSA、DSA、ECC。RSA和DSA的安全性及其它各方面性能都差不多，而ECC较之则有着很多的性能优越，包括处理速度，带宽要求，存储空间等等。</p>
+<p><strong><em>我们采用的是3DES，代码如下：</em></strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div></pre></td><td class="code"><pre><div class="line">#import &quot;DESTools.h&quot;</div><div class="line">#import &lt;CommonCrypto/CommonCrypto.h&gt;</div><div class="line">#import &quot;GTMBase64.h&quot;</div><div class="line">#import &quot;GTMDefines.h&quot;</div><div class="line"></div><div class="line">//加密解密的key,与后台一致</div><div class="line">#define USER_KEY @&quot;xxxxxx&quot;</div><div class="line">//初始化向量，与后台一致</div><div class="line">#define initIv    @&quot;xxx&quot;</div><div class="line"></div><div class="line">@implementation DESTools</div><div class="line"></div><div class="line">+ (NSString *)encryptWithText:(NSString *)sText</div><div class="line">&#123;</div><div class="line">    //kCCEncrypt 加密</div><div class="line">    return [self encrypt:sText encryptOrDecrypt:kCCEncrypt key:USER_KEY];</div><div class="line">&#125;</div><div class="line"></div><div class="line">+ (NSString *)decryptWithText:(NSString *)sText</div><div class="line">&#123;</div><div class="line">    //kCCDecrypt 解密</div><div class="line">    return [self encrypt:sText encryptOrDecrypt:kCCDecrypt key:USER_KEY];</div><div class="line">&#125;</div><div class="line"></div><div class="line">+ (NSString *)encrypt:(NSString *)sText encryptOrDecrypt:(CCOperation)encryptOperation key:(NSString *)key</div><div class="line">&#123;</div><div class="line">    const void *dataIn;</div><div class="line">    size_t dataInLength;</div><div class="line"></div><div class="line">    if (encryptOperation == kCCDecrypt)//传递过来的是decrypt 解码</div><div class="line">    &#123;</div><div class="line">        //解码 base64</div><div class="line">        NSData *decryptData = [GTMBase64 decodeData:[sText dataUsingEncoding:NSUTF8StringEncoding]];//转成utf-8并decode</div><div class="line">        dataInLength = [decryptData length];</div><div class="line">        dataIn = [decryptData bytes];</div><div class="line">    &#125;</div><div class="line">    else  //encrypt</div><div class="line">    &#123;</div><div class="line">        NSData* encryptData = [sText dataUsingEncoding:NSUTF8StringEncoding];</div><div class="line">        dataInLength = [encryptData length];</div><div class="line">        dataIn = (const void *)[encryptData bytes];</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /*</div><div class="line">     DES加密 ：用CCCrypt函数加密一下，然后用base64编码下，传过去</div><div class="line">     DES解密 ：把收到的数据根据base64，decode一下，然后再用CCCrypt函数解密，得到原本的数据</div><div class="line">     */</div><div class="line">    CCCryptorStatus ccStatus;</div><div class="line">    uint8_t *dataOut = NULL; //可以理解位type/typedef 的缩写（有效的维护了代码，比如：一个人用int，一个人用long。最好用typedef来定义）</div><div class="line">    size_t dataOutAvailable = 0; //size_t  是操作符sizeof返回的结果类型</div><div class="line">    size_t dataOutMoved = 0;</div><div class="line"></div><div class="line">    dataOutAvailable = (dataInLength + kCCBlockSizeDES) &amp; ~(kCCBlockSizeDES - 1);</div><div class="line">    dataOut = malloc( dataOutAvailable * sizeof(uint8_t));</div><div class="line">    memset((void *)dataOut, 0x0, dataOutAvailable);//将已开辟内存空间buffer的首 1 个字节的值设为值 0</div><div class="line"></div><div class="line">    const void *vkey = (const void *) [key UTF8String];</div><div class="line">    const void *iv = (const void *) [initIv UTF8String];</div><div class="line"></div><div class="line">    //CCCrypt函数 加密/解密</div><div class="line">    ccStatus = CCCrypt(encryptOperation,//  加密/解密</div><div class="line">                       kCCAlgorithm3DES,//  加密根据哪个标准（des，3des，aes。。。。）</div><div class="line">                       kCCOptionPKCS7Padding,//  选项分组密码算法(des:对每块分组加一次密  3DES：对每块分组加三个不同的密)</div><div class="line">                       vkey,  //密钥    加密和解密的密钥必须一致</div><div class="line">                       kCCKeySize3DES,//   DES 密钥的大小（kCCKeySizeDES=8）</div><div class="line">                       iv, //  可选的初始矢量</div><div class="line">                       dataIn, // 数据的存储单元</div><div class="line">                       dataInLength,// 数据的大小</div><div class="line">                       (void *)dataOut,// 用于返回数据</div><div class="line">                       dataOutAvailable,</div><div class="line">                       &amp;dataOutMoved);</div><div class="line"></div><div class="line">    NSString *result = nil;</div><div class="line"></div><div class="line">    if (encryptOperation == kCCDecrypt)//encryptOperation==1  解码</div><div class="line">    &#123;</div><div class="line">        //得到解密出来的data数据，改变为utf-8的字符串</div><div class="line">        result = [[NSString alloc] initWithData:[NSData dataWithBytes:(const void *)dataOut length:(NSUInteger)dataOutMoved] encoding:NSUTF8StringEncoding] ;</div><div class="line">    &#125;</div><div class="line">    else //encryptOperation==0  （加密过程中，把加好密的数据转成base64的）</div><div class="line">    &#123;</div><div class="line">        //编码 base64</div><div class="line">        NSData *data = [NSData dataWithBytes:(const void *)dataOut length:(NSUInteger)dataOutMoved];</div><div class="line">        result = [GTMBase64 stringByEncodingData:data];</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    return result;</div><div class="line">&#125;</div><div class="line">@end</div></pre></td></tr></table></figure></p>
 
-@interface NSString (NumberSplitWithComma)
-/**
- *数字以逗号隔开 例：123，321.11
- */
-- (NSString *)ld_numberSplitWithComma;
-/**
- *@param puctutation 符合
- *数字以某个符合隔开 例：123，321.11
- */
-- (NSString *)ld_numberSplitWithPunctutaion:(NSString *)puctutation;
-@end
-</code></pre><h3 id="m文件的实现"><a href="#m文件的实现" class="headerlink" title=".m文件的实现"></a>.m文件的实现</h3><pre><code>#import &quot;NSString+NumberSplitWithComma.h&quot;
-
-@implementation NSString (NumberSplitWithComma)
-
-- (NSString *)ld_numberSplitWithComma{
-    if ([self private_isNumber]) {
-        NSMutableString *muString = [NSMutableString tringWithString:self];
-        return [self private_insert:muString withPunctuation:@&quot;,&quot;];
-    }else{
-        return self;
-    }
-}
-- (NSString *)ld_numberSplitWithPunctutaion:(NSString *)puctutation{
-    if ([self private_isNumber]) {
-         NSMutableString *muString = [NSMutableString stringWithString:self];
-         return [self private_insert:muString withPunctuation:puctutation];
-     }else{
-         return self;
-     }
-}
-- (NSMutableString *)private_insert:(NSMutableString *)string withPunctuation:(NSString *)punctuation{
-    NSUInteger maxLength = string.length;
-    if ([string containsString:punctuation]) {
-        maxLength = [string rangeOfString:punctuation].location;
-    }else if ([string containsString:@&quot;.&quot;]){
-        maxLength = [string rangeOfString:@&quot;.&quot;].location;
-    }
-    if (maxLength-([string containsString:@&quot;-&quot;]?1:0)&gt;3) {
-        [string insertString:punctuation atIndex:(maxLength-3)];
-        [self private_insert:string withPunctuation:punctuation];
-    }else{
-        return string;
-    }
-    return string;
-}
- - (Boolean)private_isNumber{
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@&quot;SELF MATCHES %@&quot;,@&quot;^[-0-9.]*$&quot;];
-    if ([predicate evaluateWithObject:self]) {
-        return YES;
-     }
-    return NO;
- }
-</code></pre><h1 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h1><p>　　有简友反应可以使用NSNumberFormatter，然后研究了一番，确实能够很方便的达到效果。<br>1、通过使用formatter style，苹果帮我们定义好的格式。</p>
-<pre><code>NSNumberFormatter *numberFormatter =   [[NSNumberFormatter alloc] init];
-[numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
-NSString *formattedNumberString = [numberFormatter stringFromNumber:@122344.4563];
-NSLog(@&quot;formattedNumberString: %@&quot;, formattedNumberString);
-// Output for locale en_US: &quot;formattedNumberString: formattedNumberString: 122,344.453&quot;
-</code></pre><p>NSNumberFormatter 的numberStyle是一个枚举</p>
-<pre><code>    typedef NS_ENUM(NSUInteger, NSNumberFormatterStyle) {
-NSNumberFormatterNoStyle = kCFNumberFormatterNoStyle,四舍五入
-NSNumberFormatterDecimalStyle = kCFNumberFormatterDecimalStyle,金额 100,200,300.123
-NSNumberFormatterCurrencyStyle = kCFNumberFormatterCurrencyStyle,货币 $100,200,300.12
-NSNumberFormatterPercentStyle = kCFNumberFormatterPercentStyle,百分比 12%
-NSNumberFormatterScientificStyle = kCFNumberFormatterScientificStyle,科学计数法 1.234E8
-NSNumberFormatterSpellOutStyle = kCFNumberFormatterSpellOutStyle,口语 One...
-NSNumberFormatterOrdinalStyle NS_ENUM_AVAILABLE(10_11, 9_0) = kCFNumberFormatterOrdinalStyle,
-NSNumberFormatterCurrencyISOCodeStyle NS_ENUM_AVAILABLE(10_11, 9_0) = kCFNumberFormatterCurrencyISOCodeStyle,
-NSNumberFormatterCurrencyPluralStyle NS_ENUM_AVAILABLE(10_11, 9_0) = kCFNumberFormatterCurrencyPluralStyle,
-NSNumberFormatterCurrencyAccountingStyle NS_ENUM_AVAILABLE(10_11, 9_0) = kCFNumberFormatterCurrencyAccountingStyle,
-};
-</code></pre><p>２、通过一个格式字符串自定义格式</p>
-<pre><code>NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
-[numberFormatter setPositiveFormat:@&quot;###0.##&quot;];
-NSString *formattedNumberString = [numberFormatter stringFromNumber:@122344.4563];
-NSLog(@&quot;formattedNumberString: %@&quot;, formattedNumberString);
-// Output for locale en_US: &quot;formattedNumberString: formattedNumberString: 122,344.45&quot;
-</code></pre>
           
         
       
@@ -813,7 +742,7 @@ NSLog(@&quot;formattedNumberString: %@&quot;, formattedNumberString);
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/14/pod install vs. pod update/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/14/iOS小知识积累(长期更新)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="FlyOceanFish">
@@ -832,7 +761,7 @@ NSLog(@&quot;formattedNumberString: %@&quot;, formattedNumberString);
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/10/14/pod install vs. pod update/" itemprop="url">pod install vs. pod update</a></h2>
+                <a class="post-title-link" href="/2017/10/14/iOS小知识积累(长期更新)/" itemprop="url">iOS小知识积累(长期更新)</a></h2>
         
 
         <div class="post-meta">
@@ -906,22 +835,88 @@ NSLog(@&quot;formattedNumberString: %@&quot;, formattedNumberString);
       
         
           
-            <h1 id="背景"><a href="#背景" class="headerlink" title="背景　　"></a>背景　　</h1><p>　　作为iOS管理第三方包很好用的一个工具CocoaPods，大部分在使用过程中一开始使用pod install,之后就一直使用pod update。其实这种做法是不对，本篇文章将详细介绍这几个命令的区别，也希望iOS开发者能够合理使用这几个命名</p>
-<h2 id="pod-init"><a href="#pod-init" class="headerlink" title="pod init"></a>pod init</h2><p>　　初始化一个工程，此时会产生Podfile这么一个文件，我们可以添加需要引入的第三方包</p>
-<h2 id="pod-install"><a href="#pod-install" class="headerlink" title="pod install"></a>pod install</h2><pre><code>pod install --verbose
-</code></pre><p><strong><em>用这个命令可以看到所有的执行操作</em></strong><br>　　第一次构建工程时要使用该命令，但是如果我们编辑了Podfile文件，例如添加、删除、更新了一个pod也会使用该命令</p>
+            <p><strong><em>以前工作中有很多小的知识点，但是有时候只是用了，没有真正积累下来，有时候也会忘记。所以写这篇文章就是慢慢的将以前小的知识点或者之后用到的用文字的形式记录下来。【码字、分享不容易，各位的关注是小的动力！动动亲的小手指关注一下我哈。】</em></strong><br>1、_Nullable和_Nonnull(Xcode 6.3 )<br>_Nullable表示可能是NULL或nil；_Nonnull表示不应该是NULL或nil。如果不遵循会有警告<br>如果需要每个属性或每个方法都去指定nonnull和nullable，是一件非常繁琐的事。苹果为了减轻我们的工作量，专门提供了两个宏：NS_ASSUME_NONNULL_BEGIN和NS_ASSUME_NONNULL_END。<br>2、__kindof(Xcode 6.3 )<br>表示我们不用强转类型了。比如：</p>
+<pre><code>- (__kindof UITableViewCell *)dequeueReusableCellWithIdentifier:(NSString *)identifier;
+</code></pre><p>我们我可以直接用某个cell接收，不用再写（SomeCell*）这种形式强转了。</p>
+<pre><code>@property (nonatomic, readonly, copy) NSArray&lt;__kindof UIView *&gt; *subviews;
+</code></pre><p>这样，写下面的代码时就没有任何警告了：</p>
+<pre><code>UIButton *button = view.subviews.lastObject;
+</code></pre><p>3、instancetype、id、NSObject<br>instancetype 与 id 不一样, instancetype 只能在方法声明中作为返回类型使用。我们写方法返回的时候用instancetype而不用id了。instancetype代表当前类的类型。</p>
 <ul>
-<li>我们运行这个命令的时候，开始下载安装新的pods，它会将我们每一个第三方包的版本写入一个叫Podfile.lock的文件。这个文件包含了我们安装的所有的第三方包的信息</li>
-<li>当我们运行这个命令的时候，它只会下载不在Podfile.lock文件里的第三方包<ul>
-<li>对于Podfile.lock里边有的详细的第三方包（有版本)，它只会下载对应的版本，不管这个第三方包有没有新的版本</li>
-<li>如果Podfile.lock里边没有的第三方包，它将下载你Podfile里边写的（例如pod ‘MyPod’, ‘~&gt;1.2’），如果不写版本默认下载最新的版本</li>
+<li>id关键字在编译时不被检查，而NSObject在编译时会被检查是否被调用一些错误方法。</li>
+<li>id可以是任何对象，包括非NSObject对象</li>
+<li>定义id的时候不使用*，是一个指针，NSObject却需要。</li>
 </ul>
+<p>4、Storyboard References (iOS 9)<br>可以帮我们简化Storyboard,平时我们的做法是将一个大的Storyboard人为的去分成几个小的，然后代码组装起来。Storyboard References可以帮我们简化这一步。如果本身有一个Storyboard很负责，可以选择其中联系很大的一部分，然后点击 Xcode 的菜单栏，选择”Editor-&gt;Refactor to Storyboard”。这时候就有一个独立的Storyboard了。<br>5、打印当前ViewController 的名字<br>这个对于我们拿到一个陌生的代码，调试的时候非常方便。比如我们运行一个APP，看到一个界面，但是想知道对应哪个ViewController的时候。</p>
+<ul>
+<li><p>添加Symbolic Exception<br><img src="http://upload-images.jianshu.io/upload_images/6644906-649d65ae020b72cb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="A7AB9D87-CF83-4F63-8D66-9C5A113B76ED.png"></p>
+</li>
+<li><p>添加Symob和Action<br><img src="http://upload-images.jianshu.io/upload_images/6644906-6aca286b93c6de2b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="73D79C18-5E28-4A87-B039-4DDA566FD5F7.png"></p>
 </li>
 </ul>
-<h2 id="pod-update"><a href="#pod-update" class="headerlink" title="pod update"></a>pod update</h2><p>　　如果我们运行pod update PODNAME 将只更新这一个第三方包到最新的版本<br>如果我们直接运行pod update 没有pod名称，它将会更新我们所有的第三方包</p>
-<h2 id="pod-outdated"><a href="#pod-outdated" class="headerlink" title="pod outdated"></a>pod outdated</h2><p>　　将列出所有的在Podfile.lock文件里的所有第三方包现在对应的最新的版本</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>　　如果我们在Podfile文件增加、减少、或者改变了版本的时候运行pod install；如果我们想更新第三包的时候使用pod update命令</p>
-<p>接下来一篇我将详细介绍如果创建自己的spec。</p>
+<p>6、Autolayout中Intrinstic Size、Compression Resistance Priority、Compression Resistance Priority</p>
+<ul>
+<li>Intrinstic Size就是不用设置frame，视图通过内容、字体大小等属性就能获得的大小。我们设置的Content Hugging Priority和Compression Resistance Priority都是针对于这个的。</li>
+<li>Content Hugging Priority 内容拥抱，就是想变小的优先级</li>
+<li>Compression Resistance Priority抗压缩，就是想变大的优先级</li>
+</ul>
+<p><img src="http://upload-images.jianshu.io/upload_images/6644906-625f6cbcf66800cf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="A90EC537-5342-47B0-8207-9F3DBC0AB8A3.png"><br>如上图视图内容比文字内容宽，这个时候我们想要视图变小，与文字大小一样（此时intrinsic的大小就是文字区域部分的大小）。所以只要改变Content Hugging Priority的Horizontal的优先级变大就好了<br>7、topLayoutGuide&amp;&amp; bottomLayoutGuide<br>这两个属性可以理解为性表示不希望被透明的状态栏或导航栏（UITabBar、UIToolBar、NavigationBar等）遮挡的内容范围的最高或最低位置。这个属性的值是它的length属性的值。如下：</p>
+<pre><code>[view mas_makeConstraints:^(MASConstraintMaker *make) {
+    make.top.mas_equalTo(self.mas_topLayoutGuideBottom);
+    make.leading.mas_equalTo(self.view.mas_leading);
+    make.trailing.mas_equalTo(self.view.mas_trailing);
+    make.bottom.mas_equalTo(self.mas_bottomLayoutGuideTop);
+}];
+</code></pre><p>8、Autolayout中约束LayoutConstraint的有效无效（8.0）<br>有时候我们经常遇到一个view在不同的场景下约束不同，通常做法就是在不同场景下先删除再增加这样操作，这样效率反而不高。我们可以通过active这个属性设置生效不生效。</p>
+<pre><code>self.mLayoutConstraintWidth.active = YES;
+</code></pre><p>9、隐藏导航栏返回按钮旁边的文字</p>
+<pre><code>[[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(0, -60) forBarMetrics:UIBarMetricsDefault];
+</code></pre><p>10、替换返回按钮图片<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">UIImage *bgImage = [[UIImage imageNamed:@&quot;return&quot;] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];</div><div class="line">[[UINavigationBar appearance] setBackIndicatorImage:bgImage];</div><div class="line">[[UINavigationBar appearance] setBackIndicatorTransitionMaskImage:bgImage];</div></pre></td></tr></table></figure></p>
+<p>11、头文件导入<br>@class 在.h文件时引入其他.h文件的时候，效率更高</p>
+<p>#include “” 自己写的文件</p>
+<p>#include &lt;&gt; 引入系统的</p>
+<p>#import &lt;&gt; 用于包含系统文件</p>
+<p>#import “”自己写的文件，搜索路径更广<br>import比include更好，能够避免文件的重复导入，效率更高<br>不过还有一个更好的的方式<a href="https://stackoverflow.com/questions/18947516/import-vs-import-ios-7/18947634#" target="_blank" rel="external">@import</a>，这种方式让我们不必在设置里边添加包了，它会帮我们自动关联。<br>12、内存管理语义</p>
+<ul>
+<li><strong><em>assign</em></strong> “设置方法”只会执行针对”纯量类型”(例如CGFloat或NSInteger等)的简单赋值操作</li>
+<li><strong><em>strong</em></strong> 此特质表明该属性定义了一种”拥有关系”。为这种属性设置新值时，设置方法会先保留新值，并释放旧值，然后再将新值设置上去。</li>
+<li><strong><em>weak</em></strong> （5.0以上，可以说是对unsafe_unretained的一个升级,更安全，但是由于要遍历是否已经销毁，并且设置成nil，所以是消耗性能）此特质表明该属性定义了一种”非拥有关系”。为这种属性设置新值时，设置方法既不保留新值，也不释放旧值。此特质同assign类似，然而在属性所指的对象遭到摧毁时，属性值也会清空(nil)。</li>
+<li><strong><em>unsafe_unretained</em></strong> (5.0以下必须使用而不能使用weak，优点比weak快，缺点容易造成野指针)此特质的语义和assign相同，但是它使用于”对象类型”，该特质表达一种”非拥有关系”，当对象遭到摧毁时，属性值不会自动清空（”不安全”,unsafe）这一点与weak有区别。</li>
+<li><strong><em>copy</em></strong> 此特质所表达的所属关系与strong类似。然而设置方法并不保留新值，而是将其”拷贝”。警惕NSMutableArray为copy的时候奔溃问题。copy之后是NSArray添加对象会crash。<br>13、查找或判断xib是否存在<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">NSString *path = [[NSBundle mainBundle] pathForResource:NSStringFromClass(className) ofType:@&quot;nib&quot;];</div><div class="line">Boolean exist = [[NSFileManager defaultManager] fileExistsAtPath:path];</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>备注：其实关键就是Typ是”nib”而不是”xib”。因为我们打出的包，系统将我们的xib文件编译成了以nib为结尾的文件。<br>14、UI_APPEARANCE_SELECTOR<br>当我们自定义控件的时候可以在属性后边增加这个声明。代表支持appearance方法。如果你自己调用了setXX方法，则appearance方法失效。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">@property (nonatomic, assign) CGFloat selectionIndicatorHeight UI_APPEARANCE_SELECTOR;</div></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[XXXClass appearance].selectionIndicatorHeight = xxxx</div></pre></td></tr></table></figure>
+<p>15、旋转动画方向问题<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">button.transform = CGAffineTransformRotate(button.transform,M_PI);</div></pre></td></tr></table></figure></p>
+<p>我们先旋转180顺时针<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">button.transform = CGAffineTransformIdentity;</div></pre></td></tr></table></figure></p>
+<p>当我们调用上句话的时候，是顺时针旋转180返回原位置，但是很多时候我们想原路返回，其实就是想逆时针返回。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">button.transform = CGAffineTransformRotate(button.transform,M_PI-0.0001);</div></pre></td></tr></table></figure></p>
+<p>只要这么设置就会逆时针返回了。旋转动画选择了最短路径返回</p>
+<p>16、纯代码布局，添加约束<br>如果我们使用纯代码布局，则需要以下代码约束才能起作用；默认左右是有16像素间距的，设置左右各-16才能靠边(这个如果有其他好办法可以留言给我)</p>
+<pre><code>self.view.translatesAutoresizingMaskIntoConstraints = NO;
+</code></pre><p>17、NSDate和NSDateFormatter<br>NSDate：是获取的时间没有时区概念，所以获取的是0时区的时间。</p>
+<pre><code>[NSDate date]//获取的时间与当前时间差8个小时
+</code></pre><p>NSDateFormatter：将日期格式成我们想要的。同时会根据时区、地域给我们做相应的计算。(看注释)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">NSDateFormatter *formatter = [[NSDateFormatter alloc] init];</div><div class="line">formatter.dateFormat = @&quot;yyyy-MM-dd HH:mm:ss&quot;;</div><div class="line">NSTimeZone *timeZone = [NSTimeZone localTimeZone];</div><div class="line">//  formatter.locale = [NSLocale currentLocale];</div><div class="line"> formatter.timeZone = timeZone;</div><div class="line">NSDate *currentDate = [NSDate date];</div><div class="line">NSString *currentString = [formatter stringFromDate:currentDate];//会将currentDate增加8个小时，获取我们当前时区的时间</div><div class="line">NSDate *date = [formatter dateFromString:@&quot;2017-8-31 9:51:00&quot;];//获取的date是针对0时区的时间，所以会减去8个小时</div></pre></td></tr></table></figure>
+<p>以上代码可以看到我们可以设置timeZone和locale。如果我们只设置local照样能够输出我们想要的结果。但是二者有什么区别呢？</p>
+<ul>
+<li>local是设置区域的。配合setTimeStyle:、setDateStyle:这些方法可以控制日期输出不同的格式。因为每个地方的格式不同。  <a href="https://developer.apple.com/library/content/documentation/MacOSX/Conceptual/BPInternational/InternationalizingYourCode/InternationalizingYourCode.html" target="_blank" rel="external">Formatting Data Using the Locale Settings</a></li>
+</ul>
+<p><img src="http://upload-images.jianshu.io/upload_images/6644906-320495bdfa8f9c47.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="7FAEF832-CBCD-41A2-A4EE-4056FBF1B931.png"></p>
+<ul>
+<li>timeZone设置时区的。主要用来将时间转换成不同时区。</li>
+</ul>
+<p>所以在代码格式化的时候，建议设置timezone来格式化我们的时期</p>
+<p>18、Xcode关闭控制台打印不用信息</p>
+<p> Xcode-&gt;Edit Scheme -&gt; Run -&gt; Arguments, 在Environment Variables里边添加 OS_ACTIVITY_MODE ＝ disable</p>
+<p>19、NSObject中isKindOfClass、isMemberOfClass、isSubclassOfClass区别</p>
+<p>isSubclassOfClass和isKindOfClass的作用基本上是一致的，只不过一个是类方法，一个是对象方法。<br>isKindOfClass来确定一个对象是否是一个类的成员，或者是派生自该类的成员,<br>isMemberOfClass只能确定一个对象是否是当前类的成员.<br>isMemberOfClass 筛选条件更为苛刻，只有当类型完全匹配的时候才会返回YES。</p>
+<p>20、判断当前queue是否是main queue<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">static void *mainQueueKey = &amp;mainQueueKey;</div><div class="line">static dispatch_once_t onceToken;</div><div class="line">dispatch_once(&amp;onceToken, ^&#123;</div><div class="line">  dispatch_queue_set_specific(dispatch_get_main_queue(),</div><div class="line">                              mainQueueKey, mainQueueKey, NULL);</div><div class="line">&#125;);</div><div class="line">return dispatch_get_specific(mainQueueKey) == mainQueueKey;</div></pre></td></tr></table></figure></p>
+<p>21、为什么有的属性要用copy，而不用strong</p>
+<p>像NSString和NSArray这两类，在给变量赋值的时候，如果来源是可变字符串或可变数组的时候，使用copy能够避免原来变量对现在变量的影响。如果用strong的话，原来变量改变时同时会影响我们现在的变量。我们大多数期望的结果是两个变量相互独立，互补影响的，所以使用copy能够避免这类问题<br>22、SEL、IMP</p>
+<p>SEL 函数的ID，相当于将函数的名字用一个唯一识别符与之相对应。<br>IMP 本质是函数指针。其实就是函数的实现，我们在调用方法的时候是一层一层的查找，最终找到了IMP，如果直接调用IMP将会更有效率</p>
+<p>23、消息的转发</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/6644906-9209401db1a78dc4.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="44181-09a882edcb98d535.jpg"><br>runtime在调用方法的时候如果找不到会直接奔溃。如果在当前类找不到的时候，会开始顺序的调用系统的三个方法，如果再找不到会直接crash。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">1.+(Bool) resolveInstanceMethod:(SEL)sel // 对应实例方法</div><div class="line">  + (Bool)resolveClassMethod:(SEL)sel // 对应类方法</div><div class="line">我们可以在这个方法中调用class_addMethod将方法加入就不会crash</div><div class="line">2.- (id)forwardingTargetForSelector:(SEL)aSelector//可以改变查找方法的对象</div><div class="line">3.- (void)forwardInvocation:(NSInvocation *)anInvocation//搭配- (NSMethodSignature *)methodSignatureForSelector:(SEL)aSelector这个使用。通过传递过来的NSInvocation对象，我们可以对此重新注入调用对象、方法、参数等</div></pre></td></tr></table></figure></p>
+<p>24、<code>NSObject</code>的description和debugDescription方法<br>当我们在工程中使用model(继承NSObject)的时候，在断点或者log调试中有时候需要将对象打印到控制台中，但是我们自己写的model打印出的是对象的地址。如果需要打印出有效的信息，这时我们可以重写descrition或者debugDescription方法，打印出我们想要的信息。例如对象的所有属性的值。<strong><em>默认情况下debugDescription调用的是description方法</em></strong></p>
 
           
         
@@ -1283,7 +1278,7 @@ NSLog(@&quot;formattedNumberString: %@&quot;, formattedNumberString);
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/14/iOS小知识积累(长期更新)/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/14/pod install vs. pod update/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="FlyOceanFish">
@@ -1302,7 +1297,7 @@ NSLog(@&quot;formattedNumberString: %@&quot;, formattedNumberString);
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/10/14/iOS小知识积累(长期更新)/" itemprop="url">iOS小知识积累(长期更新)</a></h2>
+                <a class="post-title-link" href="/2017/10/14/pod install vs. pod update/" itemprop="url">pod install vs. pod update</a></h2>
         
 
         <div class="post-meta">
@@ -1376,247 +1371,22 @@ NSLog(@&quot;formattedNumberString: %@&quot;, formattedNumberString);
       
         
           
-            <p><strong><em>以前工作中有很多小的知识点，但是有时候只是用了，没有真正积累下来，有时候也会忘记。所以写这篇文章就是慢慢的将以前小的知识点或者之后用到的用文字的形式记录下来。【码字、分享不容易，各位的关注是小的动力！动动亲的小手指关注一下我哈。】</em></strong><br>1、_Nullable和_Nonnull(Xcode 6.3 )<br>_Nullable表示可能是NULL或nil；_Nonnull表示不应该是NULL或nil。如果不遵循会有警告<br>如果需要每个属性或每个方法都去指定nonnull和nullable，是一件非常繁琐的事。苹果为了减轻我们的工作量，专门提供了两个宏：NS_ASSUME_NONNULL_BEGIN和NS_ASSUME_NONNULL_END。<br>2、__kindof(Xcode 6.3 )<br>表示我们不用强转类型了。比如：</p>
-<pre><code>- (__kindof UITableViewCell *)dequeueReusableCellWithIdentifier:(NSString *)identifier;
-</code></pre><p>我们我可以直接用某个cell接收，不用再写（SomeCell*）这种形式强转了。</p>
-<pre><code>@property (nonatomic, readonly, copy) NSArray&lt;__kindof UIView *&gt; *subviews;
-</code></pre><p>这样，写下面的代码时就没有任何警告了：</p>
-<pre><code>UIButton *button = view.subviews.lastObject;
-</code></pre><p>3、instancetype、id、NSObject<br>instancetype 与 id 不一样, instancetype 只能在方法声明中作为返回类型使用。我们写方法返回的时候用instancetype而不用id了。instancetype代表当前类的类型。</p>
+            <h1 id="背景"><a href="#背景" class="headerlink" title="背景　　"></a>背景　　</h1><p>　　作为iOS管理第三方包很好用的一个工具CocoaPods，大部分在使用过程中一开始使用pod install,之后就一直使用pod update。其实这种做法是不对，本篇文章将详细介绍这几个命令的区别，也希望iOS开发者能够合理使用这几个命名</p>
+<h2 id="pod-init"><a href="#pod-init" class="headerlink" title="pod init"></a>pod init</h2><p>　　初始化一个工程，此时会产生Podfile这么一个文件，我们可以添加需要引入的第三方包</p>
+<h2 id="pod-install"><a href="#pod-install" class="headerlink" title="pod install"></a>pod install</h2><pre><code>pod install --verbose
+</code></pre><p><strong><em>用这个命令可以看到所有的执行操作</em></strong><br>　　第一次构建工程时要使用该命令，但是如果我们编辑了Podfile文件，例如添加、删除、更新了一个pod也会使用该命令</p>
 <ul>
-<li>id关键字在编译时不被检查，而NSObject在编译时会被检查是否被调用一些错误方法。</li>
-<li>id可以是任何对象，包括非NSObject对象</li>
-<li>定义id的时候不使用*，是一个指针，NSObject却需要。</li>
+<li>我们运行这个命令的时候，开始下载安装新的pods，它会将我们每一个第三方包的版本写入一个叫Podfile.lock的文件。这个文件包含了我们安装的所有的第三方包的信息</li>
+<li>当我们运行这个命令的时候，它只会下载不在Podfile.lock文件里的第三方包<ul>
+<li>对于Podfile.lock里边有的详细的第三方包（有版本)，它只会下载对应的版本，不管这个第三方包有没有新的版本</li>
+<li>如果Podfile.lock里边没有的第三方包，它将下载你Podfile里边写的（例如pod ‘MyPod’, ‘~&gt;1.2’），如果不写版本默认下载最新的版本</li>
 </ul>
-<p>4、Storyboard References (iOS 9)<br>可以帮我们简化Storyboard,平时我们的做法是将一个大的Storyboard人为的去分成几个小的，然后代码组装起来。Storyboard References可以帮我们简化这一步。如果本身有一个Storyboard很负责，可以选择其中联系很大的一部分，然后点击 Xcode 的菜单栏，选择”Editor-&gt;Refactor to Storyboard”。这时候就有一个独立的Storyboard了。<br>5、打印当前ViewController 的名字<br>这个对于我们拿到一个陌生的代码，调试的时候非常方便。比如我们运行一个APP，看到一个界面，但是想知道对应哪个ViewController的时候。</p>
-<ul>
-<li><p>添加Symbolic Exception<br><img src="http://upload-images.jianshu.io/upload_images/6644906-649d65ae020b72cb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="A7AB9D87-CF83-4F63-8D66-9C5A113B76ED.png"></p>
-</li>
-<li><p>添加Symob和Action<br><img src="http://upload-images.jianshu.io/upload_images/6644906-6aca286b93c6de2b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="73D79C18-5E28-4A87-B039-4DDA566FD5F7.png"></p>
 </li>
 </ul>
-<p>6、Autolayout中Intrinstic Size、Compression Resistance Priority、Compression Resistance Priority</p>
-<ul>
-<li>Intrinstic Size就是不用设置frame，视图通过内容、字体大小等属性就能获得的大小。我们设置的Content Hugging Priority和Compression Resistance Priority都是针对于这个的。</li>
-<li>Content Hugging Priority 内容拥抱，就是想变小的优先级</li>
-<li>Compression Resistance Priority抗压缩，就是想变大的优先级</li>
-</ul>
-<p><img src="http://upload-images.jianshu.io/upload_images/6644906-625f6cbcf66800cf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="A90EC537-5342-47B0-8207-9F3DBC0AB8A3.png"><br>如上图视图内容比文字内容宽，这个时候我们想要视图变小，与文字大小一样（此时intrinsic的大小就是文字区域部分的大小）。所以只要改变Content Hugging Priority的Horizontal的优先级变大就好了<br>7、topLayoutGuide&amp;&amp; bottomLayoutGuide<br>这两个属性可以理解为性表示不希望被透明的状态栏或导航栏（UITabBar、UIToolBar、NavigationBar等）遮挡的内容范围的最高或最低位置。这个属性的值是它的length属性的值。如下：</p>
-<pre><code>[view mas_makeConstraints:^(MASConstraintMaker *make) {
-    make.top.mas_equalTo(self.mas_topLayoutGuideBottom);
-    make.leading.mas_equalTo(self.view.mas_leading);
-    make.trailing.mas_equalTo(self.view.mas_trailing);
-    make.bottom.mas_equalTo(self.mas_bottomLayoutGuideTop);
-}];
-</code></pre><p>8、Autolayout中约束LayoutConstraint的有效无效（8.0）<br>有时候我们经常遇到一个view在不同的场景下约束不同，通常做法就是在不同场景下先删除再增加这样操作，这样效率反而不高。我们可以通过active这个属性设置生效不生效。</p>
-<pre><code>self.mLayoutConstraintWidth.active = YES;
-</code></pre><p>9、隐藏导航栏返回按钮旁边的文字</p>
-<pre><code>[[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(0, -60) forBarMetrics:UIBarMetricsDefault];
-</code></pre><p>10、替换返回按钮图片<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">UIImage *bgImage = [[UIImage imageNamed:@&quot;return&quot;] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];</div><div class="line">[[UINavigationBar appearance] setBackIndicatorImage:bgImage];</div><div class="line">[[UINavigationBar appearance] setBackIndicatorTransitionMaskImage:bgImage];</div></pre></td></tr></table></figure></p>
-<p>11、头文件导入<br>@class 在.h文件时引入其他.h文件的时候，效率更高</p>
-<p>#include “” 自己写的文件</p>
-<p>#include &lt;&gt; 引入系统的</p>
-<p>#import &lt;&gt; 用于包含系统文件</p>
-<p>#import “”自己写的文件，搜索路径更广<br>import比include更好，能够避免文件的重复导入，效率更高<br>不过还有一个更好的的方式<a href="https://stackoverflow.com/questions/18947516/import-vs-import-ios-7/18947634#" target="_blank" rel="external">@import</a>，这种方式让我们不必在设置里边添加包了，它会帮我们自动关联。<br>12、内存管理语义</p>
-<ul>
-<li><strong><em>assign</em></strong> “设置方法”只会执行针对”纯量类型”(例如CGFloat或NSInteger等)的简单赋值操作</li>
-<li><strong><em>strong</em></strong> 此特质表明该属性定义了一种”拥有关系”。为这种属性设置新值时，设置方法会先保留新值，并释放旧值，然后再将新值设置上去。</li>
-<li><strong><em>weak</em></strong> （5.0以上，可以说是对unsafe_unretained的一个升级,更安全，但是由于要遍历是否已经销毁，并且设置成nil，所以是消耗性能）此特质表明该属性定义了一种”非拥有关系”。为这种属性设置新值时，设置方法既不保留新值，也不释放旧值。此特质同assign类似，然而在属性所指的对象遭到摧毁时，属性值也会清空(nil)。</li>
-<li><strong><em>unsafe_unretained</em></strong> (5.0以下必须使用而不能使用weak，优点比weak快，缺点容易造成野指针)此特质的语义和assign相同，但是它使用于”对象类型”，该特质表达一种”非拥有关系”，当对象遭到摧毁时，属性值不会自动清空（”不安全”,unsafe）这一点与weak有区别。</li>
-<li><strong><em>copy</em></strong> 此特质所表达的所属关系与strong类似。然而设置方法并不保留新值，而是将其”拷贝”。警惕NSMutableArray为copy的时候奔溃问题。copy之后是NSArray添加对象会crash。<br>13、查找或判断xib是否存在<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">NSString *path = [[NSBundle mainBundle] pathForResource:NSStringFromClass(className) ofType:@&quot;nib&quot;];</div><div class="line">Boolean exist = [[NSFileManager defaultManager] fileExistsAtPath:path];</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>备注：其实关键就是Typ是”nib”而不是”xib”。因为我们打出的包，系统将我们的xib文件编译成了以nib为结尾的文件。<br>14、UI_APPEARANCE_SELECTOR<br>当我们自定义控件的时候可以在属性后边增加这个声明。代表支持appearance方法。如果你自己调用了setXX方法，则appearance方法失效。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">@property (nonatomic, assign) CGFloat selectionIndicatorHeight UI_APPEARANCE_SELECTOR;</div></pre></td></tr></table></figure></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[XXXClass appearance].selectionIndicatorHeight = xxxx</div></pre></td></tr></table></figure>
-<p>15、旋转动画方向问题<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">button.transform = CGAffineTransformRotate(button.transform,M_PI);</div></pre></td></tr></table></figure></p>
-<p>我们先旋转180顺时针<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">button.transform = CGAffineTransformIdentity;</div></pre></td></tr></table></figure></p>
-<p>当我们调用上句话的时候，是顺时针旋转180返回原位置，但是很多时候我们想原路返回，其实就是想逆时针返回。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">button.transform = CGAffineTransformRotate(button.transform,M_PI-0.0001);</div></pre></td></tr></table></figure></p>
-<p>只要这么设置就会逆时针返回了。旋转动画选择了最短路径返回</p>
-<p>16、纯代码布局，添加约束<br>如果我们使用纯代码布局，则需要以下代码约束才能起作用；默认左右是有16像素间距的，设置左右各-16才能靠边(这个如果有其他好办法可以留言给我)</p>
-<pre><code>self.view.translatesAutoresizingMaskIntoConstraints = NO;
-</code></pre><p>17、NSDate和NSDateFormatter<br>NSDate：是获取的时间没有时区概念，所以获取的是0时区的时间。</p>
-<pre><code>[NSDate date]//获取的时间与当前时间差8个小时
-</code></pre><p>NSDateFormatter：将日期格式成我们想要的。同时会根据时区、地域给我们做相应的计算。(看注释)</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">NSDateFormatter *formatter = [[NSDateFormatter alloc] init];</div><div class="line">formatter.dateFormat = @&quot;yyyy-MM-dd HH:mm:ss&quot;;</div><div class="line">NSTimeZone *timeZone = [NSTimeZone localTimeZone];</div><div class="line">//  formatter.locale = [NSLocale currentLocale];</div><div class="line"> formatter.timeZone = timeZone;</div><div class="line">NSDate *currentDate = [NSDate date];</div><div class="line">NSString *currentString = [formatter stringFromDate:currentDate];//会将currentDate增加8个小时，获取我们当前时区的时间</div><div class="line">NSDate *date = [formatter dateFromString:@&quot;2017-8-31 9:51:00&quot;];//获取的date是针对0时区的时间，所以会减去8个小时</div></pre></td></tr></table></figure>
-<p>以上代码可以看到我们可以设置timeZone和locale。如果我们只设置local照样能够输出我们想要的结果。但是二者有什么区别呢？</p>
-<ul>
-<li>local是设置区域的。配合setTimeStyle:、setDateStyle:这些方法可以控制日期输出不同的格式。因为每个地方的格式不同。  <a href="https://developer.apple.com/library/content/documentation/MacOSX/Conceptual/BPInternational/InternationalizingYourCode/InternationalizingYourCode.html" target="_blank" rel="external">Formatting Data Using the Locale Settings</a></li>
-</ul>
-<p><img src="http://upload-images.jianshu.io/upload_images/6644906-320495bdfa8f9c47.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="7FAEF832-CBCD-41A2-A4EE-4056FBF1B931.png"></p>
-<ul>
-<li>timeZone设置时区的。主要用来将时间转换成不同时区。</li>
-</ul>
-<p>所以在代码格式化的时候，建议设置timezone来格式化我们的时期</p>
-<p>18、Xcode关闭控制台打印不用信息</p>
-<p> Xcode-&gt;Edit Scheme -&gt; Run -&gt; Arguments, 在Environment Variables里边添加 OS_ACTIVITY_MODE ＝ disable</p>
-<p>19、NSObject中isKindOfClass、isMemberOfClass、isSubclassOfClass区别</p>
-<p>isSubclassOfClass和isKindOfClass的作用基本上是一致的，只不过一个是类方法，一个是对象方法。<br>isKindOfClass来确定一个对象是否是一个类的成员，或者是派生自该类的成员,<br>isMemberOfClass只能确定一个对象是否是当前类的成员.<br>isMemberOfClass 筛选条件更为苛刻，只有当类型完全匹配的时候才会返回YES。</p>
-<p>20、判断当前queue是否是main queue<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">static void *mainQueueKey = &amp;mainQueueKey;</div><div class="line">static dispatch_once_t onceToken;</div><div class="line">dispatch_once(&amp;onceToken, ^&#123;</div><div class="line">  dispatch_queue_set_specific(dispatch_get_main_queue(),</div><div class="line">                              mainQueueKey, mainQueueKey, NULL);</div><div class="line">&#125;);</div><div class="line">return dispatch_get_specific(mainQueueKey) == mainQueueKey;</div></pre></td></tr></table></figure></p>
-<p>21、为什么有的属性要用copy，而不用strong</p>
-<p>像NSString和NSArray这两类，在给变量赋值的时候，如果来源是可变字符串或可变数组的时候，使用copy能够避免原来变量对现在变量的影响。如果用strong的话，原来变量改变时同时会影响我们现在的变量。我们大多数期望的结果是两个变量相互独立，互补影响的，所以使用copy能够避免这类问题<br>22、SEL、IMP</p>
-<p>SEL 函数的ID，相当于将函数的名字用一个唯一识别符与之相对应。<br>IMP 本质是函数指针。其实就是函数的实现，我们在调用方法的时候是一层一层的查找，最终找到了IMP，如果直接调用IMP将会更有效率</p>
-<p>23、消息的转发</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/6644906-9209401db1a78dc4.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="44181-09a882edcb98d535.jpg"><br>runtime在调用方法的时候如果找不到会直接奔溃。如果在当前类找不到的时候，会开始顺序的调用系统的三个方法，如果再找不到会直接crash。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">1.+(Bool) resolveInstanceMethod:(SEL)sel // 对应实例方法</div><div class="line">  + (Bool)resolveClassMethod:(SEL)sel // 对应类方法</div><div class="line">我们可以在这个方法中调用class_addMethod将方法加入就不会crash</div><div class="line">2.- (id)forwardingTargetForSelector:(SEL)aSelector//可以改变查找方法的对象</div><div class="line">3.- (void)forwardInvocation:(NSInvocation *)anInvocation//搭配- (NSMethodSignature *)methodSignatureForSelector:(SEL)aSelector这个使用。通过传递过来的NSInvocation对象，我们可以对此重新注入调用对象、方法、参数等</div></pre></td></tr></table></figure></p>
-<p>24、<code>NSObject</code>的description和debugDescription方法<br>当我们在工程中使用model(继承NSObject)的时候，在断点或者log调试中有时候需要将对象打印到控制台中，但是我们自己写的model打印出的是对象的地址。如果需要打印出有效的信息，这时我们可以重写descrition或者debugDescription方法，打印出我们想要的信息。例如对象的所有属性的值。<strong><em>默认情况下debugDescription调用的是description方法</em></strong></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/14/Rect Native(>0.45)通过cocopods初始化工程/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="FlyOceanFish">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="FlyOceanFish' Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/10/14/Rect Native(>0.45)通过cocopods初始化工程/" itemprop="url">Rect Native(>0.45)通过cocopods初始化工程</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-14T09:27:00+08:00">
-                2017-10-14
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/React-Native/" itemprop="url" rel="index">
-                    <span itemprop="name">React Native</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>由于React Native 0.45以上版本增加了4个依赖包，并且被墙了，所以大家在初始化工程之后运行会报错，就是因为缺少了文件。其实就是Bridge文件或者它所依赖的文件。0.45以后的bidge开始使用了RCTCxxBridge,之前都是RCTBatchedBridge，根据Facebook的官方资料RCTBatchedBridge慢慢会被废弃掉的，建议使用RCTCxxBridge。因为使用RCTCxxBridge我们就必须导入被墙的4个依赖包，就会点繁琐。使用RCTBatchedBridge比较简单不用翻墙的。一下是两个Bridge对应的不同Podfile。</p>
-<h3 id="RCTBatchedBridge对应的Podfile文件内容"><a href="#RCTBatchedBridge对应的Podfile文件内容" class="headerlink" title="RCTBatchedBridge对应的Podfile文件内容"></a>RCTBatchedBridge对应的Podfile文件内容</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"># Uncomment the next line to define a global platform for your project</div><div class="line"># platform :ios, &apos;9.0&apos;</div><div class="line"></div><div class="line">target &apos;TestReactNative&apos; do</div><div class="line">  # Uncomment the next line if you&apos;re using Swift or would like to use dynamic frameworks</div><div class="line">  # use_frameworks!</div><div class="line"></div><div class="line">  # Pods for TestReactNative</div><div class="line">  pod &apos;React&apos;, :path =&gt; &apos;../node_modules/react-native&apos;, :subspecs =&gt; [</div><div class="line">    &apos;Core&apos;,</div><div class="line">    &apos;DevSupport&apos;, # 如果RN版本 &gt;= 0.43，则需要加入此行才能开启开发者菜单</div><div class="line">    &apos;RCTText&apos;,</div><div class="line">    &apos;RCTNetwork&apos;,</div><div class="line">    &apos;RCTWebSocket&apos;, # 这个模块是用于调试功能的</div><div class="line">    &apos;BatchedBridge&apos;//这个是重点，在ReactNative提供的官方例子中没导入，所以按照官方文档去做初始化的工程会报错</div><div class="line">    # 在这里继续添加你所需要的模块</div><div class="line">  ]</div><div class="line">  # 如果你的RN版本 &gt;= 0.42.0，请加入下面这行</div><div class="line">  pod &quot;Yoga&quot;, :path =&gt; &quot;../node_modules/react-native/ReactCommon/yoga&quot;</div><div class="line">end</div></pre></td></tr></table></figure>
-<h3 id="RCTCxxBridge对应的Podfile文件内容"><a href="#RCTCxxBridge对应的Podfile文件内容" class="headerlink" title="RCTCxxBridge对应的Podfile文件内容"></a>RCTCxxBridge对应的Podfile文件内容</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"># Uncomment the next line to define a global platform for your project</div><div class="line"># platform :ios, &apos;9.0&apos;</div><div class="line">react_native_path = &apos;../node_modules/react-native&apos;</div><div class="line"></div><div class="line">target &apos;StudyReactNative&apos; do</div><div class="line">  # Uncomment the next line if you&apos;re using Swift or would like to use dynamic frameworks</div><div class="line">  use_frameworks!</div><div class="line"></div><div class="line">  # Native Navigation!</div><div class="line">  #pod &apos;native-navigation&apos;, :path =&gt; &apos;../node_modules/native-navigation&apos;</div><div class="line"></div><div class="line">  # To use CocoaPods with React Native, you need to add this specific Yoga spec as well</div><div class="line">  pod &apos;Yoga&apos;, :path =&gt; react_native_path + &apos;/ReactCommon/yoga&apos;</div><div class="line"></div><div class="line">  # Third party deps</div><div class="line">  pod &apos;DoubleConversion&apos;, :podspec =&gt; react_native_path + &apos;/third-party-podspecs/DoubleConversion.podspec&apos;</div><div class="line">  pod &apos;GLog&apos;, :podspec =&gt; react_native_path + &apos;/third-party-podspecs/GLog.podspec&apos;</div><div class="line">  pod &apos;Folly&apos;, :podspec =&gt; react_native_path + &apos;/third-party-podspecs/Folly.podspec&apos;</div><div class="line"></div><div class="line">  # You don&apos;t necessarily need all of these subspecs, but this would be a typical setup.</div><div class="line">  pod &apos;React&apos;, :path =&gt; react_native_path, :subspecs =&gt; [</div><div class="line">    &apos;Core&apos;,</div><div class="line">    &apos;CxxBridge&apos;,</div><div class="line">    &apos;RCTText&apos;,</div><div class="line">    &apos;RCTNetwork&apos;,</div><div class="line">    &apos;RCTWebSocket&apos;, # needed for debugging</div><div class="line">    &apos;RCTImage&apos;,</div><div class="line">    &apos;RCTNetwork&apos;,</div><div class="line">    # Add any other subspecs you want to use in your project</div><div class="line">    &apos;DevSupport&apos;</div><div class="line">  ]</div><div class="line">end</div></pre></td></tr></table></figure>
-<p>这里因为导入了四个包，被墙了所以要翻墙。</p>
-<p>四个包的地址<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">fetch_and_unpack glog-0.3.4.tar.gz https://github.com/google/glog/archive/v0.3.4.tar.gz &quot;\&quot;$SCRIPTDIR/ios-configure-glog.sh\&quot;&quot;</div><div class="line">fetch_and_unpack double-conversion-1.1.5.tar.gz https://github.com/google/double-conversion/archive/v1.1.5.tar.gz</div><div class="line">fetch_and_unpack boost_1_63_0.tar.gz https://github.com/react-native-community/boost-for-react-native/releases/download/v1.63.0-0/boost_1_63_0.tar.gz</div><div class="line">fetch_and_unpack folly-2016.09.26.00.tar.gz https://github.com/facebook/folly/archive/v2016.09.26.00.tar.gz</div></pre></td></tr></table></figure></p>
-<p>其实可以通过上边地址自己下载下来放到<br>XXReactNative工程/node_modules/react-native/third-party文件夹下<br>如果没有third-party这个文件夹就新建一个。</p>
-<p>也可以通过百度云盘<a href="https://pan.baidu.com/s/1kVDUAZ9#list/path=%2F" target="_blank" rel="external">third-party</a>下载下来解压缩之后放到XXReactNative工程/node_modules/react-native这个路径下就可以了<br>之后运行pod install即可<br><img src="http://upload-images.jianshu.io/upload_images/6644906-01d13bd37248e3e4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="7DC30CAE-BDB1-439A-810E-1BE35FCC8EA4.png"></p>
-<h2 id="更新以前的工程"><a href="#更新以前的工程" class="headerlink" title="更新以前的工程"></a>更新以前的工程</h2><p>我通过以上方法来更新我以前的工程，同时替换package.json为最新的，发现报错。此时需要我们yarn  install或npm install，然后在ios工程的根目录下执行pod install</p>
-<h2 id="‘boost-iterator-iterator-adaptor-hpp’-file-not-found"><a href="#‘boost-iterator-iterator-adaptor-hpp’-file-not-found" class="headerlink" title="‘boost/iterator/iterator_adaptor.hpp’ file not found"></a>‘boost/iterator/iterator_adaptor.hpp’ file not found</h2><ul>
-<li><p>/Users/Vanessa/.rncache 中 boost_1_63_0.tar.gz， double-conversion-1.1.5.tar.gz， folly-2016.09.26.00.tar.gz， glog-0.3.4.tar.gz 文件下载不完整</p>
-</li>
-<li><p>node_modules/react-native/third-party 文件不完整</p>
-</li>
-</ul>
-<p>解决方案：</p>
-<p>删除 .rncache 后重新下载，或手动下载后放入 .rncache 中</p>
-<p>把以上文件解压后放入 node_modules/react-native/third-party 下</p>
-<p>Clean &amp; Build</p>
+<h2 id="pod-update"><a href="#pod-update" class="headerlink" title="pod update"></a>pod update</h2><p>　　如果我们运行pod update PODNAME 将只更新这一个第三方包到最新的版本<br>如果我们直接运行pod update 没有pod名称，它将会更新我们所有的第三方包</p>
+<h2 id="pod-outdated"><a href="#pod-outdated" class="headerlink" title="pod outdated"></a>pod outdated</h2><p>　　将列出所有的在Podfile.lock文件里的所有第三方包现在对应的最新的版本</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>　　如果我们在Podfile文件增加、减少、或者改变了版本的时候运行pod install；如果我们想更新第三包的时候使用pod update命令</p>
+<p>接下来一篇我将详细介绍如果创建自己的spec。</p>
 
           
         
@@ -1932,6 +1702,170 @@ NSLog(@&quot;formattedNumberString: %@&quot;, formattedNumberString);
 </li>
 </ul>
 <p>如果大家在这个过程还有不明白的可以留言给我，我将尽最大努力给大家解决的哦</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/14/NSInvocation/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="FlyOceanFish">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FlyOceanFish' Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/10/14/NSInvocation/" itemprop="url">NSInvocation</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-14T09:27:00+08:00">
+                2017-10-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>NSInvocation是命令模式的一种实现，它包含选择器、方法签名、相应的参数以及目标对象。所谓的方法签名，即方法所对应的返回值类型和参数类型。当NSInvocatio被调用，它会在运行时通过目标对象去寻找对应的方法，从而确保唯一性，可以用[receiver message]来解释。实际开发过程中直接创建NSInvocation的情况不多见，这些事情通常交给系统来做。比如bang的JSPatch中arm64方法替换的实现就是利用runtime消息转发最后一步中的NSInvocation实现的。</p>
+<h3 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h3><p>基于这种命令模式，可以利用NSInvocation调用任意SEL甚至block。NSInvocation与NSMethodSignature配合来完成调用。NSMethodSignature这个类的对象保存了方法的名称、参数和返回值</p>
+<ul>
+<li>SEL<br>系统<code>NSObject</code>自带的<code>performSelector</code>默认只支持一个参数，我们可以给NSObject增加一个category，增加以下方法就可以支持多个参数的调用了</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">- (id)performSelector:(SEL)aSelector withArguments:(NSArray *)arguments &#123;</div><div class="line">    if (aSelector == nil) return nil;</div><div class="line">    NSMethodSignature *signature = [[self class] instanceMethodSignatureForSelector:aSelector];</div><div class="line">    NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:signature];</div><div class="line">    invocation.target = self;</div><div class="line">    invocation.selector = aSelector; // invocation 有2个隐藏参数，所以 argument 从2开始</div><div class="line">    if ([arguments isKindOfClass:[NSArray class]]) &#123;</div><div class="line">        NSInteger count = MIN(arguments.count, signature.numberOfArguments - 2);</div><div class="line">        for (int i = 0; i &lt; count; i++) &#123;</div><div class="line">            const char *type = [signature getArgumentTypeAtIndex:2 + i]; // 需要做参数类型判断然后解析成对应类型，这里默认所有参数均为OC对象</div><div class="line">            if (strcmp(type, &quot;@&quot;) == 0) &#123;</div><div class="line">                id argument = arguments[i]; [invocation setArgument:&amp;argument atIndex:2 + i];</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    [invocation invoke];</div><div class="line">    id returnVal;</div><div class="line">    if (strcmp(signature.methodReturnType, &quot;@&quot;) == 0) &#123;</div><div class="line">        [invocation getReturnValue:&amp;returnVal];</div><div class="line">    &#125; // 需要做返回类型判断。比如返回值为常量需要包装成对象，这里仅以最简单的`@`为例</div><div class="line">    return returnVal;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><img src="http://upload-images.jianshu.io/upload_images/6644906-b09479039ddf5488.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="ED3CFE7D-C30A-4ADD-929D-B5F7CB806E82.png"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/6644906-c1af7b09f14982c9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="FCB4F1F5-1F15-4FDC-A3AE-C1DC95AF32BF.png"></p>
+<h3 id="block"><a href="#block" class="headerlink" title="block"></a>block</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line">static id invokeBlock(id block ,NSArray *arguments) &#123;</div><div class="line">    if (block == nil) return nil;</div><div class="line">    id target = [block  copy];</div><div class="line"></div><div class="line">    const char *_Block_signature(void *);</div><div class="line">    const char *signature = _Block_signature((__bridge void *)target);</div><div class="line"></div><div class="line">    NSMethodSignature *methodSignature = [NSMethodSignature signatureWithObjCTypes:signature];</div><div class="line">    NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:methodSignature];</div><div class="line">    invocation.target = target;</div><div class="line"></div><div class="line">    // invocation 有1个隐藏参数，所以 argument 从1开始</div><div class="line">    if ([arguments isKindOfClass:[NSArray class]]) &#123;</div><div class="line">        NSInteger count = MIN(arguments.count, methodSignature.numberOfArguments - 1);</div><div class="line">        for (int i = 0; i &lt; count; i++) &#123;</div><div class="line">            const char *type = [methodSignature getArgumentTypeAtIndex:1 + i];</div><div class="line">            NSString *typeStr = [NSString stringWithUTF8String:type];</div><div class="line">            if ([typeStr containsString:@&quot;\&quot;&quot;]) &#123;</div><div class="line">                type = [typeStr substringToIndex:1].UTF8String;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            // 需要做参数类型判断然后解析成对应类型，这里默认所有参数均为OC对象</div><div class="line">            if (strcmp(type, &quot;@&quot;) == 0) &#123;</div><div class="line">                id argument = arguments[i];</div><div class="line">                [invocation setArgument:&amp;argument atIndex:1 + i];</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    [invocation invoke];</div><div class="line"></div><div class="line">    id returnVal;</div><div class="line">    const char *type = methodSignature.methodReturnType;</div><div class="line">    NSString *returnType = [NSString stringWithUTF8String:type];</div><div class="line">    if ([returnType containsString:@&quot;\&quot;&quot;]) &#123;</div><div class="line">        type = [returnType substringToIndex:1].UTF8String;</div><div class="line">    &#125;</div><div class="line">    if (strcmp(type, &quot;@&quot;) == 0) &#123;</div><div class="line">        [invocation getReturnValue:&amp;returnVal];</div><div class="line">    &#125;</div><div class="line">    // 需要做返回类型判断。比如返回值为常量需要包装成对象，这里仅以最简单的`@`为例</div><div class="line">    return returnVal;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><img src="http://upload-images.jianshu.io/upload_images/6644906-f5230ba3653b8382.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="9E8A9D90-F9A9-4DD3-AA21-9953E4953C8D.png"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/6644906-bf7381308a1d6b66.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<h3 id="SEL与block比较"><a href="#SEL与block比较" class="headerlink" title="SEL与block比较"></a>SEL与block比较</h3><blockquote>
+<ul>
+<li>invocation<br>SEL既有target也有selector，block只有target</li>
+<li>signature<br>SEL有两个隐藏参数，类型均为@，分别对应target和selector。block有一个隐藏参数，类型为@?，对应target且block的target为他本身</li>
+<li>type<br>以OC对象为例：SEL的type为@，block的type会跟上具体类型，如@”NSString”</li>
+</ul>
+</blockquote>
+<h3 id="再谈block"><a href="#再谈block" class="headerlink" title="再谈block"></a>再谈block</h3><p>在block的invocation中有这样的代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">const char *_Block_signature(void *);</div><div class="line">const char *signature = _Block_signature((__bridge void *)target);</div></pre></td></tr></table></figure></p>
+<p>_Block_signature其实是JavaScriptCore/ObjcRuntimeExtras.h<br>中的私有API(这个头文件并没有公开<a href="http://trac.webkit.org/browser/trunk/Source/JavaScriptCore/API/ObjcRuntimeExtras.h" target="_blank" rel="external">可以戳这里查看</a>)</p>
+<p>既然苹果把API封了，那就自己实现咯，万能的github早有答案<a href="https://github.com/ebf/CTObjectiveCRuntimeAdditions" target="_blank" rel="external">CTObjectiveCRuntimeAdditions</a>把CTBlockDescription.h<br>和CTBlockDescription.m<br>拖到项目中，代码这样写<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line">static id invokeBlock(id block ,NSArray *arguments) &#123;</div><div class="line">    if (block == nil) return nil;</div><div class="line">    id target = [block  copy];</div><div class="line"></div><div class="line">    CTBlockDescription *ct = [[CTBlockDescription alloc] initWithBlock:target];</div><div class="line">    NSMethodSignature *methodSignature = ct.blockSignature;</div><div class="line">    NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:methodSignature];</div><div class="line">    invocation.target = target;</div><div class="line"></div><div class="line">    // invocation 有1个隐藏参数，所以 argument 从1开始</div><div class="line">    if ([arguments isKindOfClass:[NSArray class]]) &#123;</div><div class="line">        NSInteger count = MIN(arguments.count, methodSignature.numberOfArguments - 1);</div><div class="line">        for (int i = 0; i &lt; count; i++) &#123;</div><div class="line">            const char *type = [methodSignature getArgumentTypeAtIndex:1 + i];</div><div class="line">            NSString *typeStr = [NSString stringWithUTF8String:type];</div><div class="line">            if ([typeStr containsString:@&quot;\&quot;&quot;]) &#123;</div><div class="line">                type = [typeStr substringToIndex:1].UTF8String;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            // 需要做参数类型判断然后解析成对应类型，这里默认所有参数均为OC对象</div><div class="line">            if (strcmp(type, &quot;@&quot;) == 0) &#123;</div><div class="line">                id argument = arguments[i];</div><div class="line">                [invocation setArgument:&amp;argument atIndex:1 + i];</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    [invocation invoke];</div><div class="line"></div><div class="line">    id returnVal;</div><div class="line">    const char *type = methodSignature.methodReturnType;</div><div class="line">    NSString *returnType = [NSString stringWithUTF8String:type];</div><div class="line">    if ([returnType containsString:@&quot;\&quot;&quot;]) &#123;</div><div class="line">        type = [returnType substringToIndex:1].UTF8String;</div><div class="line">    &#125;</div><div class="line">    if (strcmp(type, &quot;@&quot;) == 0) &#123;</div><div class="line">        [invocation getReturnValue:&amp;returnVal];</div><div class="line">    &#125;</div><div class="line">    // 需要做返回类型判断。比如返回值为常量需要包装成对象，这里仅以最简单的`@`为例</div><div class="line">    return returnVal;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/6644906-143e6ac30788e9c1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="17D15BD3-98AA-46E9-BAD4-2747E16DD677.png"></p>
+<h3 id="NSInvocation-h"><a href="#NSInvocation-h" class="headerlink" title="NSInvocation.h"></a>NSInvocation.h</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div></pre></td><td class="code"><pre><div class="line">@interface NSInvocation : NSObject &#123;</div><div class="line">@private</div><div class="line">    __strong void *_frame;</div><div class="line">    __strong void *_retdata;</div><div class="line">    id _signature;</div><div class="line">    id _container;</div><div class="line">    uint8_t _retainedArgs;</div><div class="line">    uint8_t _reserved[15];</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 通过NSMethodSignature对象创建NSInvocation对象，NSMethodSignature为方法签名类</div><div class="line">+ (NSInvocation *)invocationWithMethodSignature:(NSMethodSignature *)sig;</div><div class="line"></div><div class="line">// 获取NSMethodSignature对象</div><div class="line">@property (readonly, retain) NSMethodSignature *methodSignature;</div><div class="line"></div><div class="line">// 保留参数，它会将传入的所有参数以及target都retain一遍</div><div class="line">- (void)retainArguments;</div><div class="line"></div><div class="line">// 判断参数是否还存在</div><div class="line">// 调用retainArguments之前，值为NO，调用之后值为YES</div><div class="line">@property (readonly) BOOL argumentsRetained;</div><div class="line"></div><div class="line">// 设置消息调用者，注意：target最好不要是局部变量</div><div class="line">@property (nullable, assign) id target;</div><div class="line"></div><div class="line">// 设置要调用的消息</div><div class="line">@property SEL selector;</div><div class="line"></div><div class="line">// 获取消息返回值</div><div class="line">- (void)getReturnValue:(void *)retLoc;</div><div class="line"></div><div class="line">// 设置消息返回值</div><div class="line">- (void)setReturnValue:(void *)retLoc;</div><div class="line"></div><div class="line">// 获取消息参数</div><div class="line">- (void)getArgument:(void *)argumentLocation atIndex:(NSInteger)idx;</div><div class="line"></div><div class="line">// 设置消息参数</div><div class="line">- (void)setArgument:(void *)argumentLocation atIndex:(NSInteger)idx;</div><div class="line"></div><div class="line">// 发送消息，即执行方法</div><div class="line">- (void)invoke;</div><div class="line"></div><div class="line">// target发送消息，既设置了target同时执行方法。这一步要注意在调用此方法之前必须设置了selector和argument</div><div class="line">- (void)invokeWithTarget:(id)target;</div><div class="line"></div><div class="line">@end</div></pre></td></tr></table></figure>
 
           
         
