@@ -80,4 +80,4 @@ avatar: /images/avatar.png
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: https://github.com/FlyOceanFish/FlyOceanFish.github.io.git
+  repo: http://github.com/FlyOceanFish/FlyOceanFish.github.io.git
