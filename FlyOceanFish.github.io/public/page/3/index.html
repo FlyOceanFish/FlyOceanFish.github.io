@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="React Native, iOS" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Better Late Than Never">
+<meta property="og:type" content="website">
+<meta property="og:title" content="FlyOceanFish&#39; Blog">
+<meta property="og:url" content="http://yoursite.com/page/3/index.html">
+<meta property="og:site_name" content="FlyOceanFish&#39; Blog">
+<meta property="og:description" content="Better Late Than Never">
+<meta property="og:locale" content="zh-Hans">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="FlyOceanFish&#39; Blog">
+<meta name="twitter:description" content="Better Late Than Never">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/page/3/"/>
+
+
+
+
+
+  <title>FlyOceanFish' Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left 
+  page-home">
+    <div class="headband"></div>
+    <a href="https://github.com/FlyOceanFish"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">FlyOceanFish' Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">You Believe,You Can</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+  <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/16/将RN工程嵌入到现有原生iOS应用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="FlyOceanFish">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FlyOceanFish' Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/10/16/将RN工程嵌入到现有原生iOS应用/" itemprop="url">将RN工程嵌入到现有原生iOS应用</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-16T13:57:18+08:00">
+                2017-10-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/React-Native/" itemprop="url" rel="index">
+                    <span itemprop="name">React Native</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/10/16/将RN工程嵌入到现有原生iOS应用/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/10/16/将RN工程嵌入到现有原生iOS应用/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>今天心血来潮，就想尝试一下将RN工程单独嵌入到原生工程中，所以就做了尝试，本文是通过cocopods集成RN到现有工程的，但是其中也遇到一个问题，怎么编译都不过。</p>
+<h1 id="依赖包"><a href="#依赖包" class="headerlink" title="依赖包"></a>依赖包</h1><p>React Native的植入过程同时需要React和React Native两个node依赖包，所以需要我们创建package.json文件和正确的RN文件目录结构</p>
+<blockquote>
+<p>对于一个典型的React Native项目来说，一般package.json和index.ios.js等文件会放在项目的根目录下。而iOS相关的原生代码会放在一个名为ios/的子目录中,这里也同时放着你的Xcode项目文件（.xcodeproj）。</p>
+</blockquote>
+<p><img src="http://upload-images.jianshu.io/upload_images/6644906-30b409760b9414ae.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="88161340-E7F4-46B0-86A9-5A13DCCDA819.png"></p>
+<p>按照上图的目录结构创建</p>
+<h3 id="package-json"><a href="#package-json" class="headerlink" title="package.json"></a>package.json</h3><figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">	<span class="attr">"name"</span>: <span class="string">"TestReactNative"</span>,</div><div class="line">	<span class="attr">"version"</span>: <span class="string">"0.0.1"</span>,</div><div class="line">	<span class="attr">"private"</span>: <span class="literal">true</span>,</div><div class="line">	<span class="attr">"scripts"</span>: &#123;</div><div class="line">		<span class="attr">"start"</span>: <span class="string">"node node_modules/react-native/local-cli/cli.js start"</span>,</div><div class="line">		<span class="attr">"test"</span>: <span class="string">"jest"</span></div><div class="line">	&#125;,</div><div class="line">	<span class="attr">"dependencies"</span>: &#123;</div><div class="line">		<span class="attr">"react"</span>: <span class="string">"16.0.0-alpha.6"</span>,</div><div class="line">		<span class="attr">"react-native"</span>: <span class="string">"0.44.3"</span></div><div class="line">	&#125;,</div><div class="line">	<span class="attr">"devDependencies"</span>: &#123;</div><div class="line">		<span class="attr">"babel-jest"</span>: <span class="string">"20.0.3"</span>,</div><div class="line">		<span class="attr">"babel-preset-react-native"</span>: <span class="string">"2.1.0"</span>,</div><div class="line">		<span class="attr">"jest"</span>: <span class="string">"20.0.4"</span>,</div><div class="line">		<span class="attr">"react-test-renderer"</span>: <span class="string">"16.0.0-alpha.6"</span></div><div class="line">	&#125;,</div><div class="line">	<span class="attr">"jest"</span>: &#123;</div><div class="line">		<span class="attr">"preset"</span>: <span class="string">"react-native"</span></div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="安装依赖包"><a href="#安装依赖包" class="headerlink" title="安装依赖包"></a>安装依赖包</h1><p>使用npm（node包管理器，Node package manager）来安装React和React Native模块。这些模块会被安装到项目根目录下的node_modules/目录中。 在包含有package.json文件的目录（一般也就是项目根目录）中运行下列命令来安装：</p>
+<blockquote>
+<p>npm install</p>
+</blockquote>
+<h1 id="新建index-ios-js"><a href="#新建index-ios-js" class="headerlink" title="新建index.ios.js"></a>新建index.ios.js</h1><p>这个是随便一个index.ios.js即可,我是从一个RN的初始化工程复制了一个出来<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * Sample React Native App</div><div class="line"> * https://github.com/facebook/react-native</div><div class="line"> * @flow</div><div class="line"> */</div><div class="line"></div><div class="line">import React, &#123; Component &#125; from &apos;react&apos;;</div><div class="line">import &#123;</div><div class="line">  AppRegistry,</div><div class="line">  StyleSheet,</div><div class="line">  Text,</div><div class="line">  View</div><div class="line">&#125; from &apos;react-native&apos;;</div><div class="line"></div><div class="line">export default class DemoApp extends Component &#123;</div><div class="line">  render() &#123;</div><div class="line">    return (</div><div class="line">      &lt;View style=&#123;styles.container&#125;&gt;</div><div class="line">        &lt;Text style=&#123;styles.welcome&#125;&gt;</div><div class="line">          Welcome to React Native!</div><div class="line">        &lt;/Text&gt;</div><div class="line">        &lt;Text style=&#123;styles.instructions&#125;&gt;</div><div class="line">          To get started, edit index.ios.js</div><div class="line">        &lt;/Text&gt;</div><div class="line">        &lt;Text style=&#123;styles.instructions&#125;&gt;</div><div class="line">          Press Cmd+R to reload,&#123;&apos;\n&apos;&#125;</div><div class="line">          Cmd+D or shake for dev menu</div><div class="line">        &lt;/Text&gt;</div><div class="line">      &lt;/View&gt;</div><div class="line">    );</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">const styles = StyleSheet.create(&#123;</div><div class="line">  container: &#123;</div><div class="line">    flex: 1,</div><div class="line">    justifyContent: &apos;center&apos;,</div><div class="line">    alignItems: &apos;center&apos;,</div><div class="line">    backgroundColor: &apos;#F5FCFF&apos;,</div><div class="line">  &#125;,</div><div class="line">  welcome: &#123;</div><div class="line">    fontSize: 20,</div><div class="line">    textAlign: &apos;center&apos;,</div><div class="line">    margin: 10,</div><div class="line">  &#125;,</div><div class="line">  instructions: &#123;</div><div class="line">    textAlign: &apos;center&apos;,</div><div class="line">    color: &apos;#333333&apos;,</div><div class="line">    marginBottom: 5,</div><div class="line">  &#125;,</div><div class="line">&#125;);</div><div class="line"></div><div class="line">AppRegistry.registerComponent(&apos;TestReactNative&apos;, () =&gt; DemoApp);</div></pre></td></tr></table></figure></p>
+<p>至此RN的相关依赖已经配置好，接下来就该配置cocopods了</p>
+<h1 id="cocopods配置"><a href="#cocopods配置" class="headerlink" title="cocopods配置"></a>cocopods配置</h1><p>1、<strong><em>创建Podfile，如果已经有了可以忽略此步骤</em></strong><br><figure class="highlight jsp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">## 在iOS原生代码所在的目录中（也就是`.xcodeproj`文件所在的目录）执行：</div><div class="line">$ pod init</div></pre></td></tr></table></figure></p>
+<p>Podfile文件内容如下:<br><figure class="highlight jsp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"># Uncomment the next line to define a global platform for your project</div><div class="line"># platform :ios, '9.0'</div><div class="line"></div><div class="line">target <span class="string">'TestReactNative'</span> <span class="keyword">do</span></div><div class="line">  # Uncomment the next line if you're using Swift or would like to use dynamic frameworks</div><div class="line">  # use_frameworks!</div><div class="line"></div><div class="line">  # Pods for TestReactNative</div><div class="line">  pod <span class="string">'React'</span>, :path =&gt; <span class="string">'../node_modules/react-native'</span>, :subspecs =&gt; [</div><div class="line">    <span class="string">'Core'</span>,</div><div class="line">    'DevSupport', # 如果RN版本 &gt;= 0.43，则需要加入此行才能开启开发者菜单</div><div class="line">    <span class="string">'RCTText'</span>,</div><div class="line">    <span class="string">'RCTNetwork'</span>,</div><div class="line">    'RCTWebSocket', # 这个模块是用于调试功能的</div><div class="line">    # 在这里继续添加你所需要的模块</div><div class="line">  ]</div><div class="line">  # 如果你的RN版本 &gt;= 0.42.0，请加入下面这行</div><div class="line">  pod <span class="string">"Yoga"</span>, :path =&gt; <span class="string">"../node_modules/react-native/ReactCommon/yoga"</span></div><div class="line">end</div></pre></td></tr></table></figure></p>
+<p>subspecs就是你依赖的包。可用的subspec都列在<a href="https://github.com/facebook/react-native/blob/master/React.podspec" target="_blank" rel="external">node_modules/react-native/React.podspec
+</a>中，基本都是按其功能命名的。一般来说你首先需要添加Core，这一subspec包含了必须的AppRegistry、StyleSheet、View以及其他的一些React Native核心库。如果你想使用React Native的Text库（即<text>组件），那就需要添加RCTText的subspec。同理，Image需加入RCTImage，等等。<br>2、<strong><em>安装依赖包</em></strong><br>执行pod install<br><img src="http://upload-images.jianshu.io/upload_images/6644906-d2f8ac5ea7e08d21.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="C07B6B3E-1642-4EAC-9814-BE6A55C4527C.png"><br>会看到以上过程则表示安装依赖已经成功<br>3、<strong><em>调用RN工程</em></strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">#import &quot;ViewController.h&quot;</div><div class="line">#import &lt;React/RCTRootView.h&gt;</div><div class="line"></div><div class="line">@interface ViewController ()</div><div class="line"></div><div class="line">@end</div><div class="line"></div><div class="line">@implementation ViewController</div><div class="line"></div><div class="line">- (void)viewDidLoad &#123;</div><div class="line">    [super viewDidLoad];</div><div class="line">    // Do any additional setup after loading the view, typically from a nib.</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (IBAction)actionClick:(id)sender &#123;</div><div class="line">    NSLog(@&quot;High Score Button Pressed&quot;);</div><div class="line">    NSURL *jsCodeLocation = [NSURL</div><div class="line">                             URLWithString:@&quot;http://localhost:8081/index.ios.bundle?platform=ios&quot;];</div><div class="line">    RCTRootView *rootView =</div><div class="line">    [[RCTRootView alloc] initWithBundleURL : jsCodeLocation</div><div class="line">                         moduleName        : @&quot;TestReactNative&quot;</div><div class="line">                         initialProperties :nil</div><div class="line">                          launchOptions    : nil];</div><div class="line">    UIViewController *vc = [[UIViewController alloc] init];</div><div class="line">    vc.view = rootView;</div><div class="line">    [self presentViewController:vc animated:YES completion:nil];</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (void)didReceiveMemoryWarning &#123;</div><div class="line">    [super didReceiveMemoryWarning];</div><div class="line">    // Dispose of any resources that can be recreated.</div><div class="line">&#125;</div><div class="line">@end</div></pre></td></tr></table></figure></text></p>
+<p>至此整集成已经结束，可以直接运行xcode过程，或者通过命令运行工程<br><figure class="highlight jsp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># From the root of your project, where the `node_modules` directory is located.</div><div class="line">$ npm start</div></pre></td></tr></table></figure></p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># 在项目的根目录中执行：</div><div class="line">$ react-<span class="keyword">native</span> run-ios</div></pre></td></tr></table></figure>
+<h1 id="坑"><a href="#坑" class="headerlink" title="坑"></a>坑</h1><p>不知道大家有没有注意我们package.json中react-native中的版本是”0.44.3”，而为什么不是最新版46的呢？？这就是一个很大的坑！从45版本开始RN有4个文件被墙了，所以如果大于44版本的react-native会一直编译不过<br><strong><em>有以下3个解决方案：</em></strong><br>1、不导入最新的包，导入44版本<br>2、翻墙呗。。。。<br>3、<a href="http://blog.csdn.net/u013751625/article/details/75046147" target="_blank" rel="external">下载被墙的4个依赖包，手工导入</a></p>
+<h3 id="优化加载速度"><a href="#优化加载速度" class="headerlink" title="优化加载速度"></a>优化加载速度</h3><p>在原生调用RN的时候有点慢。大家在集成的时候会发现加载的过程挺慢的，可以压缩加载本地文件，这样加载就快了。通常我们可以将文件放到服务器上，然后通过IP地址来加载，这种方式其实也是比较慢的，最好的方式就是将文件提前下载到本地，通过一定的更新机制确保本地文件时最新的，通过使用这种方式加载就很快了。</p>
+<ul>
+<li><p>到当前项目的根目录中执行:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">react-native bundle --platform ios --dev false --entry-file index.ios.js --bundle-output ios/main.jsbundle</div></pre></td></tr></table></figure>
+</li>
+<li><p>将main.jsbundle加载到Xcode工程中，然后通过以下方式获取URL地址来加载</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">NSString *path = [[NSBundle mainBundle] pathForResource:@&quot;main&quot; ofType:@&quot;jsbundle&quot;];</div><div class="line">NSURL *jsCodeLocation = [NSURL URLWithString:path];</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>如果大家在这个过程还有不明白的可以留言给我，我将尽最大努力给大家解决的哦</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/16/手把手教你创建Cocoapods的podspec/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="FlyOceanFish">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FlyOceanFish' Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/10/16/手把手教你创建Cocoapods的podspec/" itemprop="url">手把手教你创建Cocoapods的podspec</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-16T13:57:18+08:00">
+                2017-10-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/10/16/手把手教你创建Cocoapods的podspec/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/10/16/手把手教你创建Cocoapods的podspec/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>现在大部分iOS项目都是在用Cocoapods来管理项目了，但是当我们自己写的一个公有或者私有项目的时候，想要支持Cocoapods，那应该怎么做呢？本教程手把手的教大家如何创建podsepc</p>
+<h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><ol>
+<li>github上创建自己的共有项目<br><img src="http://upload-images.jianshu.io/upload_images/6644906-af82c503463a2495.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="2220EA18-9E12-4891-B409-EB99776CBA78.png"></li>
+<li>创建自己的Xcode工程，并提交到该repository<br><img src="http://upload-images.jianshu.io/upload_images/6644906-b677f02da468d7cb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="0EF5DF0F-67C1-41D4-B3BA-5F8A8BB0BE78.png"></li>
+<li><p>创建podspec文件<br>我们cd当我们项目的根目录下。本项目中就是上图的文件夹下。执行如下命令：</p>
+<pre><code>pod spec create OceanFish git@github.com:FlyOceanFish/CreateOwnSpec.git
+</code></pre></li>
+<li>编辑我们的podspec文件</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div></pre></td><td class="code"><pre><div class="line">#</div><div class="line">#  Be sure to run `pod spec lint OceanFish.podspec&apos; to ensure this is a</div><div class="line">#  valid spec and to remove all comments including this before submitting the spec.</div><div class="line">#</div><div class="line">#  To learn more about Podspec attributes see http://docs.cocoapods.org/specification.html</div><div class="line">#  To see working Podspecs in the CocoaPods repo see https://github.com/CocoaPods/Specs/</div><div class="line">#</div><div class="line"></div><div class="line">Pod::Spec.new do |s|</div><div class="line"></div><div class="line">  # ―――  Spec Metadata  ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #</div><div class="line">  #</div><div class="line">  #  These will help people to find your library, and whilst it</div><div class="line">  #  can feel like a chore to fill in it&apos;s definitely to your advantage. The</div><div class="line">  #  summary should be tweet-length, and the description more in depth.</div><div class="line">  #</div><div class="line"></div><div class="line">  s.name         = &quot;OceanFish&quot;</div><div class="line">  s.version      = &quot;0.0.1&quot;</div><div class="line">  s.summary      = &quot;make a Spec&quot;</div><div class="line"></div><div class="line">  # This description is used to generate tags and improve search results.</div><div class="line">  #   * Think: What does it do? Why did you write it? What is the focus?</div><div class="line">  #   * Try to keep it short, snappy and to the point.</div><div class="line">  #   * Write the description between the DESC delimiters below.</div><div class="line">  #   * Finally, don&apos;t worry about the indent, CocoaPods strips it!</div><div class="line">  s.description  = &lt;&lt;-DESC</div><div class="line">                  手把手叫你如何创建自己的Spec</div><div class="line">                   DESC</div><div class="line"></div><div class="line">  s.homepage     = &quot;https://github.com/FlyOceanFish&quot;</div><div class="line">  # s.screenshots  = &quot;www.example.com/screenshots_1.gif&quot;, &quot;www.example.com/screenshots_2.gif&quot;</div><div class="line"></div><div class="line"></div><div class="line">  # ―――  Spec License  ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #</div><div class="line">  #</div><div class="line">  #  Licensing your code is important. See http://choosealicense.com for more info.</div><div class="line">  #  CocoaPods will detect a license file if there is a named LICENSE*</div><div class="line">  #  Popular ones are &apos;MIT&apos;, &apos;BSD&apos; and &apos;Apache License, Version 2.0&apos;.</div><div class="line">  #</div><div class="line"></div><div class="line">  s.license      = &#123; :type =&gt; &quot;MIT&quot;, :file =&gt; &quot;LICENSE&quot; &#125;</div><div class="line"></div><div class="line"></div><div class="line">  # ――― Author Metadata  ――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #</div><div class="line">  #</div><div class="line">  #  Specify the authors of the library, with email addresses. Email addresses</div><div class="line">  #  of the authors are extracted from the SCM log. E.g. $ git log. CocoaPods also</div><div class="line">  #  accepts just a name if you&apos;d rather not provide an email address.</div><div class="line">  #</div><div class="line">  #  Specify a social_media_url where others can refer to, for example a twitter</div><div class="line">  #  profile URL.</div><div class="line">  #</div><div class="line"></div><div class="line">  s.author             = &#123; &quot;OceanFish&quot; =&gt; &quot;978456068@qq.com&quot; &#125;</div><div class="line">  # Or just: s.author    = &quot;frances&quot;</div><div class="line">  # s.authors            = &#123; &quot;frances&quot; =&gt; &quot;978456068@qq.com&quot; &#125;</div><div class="line">  # s.social_media_url   = &quot;http://twitter.com/frances&quot;</div><div class="line"></div><div class="line">  # ――― Platform Specifics ――――――――――――――――――――――――――――――――――――――――――――――――――――――― #</div><div class="line">  #</div><div class="line">  #  If this Pod runs only on iOS or OS X, then specify the platform and</div><div class="line">  #  the deployment target. You can optionally include the target after the platform.</div><div class="line">  #</div><div class="line"></div><div class="line">  # s.platform     = :ios</div><div class="line">   s.platform     = :ios, &quot;10.3&quot;</div><div class="line"></div><div class="line">  #  When using multiple platforms</div><div class="line">  # s.ios.deployment_target = &quot;5.0&quot;</div><div class="line">  # s.osx.deployment_target = &quot;10.7&quot;</div><div class="line">  # s.watchos.deployment_target = &quot;2.0&quot;</div><div class="line">  # s.tvos.deployment_target = &quot;9.0&quot;</div><div class="line"></div><div class="line"></div><div class="line">  # ――― Source Location ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #</div><div class="line">  #</div><div class="line">  #  Specify the location from where the source should be retrieved.</div><div class="line">  #  Supports git, hg, bzr, svn and HTTP.</div><div class="line">  #</div><div class="line"></div><div class="line">  s.source       = &#123; :git =&gt; &quot;https://github.com/FlyOceanFish/CreateOwnSpec.git&quot;, :tag =&gt; &quot;#&#123;s.version&#125;&quot; &#125;</div><div class="line"></div><div class="line"></div><div class="line">  # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #</div><div class="line">  #</div><div class="line">  #  CocoaPods is smart about how it includes source code. For source files</div><div class="line">  #  giving a folder will include any swift, h, m, mm, c &amp; cpp files.</div><div class="line">  #  For header files it will include any header in the folder.</div><div class="line">  #  Not including the public_header_files will make all headers public.</div><div class="line">  #</div><div class="line"></div><div class="line">  s.source_files  = &quot;FlyOceanFish&quot;, &quot;FlyOceanFish/**/*.&#123;h,m&#125;&quot;</div><div class="line">  #s.exclude_files = &quot;Classes/Exclude&quot;</div><div class="line"></div><div class="line">  # s.public_header_files = &quot;Classes/**/*.h&quot;</div><div class="line"></div><div class="line"></div><div class="line">  # ――― Resources ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #</div><div class="line">  #</div><div class="line">  #  A list of resources included with the Pod. These are copied into the</div><div class="line">  #  target bundle with a build phase script. Anything else will be cleaned.</div><div class="line">  #  You can preserve files from being cleaned, please don&apos;t preserve</div><div class="line">  #  non-essential files like tests, examples and documentation.</div><div class="line">  #</div><div class="line"></div><div class="line">  # s.resource  = &quot;icon.png&quot;</div><div class="line">  # s.resources = &quot;Resources/*.png&quot;</div><div class="line"></div><div class="line">  # s.preserve_paths = &quot;FilesToSave&quot;, &quot;MoreFilesToSave&quot;</div><div class="line"></div><div class="line"></div><div class="line">  # ――― Project Linking ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #</div><div class="line">  #</div><div class="line">  #  Link your library with frameworks, or libraries. Libraries do not include</div><div class="line">  #  the lib prefix of their name.</div><div class="line">  #</div><div class="line"></div><div class="line">  # s.framework  = &quot;SomeFramework&quot;</div><div class="line">  # s.frameworks = &quot;SomeFramework&quot;, &quot;AnotherFramework&quot;</div><div class="line"></div><div class="line">  # s.library   = &quot;iconv&quot;</div><div class="line">  # s.libraries = &quot;iconv&quot;, &quot;xml2&quot;</div><div class="line"></div><div class="line"></div><div class="line">  # ――― Project Settings ――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #</div><div class="line">  #</div><div class="line">  #  If your library depends on compiler flags you can set them in the xcconfig hash</div><div class="line">  #  where they will only apply to your library. If you depend on other Podspecs</div><div class="line">  #  you can include multiple dependencies to ensure it works.</div><div class="line"></div><div class="line">  s.requires_arc = true</div><div class="line"></div><div class="line">  # s.xcconfig = &#123; &quot;HEADER_SEARCH_PATHS&quot; =&gt; &quot;$(SDKROOT)/usr/include/libxml2&quot; &#125;</div><div class="line">  # s.dependency &quot;JSONKit&quot;, &quot;~&gt; 1.4&quot;</div><div class="line"></div><div class="line">end</div></pre></td></tr></table></figure>
+<ol>
+<li><p>执行如下命令进行校验文件的正确性</p>
+<pre><code>pod lib lint
+</code></pre></li>
+</ol>
+<p><img src="http://upload-images.jianshu.io/upload_images/6644906-8ee99362e9e96299.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="AECADD88-FAD7-4B9C-BD73-701B7AC40282.png"><br>如果见到如上图，则代表验证通过；如果没有通过的话按照提示进行修改即可。<br>备注：这个命令是本地校验的，还要pod spec lint 这个是本地和远程校验。如果此时我们用pod spec lint会报错，因为我们还有发布一个版本，就是第6步还没做呢。</p>
+<ol>
+<li>在github上创建一个发布版本<br><img src="http://upload-images.jianshu.io/upload_images/6644906-d8d193f003b2720b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="3EF1084F-7DF7-403E-8CE7-519AB42194E0.png"><br>此时我们运行pod spec lint则会见到如下图<br><img src="http://upload-images.jianshu.io/upload_images/6644906-e7ff39a2608266f9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="EDBCCFB9-6125-4816-8CEE-DD7178C06CB0.png"><br>到这步整个制作过程已经完成接下来让我们发布自己spec<h2 id="发布到CocoaPods"><a href="#发布到CocoaPods" class="headerlink" title="发布到CocoaPods"></a>发布到CocoaPods</h2>CocoaPods 0.33中加入了 Trunk 服务，使用 Trunk 服务可以方便的发布自己的Pod。要想使用 Trunk 服务，首先需要使用如下命令注册自己的电脑。这很简单，只要你指明你的邮箱地址（spec文件中的）和名称即可。CocoaPods 会给你填写的邮箱发送验证邮件，点击邮件中的链接就可通过验证。</li>
+<li>注册<br> pod trunk register 978456068@qq.com “FlyOceanFish”</li>
+</ol>
+<p>2、验证是否注册成功</p>
+<pre><code>pod trunk me
+</code></pre><p><img src="http://upload-images.jianshu.io/upload_images/6644906-1c0e9356bacb2005.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="7117B254-7688-427F-A205-69968ABF3AE3.png"><br>3、发布我们的podspec</p>
+<pre><code>pod trunk push
+</code></pre><p><img src="http://upload-images.jianshu.io/upload_images/6644906-870e654c65f46478.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="7FA508FC-B6CB-4ED1-B31E-1799F83BCE6F.png"><br>此图代表我们已经发布成功</p>
+<p>不过此时我们pod search还搜不到我们的podspec。因为还没审核通过要等个几天，然后运行pod setup更新本地的spec，再搜索一下试试看。</p>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><a href="https://guides.cocoapods.org/using/index.html" target="_blank" rel="external">CocoaPods</a><br><a href="https://stackoverflow.com/questions/32304421/whats-the-difference-between-pod-spec-lint-and-pod-lib-lint" target="_blank" rel="external">between ‘pod spec lint’ and ‘pod lib lint’?</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/16/React Native项目实践总结/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="FlyOceanFish">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FlyOceanFish' Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/10/16/React Native项目实践总结/" itemprop="url">React Native项目实践总结</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-16T13:55:41+08:00">
+                2017-10-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/React-Native/" itemprop="url" rel="index">
+                    <span itemprop="name">React Native</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/10/16/React Native项目实践总结/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/10/16/React Native项目实践总结/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>想想有一段时间没更新博客了，其中有工作稍微忙了点的原因，其实作者找了一个项目一直在练习。另一方面作者购买了一个域名并且通过辛苦努力搭建了一个自己的小窝，欢迎各位的光临哦！（<a href="http://flyoceanfish.top/" target="_blank" rel="external">作者的小窝传送门</a>），以后写的文章将在自己的小窝作为首发了。</p>
+<h2 id="项目背景"><a href="#项目背景" class="headerlink" title="项目背景"></a>项目背景</h2><p>本人练习的项目是一个通过豆瓣公共api实现了电影相关的一个APP。主要功能有推荐、搜索、登录、详情等，由于是刚学习完RN第一个练习项目，所以难免有些生疏和技术的不熟练，哪里有些的不好的地方希望大家可以不吝赐教。本项目是通过两个阶段完成的：第一阶段使用RN自带的控件比如<a href="http://facebook.github.io/react-native/docs/tabbarios.html" target="_blank" rel="external">TabBarIOS</a>、<a href="http://facebook.github.io/react-native/docs/navigatorios.html" target="_blank" rel="external">NavigatorIOS</a>、<a href="http://facebook.github.io/react-native/docs/button.html" target="_blank" rel="external">Button</a>、<a href="http://facebook.github.io/react-native/docs/image.html" target="_blank" rel="external">Image</a>等；第二阶段重构使用了比较火的一些第三方控件<a href="https://www.npmjs.com/package/react-native-navigation" target="_blank" rel="external">react-native-navigation</a>、<a href="https://github.com/remobile/react-native-cache-image" target="_blank" rel="external">react-native-img-cache</a>、<a href="https://github.com/APSL/react-native-button" target="_blank" rel="external">react-native-button</a>。</p>
+<h2 id="项目视频介绍"><a href="#项目视频介绍" class="headerlink" title="项目视频介绍"></a>项目视频介绍</h2><p><img src="http://upload-images.jianshu.io/upload_images/6644906-f0462dc777d36ec2.gif?imageMogr2/auto-orient/strip" alt="项目视频介绍.gif"></p>
+<h3 id="使用到的技术"><a href="#使用到的技术" class="headerlink" title="使用到的技术"></a>使用到的技术</h3><ul>
+<li>ES6 其中主要使用的是箭头函数这个特性，项目中代码其实使用了两种，我注释掉了一种。两种最大的区别就是箭头函数自动绑定this</li>
+<li>Flex 一种布局方式</li>
+<li>JavaScript</li>
+<li>Objective-c<h3 id="项目详细介绍"><a href="#项目详细介绍" class="headerlink" title="项目详细介绍"></a>项目详细介绍</h3>1、项目初始化<br>由于使用到了react-native-navigation第三方框架导航，所以APP代码还有有挺大区别的。<br>直接在index.os.js中将所有的代码注释掉仅仅使用如下一句即可</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">import app from &apos;./app/App&apos;</div></pre></td></tr></table></figure>
+<p>1.1、App.js源码<br>App其实一方面<code>registerScreens()</code>方法注册了所有的Component，另一方面使用了<code>Navigation.startTabBasedApp</code>启动了整个App，实现了UITabBar的效果</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div></pre></td><td class="code"><pre><div class="line">import &#123;Platform&#125; from &apos;react-native&apos;;</div><div class="line">import &#123;Navigation&#125; from &apos;react-native-navigation&apos;;</div><div class="line">import &#123;registerScreens,registerScreenVisibilityListener&#125; from &apos;./Screens/index&apos;;</div><div class="line"></div><div class="line">import Icons from &apos;./Assets/Icon&apos;;</div><div class="line"></div><div class="line">// screen related book keeping</div><div class="line">registerScreens();</div><div class="line">registerScreenVisibilityListener();</div><div class="line"></div><div class="line">const tabs = [&#123;</div><div class="line">        label: &apos;推荐&apos;,</div><div class="line">        screen: &apos;com.fof.FlyOceanMovies.MovieList&apos;,</div><div class="line">        icon: &#123;uri:Icons.star,scale:4.6&#125;,</div><div class="line">        title: &apos;热门推荐&apos;,</div><div class="line">    &#125;,</div><div class="line">    &#123;</div><div class="line">        label: &apos;北美票房&apos;,</div><div class="line">        screen: &apos;com.fof.FlyOceanMovies.USBoxList&apos;,</div><div class="line">        icon: &#123;uri:Icons.featured,scale:1.1&#125;,</div><div class="line">        title: &apos;北美票房&apos;,</div><div class="line">    &#125;,</div><div class="line">    &#123;</div><div class="line">        label: &apos;搜索&apos;,</div><div class="line">        screen: &apos;com.fof.FlyOceanMovies.SearchForm&apos;,</div><div class="line">        icon: &#123;uri:Icons.search,scale:1.2&#125;,</div><div class="line">        title: &apos;搜索&apos;,</div><div class="line">    &#125;</div><div class="line">    ];</div><div class="line"></div><div class="line">// this will start our app</div><div class="line">Navigation.startTabBasedApp(&#123;</div><div class="line">    tabs,</div><div class="line">    animationType: Platform.OS === &apos;ios&apos; ? &apos;slide-down&apos; : &apos;fade&apos;,</div><div class="line">    tabsStyle: &#123;</div><div class="line">        tabBarBackgroundColor: &apos;#003a66&apos;,</div><div class="line">        tabBarButtonColor: &apos;#ffffff&apos;,</div><div class="line">        tabBarSelectedButtonColor: &apos;#ff505c&apos;,</div><div class="line">        tabFontFamily: &apos;BioRhyme-Bold&apos;,</div><div class="line">    &#125;,</div><div class="line">    appStyle: &#123;</div><div class="line">        tabBarBackgroundColor: &apos;#003a66&apos;,</div><div class="line">        navBarButtonColor: &apos;#ffffff&apos;,</div><div class="line">        tabBarButtonColor: &apos;#ffffff&apos;,</div><div class="line">        navBarTextColor: &apos;#ffffff&apos;,</div><div class="line">        tabBarSelectedButtonColor: &apos;#ff505c&apos;,</div><div class="line">        navigationBarColor: &apos;#003a66&apos;,</div><div class="line">        navBarBackgroundColor: &apos;#003a66&apos;,</div><div class="line">        statusBarColor: &apos;#002b4c&apos;,</div><div class="line">        tabFontFamily: &apos;BioRhyme-Bold&apos;,</div><div class="line">    &#125;,</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>2、各个子页面<br>MovieList：首页<br>USBoxList：北美票房<br>SearchForm：搜索<br>MovieDetail：详情<br>Login：登录界面<br>SearchResult：搜索结果页<br>Main.js：相当于CSS样式，其实就是布局</p>
+<p>其中MovieList自己实现了相当于iOS的segmentcontrol的效果使用到了ReactNative中的动画。</p>
+<p>还有一些其他的关注点我都在代码加了注释，大家有兴趣可以详细看一下代码，由于里边包括了我两个阶段的所有代码，所以大家要耐心看哦。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>学习React Native有一段时间了，写这个项目其实不是很熟练，踩了不少坑，写的也不是非常的快。但是没遇到一个坑都停下来好好思考复习巩固自己没掌握的知识，让自己也提升了不少。所以万里之行始于足下，掌握知识的最快方法就是行动起来，找个项目从0开始，完整的写完一个项目。不仅验证了自己所学的知识，同时在写项目中能够学到之前没学到的知识,也巩固了自己的新知识。</p>
+<p><a href="https://github.com/FlyOceanFish/FlyOceanMovies" target="_blank" rel="external">项目完整代码</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+  </section>
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+  </nav>
+
+
+
+          </div>
+          
+
+
+          
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="FlyOceanFish" />
+            
+              <p class="site-author-name" itemprop="name">FlyOceanFish</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">FlyOceanFish</span>
+
+  
+</div>
+
+<!--
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.3</div>
+
+-->
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_lines.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.3"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=5.1.3"></script>
+
+
+  
+
+</body>
+</html>
+<script type="text/javascript" src="/js/src/love.js"></script>

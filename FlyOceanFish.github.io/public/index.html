@@ -1,0 +1,2349 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="React Native, iOS" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Better Late Than Never">
+<meta property="og:type" content="website">
+<meta property="og:title" content="FlyOceanFish&#39; Blog">
+<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:site_name" content="FlyOceanFish&#39; Blog">
+<meta property="og:description" content="Better Late Than Never">
+<meta property="og:locale" content="zh-Hans">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="FlyOceanFish&#39; Blog">
+<meta name="twitter:description" content="Better Late Than Never">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/"/>
+
+
+
+
+
+  <title>FlyOceanFish' Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left 
+  page-home">
+    <div class="headband"></div>
+    <a href="https://github.com/FlyOceanFish"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">FlyOceanFish' Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">You Believe,You Can</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+  <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/16/iOS中将数字用符合隔开(比如逗号)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="FlyOceanFish">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FlyOceanFish' Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/10/16/iOS中将数字用符合隔开(比如逗号)/" itemprop="url">iOS中将数字用符合隔开(比如逗号)</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-16T13:57:18+08:00">
+                2017-10-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/10/16/iOS中将数字用符合隔开(比如逗号)/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/10/16/iOS中将数字用符合隔开(比如逗号)/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>这次项目中遇到一个需求，将数字每隔3个用逗号隔开。因为如果数字太大确实看着有点眼花。<br>　　所以就想着写了一个NSString的category，用起来效果还不错，代码如下：</p>
+<h3 id="h的声明"><a href="#h的声明" class="headerlink" title=".h的声明"></a>.h的声明</h3><pre><code>#import &lt;Foundation/Foundation.h&gt;
+
+@interface NSString (NumberSplitWithComma)
+/**
+ *数字以逗号隔开 例：123，321.11
+ */
+- (NSString *)ld_numberSplitWithComma;
+/**
+ *@param puctutation 符合
+ *数字以某个符合隔开 例：123，321.11
+ */
+- (NSString *)ld_numberSplitWithPunctutaion:(NSString *)puctutation;
+@end
+</code></pre><h3 id="m文件的实现"><a href="#m文件的实现" class="headerlink" title=".m文件的实现"></a>.m文件的实现</h3><pre><code>#import &quot;NSString+NumberSplitWithComma.h&quot;
+
+@implementation NSString (NumberSplitWithComma)
+
+- (NSString *)ld_numberSplitWithComma{
+    if ([self private_isNumber]) {
+        NSMutableString *muString = [NSMutableString tringWithString:self];
+        return [self private_insert:muString withPunctuation:@&quot;,&quot;];
+    }else{
+        return self;
+    }
+}
+- (NSString *)ld_numberSplitWithPunctutaion:(NSString *)puctutation{
+    if ([self private_isNumber]) {
+         NSMutableString *muString = [NSMutableString stringWithString:self];
+         return [self private_insert:muString withPunctuation:puctutation];
+     }else{
+         return self;
+     }
+}
+- (NSMutableString *)private_insert:(NSMutableString *)string withPunctuation:(NSString *)punctuation{
+    NSUInteger maxLength = string.length;
+    if ([string containsString:punctuation]) {
+        maxLength = [string rangeOfString:punctuation].location;
+    }else if ([string containsString:@&quot;.&quot;]){
+        maxLength = [string rangeOfString:@&quot;.&quot;].location;
+    }
+    if (maxLength-([string containsString:@&quot;-&quot;]?1:0)&gt;3) {
+        [string insertString:punctuation atIndex:(maxLength-3)];
+        [self private_insert:string withPunctuation:punctuation];
+    }else{
+        return string;
+    }
+    return string;
+}
+ - (Boolean)private_isNumber{
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@&quot;SELF MATCHES %@&quot;,@&quot;^[-0-9.]*$&quot;];
+    if ([predicate evaluateWithObject:self]) {
+        return YES;
+     }
+    return NO;
+ }
+</code></pre><h1 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h1><p>　　有简友反应可以使用NSNumberFormatter，然后研究了一番，确实能够很方便的达到效果。<br>1、通过使用formatter style，苹果帮我们定义好的格式。</p>
+<pre><code>NSNumberFormatter *numberFormatter =   [[NSNumberFormatter alloc] init];
+[numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
+NSString *formattedNumberString = [numberFormatter stringFromNumber:@122344.4563];
+NSLog(@&quot;formattedNumberString: %@&quot;, formattedNumberString);
+// Output for locale en_US: &quot;formattedNumberString: formattedNumberString: 122,344.453&quot;
+</code></pre><p>NSNumberFormatter 的numberStyle是一个枚举</p>
+<pre><code>    typedef NS_ENUM(NSUInteger, NSNumberFormatterStyle) {
+NSNumberFormatterNoStyle = kCFNumberFormatterNoStyle,四舍五入
+NSNumberFormatterDecimalStyle = kCFNumberFormatterDecimalStyle,金额 100,200,300.123
+NSNumberFormatterCurrencyStyle = kCFNumberFormatterCurrencyStyle,货币 $100,200,300.12
+NSNumberFormatterPercentStyle = kCFNumberFormatterPercentStyle,百分比 12%
+NSNumberFormatterScientificStyle = kCFNumberFormatterScientificStyle,科学计数法 1.234E8
+NSNumberFormatterSpellOutStyle = kCFNumberFormatterSpellOutStyle,口语 One...
+NSNumberFormatterOrdinalStyle NS_ENUM_AVAILABLE(10_11, 9_0) = kCFNumberFormatterOrdinalStyle,
+NSNumberFormatterCurrencyISOCodeStyle NS_ENUM_AVAILABLE(10_11, 9_0) = kCFNumberFormatterCurrencyISOCodeStyle,
+NSNumberFormatterCurrencyPluralStyle NS_ENUM_AVAILABLE(10_11, 9_0) = kCFNumberFormatterCurrencyPluralStyle,
+NSNumberFormatterCurrencyAccountingStyle NS_ENUM_AVAILABLE(10_11, 9_0) = kCFNumberFormatterCurrencyAccountingStyle,
+};
+</code></pre><p>２、通过一个格式字符串自定义格式</p>
+<pre><code>NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+[numberFormatter setPositiveFormat:@&quot;###0.##&quot;];
+NSString *formattedNumberString = [numberFormatter stringFromNumber:@122344.4563];
+NSLog(@&quot;formattedNumberString: %@&quot;, formattedNumberString);
+// Output for locale en_US: &quot;formattedNumberString: formattedNumberString: 122,344.45&quot;
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/16/NSInvocation/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="FlyOceanFish">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FlyOceanFish' Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/10/16/NSInvocation/" itemprop="url">NSInvocation</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-16T13:57:18+08:00">
+                2017-10-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/10/16/NSInvocation/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/10/16/NSInvocation/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>NSInvocation是命令模式的一种实现，它包含选择器、方法签名、相应的参数以及目标对象。所谓的方法签名，即方法所对应的返回值类型和参数类型。当NSInvocatio被调用，它会在运行时通过目标对象去寻找对应的方法，从而确保唯一性，可以用[receiver message]来解释。实际开发过程中直接创建NSInvocation的情况不多见，这些事情通常交给系统来做。比如bang的JSPatch中arm64方法替换的实现就是利用runtime消息转发最后一步中的NSInvocation实现的。</p>
+<h3 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h3><p>基于这种命令模式，可以利用NSInvocation调用任意SEL甚至block。NSInvocation与NSMethodSignature配合来完成调用。NSMethodSignature这个类的对象保存了方法的名称、参数和返回值</p>
+<ul>
+<li>SEL<br>系统<code>NSObject</code>自带的<code>performSelector</code>默认只支持一个参数，我们可以给NSObject增加一个category，增加以下方法就可以支持多个参数的调用了</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">- (id)performSelector:(SEL)aSelector withArguments:(NSArray *)arguments &#123;</div><div class="line">    if (aSelector == nil) return nil;</div><div class="line">    NSMethodSignature *signature = [[self class] instanceMethodSignatureForSelector:aSelector];</div><div class="line">    NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:signature];</div><div class="line">    invocation.target = self;</div><div class="line">    invocation.selector = aSelector; // invocation 有2个隐藏参数，所以 argument 从2开始</div><div class="line">    if ([arguments isKindOfClass:[NSArray class]]) &#123;</div><div class="line">        NSInteger count = MIN(arguments.count, signature.numberOfArguments - 2);</div><div class="line">        for (int i = 0; i &lt; count; i++) &#123;</div><div class="line">            const char *type = [signature getArgumentTypeAtIndex:2 + i]; // 需要做参数类型判断然后解析成对应类型，这里默认所有参数均为OC对象</div><div class="line">            if (strcmp(type, &quot;@&quot;) == 0) &#123;</div><div class="line">                id argument = arguments[i]; [invocation setArgument:&amp;argument atIndex:2 + i];</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    [invocation invoke];</div><div class="line">    id returnVal;</div><div class="line">    if (strcmp(signature.methodReturnType, &quot;@&quot;) == 0) &#123;</div><div class="line">        [invocation getReturnValue:&amp;returnVal];</div><div class="line">    &#125; // 需要做返回类型判断。比如返回值为常量需要包装成对象，这里仅以最简单的`@`为例</div><div class="line">    return returnVal;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><img src="http://upload-images.jianshu.io/upload_images/6644906-b09479039ddf5488.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="ED3CFE7D-C30A-4ADD-929D-B5F7CB806E82.png"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/6644906-c1af7b09f14982c9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="FCB4F1F5-1F15-4FDC-A3AE-C1DC95AF32BF.png"></p>
+<h3 id="block"><a href="#block" class="headerlink" title="block"></a>block</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line">static id invokeBlock(id block ,NSArray *arguments) &#123;</div><div class="line">    if (block == nil) return nil;</div><div class="line">    id target = [block  copy];</div><div class="line"></div><div class="line">    const char *_Block_signature(void *);</div><div class="line">    const char *signature = _Block_signature((__bridge void *)target);</div><div class="line"></div><div class="line">    NSMethodSignature *methodSignature = [NSMethodSignature signatureWithObjCTypes:signature];</div><div class="line">    NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:methodSignature];</div><div class="line">    invocation.target = target;</div><div class="line"></div><div class="line">    // invocation 有1个隐藏参数，所以 argument 从1开始</div><div class="line">    if ([arguments isKindOfClass:[NSArray class]]) &#123;</div><div class="line">        NSInteger count = MIN(arguments.count, methodSignature.numberOfArguments - 1);</div><div class="line">        for (int i = 0; i &lt; count; i++) &#123;</div><div class="line">            const char *type = [methodSignature getArgumentTypeAtIndex:1 + i];</div><div class="line">            NSString *typeStr = [NSString stringWithUTF8String:type];</div><div class="line">            if ([typeStr containsString:@&quot;\&quot;&quot;]) &#123;</div><div class="line">                type = [typeStr substringToIndex:1].UTF8String;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            // 需要做参数类型判断然后解析成对应类型，这里默认所有参数均为OC对象</div><div class="line">            if (strcmp(type, &quot;@&quot;) == 0) &#123;</div><div class="line">                id argument = arguments[i];</div><div class="line">                [invocation setArgument:&amp;argument atIndex:1 + i];</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    [invocation invoke];</div><div class="line"></div><div class="line">    id returnVal;</div><div class="line">    const char *type = methodSignature.methodReturnType;</div><div class="line">    NSString *returnType = [NSString stringWithUTF8String:type];</div><div class="line">    if ([returnType containsString:@&quot;\&quot;&quot;]) &#123;</div><div class="line">        type = [returnType substringToIndex:1].UTF8String;</div><div class="line">    &#125;</div><div class="line">    if (strcmp(type, &quot;@&quot;) == 0) &#123;</div><div class="line">        [invocation getReturnValue:&amp;returnVal];</div><div class="line">    &#125;</div><div class="line">    // 需要做返回类型判断。比如返回值为常量需要包装成对象，这里仅以最简单的`@`为例</div><div class="line">    return returnVal;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><img src="http://upload-images.jianshu.io/upload_images/6644906-f5230ba3653b8382.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="9E8A9D90-F9A9-4DD3-AA21-9953E4953C8D.png"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/6644906-bf7381308a1d6b66.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<h3 id="SEL与block比较"><a href="#SEL与block比较" class="headerlink" title="SEL与block比较"></a>SEL与block比较</h3><blockquote>
+<ul>
+<li>invocation<br>SEL既有target也有selector，block只有target</li>
+<li>signature<br>SEL有两个隐藏参数，类型均为@，分别对应target和selector。block有一个隐藏参数，类型为@?，对应target且block的target为他本身</li>
+<li>type<br>以OC对象为例：SEL的type为@，block的type会跟上具体类型，如@”NSString”</li>
+</ul>
+</blockquote>
+<h3 id="再谈block"><a href="#再谈block" class="headerlink" title="再谈block"></a>再谈block</h3><p>在block的invocation中有这样的代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">const char *_Block_signature(void *);</div><div class="line">const char *signature = _Block_signature((__bridge void *)target);</div></pre></td></tr></table></figure></p>
+<p>_Block_signature其实是JavaScriptCore/ObjcRuntimeExtras.h<br>中的私有API(这个头文件并没有公开<a href="http://trac.webkit.org/browser/trunk/Source/JavaScriptCore/API/ObjcRuntimeExtras.h" target="_blank" rel="external">可以戳这里查看</a>)</p>
+<p>既然苹果把API封了，那就自己实现咯，万能的github早有答案<a href="https://github.com/ebf/CTObjectiveCRuntimeAdditions" target="_blank" rel="external">CTObjectiveCRuntimeAdditions</a>把CTBlockDescription.h<br>和CTBlockDescription.m<br>拖到项目中，代码这样写<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line">static id invokeBlock(id block ,NSArray *arguments) &#123;</div><div class="line">    if (block == nil) return nil;</div><div class="line">    id target = [block  copy];</div><div class="line"></div><div class="line">    CTBlockDescription *ct = [[CTBlockDescription alloc] initWithBlock:target];</div><div class="line">    NSMethodSignature *methodSignature = ct.blockSignature;</div><div class="line">    NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:methodSignature];</div><div class="line">    invocation.target = target;</div><div class="line"></div><div class="line">    // invocation 有1个隐藏参数，所以 argument 从1开始</div><div class="line">    if ([arguments isKindOfClass:[NSArray class]]) &#123;</div><div class="line">        NSInteger count = MIN(arguments.count, methodSignature.numberOfArguments - 1);</div><div class="line">        for (int i = 0; i &lt; count; i++) &#123;</div><div class="line">            const char *type = [methodSignature getArgumentTypeAtIndex:1 + i];</div><div class="line">            NSString *typeStr = [NSString stringWithUTF8String:type];</div><div class="line">            if ([typeStr containsString:@&quot;\&quot;&quot;]) &#123;</div><div class="line">                type = [typeStr substringToIndex:1].UTF8String;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            // 需要做参数类型判断然后解析成对应类型，这里默认所有参数均为OC对象</div><div class="line">            if (strcmp(type, &quot;@&quot;) == 0) &#123;</div><div class="line">                id argument = arguments[i];</div><div class="line">                [invocation setArgument:&amp;argument atIndex:1 + i];</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    [invocation invoke];</div><div class="line"></div><div class="line">    id returnVal;</div><div class="line">    const char *type = methodSignature.methodReturnType;</div><div class="line">    NSString *returnType = [NSString stringWithUTF8String:type];</div><div class="line">    if ([returnType containsString:@&quot;\&quot;&quot;]) &#123;</div><div class="line">        type = [returnType substringToIndex:1].UTF8String;</div><div class="line">    &#125;</div><div class="line">    if (strcmp(type, &quot;@&quot;) == 0) &#123;</div><div class="line">        [invocation getReturnValue:&amp;returnVal];</div><div class="line">    &#125;</div><div class="line">    // 需要做返回类型判断。比如返回值为常量需要包装成对象，这里仅以最简单的`@`为例</div><div class="line">    return returnVal;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/6644906-143e6ac30788e9c1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="17D15BD3-98AA-46E9-BAD4-2747E16DD677.png"></p>
+<h3 id="NSInvocation-h"><a href="#NSInvocation-h" class="headerlink" title="NSInvocation.h"></a>NSInvocation.h</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div></pre></td><td class="code"><pre><div class="line">@interface NSInvocation : NSObject &#123;</div><div class="line">@private</div><div class="line">    __strong void *_frame;</div><div class="line">    __strong void *_retdata;</div><div class="line">    id _signature;</div><div class="line">    id _container;</div><div class="line">    uint8_t _retainedArgs;</div><div class="line">    uint8_t _reserved[15];</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 通过NSMethodSignature对象创建NSInvocation对象，NSMethodSignature为方法签名类</div><div class="line">+ (NSInvocation *)invocationWithMethodSignature:(NSMethodSignature *)sig;</div><div class="line"></div><div class="line">// 获取NSMethodSignature对象</div><div class="line">@property (readonly, retain) NSMethodSignature *methodSignature;</div><div class="line"></div><div class="line">// 保留参数，它会将传入的所有参数以及target都retain一遍</div><div class="line">- (void)retainArguments;</div><div class="line"></div><div class="line">// 判断参数是否还存在</div><div class="line">// 调用retainArguments之前，值为NO，调用之后值为YES</div><div class="line">@property (readonly) BOOL argumentsRetained;</div><div class="line"></div><div class="line">// 设置消息调用者，注意：target最好不要是局部变量</div><div class="line">@property (nullable, assign) id target;</div><div class="line"></div><div class="line">// 设置要调用的消息</div><div class="line">@property SEL selector;</div><div class="line"></div><div class="line">// 获取消息返回值</div><div class="line">- (void)getReturnValue:(void *)retLoc;</div><div class="line"></div><div class="line">// 设置消息返回值</div><div class="line">- (void)setReturnValue:(void *)retLoc;</div><div class="line"></div><div class="line">// 获取消息参数</div><div class="line">- (void)getArgument:(void *)argumentLocation atIndex:(NSInteger)idx;</div><div class="line"></div><div class="line">// 设置消息参数</div><div class="line">- (void)setArgument:(void *)argumentLocation atIndex:(NSInteger)idx;</div><div class="line"></div><div class="line">// 发送消息，即执行方法</div><div class="line">- (void)invoke;</div><div class="line"></div><div class="line">// target发送消息，既设置了target同时执行方法。这一步要注意在调用此方法之前必须设置了selector和argument</div><div class="line">- (void)invokeWithTarget:(id)target;</div><div class="line"></div><div class="line">@end</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/16/React Native源码分析原理（一）(基于0.48版本)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="FlyOceanFish">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FlyOceanFish' Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/10/16/React Native源码分析原理（一）(基于0.48版本)/" itemprop="url">React Native源码分析原理（一）(基于0.48版本)</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-16T13:57:18+08:00">
+                2017-10-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/React-Native/" itemprop="url" rel="index">
+                    <span itemprop="name">React Native</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/10/16/React Native源码分析原理（一）(基于0.48版本)/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/10/16/React Native源码分析原理（一）(基于0.48版本)/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <ul>
+<li><a href="http://www.jianshu.com/p/8324b379c020" target="_blank" rel="external">React Native源码分析原理（一）(基于0.48版本)</a></li>
+<li><a href="http://www.jianshu.com/p/0688b24950f4" target="_blank" rel="external">React Native源码分析原理（二）(基于0.48版本)</a><h3 id="React和React-Native初步认识"><a href="#React和React-Native初步认识" class="headerlink" title="React和React Native初步认识"></a>React和React Native初步认识</h3>说起Facebook的React Native就不得不说一下React，React是个什么东东呢？<blockquote>
+<p>React 是一个用于构建用户界面的 JAVASCRIPT 库。<br>React主要用于构建UI，很多人认为 React 是 MVC 中的 V（视图）。<br>React 起源于 Facebook 的内部项目，用来架设 Instagram 的网站，并于 2013 年 5 月开源。<br>React 拥有较高的性能，代码逻辑非常简单，越来越多的人已开始关注和使用它。</p>
+</blockquote>
+</li>
+</ul>
+<p><strong><em>React</em></strong></p>
+<blockquote>
+<p>1.声明式设计 −React采用声明范式，可以轻松描述应用。<br>2.高效 −React通过对DOM的模拟，最大限度地减少与DOM的交互。<br>3.灵活 −React可以与已知的库或框架很好地配合。<br>4.JSX − JSX 是 JavaScript 语法的扩展。React 开发不一定使用 JSX ，但我们建议使用它。<br>5.组件 − 通过 React 构建组件，使得代码更加容易得到复用，能够很好的应用在大项目的开发中。<br>6.单向响应的数据流 − React 实现了单向响应的数据流，从而减少了重复代码，这也是它为什么比传统数据绑定更简单。</p>
+</blockquote>
+<p>根据以上内容相信大家对React有了一个初步认识。其实高效、简单使用是React最大的特点了。</p>
+<p><strong><em>React Native</em></strong></p>
+<p>React Native说白了就是让React拥有了与原生APP交互，能够写接近原生APP的功能，就像它的两个单词一样，一个React，一个Native。有了它就能让js和oc或Android能够方便的相互调用，实现了能够通过js开发接近原生的APP的功能。是的，非常接近原生APP的体检，尤其绘制出的视图全部都是原生的！但是它与混合开发是不同的，一般我们说的混合开发是原生APP和html混合开发，但是体验上是比较差的。React Native也秉承了React的理念 <code>Learn Once, Write Anywhere</code>,而不是混合开发所追崇的<code>Write Once,Run Anywhere</code>。现在像携程、腾讯等这样的公司已经都使用了React Native写项目了，所以是时候大家也跟进一波，不管用不用，先学习攒着嘛！哈哈。毕竟技多不压身的嘛。</p>
+<h3 id="通讯框架图和几个核心类的作用"><a href="#通讯框架图和几个核心类的作用" class="headerlink" title="通讯框架图和几个核心类的作用"></a>通讯框架图和几个核心类的作用</h3><p>首先让我们看看React Native的js与oc交互框架（个人整理的，非官方的）。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/6644906-cb4d495b7b74ffd4.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="通讯图.001.jpeg"></p>
+<ul>
+<li><p><code>RCTCxxxBridge.h</code> oc与js之间的调用都是通过这个桥梁(0.44以前是RCTBatchedBridge.h这个类)。这个桥梁持有各个具体功能类和一个jsThread,它的作用其实就是一个调度的作用。注意所有js代码的执行都是在此jsThread中执行，这个Thread是放在runloop中的，会保持一直运行的。此线程也是大家常听说的js线程。一个项目中最好只有一个Bridge，要不是比较消耗性能的。</p>
+<ul>
+<li><code>JSCExecutor.h</code> 所有的js与oc的通信都是通过此类来实现的</li>
+<li><code>BatchedBridge.js</code>这个js文件仅仅是一个导入文件。导入了<code>MessageQueue.js</code>这个文件。<ul>
+<li><code>MessageQueue.js</code>这个文件是js端与oc通信的一个桥梁文件，里边有个计时器将要调用oc方法的事件放入一个queue中，当oc没有及时的在消息队列中调js的时候, 大于5ms后js就会调用这个回调, 主动调用oc</li>
+</ul>
+</li>
+<li><code>NativeModule.js</code> 实现了js调用oc代码。大家注意这个调用其实都是oc先调用js文件，执行js，在这时候传入适当的参数，然后实现了js调用oc方法哦。</li>
+</ul>
+</li>
+<li><p><code>RCTBridgeModule.h</code> 这个类非常重要，只要想与js实现通信，这个协议必须实现。如果不实现此协议我们js在调用原生方法就会报错，RN在内部会将第一检验的就是类有没有实现这个协议。除了一个标识的作用，还给我们提供了几个宏供我们使用。这几个宏也是js调用原生的具体实现</p>
+</li>
+<li><code>RCTUIManager.h</code>    <code>UIManage.js</code>这两个类一个是在oc端，一个是在js端，通过这两个类RN将我们的component转换成了我们原生的视图类。该类实现了视图的创建、查找、删除等功能。创建View的时候，每个View都有一个</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/16/React Native源码分析原理（二）(基于0.48版本)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="FlyOceanFish">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FlyOceanFish' Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/10/16/React Native源码分析原理（二）(基于0.48版本)/" itemprop="url">React Native源码分析原理（二）(基于0.48版本)</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-16T13:57:18+08:00">
+                2017-10-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/React-Native/" itemprop="url" rel="index">
+                    <span itemprop="name">React Native</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/10/16/React Native源码分析原理（二）(基于0.48版本)/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/10/16/React Native源码分析原理（二）(基于0.48版本)/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <ul>
+<li><a href="http://www.jianshu.com/p/8324b379c020" target="_blank" rel="external">React Native源码分析原理（一）(基于0.48版本)</a></li>
+<li><a href="http://www.jianshu.com/p/0688b24950f4" target="_blank" rel="external">React Native源码分析原理（二）(基于0.48版本)</a></li>
+</ul>
+<p>上一篇文章大家如果仔细阅读揣摩对RN有了一个初步的认识了，接下来将基于上一篇文章的这种初步认识然我们详细了解一下RN的启动过程</p>
+<h3 id="启动过程"><a href="#启动过程" class="headerlink" title="启动过程"></a>启动过程</h3><p>[RCTRootView initWithBundleURL:…]<br>[RCTBridge initWithBundleURL:…]<br>[RCTBridge setUp]<br>初始化batchedBridge<br>[RCTCxxBridge start]<br>开启一个线程jsThread用于js<br>[RCTCxxBridge _initModulesWithDispatchGroup]<br>初始化JSCExecutorFactory, 用于执行js代码以及处理回调 JSCExecutor::JSCExecutor()<br>JSCExecutor::initOnJSVMThread()<br>installGlobalProxy -&gt; nativeModuleProxy<br>RCTJavaScriptLoader -&gt; 加载js代码<br>[RCTCxxBridge executeSourceCode]<br>[RCTRootView initWithBridge:…]<br>[RCTRootView bundleFinishedLoading]<br>初始化RCTRootContentView<br>[RCTRootView runApplication]//是Native调用js的一个完美例子。本质调用了AppRegistry的runApplication方法<br>我们初始化RN工程一般都是如下代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@&quot;index.ios&quot; fallbackResource:nil];</div><div class="line"></div><div class="line">RCTRootView *rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation</div><div class="line">                                                    moduleName:@&quot;AwesomeProject&quot;</div><div class="line">                                             initialProperties:nil</div><div class="line">                                                 launchOptions:launchOptions];</div></pre></td></tr></table></figure></p>
+<p>1、 获取到app的js入口文件的NSURL<br>2 、初始化RCTRootView, 传递的参数moduleName:@”AwesomeProject”是我们在入口的js文件中注册的, initialProperties:nil, 将作为js中的跟view的props, 可以用来传递需要的初始数据</p>
+<p>进入RCTRootView初始化中，其实很简单<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">RCTBridge *bridge = [[RCTBridge alloc] initWithBundleURL:bundleURL</div><div class="line">                                          moduleProvider:nil</div><div class="line">                                           launchOptions:launchOptions];</div><div class="line"></div><div class="line">return [self initWithBridge:bridge moduleName:moduleName initialProperties:initialProperties];</div></pre></td></tr></table></figure></p>
+<p>就实例化了一个RCTBridge，这个RCTBridge的实例其实就是一个外壳而已，接下来我们看看内部，为啥是一个外壳。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[self setUp];</div></pre></td></tr></table></figure></p>
+<p>内部中这个方法就是关键，这个方法里边实例化了一个真正的Bridge，即<code>RCTCxxBridge</code>或<code>RCTBatchedBridge</code>，所以说一开始实例化的Bridge只是一个壳子而已。为什么会出现两个不同的Bridge呢？主要是0.44之前的都是用的<code>RCTBatchedBridge</code>，之后RN用的是<code>RCTCxxBridge</code>，根据它的官方资料<code>RCTCxxBridge</code>会慢慢取代<code>RCTBatchedBridge</code>。(<code>RCTCxxBridge</code>有个问题就是依赖了4个包，而且这4个包被墙了具体可以看<a href="http://www.jianshu.com/p/1927785a3ba7" target="_blank" rel="external">将RN工程嵌入到现有原生iOS应用</a>)。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">self.batchedBridge = [[bridgeClass alloc] initWithParentBridge:self];</div><div class="line">[self.batchedBridge start];</div></pre></td></tr></table></figure></p>
+<p>首先是bridgeClass的获取，具体代码是优先加载<code>RCTCxxBridge</code>，如果获取不到的话，其次加载<code>RCTBatchedBridge</code>。本次分析是基于0.48并且工程初始化是使用了<code>RCTCxxBridge</code>，所以下边只要提到Bridge说的就是<code>RCTCxxBridge</code>。</p>
+<p>start是一个非常有料的方法。就像之前说的Bridge其实就是实现了一个调度管理的作用，那调度管理什么呢？所有需要调度管理的前提环境和类全部都是在start方法进行了初始化。</p>
+<p>1、  首先做的是实例化了一个js线程，我们之前所说的js thread就是它，用来执行js代码的线程<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">// Set up the JS thread early</div><div class="line">_jsThread = [[NSThread alloc] initWithTarget:self</div><div class="line">                                    selector:@selector(runJSRunLoop)</div><div class="line">                                      object:nil];</div><div class="line">_jsThread.name = RCTJSThreadName;</div><div class="line">_jsThread.qualityOfService = NSOperationQualityOfServiceUserInteractive;</div><div class="line">[_jsThread start];</div></pre></td></tr></table></figure></p>
+<p>这个线程执行的方法是<code>runJSRunLoop</code>通过名字大家也能猜出一个大概吧。其实就是启动了线程的runloop，保证了_jsThread能够一直运行。</p>
+<p>2、创建了一个group，用来初始化Birdge。接下来就开始加载我们本地所有的已经实现了RCTBridgeModule协议的modules<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"> dispatch_group_t prepareBridge = dispatch_group_create();</div><div class="line">// Initialize all native modules that cannot be loaded lazily</div><div class="line">[self _initModulesWithDispatchGroup:prepareBridge];</div></pre></td></tr></table></figure></p>
+<p>3、让我们看看initModulesWithDispatchGroup内部<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">for (Class moduleClass in RCTGetModuleClasses()) &#123;</div><div class="line">   NSString *moduleName = RCTBridgeModuleNameForClass(moduleClass);</div><div class="line"></div><div class="line">   // Don&apos;t initialize the old executor in the new bridge.</div><div class="line">   // TODO mhorowitz #10487027: after D3175632 lands, we won&apos;t need</div><div class="line">   // this, because it won&apos;t be eagerly initialized.</div><div class="line">   if ([moduleName isEqual:@&quot;RCTJSCExecutor&quot;]) &#123;</div><div class="line">     continue;</div><div class="line">   &#125;</div><div class="line"></div><div class="line">   // Check for module name collisions</div><div class="line">   RCTModuleData *moduleData = moduleDataByName[moduleName];</div><div class="line">   if (moduleData) &#123;</div><div class="line">     if (moduleData.hasInstance) &#123;</div><div class="line">       // Existing module was preregistered, so it takes precedence</div><div class="line">       continue;</div><div class="line">     &#125; else if ([moduleClass new] == nil) &#123;</div><div class="line">       // The new module returned nil from init, so use the old module</div><div class="line">       continue;</div><div class="line">     &#125; else if ([moduleData.moduleClass new] != nil) &#123;</div><div class="line">       // Both modules were non-nil, so it&apos;s unclear which should take precedence</div><div class="line">       RCTLogError(@&quot;Attempted to register RCTBridgeModule class %@ for the &quot;</div><div class="line">                   &quot;name &apos;%@&apos;, but name was already registered by class %@&quot;,</div><div class="line">                   moduleClass, moduleName, moduleData.moduleClass);</div><div class="line">     &#125;</div><div class="line">   &#125;</div><div class="line"></div><div class="line">   // Instantiate moduleData</div><div class="line">   // TODO #13258411: can we defer this until config generation?</div><div class="line">   moduleData = [[RCTModuleData alloc] initWithModuleClass:moduleClass</div><div class="line">                                                    bridge:self];</div><div class="line">   moduleDataByName[moduleName] = moduleData;</div><div class="line">   [moduleClassesByID addObject:moduleClass];</div><div class="line">   [moduleDataByID addObject:moduleData];</div><div class="line"> &#125;</div></pre></td></tr></table></figure></p>
+<p>主要是循环遍历用2个数组分别存储了所有的class和RCTModuleData(存储着我们class所有的信息包括class名称、所有的方法、等一些有效的信息和一个instance。还有一个Dictionary key是class，value是moudleData。这个就是通过class名称去取moduleData用的。</p>
+<p>这个方法中有一个很重要的方法<code>RCTGetModuleClasses()</code>。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">void RCTRegisterModule(Class);</div><div class="line">void RCTRegisterModule(Class moduleClass)</div><div class="line">&#123;</div><div class="line">  static dispatch_once_t onceToken;</div><div class="line">  dispatch_once(&amp;onceToken, ^&#123;</div><div class="line">    RCTModuleClasses = [NSMutableArray new];</div><div class="line">  &#125;);</div><div class="line"></div><div class="line">  RCTAssert([moduleClass conformsToProtocol:@protocol(RCTBridgeModule)],</div><div class="line">            @&quot;%@ does not conform to the RCTBridgeModule protocol&quot;,</div><div class="line">            moduleClass);</div><div class="line"></div><div class="line">  // Register module</div><div class="line">  [RCTModuleClasses addObject:moduleClass];</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这个就是我们一直说的必须要实现了RCTBridgeModule这个协议，如果实现其实会直接报错的。这个加载是通过<code>RCT_EXPORT_MODULE()</code>宏来实现的，宏是通过运行时<code>+load()</code>方法在我们应用启动的时候其实已经将所有的module加入到了数组之中。</p>
+<p>4 、以上终于完成了Modules信息的保存, 接着会进行JSExecutorFactory的初始化和相关的设置, JSExecutorFactory内部会持有一个JSCExecutor 所有与JS的通信，一定都通过JSCExecutor来进行, 所以需要重点关注, 它的构造函数中调用了initOnJSVMThread(), 里面进行了很多的JS上下文的准备, 创建JSClass, 全局的context, 以及添加全局的回调.注意在这个里面使用到的JSC<em>JSXXX的宏的作用, 实际上是会转换为调用苹果的JavaScriptCore对应的方法(去掉JSC</em>), 同时还要留意JSCExecutor构造函数中为js的上下文中设置了一个Proxy, nativeModuleProxy.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">void JSCExecutor::initOnJSVMThread()</div><div class="line">  // 在js的上下文中注册全局的闭包回调 , 这两个是我们需要重点关注的回调.</div><div class="line">  nativeFlushQueueImmediate</div><div class="line">  nativeCallSyncHook</div><div class="line"></div><div class="line">    installNativeHook&lt;&amp;JSCExecutor::nativeFlushQueueImmediate&gt;(&quot;nativeFlushQueueImmediate&quot;);</div><div class="line">    // 这一个注册的回调, 可以用于在js中直接调用oc, 注意, 在rn中js调用oc一般都是由oc发起的,</div><div class="line">    // 这就像我们的界面一般是有用户的操作才会触发系统调用, rn中类似的,</div><div class="line">    // 当oc调了js后, 在对应的js回调中才会实现调用oc的逻辑</div><div class="line"></div><div class="line"> // 在react native MessageQueue.js中的源码中可以找到 这样一段代码,</div><div class="line"> // 就是当oc没有及时的在消息队列中调js的时候, 大于5ms后js就会调用这个回调, 主动调用oc</div><div class="line"></div><div class="line">   MIN_TIME_BETWEEN_FLUSHES_MS = 5ms;</div><div class="line">      if (global.nativeFlushQueueImmediate &amp;&amp;</div><div class="line">        (now - this._lastFlush &gt;= MIN_TIME_BETWEEN_FLUSHES_MS ||</div><div class="line">         this._inCall === 0)) &#123;</div><div class="line">      var queue = this._queue;</div><div class="line">      this._queue = [[], [], [], this._callID];</div><div class="line">      this._lastFlush = now;</div><div class="line">      global.nativeFlushQueueImmediate(queue);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">// 这个回调是用来调用查找native中对应的方法相关信息的</div><div class="line"></div><div class="line">installNativeHook&lt;&amp;JSCExecutor::nativeCallSyncHook&gt;(&quot;nativeCallSyncHook&quot;);</div><div class="line">在react native的 NativeModules.js中有相关的调用来获取native方法的相关信息</div><div class="line">function genMethod(moduleID: number, methodID: number, type: MethodType) &#123;</div><div class="line">//...</div><div class="line">    return global.nativeCallSyncHook(moduleID, methodID, args);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>为js的上下设置 nativeModuleProxy, 这一个属性很重要, js端用来获取所有注册的nativeModule. 在js中我们需要引入native端的时候回写这样的类似代码 var {NativeModules} from ‘react-native’, 实际上就是获取到我们这里设置的.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">JSCExecutor::JSCExecutor()</div><div class="line">  &#123;</div><div class="line">  // 这个函数在js的全局上下文中设置了`nativeModuleProxy`,</div><div class="line">// 使得在js端可以获取到, 同时注意这个函数的第三个参数中</div><div class="line">// 还包装了一个方法用于调用, 里面涉及到JSCNativeModules这个类,</div><div class="line">// 就是获取NativeModule的操作, 后面分析</div><div class="line">    installGlobalProxy(m_context, &quot;nativeModuleProxy&quot;,</div><div class="line">                       exceptionWrapMethod&lt;&amp;JSCExecutor::getNativeModule&gt;());</div><div class="line">  &#125;</div><div class="line"></div><div class="line">在react-native 的NativeModules.js底部有这样的代码, 就直接调用了上面在native端设置的全局属性了</div><div class="line"></div><div class="line">let NativeModules : &#123;[moduleName: string]: Object&#125; = &#123;&#125;;</div><div class="line">if (global.nativeModuleProxy) &#123;</div><div class="line">  NativeModules = global.nativeModuleProxy;</div><div class="line">&#125;</div><div class="line">module.exports = NativeModules;</div></pre></td></tr></table></figure></p>
+<p>那么js中是怎么获取到我们之前在native端已经生成好的’配置表’信息的呢? 这个问题需要我们重点关注下, 在之前的react-native版本中, 是通过native端直接在js的上下文中注入这样一个__fbBatchedBridgeConfig配置表,<br>传过去一个json(remoteModuleConfig). 现在的版本中改了一些. 还是上面这段代码. 在如下的调用栈中,我们只需要关注最后一个函数.</p>
+<p>JSCExecutor::getNativeModule()<br>JSCNativeModules::getModule()<br>JSCNativeModules::createModule()<br>ModuleRegistry::getConfig()<br>RCTNativeModule::getMethods()<br>NSStringFromSelector(selector) hasPrefix:@”rct_export”(初始化RCTModuleMethod信息)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line">folly::Optional&lt;Object&gt; JSCNativeModules::createModule(const std::string&amp; name, JSContextRef context) &#123;</div><div class="line">  if (!m_genNativeModuleJS) &#123;</div><div class="line">// 获取js中contenxt中的global</div><div class="line">    auto global = Object::getGlobalObject(context);  </div><div class="line">// 获取 global中的__fbGenNativeModule对象</div><div class="line">    m_genNativeModuleJS = global.getProperty(&quot;__fbGenNativeModule&quot;).asObject();</div><div class="line">    m_genNativeModuleJS-&gt;makeProtected();</div><div class="line">  &#125;</div><div class="line"></div><div class="line"> // 这个方法最终会调到 RCTNativeModule::getMethods()中,</div><div class="line"> // 取得之前使用宏暴露的所有的方法  -&gt; 前缀是 &quot;__rct_export__&quot;</div><div class="line"> auto result = m_moduleRegistry-&gt;getConfig(name);</div><div class="line"></div><div class="line"></div><div class="line">  if (!result.hasValue()) &#123;</div><div class="line">    return nullptr;</div><div class="line">  &#125;</div><div class="line">// 调用 js中的__fbGenNativeModule方法, 并且传递过去native端的配置表, 用于端js处理</div><div class="line">  Value moduleInfo = m_genNativeModuleJS-&gt;callAsFunction(&#123;</div><div class="line">    Value::fromDynamic(context, result-&gt;config),</div><div class="line">    Value::makeNumber(context, result-&gt;index)</div><div class="line">  &#125;);</div><div class="line">  return moduleInfo.asObject().getProperty(&quot;module&quot;).asObject();</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 下面是对应的js中的处理, NativeModules.js</div><div class="line">// 暴露一个全局的属性给native(就是上面我们调用的js中的方法, 触发了后面的js后取到native端的配置表, 并且保存)</div><div class="line">// export this method as a global so we can call it from native</div><div class="line">global.__fbGenNativeModule = genModule;</div><div class="line"></div><div class="line">function genModule(...) &#123;</div><div class="line">  // 获取到native端调用时传递过来的配置信息</div><div class="line">  const [moduleName, constants, methods, promiseMethods, syncMethods] = config;</div><div class="line">  const module = &#123;&#125;;</div><div class="line">  // 遍历 所有的native的方法列表, 获取所有native的方法的详细信息</div><div class="line">  methods &amp;&amp; methods.forEach((methodName, methodID) =&gt; &#123;</div><div class="line">    module[methodName] = genMethod(moduleID, methodID, methodType);</div><div class="line">  &#125;);</div><div class="line"></div><div class="line">&#125;</div><div class="line">function genMethod(...) &#123;</div><div class="line">  /// ...</div><div class="line">  // 调用之前native端在js中注入的回调, 获取native中的所有方法的详细信息</div><div class="line">  return global.nativeCallSyncHook(moduleID, methodID, args);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>5、 使用dispatch_group方式初始化Instance(执行代码需要), 和加载js代码RCTJavaScriptLoader,这个类比较单纯，就是用来加载js代码的，没有其他用处<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">NSData *sourceCode = [RCTJavaScriptLoader attemptSynchronousLoadOfBundleAtURL:self.bundleURL</div><div class="line">                                                                 runtimeBCVersion:bcVersion</div><div class="line">                                                                     sourceLength:NULL</div><div class="line">                                                                            error:&amp;error];</div></pre></td></tr></table></figure></p>
+<p>6、 modules and source code都已经准备好了, 在notify中JSCExecutor专属的Thread内执行jsbundle代码执行js代码. 执行完毕后会将_displayLink添加到runloop(注意是在jsThread所在的runloop)中, 开始运行。</p>
+<p>[RCTCxxBridge executeSourceCode: ]<br>[RCTCxxBridge enqueueApplicationScript:]<br>void Instance::loadScriptFromString()<br>void NativeToJsBridge::loadApplication()<br>void JSCExecutor::loadApplicationScript()<br>void JSCExecutor::flush()<br>void JSCExecutor::bindBridge()<br>上面的调用栈中我们主要关注后面几个函数</p>
+<p><code>void JSCExecutor::loadApplicationScript()</code>, 在这个函数中注意下面两行代码, 注意, RN中有个很明显的问题就是, 首次进入RN模块的时候, 加载的很慢, 会有几秒的加载时间, 其实就是在这个函数中加载jsBundle造成的, 如果要优化加载的时间, 以及不同模块页面切换流畅, 就需要对jsBundle文件进行精简, 缓存等操作。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">// 执行js代码, 加载jsBundle</div><div class="line">evaluateScript(m_context, jsScript, jsSourceURL);</div><div class="line">// 在加载完jsbundle后主动调用一次, 为js的上下文环境添加必要的全局属性和回调</div><div class="line">flush();</div></pre></td></tr></table></figure></p>
+<p>void JSCExecutor::bindBridge()保存js的上下文环境中必要的全局属性和回调, 这些在 react native的 MessageQueue.js中定义的调用方法, 当native需要调用js的方法的时候, 需要通过调用这些js方法, 在这些方法中, js端会根据传递的信息查找到在js中需要调用的方法.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">    auto global = Object::getGlobalObject(m_context);</div><div class="line">    auto batchedBridgeValue = global.getProperty(&quot;__fbBatchedBridge&quot;);</div><div class="line">// 这些是在MessageQueue.js中定义的调用方法</div><div class="line">    auto batchedBridge = batchedBridgeValue.asObject();</div><div class="line">    m_callFunctionReturnFlushedQueueJS = batchedBridge.getProperty(&quot;callFunctionReturnFlushedQueue&quot;).asObject();</div><div class="line">    m_invokeCallbackAndReturnFlushedQueueJS = batchedBridge.getProperty(&quot;invokeCallbackAndReturnFlushedQueue&quot;).asObject();</div><div class="line">    m_flushedQueueJS = batchedBridge.getProperty(&quot;flushedQueue&quot;).asObject();</div><div class="line">    m_callFunctionReturnResultAndFlushedQueueJS = batchedBridge.getProperty(&quot;callFunctionReturnResultAndFlushedQueue&quot;).asObject();</div><div class="line">  &#125;</div></pre></td></tr></table></figure></p>
+<p>7 、上面的工作完成之后, 初始化bridge的工作就完成了, jsBundle已经加载完成, oc端的’配置表’也已经处理好, 并且成功已经传递给js端, js的上下文配置已经准备好, 下面就是开始执行我们的js代码了, React就会开始计算好所有的布局信息, 以及Component层级关系等, 等待native端完成对应的真正的页面渲染和布局. 回到RCTRootView的初始化方法中, 注意在[RCTRootView initWithBridge:…]的初始化方法中, 注册了几个js执行情况的通知, 我们重点关注js执行完毕后的通知RCTJavaScriptDidLoadNotification<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">- (instancetype)initWithBundleURL:(NSURL *)bundleURL</div><div class="line">                       moduleName:(NSString *)moduleName</div><div class="line">                initialProperties:(NSDictionary *)initialProperties</div><div class="line">                    launchOptions:(NSDictionary *)launchOptions</div><div class="line">&#123;</div><div class="line">  RCTBridge *bridge = [[RCTBridge alloc] initWithBundleURL:bundleURL</div><div class="line">                                            moduleProvider:nil</div><div class="line">                                             launchOptions:launchOptions];</div><div class="line">// 上面完成了bridge的初始化工作 , 下面开始完成rootView的初始化</div><div class="line">  return [self initWithBridge:bridge moduleName:moduleName initialProperties:initialProperties];</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>下面是js执行完毕后的通知RCTJavaScriptDidLoadNotification中的一系列的处理</p>
+<p>[RCTRootView javaScriptDidLoad]<br>[RCTRootView bundleFinishedLoading]<br>RCTRootContentView (创建contentView)<br>[RCTRootView runApplication]<br>在创建RCTRootContentView的时候, 注意有个参数是reactTag, 这个属性很重要, 每一个reactTag都应该是唯一的, 从1开始, 每次递增10. RCTRootContentView初始化时, 还需要在RCTUIManager中通过reactTag去注册, 从而由RCTUIManager来统一管理所有的js端使用Component对应的每个原生view(_viewRegistry[tag]表), 有了这个, 我们就可以很方便的在其他地方通过reactTag获取到我们的Component所在的rootView.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">    /**</div><div class="line">     * Every root view that is created must have a unique react tag.</div><div class="line">     * Numbering of these tags goes from 1, 11, 21, 31, etc</div><div class="line">     *</div><div class="line">     * NOTE: Since the bridge persists, the RootViews might be reused, so the</div><div class="line">     * react tag must be re-assigned every time a new UIManager is created.</div><div class="line">     */</div><div class="line"></div><div class="line">- (NSNumber *)allocateRootTag</div><div class="line">&#123;</div><div class="line">  NSNumber *rootTag = objc_getAssociatedObject(self, _cmd) ?: @1;</div><div class="line">  objc_setAssociatedObject(self, _cmd, @(rootTag.integerValue + 10), OBJC_ASSOCIATION_RETAIN_NONATOMIC);</div><div class="line">  return rootTag;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>然后才是[RCTRootView runApplication], 这里就会调用js里面AppRegistry对应的方法runApplication了, 在AppRegistry.js中有下面的一段注释, 已经解释得很清楚了<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * `AppRegistry` is the JS entry point to running all React Native apps.  App</div><div class="line"> * root components should register themselves with</div><div class="line"> * `AppRegistry.registerComponent`, then the native system can load the bundle</div><div class="line"> * for the app and then actually run the app when it&apos;s ready by invoking</div><div class="line"> * `AppRegistry.runApplication`.</div><div class="line"> *</div><div class="line"> * To &quot;stop&quot; an application when a view should be destroyed, call</div><div class="line"> * `AppRegistry.unmountApplicationComponentAtRootTag` with the tag that was</div><div class="line"> * passed into `runApplication`. These should always be used as a pair.</div><div class="line"> *</div><div class="line"> * `AppRegistry` should be `require`d early in the `require` sequence to make</div><div class="line"> * sure the JS execution environment is setup before other modules are</div><div class="line"> * `require`d.</div><div class="line"> */</div><div class="line"></div><div class="line">- (void)runApplication:(RCTBridge *)bridge</div><div class="line">&#123;</div><div class="line">  NSString *moduleName = _moduleName ?: @&quot;&quot;;</div><div class="line">  NSDictionary *appParameters = @&#123;</div><div class="line">    @&quot;rootTag&quot;: _contentView.reactTag,</div><div class="line">    @&quot;initialProps&quot;: _appProperties ?: @&#123;&#125;,</div><div class="line">  &#125;;</div><div class="line">// 调用AppRegistry.js中的runApplication开始运行</div><div class="line">  RCTLogInfo(@&quot;Running application %@ (%@)&quot;, moduleName, appParameters);</div><div class="line">  [bridge enqueueJSCall:@&quot;AppRegistry&quot;</div><div class="line">                 method:@&quot;runApplication&quot;</div><div class="line">                   args:@[moduleName, appParameters]</div><div class="line">             completion:NULL];</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>8、 因为执行js代码的时候, js端会计算好每个view的布局, 属性等信息, 然后通过调用native的系统方法来完成, 页面的渲染, 页面的布局. 这个过程中就涉及到了js 和native的互调通信了. 这个过程分为两个部分.</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/16/React Native组件生命周期/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="FlyOceanFish">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FlyOceanFish' Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/10/16/React Native组件生命周期/" itemprop="url">React Native组件生命周期</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-16T13:57:18+08:00">
+                2017-10-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/React-Native/" itemprop="url" rel="index">
+                    <span itemprop="name">React Native</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/10/16/React Native组件生命周期/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/10/16/React Native组件生命周期/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h2><p>RN的Component如同iOS中ViewController一样，同样具有自己的生命周期，如果大家对于ViewController的生命周期熟悉的话，相信看明白也不在话下的</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/6644906-f3f49bf47382bddf.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Component生命周期.jpeg"></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/16/Rect Native(>0.45)通过cocopods初始化工程/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="FlyOceanFish">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FlyOceanFish' Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/10/16/Rect Native(>0.45)通过cocopods初始化工程/" itemprop="url">Rect Native(>0.45)通过cocopods初始化工程</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-16T13:57:18+08:00">
+                2017-10-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/React-Native/" itemprop="url" rel="index">
+                    <span itemprop="name">React Native</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/10/16/Rect Native(>0.45)通过cocopods初始化工程/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/10/16/Rect Native(>0.45)通过cocopods初始化工程/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>由于React Native 0.45以上版本增加了4个依赖包，并且被墙了，所以大家在初始化工程之后运行会报错，就是因为缺少了文件。其实就是Bridge文件或者它所依赖的文件。0.45以后的bidge开始使用了RCTCxxBridge,之前都是RCTBatchedBridge，根据Facebook的官方资料RCTBatchedBridge慢慢会被废弃掉的，建议使用RCTCxxBridge。因为使用RCTCxxBridge我们就必须导入被墙的4个依赖包，就会点繁琐。使用RCTBatchedBridge比较简单不用翻墙的。一下是两个Bridge对应的不同Podfile。</p>
+<h3 id="RCTBatchedBridge对应的Podfile文件内容"><a href="#RCTBatchedBridge对应的Podfile文件内容" class="headerlink" title="RCTBatchedBridge对应的Podfile文件内容"></a>RCTBatchedBridge对应的Podfile文件内容</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"># Uncomment the next line to define a global platform for your project</div><div class="line"># platform :ios, &apos;9.0&apos;</div><div class="line"></div><div class="line">target &apos;TestReactNative&apos; do</div><div class="line">  # Uncomment the next line if you&apos;re using Swift or would like to use dynamic frameworks</div><div class="line">  # use_frameworks!</div><div class="line"></div><div class="line">  # Pods for TestReactNative</div><div class="line">  pod &apos;React&apos;, :path =&gt; &apos;../node_modules/react-native&apos;, :subspecs =&gt; [</div><div class="line">    &apos;Core&apos;,</div><div class="line">    &apos;DevSupport&apos;, # 如果RN版本 &gt;= 0.43，则需要加入此行才能开启开发者菜单</div><div class="line">    &apos;RCTText&apos;,</div><div class="line">    &apos;RCTNetwork&apos;,</div><div class="line">    &apos;RCTWebSocket&apos;, # 这个模块是用于调试功能的</div><div class="line">    &apos;BatchedBridge&apos;//这个是重点，在ReactNative提供的官方例子中没导入，所以按照官方文档去做初始化的工程会报错</div><div class="line">    # 在这里继续添加你所需要的模块</div><div class="line">  ]</div><div class="line">  # 如果你的RN版本 &gt;= 0.42.0，请加入下面这行</div><div class="line">  pod &quot;Yoga&quot;, :path =&gt; &quot;../node_modules/react-native/ReactCommon/yoga&quot;</div><div class="line">end</div></pre></td></tr></table></figure>
+<h3 id="RCTCxxBridge对应的Podfile文件内容"><a href="#RCTCxxBridge对应的Podfile文件内容" class="headerlink" title="RCTCxxBridge对应的Podfile文件内容"></a>RCTCxxBridge对应的Podfile文件内容</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"># Uncomment the next line to define a global platform for your project</div><div class="line"># platform :ios, &apos;9.0&apos;</div><div class="line">react_native_path = &apos;../node_modules/react-native&apos;</div><div class="line"></div><div class="line">target &apos;StudyReactNative&apos; do</div><div class="line">  # Uncomment the next line if you&apos;re using Swift or would like to use dynamic frameworks</div><div class="line">  use_frameworks!</div><div class="line"></div><div class="line">  # Native Navigation!</div><div class="line">  #pod &apos;native-navigation&apos;, :path =&gt; &apos;../node_modules/native-navigation&apos;</div><div class="line"></div><div class="line">  # To use CocoaPods with React Native, you need to add this specific Yoga spec as well</div><div class="line">  pod &apos;Yoga&apos;, :path =&gt; react_native_path + &apos;/ReactCommon/yoga&apos;</div><div class="line"></div><div class="line">  # Third party deps</div><div class="line">  pod &apos;DoubleConversion&apos;, :podspec =&gt; react_native_path + &apos;/third-party-podspecs/DoubleConversion.podspec&apos;</div><div class="line">  pod &apos;GLog&apos;, :podspec =&gt; react_native_path + &apos;/third-party-podspecs/GLog.podspec&apos;</div><div class="line">  pod &apos;Folly&apos;, :podspec =&gt; react_native_path + &apos;/third-party-podspecs/Folly.podspec&apos;</div><div class="line"></div><div class="line">  # You don&apos;t necessarily need all of these subspecs, but this would be a typical setup.</div><div class="line">  pod &apos;React&apos;, :path =&gt; react_native_path, :subspecs =&gt; [</div><div class="line">    &apos;Core&apos;,</div><div class="line">    &apos;CxxBridge&apos;,</div><div class="line">    &apos;RCTText&apos;,</div><div class="line">    &apos;RCTNetwork&apos;,</div><div class="line">    &apos;RCTWebSocket&apos;, # needed for debugging</div><div class="line">    &apos;RCTImage&apos;,</div><div class="line">    &apos;RCTNetwork&apos;,</div><div class="line">    # Add any other subspecs you want to use in your project</div><div class="line">    &apos;DevSupport&apos;</div><div class="line">  ]</div><div class="line">end</div></pre></td></tr></table></figure>
+<p>这里因为导入了四个包，被墙了所以要翻墙。</p>
+<p>四个包的地址<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">fetch_and_unpack glog-0.3.4.tar.gz https://github.com/google/glog/archive/v0.3.4.tar.gz &quot;\&quot;$SCRIPTDIR/ios-configure-glog.sh\&quot;&quot;</div><div class="line">fetch_and_unpack double-conversion-1.1.5.tar.gz https://github.com/google/double-conversion/archive/v1.1.5.tar.gz</div><div class="line">fetch_and_unpack boost_1_63_0.tar.gz https://github.com/react-native-community/boost-for-react-native/releases/download/v1.63.0-0/boost_1_63_0.tar.gz</div><div class="line">fetch_and_unpack folly-2016.09.26.00.tar.gz https://github.com/facebook/folly/archive/v2016.09.26.00.tar.gz</div></pre></td></tr></table></figure></p>
+<p>其实可以通过上边地址自己下载下来放到<br>XXReactNative工程/node_modules/react-native/third-party文件夹下<br>如果没有third-party这个文件夹就新建一个。</p>
+<p>也可以通过百度云盘<a href="https://pan.baidu.com/s/1kVDUAZ9#list/path=%2F" target="_blank" rel="external">third-party</a>下载下来解压缩之后放到XXReactNative工程/node_modules/react-native这个路径下就可以了<br>之后运行pod install即可<br><img src="http://upload-images.jianshu.io/upload_images/6644906-01d13bd37248e3e4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="7DC30CAE-BDB1-439A-810E-1BE35FCC8EA4.png"></p>
+<h2 id="更新以前的工程"><a href="#更新以前的工程" class="headerlink" title="更新以前的工程"></a>更新以前的工程</h2><p>我通过以上方法来更新我以前的工程，同时替换package.json为最新的，发现报错。此时需要我们yarn  install或npm install，然后在ios工程的根目录下执行pod install</p>
+<h2 id="‘boost-iterator-iterator-adaptor-hpp’-file-not-found"><a href="#‘boost-iterator-iterator-adaptor-hpp’-file-not-found" class="headerlink" title="‘boost/iterator/iterator_adaptor.hpp’ file not found"></a>‘boost/iterator/iterator_adaptor.hpp’ file not found</h2><ul>
+<li><p>/Users/Vanessa/.rncache 中 boost_1_63_0.tar.gz， double-conversion-1.1.5.tar.gz， folly-2016.09.26.00.tar.gz， glog-0.3.4.tar.gz 文件下载不完整</p>
+</li>
+<li><p>node_modules/react-native/third-party 文件不完整</p>
+</li>
+</ul>
+<p>解决方案：</p>
+<p>删除 .rncache 后重新下载，或手动下载后放入 .rncache 中</p>
+<p>把以上文件解压后放入 node_modules/react-native/third-party 下</p>
+<p>Clean &amp; Build</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/16/SDWebImage源码解读与学习（一）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="FlyOceanFish">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FlyOceanFish' Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/10/16/SDWebImage源码解读与学习（一）/" itemprop="url">SDWebImage源码解读与学习（一）</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-16T13:57:18+08:00">
+                2017-10-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/10/16/SDWebImage源码解读与学习（一）/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/10/16/SDWebImage源码解读与学习（一）/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>SDWebImage可以说是一个家喻户晓的一个优秀的图片加载框架，极大的方便了我们加载网络图片。好的代码和框架都是我们学习的资源，所以我将一点一点的，从全局到局部的思路对SDWebImage的源码进行解读。</p>
+<p>首先让我们了解一下这么优秀的框架都干了啥，有哪些优点！</p>
+<h2 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h2><ul>
+<li>通过UIImageView、 UIButton的category的方式实现，可以让我们方便的引入和使用</li>
+<li>异步下载图片</li>
+<li>在内存和硬盘上异步缓存图片，有自动过期处理机制</li>
+<li>在后台实现了图片解压</li>
+<li>保证了同样的图片地址不会下载多次</li>
+<li>保证了主线程永远不会被阻塞</li>
+<li>使用GCD和ARC</li>
+<li>支持UIImage (JPEG, PNG, …)</li>
+<li><strong><em>支持WebP</em></strong></li>
+</ul>
+<h2 id="SDWebImage框架类图"><a href="#SDWebImage框架类图" class="headerlink" title="SDWebImage框架类图"></a>SDWebImage框架类图</h2><p>通过此图我们可以了解到SDWebImage整个框架的设计思路，可以看到SDWebImage有哪些核心类和方法(如果不清晰，建议下载下来看)</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/6644906-69c145b9f4f11725.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="SDWebImage框架类图.png"></p>
+<h2 id="核心类的作用"><a href="#核心类的作用" class="headerlink" title="核心类的作用"></a>核心类的作用</h2><p><strong><em>SDWebImageManager</em></strong><br>通过调用各个不同的类实现了缓存查询和图片的下载<br><strong><em>SDWebImageDownloader</em></strong><br>在内部通过调用下载类去下载我们需要的图片，这个类是通过设计模式的外观模式实现的。即使以后通过其他方式的下载，只要重写一个下载类更改此类的逻辑就好，根本影响不到我们本身代码的调用<br><strong><em>SDWebImageDownloaderOperation</em></strong><br>一个线程，继承于NSOperation，内部通过NSURLRequest和NSURLSession的方式实现图片的下载<br><strong><em>SDWebImageDecoder</em></strong><br>实现了图片的解码<br><strong><em>NSData+ImageContentType</em></strong><br>判断出图片的格式。jpeg、png、gif、tiff、webp<br><strong><em>SDImageCache</em></strong><br>在磁盘或内存图片的缓存和读取。当达到内存警告的时候，清除内存的缓存;当程序UIApplicationWillTerminateNotification时，清除磁盘缓存<br><strong><em>SDImageCacheConfig</em></strong><br>主要配合SDImageCache使用，帮我们配置是否需要解压缩图片、是否关闭iCloud备份、是否缓存到内存、缓存时间、缓存大小<br><strong><em>SDWebImageCompat</em></strong><br>根据屏幕的Scale生成不同Scale的图片<br><strong><em>UIImage+MultiFormat</em></strong><br>根据图片的类型生成不同的图片，包括gif、webp、和其他三种大的类型图片的生成方式<br><strong><em>UIView+WebCache</em></strong><br>将所有的UIView的category的图片下载操作提取出来，做成公用的下载方法</p>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">#import &lt;SDWebImage/UIImageView+WebCache.h&gt;</div><div class="line">...</div><div class="line">[imageView sd_setImageWithURL:[NSURL URLWithString:@&quot;http://www.domain.com/path/to/image.jpg&quot;]</div><div class="line">             placeholderImage:[UIImage imageNamed:@&quot;placeholder.png&quot;]];</div></pre></td></tr></table></figure>
+<p>可以看到如果我们UIButton、UIImageView如果想使用网络图片，直接调用一个方法即可实现我们想要的，是不是很简单啊？？</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/16/SDWebImage源码解读与学习（二）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="FlyOceanFish">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FlyOceanFish' Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/10/16/SDWebImage源码解读与学习（二）/" itemprop="url">SDWebImage源码解读与学习（二）</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-16T13:57:18+08:00">
+                2017-10-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/10/16/SDWebImage源码解读与学习（二）/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/10/16/SDWebImage源码解读与学习（二）/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>SDWebImage源码解读与学习（一）我写的这篇文章已经详细介绍了SDWebImage框架中所有的核心类和具体作用，结尾处也简单示例了一下SDWebImage的使用，相信大家对SDWebImage已经有了一个大体的认识。这次我将带领大家解读一下SDWebImage加载网络图片这个过程。</p>
+<p>1、<strong><em>当我们给UIImageView设置图片URL是，首先调用的是UIView+WebCache这个category中的方法。</em></strong><br><img src="http://upload-images.jianshu.io/upload_images/6644906-74a919d76d926e47.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="E49A659E-4846-4B94-8F2A-5F66A12823CC.png"><br>这个方法主要干了两件事情。1)取消当前视图正在下载图片的线程2）调用SDWebImageManager的loadImageWithURL方法开始下载图片。当线程下载成功回到到SDWebImageManager的block时，此时会调用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[self.imageCache storeImage:transformedImage imageData:(imageWasTransformed ? nil : downloadedData) forKey:key toDisk:cacheOnDisk completion:nil];</div></pre></td></tr></table></figure></p>
+<p>这个方法将下载的图片缓存到磁盘和内存中</p>
+<p>2、<strong><em>接下来让我分析SDWebImageManager类中loadImageWithURL方法</em></strong></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/6644906-4846398c5d5c0023.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="C226D78D-7C3D-49BC-9D85-A47751E182DB.png"><br>该方法中通过如上图SDImageCache去查缓存是否已经有这张图片，如果查到了</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/6644906-7d6e794aee939298.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="A2245A8E-0D42-4C26-9025-854D9C0413B0.png"><br>并不是忙着直接回调，而是判断是否是SDWebImageRefreshCached或者SDWebImageManagerDelegate的方法</p>
+<p>  <strong>如果判断条件成立：</strong><br>会调用SDWebImageDownloader中downloadImageWithURL启动线程开始下载图片，SDWebImageDownloaderOperation下载成功之后会做一系列的处理。包括根据格式生成矫正过的UIImage、解压缩图片等等</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/6644906-a7027f4456efa0bd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="F7419FF6-36E7-44D6-802B-1ACE0F31ECC7.png"></p>
+<p><strong>如果判断条件不成立:</strong></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/6644906-68fa443f8341635a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="BBAFDDF7-B13B-48DE-9BA9-8553756AD727.png"><br>如上图则直接调用callCompletionBlockForOperation:completion:image:data:error:cacheType:finished:url这个方法,这个方法最终回调到UIView+WebCache这个类中，此类然后通过判断是UIImageView或UIButton将图片设置到视图上。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>整个加载过程就是这样，可以看到SDWebImageManager就像一个大脑一样，负责调度各个类完成图片下载、缓存的功能，让各个类各司其职。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/16/UIPageViewController使用和控件的封装/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="FlyOceanFish">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FlyOceanFish' Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/10/16/UIPageViewController使用和控件的封装/" itemprop="url">UIPageViewController使用和控件的封装</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-16T13:57:18+08:00">
+                2017-10-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/10/16/UIPageViewController使用和控件的封装/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/10/16/UIPageViewController使用和控件的封装/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>我们经常会遇到一个场景，就是同时有几个视图需要左右滑动显示。大家可能会通过UIScrollview来实现，也能实现。但是如果不自己实现一些懒加载、缓存其实对性能还是有浪费的。接下来我们就让U闪亮登场。UIPageViewController加载不同的UIViewController可以有效的将不同逻辑进行了分离，减轻了总UIViewController的负担。<br>我通过UIPageViewController简单封装了一个工具，就是加载不同的视图，支持上下滑动、左右滑动。并且具有懒加载和缓存的功能，在一定程度上提高了性能。</p>
+<h4 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">    self.array = @[[FirstViewController class],[SecondViewController class],[FirstViewController class]];</div><div class="line">//实例化UIPageViewController，并且指定方向和动画。可以设置options。UIPageViewControllerOptionInterPageSpacingKey两个视图的间距</div><div class="line">    UIPageViewController *page = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal options:@&#123;UIPageViewControllerOptionInterPageSpacingKey:@10&#125;];</div><div class="line">    page.delegate = self;</div><div class="line">    page.dataSource = self;</div><div class="line">`</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">typedef NS_ENUM(NSInteger, UIPageViewControllerTransitionStyle) &#123;</div><div class="line">    UIPageViewControllerTransitionStylePageCurl = 0, //翻书的效果</div><div class="line">    UIPageViewControllerTransitionStyleScroll = 1 // 正常滑动切换效果</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">typedef NS_ENUM(NSInteger, UIPageViewControllerNavigationDirection) &#123;</div><div class="line">    UIPageViewControllerNavigationDirectionForward,</div><div class="line">    UIPageViewControllerNavigationDirectionReverse</div><div class="line">&#125;;</div><div class="line">其实这两个就是一对。如果是左右滑动的话，一个代表从左到右，另一个就是从右到左；如果上下滑动，一个代表从上到下，另一个就是从下到上。</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">//设置当前显示ViewController,这里通过一个方法集中生成，其实也是做到缓存功能。</div><div class="line">    [page setViewControllers:@[[self private_viewControllerForPage:0]] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];</div><div class="line">    [self addChildViewController:page];</div><div class="line">    [self.view addSubview:page.view];</div><div class="line">    [page didMoveToParentViewController:self];</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">//实例化UIViewController,并且缓存起来</div><div class="line">- (UIViewController *)private_viewControllerForPage:(NSUInteger)pageIndex&#123;</div><div class="line">    if (pageIndex&lt;self.pageViewControllerClasses.count) &#123;</div><div class="line">        if (pageIndex&lt;self.cacheViewControllerArray.count) &#123;</div><div class="line">            return self.cacheViewControllerArray[pageIndex];</div><div class="line">        &#125;else&#123;</div><div class="line">            Class controllerClass =  self.pageViewControllerClasses[pageIndex];</div><div class="line">            UIViewController *controller = [[controllerClass alloc] init];</div><div class="line">            [self.cacheViewControllerArray insertObject:controller atIndex:pageIndex];</div><div class="line">            return controller;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    return nil;</div><div class="line"></div><div class="line">&#125;</div><div class="line">- (NSInteger)private_indexOfViewController:(UIViewController *)viewController&#123;</div><div class="line">    NSInteger index = [self.cacheViewControllerArray indexOfObject:viewController];</div><div class="line">    return index;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="代理方法"><a href="#代理方法" class="headerlink" title="代理方法"></a>代理方法</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">//向后滑动的时候，调用此方法。获取之前显示过的UIViewController</div><div class="line">- (nullable UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController&#123;</div><div class="line">    NSInteger currentIndex = [self private_indexOfViewController:viewController];</div><div class="line">    if (currentIndex&gt;0) &#123;</div><div class="line">        return [self private_viewControllerForPage:currentIndex-1];</div><div class="line">    &#125;</div><div class="line">    return nil;</div><div class="line">&#125;</div><div class="line">//向前滑动的时候，调用此方法。获取之后要显示的UIViewController</div><div class="line">- (nullable UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController&#123;</div><div class="line">    NSInteger currentIndex = [self private_indexOfViewController:viewController];</div><div class="line">    if (currentIndex&gt;=0) &#123;</div><div class="line">        return [self private_viewControllerForPage:currentIndex+1];</div><div class="line">    &#125;</div><div class="line">    return nil;</div><div class="line">&#125;</div><div class="line">//滑动结束后回调此方法</div><div class="line">- (void)pageViewController:(UIPageViewController *)pageViewController didFinishAnimating:(BOOL)finished previousViewControllers:(NSArray&lt;UIViewController *&gt; *)previousViewControllers transitionCompleted:(BOOL)completed&#123;</div><div class="line">    if (completed&amp;&amp;self.YTOPageViewControllerPageChanged) &#123;</div><div class="line">        self.YTOPageViewControllerPageChanged([self private_indexOfViewController:pageViewController.viewControllers.firstObject]);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>上边就是UIPageViewController的基本用法。大家可以自行去探索一下。其实挺好玩的，也可以实现一下显示两个视图，看起来就是一本打开的书的效果。<br>下边是我封装的一个工具类，大家可以参考一下。只要传入你需要显示的UIViewController<br>的class名字就可以。</p>
+<h2 id="效果图"><a href="#效果图" class="headerlink" title="效果图"></a>效果图</h2><p><img src="http://upload-images.jianshu.io/upload_images/6644906-c23a7e673aca129a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="效果.png"></p>
+<h2 id="控件地址"><a href="#控件地址" class="headerlink" title="控件地址"></a>控件地址</h2><p><strong><em>大家觉着有用别忘了star一下哦！</em></strong><br><a href="https://github.com/FlyOceanFish/YTOSectionsViewController" target="_blank" rel="external">YTOSectionsViewController</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/16/iOS中3DES加密解密/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="FlyOceanFish">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FlyOceanFish' Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/10/16/iOS中3DES加密解密/" itemprop="url">iOS中3DES加密解密</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-16T13:57:18+08:00">
+                2017-10-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/10/16/iOS中3DES加密解密/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/10/16/iOS中3DES加密解密/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="加密"><a href="#加密" class="headerlink" title="加密"></a>加密</h2><p>加密分为对称加密和非对称加密。</p>
+<ul>
+<li>对称性加密算法，信息接收双方都需事先知道密匙和加解密算法且其密匙是相同的，之后便是对数据进行 加解密了;</li>
+<li>非对称算法与之不同，发送双方A,B事先均生成一堆密匙，然后A将自己的公有密匙发送给B，B将自己的公有密匙发送给A，如果A要给B发送消息，则先需要用B的公有密匙进行消息加密，然后发送给B端，此时B端再用自己的私有密匙进行消息解密，B向A发送消息时为同样的道理。</li>
+</ul>
+<h4 id="对称加密"><a href="#对称加密" class="headerlink" title="对称加密"></a>对称加密</h4><p>对称加密常见的AES、DES、3DES。DES是一种分组数据加密技术（先将数据分成固定长度的小数据块，之后进行加密），速度较快，适用于大量数据加密，而3DES是一种基于DES的加密算法，使用3个不同密匙对同一个分组数据块进行3次加密，如此以使得密文强度更高;AES相比较其他两种具有更高的速度和资源使用效率。</p>
+<h4 id="非对称加密"><a href="#非对称加密" class="headerlink" title="非对称加密"></a>非对称加密</h4><p>非对称加密常见RSA、DSA、ECC。RSA和DSA的安全性及其它各方面性能都差不多，而ECC较之则有着很多的性能优越，包括处理速度，带宽要求，存储空间等等。</p>
+<p><strong><em>我们采用的是3DES，代码如下：</em></strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div></pre></td><td class="code"><pre><div class="line">#import &quot;DESTools.h&quot;</div><div class="line">#import &lt;CommonCrypto/CommonCrypto.h&gt;</div><div class="line">#import &quot;GTMBase64.h&quot;</div><div class="line">#import &quot;GTMDefines.h&quot;</div><div class="line"></div><div class="line">//加密解密的key,与后台一致</div><div class="line">#define USER_KEY @&quot;xxxxxx&quot;</div><div class="line">//初始化向量，与后台一致</div><div class="line">#define initIv    @&quot;xxx&quot;</div><div class="line"></div><div class="line">@implementation DESTools</div><div class="line"></div><div class="line">+ (NSString *)encryptWithText:(NSString *)sText</div><div class="line">&#123;</div><div class="line">    //kCCEncrypt 加密</div><div class="line">    return [self encrypt:sText encryptOrDecrypt:kCCEncrypt key:USER_KEY];</div><div class="line">&#125;</div><div class="line"></div><div class="line">+ (NSString *)decryptWithText:(NSString *)sText</div><div class="line">&#123;</div><div class="line">    //kCCDecrypt 解密</div><div class="line">    return [self encrypt:sText encryptOrDecrypt:kCCDecrypt key:USER_KEY];</div><div class="line">&#125;</div><div class="line"></div><div class="line">+ (NSString *)encrypt:(NSString *)sText encryptOrDecrypt:(CCOperation)encryptOperation key:(NSString *)key</div><div class="line">&#123;</div><div class="line">    const void *dataIn;</div><div class="line">    size_t dataInLength;</div><div class="line"></div><div class="line">    if (encryptOperation == kCCDecrypt)//传递过来的是decrypt 解码</div><div class="line">    &#123;</div><div class="line">        //解码 base64</div><div class="line">        NSData *decryptData = [GTMBase64 decodeData:[sText dataUsingEncoding:NSUTF8StringEncoding]];//转成utf-8并decode</div><div class="line">        dataInLength = [decryptData length];</div><div class="line">        dataIn = [decryptData bytes];</div><div class="line">    &#125;</div><div class="line">    else  //encrypt</div><div class="line">    &#123;</div><div class="line">        NSData* encryptData = [sText dataUsingEncoding:NSUTF8StringEncoding];</div><div class="line">        dataInLength = [encryptData length];</div><div class="line">        dataIn = (const void *)[encryptData bytes];</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /*</div><div class="line">     DES加密 ：用CCCrypt函数加密一下，然后用base64编码下，传过去</div><div class="line">     DES解密 ：把收到的数据根据base64，decode一下，然后再用CCCrypt函数解密，得到原本的数据</div><div class="line">     */</div><div class="line">    CCCryptorStatus ccStatus;</div><div class="line">    uint8_t *dataOut = NULL; //可以理解位type/typedef 的缩写（有效的维护了代码，比如：一个人用int，一个人用long。最好用typedef来定义）</div><div class="line">    size_t dataOutAvailable = 0; //size_t  是操作符sizeof返回的结果类型</div><div class="line">    size_t dataOutMoved = 0;</div><div class="line"></div><div class="line">    dataOutAvailable = (dataInLength + kCCBlockSizeDES) &amp; ~(kCCBlockSizeDES - 1);</div><div class="line">    dataOut = malloc( dataOutAvailable * sizeof(uint8_t));</div><div class="line">    memset((void *)dataOut, 0x0, dataOutAvailable);//将已开辟内存空间buffer的首 1 个字节的值设为值 0</div><div class="line"></div><div class="line">    const void *vkey = (const void *) [key UTF8String];</div><div class="line">    const void *iv = (const void *) [initIv UTF8String];</div><div class="line"></div><div class="line">    //CCCrypt函数 加密/解密</div><div class="line">    ccStatus = CCCrypt(encryptOperation,//  加密/解密</div><div class="line">                       kCCAlgorithm3DES,//  加密根据哪个标准（des，3des，aes。。。。）</div><div class="line">                       kCCOptionPKCS7Padding,//  选项分组密码算法(des:对每块分组加一次密  3DES：对每块分组加三个不同的密)</div><div class="line">                       vkey,  //密钥    加密和解密的密钥必须一致</div><div class="line">                       kCCKeySize3DES,//   DES 密钥的大小（kCCKeySizeDES=8）</div><div class="line">                       iv, //  可选的初始矢量</div><div class="line">                       dataIn, // 数据的存储单元</div><div class="line">                       dataInLength,// 数据的大小</div><div class="line">                       (void *)dataOut,// 用于返回数据</div><div class="line">                       dataOutAvailable,</div><div class="line">                       &amp;dataOutMoved);</div><div class="line"></div><div class="line">    NSString *result = nil;</div><div class="line"></div><div class="line">    if (encryptOperation == kCCDecrypt)//encryptOperation==1  解码</div><div class="line">    &#123;</div><div class="line">        //得到解密出来的data数据，改变为utf-8的字符串</div><div class="line">        result = [[NSString alloc] initWithData:[NSData dataWithBytes:(const void *)dataOut length:(NSUInteger)dataOutMoved] encoding:NSUTF8StringEncoding] ;</div><div class="line">    &#125;</div><div class="line">    else //encryptOperation==0  （加密过程中，把加好密的数据转成base64的）</div><div class="line">    &#123;</div><div class="line">        //编码 base64</div><div class="line">        NSData *data = [NSData dataWithBytes:(const void *)dataOut length:(NSUInteger)dataOutMoved];</div><div class="line">        result = [GTMBase64 stringByEncodingData:data];</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    return result;</div><div class="line">&#125;</div><div class="line">@end</div></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+  </section>
+
+  
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+  </nav>
+
+
+
+          </div>
+          
+
+
+          
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="FlyOceanFish" />
+            
+              <p class="site-author-name" itemprop="name">FlyOceanFish</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">FlyOceanFish</span>
+
+  
+</div>
+
+<!--
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.3</div>
+
+-->
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_lines.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.3"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=5.1.3"></script>
+
+
+  
+
+</body>
+</html>
+<script type="text/javascript" src="/js/src/love.js"></script>
