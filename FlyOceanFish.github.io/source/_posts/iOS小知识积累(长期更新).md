@@ -1,6 +1,7 @@
 ---
 title: iOS小知识积累(长期更新) # 这是标题
-date: 2017-10-14 09:27:00
+date: 2017-10-17 09:27:00
+updated: 2017-10-17 14:30:00
 categories:  # 这里写的分类会自动汇集到 categories 页面上，分类可以多级
 - iOS # 一级分类
 tags:   # 这里写的标签会自动汇集到 tags 页面上
@@ -184,3 +185,23 @@ runtime在调用方法的时候如果找不到会直接奔溃。如果在当前�
 
 24、`NSObject`的description和debugDescription方法
 当我们在工程中使用model(继承NSObject)的时候，在断点或者log调试中有时候需要将对象打印到控制台中，但是我们自己写的model打印出的是对象的地址。如果需要打印出有效的信息，这时我们可以重写descrition或者debugDescription方法，打印出我们想要的信息。例如对象的所有属性的值。***默认情况下debugDescription调用的是description方法***
+
+25、 UIView的setNeedsLayout、layoutIfNeeded 、setNeedsDisplay
+* ***setNeedsLayout*** 标记为需要重新布局，不立即刷新，但layoutSubviews一定会被调用
+配合layoutIfNeeded立即更新
+* ***layoutIfNeeded*** 如果有有需要刷新的标记，立即调用layoutSubviews进行布局，并且进行页面刷新
+例如我在使用约束做动画的时候:
+````Objective-C
+leftContrain.constant = 100
+UIView.animateWithDuration(0.8, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: UIViewAnimationOptions.AllowAnimatedContent, animations: {
+                self.view.layoutIfNeeded() //立即实现布局
+            }, completion: nil)
+````
+如果不调用`layoutIfNeeded`则动画一点卵用没有
+* ***setNeedsDisplay或setNeedsDisplayInRect***   会调用自动调用drawRect方法，这样可以拿到  UIGraphicsGetCurrentContext，就可以画画了。而setNeedsLayout会默认调用layoutSubViews，
+    * setNeedsDisplay 对应画布的大小就是UIView的大小，所以会将整个UIView进行绘制
+    * setNeedsDisplayInRect 对应画布的大小是调用此方法传入的rect，如果此前UIView已经绘制过一次，则会保留上次的绘制，仅仅对对应传入的rect进行刷新绘制
+      >This method makes a note of the request and returns immediately. The view is not actually redrawn until the next drawing cycle, at which point all invalidated views are updated.
+
+
+>setNeedsDisplay方便绘图，而layoutSubViews方便出来数据。

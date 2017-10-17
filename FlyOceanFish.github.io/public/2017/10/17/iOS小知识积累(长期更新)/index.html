@@ -83,7 +83,7 @@
 <meta name="keywords" content="iOS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="iOS小知识积累(长期更新)">
-<meta property="og:url" content="http://yoursite.com/2017/10/14/iOS小知识积累(长期更新)/index.html">
+<meta property="og:url" content="http://yoursite.com/2017/10/17/iOS小知识积累(长期更新)/index.html">
 <meta property="og:site_name" content="FlyOceanFish&#39; Blog">
 <meta property="og:description" content="以前工作中有很多小的知识点，但是有时候只是用了，没有真正积累下来，有时候也会忘记。所以写这篇文章就是慢慢的将以前小的知识点或者之后用到的用文字的形式记录下来。【码字、分享不容易，各位的关注是小的动力！动动亲的小手指关注一下我哈。】1、_Nullable和_Nonnull(Xcode 6.3 )_Nullable表示可能是NULL或nil；_Nonnull表示不应该是NULL或nil。如果不遵循会有">
 <meta property="og:locale" content="zh-Hans">
@@ -92,7 +92,7 @@
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/6644906-625f6cbcf66800cf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/6644906-320495bdfa8f9c47.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/6644906-9209401db1a78dc4.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2017-10-16T08:45:26.000Z">
+<meta property="og:updated_time" content="2017-10-17T06:30:00.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS小知识积累(长期更新)">
 <meta name="twitter:description" content="以前工作中有很多小的知识点，但是有时候只是用了，没有真正积累下来，有时候也会忘记。所以写这篇文章就是慢慢的将以前小的知识点或者之后用到的用文字的形式记录下来。【码字、分享不容易，各位的关注是小的动力！动动亲的小手指关注一下我哈。】1、_Nullable和_Nonnull(Xcode 6.3 )_Nullable表示可能是NULL或nil；_Nonnull表示不应该是NULL或nil。如果不遵循会有">
@@ -126,7 +126,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/10/14/iOS小知识积累(长期更新)/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/10/17/iOS小知识积累(长期更新)/"/>
 
 
 
@@ -269,7 +269,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/14/iOS小知识积累(长期更新)/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/17/iOS小知识积累(长期更新)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="FlyOceanFish">
@@ -298,8 +298,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-14T09:27:00+08:00">
-                2017-10-14
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-17T09:27:00+08:00">
+                2017-10-17
               </time>
             
 
@@ -339,8 +339,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/10/14/iOS小知识积累(长期更新)/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count gitment-comments-count" data-xid="/2017/10/14/iOS小知识积累(长期更新)/" itemprop="commentsCount"></span>
+                <a href="/2017/10/17/iOS小知识积累(长期更新)/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/2017/10/17/iOS小知识积累(长期更新)/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -450,6 +450,26 @@
 <p>23、消息的转发</p>
 <p><img src="http://upload-images.jianshu.io/upload_images/6644906-9209401db1a78dc4.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="44181-09a882edcb98d535.jpg"><br>runtime在调用方法的时候如果找不到会直接奔溃。如果在当前类找不到的时候，会开始顺序的调用系统的三个方法，如果再找不到会直接crash。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">1.+(Bool) resolveInstanceMethod:(SEL)sel // 对应实例方法</div><div class="line">  + (Bool)resolveClassMethod:(SEL)sel // 对应类方法</div><div class="line">我们可以在这个方法中调用class_addMethod将方法加入就不会crash</div><div class="line">2.- (id)forwardingTargetForSelector:(SEL)aSelector//可以改变查找方法的对象</div><div class="line">3.- (void)forwardInvocation:(NSInvocation *)anInvocation//搭配- (NSMethodSignature *)methodSignatureForSelector:(SEL)aSelector这个使用。通过传递过来的NSInvocation对象，我们可以对此重新注入调用对象、方法、参数等</div></pre></td></tr></table></figure></p>
 <p>24、<code>NSObject</code>的description和debugDescription方法<br>当我们在工程中使用model(继承NSObject)的时候，在断点或者log调试中有时候需要将对象打印到控制台中，但是我们自己写的model打印出的是对象的地址。如果需要打印出有效的信息，这时我们可以重写descrition或者debugDescription方法，打印出我们想要的信息。例如对象的所有属性的值。<strong><em>默认情况下debugDescription调用的是description方法</em></strong></p>
+<p>25、 UIView的setNeedsLayout、layoutIfNeeded 、setNeedsDisplay</p>
+<ul>
+<li><strong><em>setNeedsLayout</em></strong> 标记为需要重新布局，不立即刷新，但layoutSubviews一定会被调用<br>配合layoutIfNeeded立即更新</li>
+<li><strong><em>layoutIfNeeded</em></strong> 如果有有需要刷新的标记，立即调用layoutSubviews进行布局，并且进行页面刷新<br>例如我在使用约束做动画的时候:<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">leftContrain.constant = 100</div><div class="line">UIView.animateWithDuration(0.8, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: UIViewAnimationOptions.AllowAnimatedContent, animations: &#123;</div><div class="line">                self.view.layoutIfNeeded() //立即实现布局</div><div class="line">            &#125;, completion: nil)</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>如果不调用<code>layoutIfNeeded</code>则动画一点卵用没有</p>
+<ul>
+<li><strong><em>setNeedsDisplay或setNeedsDisplayInRect</em></strong>   会调用自动调用drawRect方法，这样可以拿到  UIGraphicsGetCurrentContext，就可以画画了。而setNeedsLayout会默认调用layoutSubViews，<ul>
+<li>setNeedsDisplay 对应画布的大小就是UIView的大小，所以会将整个UIView进行绘制</li>
+<li>setNeedsDisplayInRect 对应画布的大小是调用此方法传入的rect，如果此前UIView已经绘制过一次，则会保留上次的绘制，仅仅对对应传入的rect进行刷新绘制<blockquote>
+<p>This method makes a note of the request and returns immediately. The view is not actually redrawn until the next drawing cycle, at which point all invalidated views are updated.</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>setNeedsDisplay方便绘图，而layoutSubViews方便出来数据。</p>
+</blockquote>
 
       
     </div>
@@ -480,8 +500,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/10/14/iOS自定义相机界面/" rel="next" title="iOS自定义相机界面">
-                <i class="fa fa-chevron-left"></i> iOS自定义相机界面
+              <a href="/2017/10/16/React Native项目实践总结/" rel="next" title="React Native项目实践总结">
+                <i class="fa fa-chevron-left"></i> React Native项目实践总结
               </a>
             
           </div>
@@ -489,10 +509,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/10/14/NSInvocation/" rel="prev" title="NSInvocation">
-                NSInvocation <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
