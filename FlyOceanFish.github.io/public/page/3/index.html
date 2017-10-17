@@ -262,7 +262,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/14/将RN工程嵌入到现有原生iOS应用/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/14/pod install vs. pod update/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="FlyOceanFish">
@@ -281,7 +281,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/10/14/将RN工程嵌入到现有原生iOS应用/" itemprop="url">将RN工程嵌入到现有原生iOS应用</a></h2>
+                <a class="post-title-link" href="/2017/10/14/pod install vs. pod update/" itemprop="url">pod install vs. pod update</a></h2>
         
 
         <div class="post-meta">
@@ -316,8 +316,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/React-Native/" itemprop="url" rel="index">
-                    <span itemprop="name">React Native</span>
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
                   </a>
                 </span>
 
@@ -355,37 +355,22 @@
       
         
           
-            <p>今天心血来潮，就想尝试一下将RN工程单独嵌入到原生工程中，所以就做了尝试，本文是通过cocopods集成RN到现有工程的，但是其中也遇到一个问题，怎么编译都不过。</p>
-<h1 id="依赖包"><a href="#依赖包" class="headerlink" title="依赖包"></a>依赖包</h1><p>React Native的植入过程同时需要React和React Native两个node依赖包，所以需要我们创建package.json文件和正确的RN文件目录结构</p>
-<blockquote>
-<p>对于一个典型的React Native项目来说，一般package.json和index.ios.js等文件会放在项目的根目录下。而iOS相关的原生代码会放在一个名为ios/的子目录中,这里也同时放着你的Xcode项目文件（.xcodeproj）。</p>
-</blockquote>
-<p><img src="http://upload-images.jianshu.io/upload_images/6644906-30b409760b9414ae.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="88161340-E7F4-46B0-86A9-5A13DCCDA819.png"></p>
-<p>按照上图的目录结构创建</p>
-<h3 id="package-json"><a href="#package-json" class="headerlink" title="package.json"></a>package.json</h3><figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">	<span class="attr">"name"</span>: <span class="string">"TestReactNative"</span>,</div><div class="line">	<span class="attr">"version"</span>: <span class="string">"0.0.1"</span>,</div><div class="line">	<span class="attr">"private"</span>: <span class="literal">true</span>,</div><div class="line">	<span class="attr">"scripts"</span>: &#123;</div><div class="line">		<span class="attr">"start"</span>: <span class="string">"node node_modules/react-native/local-cli/cli.js start"</span>,</div><div class="line">		<span class="attr">"test"</span>: <span class="string">"jest"</span></div><div class="line">	&#125;,</div><div class="line">	<span class="attr">"dependencies"</span>: &#123;</div><div class="line">		<span class="attr">"react"</span>: <span class="string">"16.0.0-alpha.6"</span>,</div><div class="line">		<span class="attr">"react-native"</span>: <span class="string">"0.44.3"</span></div><div class="line">	&#125;,</div><div class="line">	<span class="attr">"devDependencies"</span>: &#123;</div><div class="line">		<span class="attr">"babel-jest"</span>: <span class="string">"20.0.3"</span>,</div><div class="line">		<span class="attr">"babel-preset-react-native"</span>: <span class="string">"2.1.0"</span>,</div><div class="line">		<span class="attr">"jest"</span>: <span class="string">"20.0.4"</span>,</div><div class="line">		<span class="attr">"react-test-renderer"</span>: <span class="string">"16.0.0-alpha.6"</span></div><div class="line">	&#125;,</div><div class="line">	<span class="attr">"jest"</span>: &#123;</div><div class="line">		<span class="attr">"preset"</span>: <span class="string">"react-native"</span></div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h1 id="安装依赖包"><a href="#安装依赖包" class="headerlink" title="安装依赖包"></a>安装依赖包</h1><p>使用npm（node包管理器，Node package manager）来安装React和React Native模块。这些模块会被安装到项目根目录下的node_modules/目录中。 在包含有package.json文件的目录（一般也就是项目根目录）中运行下列命令来安装：</p>
-<blockquote>
-<p>npm install</p>
-</blockquote>
-<h1 id="新建index-ios-js"><a href="#新建index-ios-js" class="headerlink" title="新建index.ios.js"></a>新建index.ios.js</h1><p>这个是随便一个index.ios.js即可,我是从一个RN的初始化工程复制了一个出来<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * Sample React Native App</div><div class="line"> * https://github.com/facebook/react-native</div><div class="line"> * @flow</div><div class="line"> */</div><div class="line"></div><div class="line">import React, &#123; Component &#125; from &apos;react&apos;;</div><div class="line">import &#123;</div><div class="line">  AppRegistry,</div><div class="line">  StyleSheet,</div><div class="line">  Text,</div><div class="line">  View</div><div class="line">&#125; from &apos;react-native&apos;;</div><div class="line"></div><div class="line">export default class DemoApp extends Component &#123;</div><div class="line">  render() &#123;</div><div class="line">    return (</div><div class="line">      &lt;View style=&#123;styles.container&#125;&gt;</div><div class="line">        &lt;Text style=&#123;styles.welcome&#125;&gt;</div><div class="line">          Welcome to React Native!</div><div class="line">        &lt;/Text&gt;</div><div class="line">        &lt;Text style=&#123;styles.instructions&#125;&gt;</div><div class="line">          To get started, edit index.ios.js</div><div class="line">        &lt;/Text&gt;</div><div class="line">        &lt;Text style=&#123;styles.instructions&#125;&gt;</div><div class="line">          Press Cmd+R to reload,&#123;&apos;\n&apos;&#125;</div><div class="line">          Cmd+D or shake for dev menu</div><div class="line">        &lt;/Text&gt;</div><div class="line">      &lt;/View&gt;</div><div class="line">    );</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">const styles = StyleSheet.create(&#123;</div><div class="line">  container: &#123;</div><div class="line">    flex: 1,</div><div class="line">    justifyContent: &apos;center&apos;,</div><div class="line">    alignItems: &apos;center&apos;,</div><div class="line">    backgroundColor: &apos;#F5FCFF&apos;,</div><div class="line">  &#125;,</div><div class="line">  welcome: &#123;</div><div class="line">    fontSize: 20,</div><div class="line">    textAlign: &apos;center&apos;,</div><div class="line">    margin: 10,</div><div class="line">  &#125;,</div><div class="line">  instructions: &#123;</div><div class="line">    textAlign: &apos;center&apos;,</div><div class="line">    color: &apos;#333333&apos;,</div><div class="line">    marginBottom: 5,</div><div class="line">  &#125;,</div><div class="line">&#125;);</div><div class="line"></div><div class="line">AppRegistry.registerComponent(&apos;TestReactNative&apos;, () =&gt; DemoApp);</div></pre></td></tr></table></figure></p>
-<p>至此RN的相关依赖已经配置好，接下来就该配置cocopods了</p>
-<h1 id="cocopods配置"><a href="#cocopods配置" class="headerlink" title="cocopods配置"></a>cocopods配置</h1><p>1、<strong><em>创建Podfile，如果已经有了可以忽略此步骤</em></strong><br><figure class="highlight jsp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">## 在iOS原生代码所在的目录中（也就是`.xcodeproj`文件所在的目录）执行：</div><div class="line">$ pod init</div></pre></td></tr></table></figure></p>
-<p>Podfile文件内容如下:<br><figure class="highlight jsp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"># Uncomment the next line to define a global platform for your project</div><div class="line"># platform :ios, '9.0'</div><div class="line"></div><div class="line">target <span class="string">'TestReactNative'</span> <span class="keyword">do</span></div><div class="line">  # Uncomment the next line if you're using Swift or would like to use dynamic frameworks</div><div class="line">  # use_frameworks!</div><div class="line"></div><div class="line">  # Pods for TestReactNative</div><div class="line">  pod <span class="string">'React'</span>, :path =&gt; <span class="string">'../node_modules/react-native'</span>, :subspecs =&gt; [</div><div class="line">    <span class="string">'Core'</span>,</div><div class="line">    'DevSupport', # 如果RN版本 &gt;= 0.43，则需要加入此行才能开启开发者菜单</div><div class="line">    <span class="string">'RCTText'</span>,</div><div class="line">    <span class="string">'RCTNetwork'</span>,</div><div class="line">    'RCTWebSocket', # 这个模块是用于调试功能的</div><div class="line">    # 在这里继续添加你所需要的模块</div><div class="line">  ]</div><div class="line">  # 如果你的RN版本 &gt;= 0.42.0，请加入下面这行</div><div class="line">  pod <span class="string">"Yoga"</span>, :path =&gt; <span class="string">"../node_modules/react-native/ReactCommon/yoga"</span></div><div class="line">end</div></pre></td></tr></table></figure></p>
-<p>subspecs就是你依赖的包。可用的subspec都列在<a href="https://github.com/facebook/react-native/blob/master/React.podspec" target="_blank" rel="external">node_modules/react-native/React.podspec
-</a>中，基本都是按其功能命名的。一般来说你首先需要添加Core，这一subspec包含了必须的AppRegistry、StyleSheet、View以及其他的一些React Native核心库。如果你想使用React Native的Text库（即<text>组件），那就需要添加RCTText的subspec。同理，Image需加入RCTImage，等等。<br>2、<strong><em>安装依赖包</em></strong><br>执行pod install<br><img src="http://upload-images.jianshu.io/upload_images/6644906-d2f8ac5ea7e08d21.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="C07B6B3E-1642-4EAC-9814-BE6A55C4527C.png"><br>会看到以上过程则表示安装依赖已经成功<br>3、<strong><em>调用RN工程</em></strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">#import &quot;ViewController.h&quot;</div><div class="line">#import &lt;React/RCTRootView.h&gt;</div><div class="line"></div><div class="line">@interface ViewController ()</div><div class="line"></div><div class="line">@end</div><div class="line"></div><div class="line">@implementation ViewController</div><div class="line"></div><div class="line">- (void)viewDidLoad &#123;</div><div class="line">    [super viewDidLoad];</div><div class="line">    // Do any additional setup after loading the view, typically from a nib.</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (IBAction)actionClick:(id)sender &#123;</div><div class="line">    NSLog(@&quot;High Score Button Pressed&quot;);</div><div class="line">    NSURL *jsCodeLocation = [NSURL</div><div class="line">                             URLWithString:@&quot;http://localhost:8081/index.ios.bundle?platform=ios&quot;];</div><div class="line">    RCTRootView *rootView =</div><div class="line">    [[RCTRootView alloc] initWithBundleURL : jsCodeLocation</div><div class="line">                         moduleName        : @&quot;TestReactNative&quot;</div><div class="line">                         initialProperties :nil</div><div class="line">                          launchOptions    : nil];</div><div class="line">    UIViewController *vc = [[UIViewController alloc] init];</div><div class="line">    vc.view = rootView;</div><div class="line">    [self presentViewController:vc animated:YES completion:nil];</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (void)didReceiveMemoryWarning &#123;</div><div class="line">    [super didReceiveMemoryWarning];</div><div class="line">    // Dispose of any resources that can be recreated.</div><div class="line">&#125;</div><div class="line">@end</div></pre></td></tr></table></figure></text></p>
-<p>至此整集成已经结束，可以直接运行xcode过程，或者通过命令运行工程<br><figure class="highlight jsp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># From the root of your project, where the `node_modules` directory is located.</div><div class="line">$ npm start</div></pre></td></tr></table></figure></p>
-<figure class="highlight jsp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># 在项目的根目录中执行：</div><div class="line">$ react-<span class="keyword">native</span> run-ios</div></pre></td></tr></table></figure>
-<h1 id="坑"><a href="#坑" class="headerlink" title="坑"></a>坑</h1><p>不知道大家有没有注意我们package.json中react-native中的版本是”0.44.3”，而为什么不是最新版46的呢？？这就是一个很大的坑！从45版本开始RN有4个文件被墙了，所以如果大于44版本的react-native会一直编译不过<br><strong><em>有以下3个解决方案：</em></strong><br>1、不导入最新的包，导入44版本<br>2、翻墙呗。。。。<br>3、<a href="http://blog.csdn.net/u013751625/article/details/75046147" target="_blank" rel="external">下载被墙的4个依赖包，手工导入</a></p>
-<h3 id="优化加载速度"><a href="#优化加载速度" class="headerlink" title="优化加载速度"></a>优化加载速度</h3><p>在原生调用RN的时候有点慢。大家在集成的时候会发现加载的过程挺慢的，可以压缩加载本地文件，这样加载就快了。通常我们可以将文件放到服务器上，然后通过IP地址来加载，这种方式其实也是比较慢的，最好的方式就是将文件提前下载到本地，通过一定的更新机制确保本地文件时最新的，通过使用这种方式加载就很快了。</p>
+            <h1 id="背景"><a href="#背景" class="headerlink" title="背景　　"></a>背景　　</h1><p>　　作为iOS管理第三方包很好用的一个工具CocoaPods，大部分在使用过程中一开始使用pod install,之后就一直使用pod update。其实这种做法是不对，本篇文章将详细介绍这几个命令的区别，也希望iOS开发者能够合理使用这几个命名</p>
+<h2 id="pod-init"><a href="#pod-init" class="headerlink" title="pod init"></a>pod init</h2><p>　　初始化一个工程，此时会产生Podfile这么一个文件，我们可以添加需要引入的第三方包</p>
+<h2 id="pod-install"><a href="#pod-install" class="headerlink" title="pod install"></a>pod install</h2><pre><code>pod install --verbose
+</code></pre><p><strong><em>用这个命令可以看到所有的执行操作</em></strong><br>　　第一次构建工程时要使用该命令，但是如果我们编辑了Podfile文件，例如添加、删除、更新了一个pod也会使用该命令</p>
 <ul>
-<li><p>到当前项目的根目录中执行:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">react-native bundle --platform ios --dev false --entry-file index.ios.js --bundle-output ios/main.jsbundle</div></pre></td></tr></table></figure>
-</li>
-<li><p>将main.jsbundle加载到Xcode工程中，然后通过以下方式获取URL地址来加载</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">NSString *path = [[NSBundle mainBundle] pathForResource:@&quot;main&quot; ofType:@&quot;jsbundle&quot;];</div><div class="line">NSURL *jsCodeLocation = [NSURL URLWithString:path];</div></pre></td></tr></table></figure>
+<li>我们运行这个命令的时候，开始下载安装新的pods，它会将我们每一个第三方包的版本写入一个叫Podfile.lock的文件。这个文件包含了我们安装的所有的第三方包的信息</li>
+<li>当我们运行这个命令的时候，它只会下载不在Podfile.lock文件里的第三方包<ul>
+<li>对于Podfile.lock里边有的详细的第三方包（有版本)，它只会下载对应的版本，不管这个第三方包有没有新的版本</li>
+<li>如果Podfile.lock里边没有的第三方包，它将下载你Podfile里边写的（例如pod ‘MyPod’, ‘~&gt;1.2’），如果不写版本默认下载最新的版本</li>
+</ul>
 </li>
 </ul>
-<p>如果大家在这个过程还有不明白的可以留言给我，我将尽最大努力给大家解决的哦</p>
+<h2 id="pod-update"><a href="#pod-update" class="headerlink" title="pod update"></a>pod update</h2><p>　　如果我们运行pod update PODNAME 将只更新这一个第三方包到最新的版本<br>如果我们直接运行pod update 没有pod名称，它将会更新我们所有的第三方包</p>
+<h2 id="pod-outdated"><a href="#pod-outdated" class="headerlink" title="pod outdated"></a>pod outdated</h2><p>　　将列出所有的在Podfile.lock文件里的所有第三方包现在对应的最新的版本</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>　　如果我们在Podfile文件增加、减少、或者改变了版本的时候运行pod install；如果我们想更新第三包的时候使用pod update命令</p>
+<p>接下来一篇我将详细介绍如果创建自己的spec。</p>
 
           
         
@@ -1043,6 +1028,21 @@
 
 
 
+
+  
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine@1.1.6/dist/Valine.min.js"></script>
+  <script type="text/javascript">
+    new Valine({
+        av: AV,
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        app_id: 'BUyek27xhBJW608unzBEyhWI-gzGzoHsz',
+        app_key: 'lT2NUWTMwPfNYl6xMQUtUxDv',
+        placeholder: '请输入评论'
+    });
+  </script>
 
 
 
