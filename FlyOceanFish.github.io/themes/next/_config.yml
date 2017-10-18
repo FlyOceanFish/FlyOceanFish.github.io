@@ -388,18 +388,18 @@ valine:
 # Gitment
 # Introduction: https://imsun.net/posts/gitment-introduction/
 gitment:
-  enable: true
+  enable: false
   mint: true # RECOMMEND, A mint on Gitment, to support count, language and proxy_gateway
   count: true # Show comments count in post meta area
   lazy: false # Comments lazy loading with a button
   cleanly: true # Hide 'Powered by ...' on footer, and more
   language: # Force language, or auto switch by theme
-  github_user: 29732751 # MUST HAVE, Your Github ID
-  github_repo: master # MUST HAVE, The repo you use to store Gitment comments
-  client_id: 0e0d36ef3dcf4baafe97  # MUST HAVE, Github client id for the Gitment
-  client_secret: 6a7cb8e125eba206972c6a36a64f26509f654025 # EITHER this or proxy_gateway, Github access secret token for the Gitment
+  github_user:  # MUST HAVE, Your Github ID
+  github_repo:  # MUST HAVE, The repo you use to store Gitment comments
+  client_id:   # MUST HAVE, Github client id for the Gitment
+  client_secret:  # EITHER this or proxy_gateway, Github access secret token for the Gitment
   proxy_gateway: # Address of api proxy, See: https://github.com/aimingoo/intersect
-  redirect_protocol: http://flyoceanfish.top/ # Protocol of redirect_uri with force_redirect_protocol when mint enabled
+  redirect_protocol:  # Protocol of redirect_uri with force_redirect_protocol when mint enabled
 
 # Baidu Share
 # Available value:

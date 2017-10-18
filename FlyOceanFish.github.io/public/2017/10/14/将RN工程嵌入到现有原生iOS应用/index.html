@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="iOS,React Native," />
+  <meta name="keywords" content="React Native,iOS," />
 
 
 
@@ -80,7 +80,7 @@
 
 
 <meta name="description" content="今天心血来潮，就想尝试一下将RN工程单独嵌入到原生工程中，所以就做了尝试，本文是通过cocopods集成RN到现有工程的，但是其中也遇到一个问题，怎么编译都不过。 依赖包React Native的植入过程同时需要React和React Native两个node依赖包，所以需要我们创建package.json文件和正确的RN文件目录结构  对于一个典型的React Native项目来说，一般pack">
-<meta name="keywords" content="iOS,React Native">
+<meta name="keywords" content="React Native,iOS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="将RN工程嵌入到现有原生iOS应用">
 <meta property="og:url" content="http://yoursite.com/2017/10/14/将RN工程嵌入到现有原生iOS应用/index.html">
@@ -331,16 +331,6 @@
 
           
             
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/10/14/将RN工程嵌入到现有原生iOS应用/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count gitment-comments-count" data-xid="/2017/10/14/将RN工程嵌入到现有原生iOS应用/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
           
 
           
@@ -413,9 +403,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/iOS/" rel="tag"># iOS</a>
-          
             <a href="/tags/React-Native/" rel="tag"># React Native</a>
+          
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
           
         </div>
       
@@ -438,8 +428,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/10/14/UIPageViewController使用和控件的封装/" rel="prev" title="UIPageViewController使用和控件的封装">
-                UIPageViewController使用和控件的封装 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/10/14/React Native组件生命周期/" rel="prev" title="React Native组件生命周期">
+                React Native组件生命周期 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -471,11 +461,8 @@
 
   
     <div class="comments" id="comments">
-      
-        <div id="gitment-container"></div>
-      
+      <div id="vcomments"></div>
     </div>
-
   
 
 
@@ -528,7 +515,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-count">24</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -784,50 +771,6 @@
 
 
 
-
-
-<!-- LOCAL: You can save these files to your site and update links -->
-    
-        
-        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
-        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
-    
-<!-- END LOCAL -->
-
-    
-      <style>
-        a.gitment-editor-footer-tip { display: none; }
-        .gitment-container.gitment-footer-container { display: none; }
-      </style>
-    
-
-    
-      <script type="text/javascript">
-      function renderGitment(){
-        var gitment = new Gitmint({
-            id: document.location.href, 
-            owner: '29732751',
-            repo: 'master',
-            
-            lang: "" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
-            
-            oauth: {
-            
-                redirect_protocol: 'http://flyoceanfish.top/',
-            
-            
-                client_secret: '6a7cb8e125eba206972c6a36a64f26509f654025',
-            
-                client_id: '0e0d36ef3dcf4baafe97'
-            }});
-        gitment.render('gitment-container');
-      }
-
-      
-      renderGitment();
-      
-      </script>
-    
 
 
 

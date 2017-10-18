@@ -262,6 +262,191 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/18/iOS中App Search/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="FlyOceanFish">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FlyOceanFish' Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/10/18/iOS中App Search/" itemprop="url">iOS中App Search</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-18T09:40:00+08:00">
+                2017-10-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>自从iOS9.0，苹果提供了多种方式让用户获取APP中的信息，甚至你即使没有安装应用。用户可以通过Spotlight、HandOff等方式获取你APP深层次的一些信息。</p>
+<h2 id="实现方式"><a href="#实现方式" class="headerlink" title="实现方式"></a>实现方式</h2><h3 id="NSUserActivity"><a href="#NSUserActivity" class="headerlink" title="NSUserActivity"></a>NSUserActivity</h3><p><code>NSUserActivity</code>类提供了一些方法，可以让您捕获用户之前访问过的特定应用程序状态和导航点，然后使用Handoff(在您的应用程序中学习更多关于启用切换的知识)来恢复它们。在iOS 8和后来的应用程序中，用户希望Handoff帮助他们在一个设备上启动一个活动，并在另一个设备上继续运行。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">self.activity = [[NSUserActivity alloc] initWithActivityType:@&quot;com.rw.activity&quot;]; </div><div class="line">self.activity.title = @&quot;大头鱼&quot;;</div><div class="line">self.activity.keywords=[NSSet setWithArray:@[@&quot;tiger&quot;,@&quot;horse&quot;]]; </div><div class="line">self.activity.eligibleForSearch = YES;   </div><div class="line">self.activity.eligibleForPublicIndexing = YES; </div><div class="line">[self.activity becomeCurrent];</div></pre></td></tr></table></figure>
+<p><img src="http://upload-images.jianshu.io/upload_images/6644906-4a22d5a45c22b6bd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="76416.png"></p>
+<blockquote>
+<p>注意：通过NSUserActivity方式的实现变量要声明成全局变量，否则会被释放掉而没有效果</p>
+</blockquote>
+<h3 id="Core-Spotlight-framework"><a href="#Core-Spotlight-framework" class="headerlink" title="Core Spotlight framework"></a>Core Spotlight framework</h3><p><code>Core Spotlight</code>框架提供了在应用程序中索引内容和管理私有设备索引的方法。<code>Core Spotlight</code>最适合于索引用户特定的内容，比如朋友、被标记为最喜欢的项目、购买的项目等等。当你使用<code>Core Spotlight</code>api使某些内容可以搜索时，可以让用户很容易地在<code>Spotlight</code>搜索结果中找到他们的内容。</p>
+<ul>
+<li>文本<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">CSSearchableItemAttributeSet *attributeSet = [[CSSearchableItemAttributeSet alloc] initWithItemContentType:@&quot;my&quot;];</div><div class="line">attributeSet.title = @&quot;first&quot;;</div><div class="line">attributeSet.contentDescription = @&quot;my app is running!&quot;;</div><div class="line">NSArray *secondArrayKey = [NSArray arrayWithObjects:@&quot;second&quot;,@&quot;测试&quot;,@&quot;secondeVIew&quot;, nil];</div><div class="line">attributeSet.contactKeywords = secondArrayKey;</div><div class="line">attributeSet.keywords = @[@&quot;5月17日&quot;];</div><div class="line">attributeSet.addedDate = [NSDate date];</div><div class="line">CSSearchableItem *searchItem = [[CSSearchableItem alloc] initWithUniqueIdentifier:@&quot;cat&quot; domainIdentifier:@&quot;com.rw&quot; attributeSet:attributeSet];</div><div class="line">[[CSSearchableIndex defaultSearchableIndex] indexSearchableItems:@[searchItem] completionHandler:^(NSError * _Nullable error) &#123;</div><div class="line">        NSLog(@&quot;%@&quot;,error.description);</div><div class="line">    &#125;];</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><img src="http://upload-images.jianshu.io/upload_images/6644906-b7eae5ac9f2e3757.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="890293.png"></p>
+<ul>
+<li>电话</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">attributeSet.supportsPhoneCall = @(YES);</div><div class="line">attributeSet.phoneNumbers = @[@&quot;15601856811&quot;];</div><div class="line">      attributeSet.accountHandles = @[@&quot;15601856811”];</div></pre></td></tr></table></figure>
+<p><img src="http://upload-images.jianshu.io/upload_images/6644906-84558af39aa45677.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="119931.png"></p>
+<blockquote>
+<p>注：supportsPhoneCall和phoneNumbers两个属性设置之后会显示一个电话图标，但是点击没有反应。只有设置accountHandles的时候，点击之后会拨打电话</p>
+</blockquote>
+<ul>
+<li>更新</li>
+</ul>
+<p>更新与增加是同样的方法，只是将Item的CSSearchableItemAttributeSet重新实例就好啦</p>
+<ul>
+<li>删除</li>
+</ul>
+<ul>
+<li>deleteAllSearchableItemsWithCompletionHandler://删除所有的</li>
+<li>deleteSearchableItemsWithDomainIdentifiers:completionHandler://根据Domain删除</li>
+<li>deleteSearchableItemsWithIdentifiers:completionHandler://根据Identifiers删除</li>
+</ul>
+<h3 id="Web-Markup"><a href="#Web-Markup" class="headerlink" title="Web Markup"></a>Web Markup</h3><p>如果你的应用程序的部分或全部内容也可以在你的网站上使用，你可以使用web标记来让用户访问你在搜索结果中的内容。使用web标记可以让Applebot web爬虫索引你在苹果服务器端索引中的内容，这使得它可以在Spotlight和Safari搜索结果中对所有iOS用户开放。</p>
+<ul>
+<li><a href="https://developer.apple.com/library/content/documentation/AppleApplications/Reference/SafariWebContent/PromotingAppswithAppBanners/PromotingAppswithAppBanners.html#//apple_ref/doc/uid/TP40002051-CH6" target="_blank" rel="external">Smart App Banners</a></li>
+</ul>
+<p>在你的网站上，一个Smart App Banners邀请那些没有安装你的应用程序的用户从App Store下载它，它给已经安装了你的应用程序的用户安装了一个简单的方法，可以在它里面打开一个页面。如下图:</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/6644906-bb50d8ad936e580a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<ul>
+<li><a href="https://developer.apple.com/library/content/documentation/General/Conceptual/AppSearch/FindingImages.html#//apple_ref/doc/uid/TP40016308-CH14-SW1" target="_blank" rel="external">Support Universal Links</a></li>
+</ul>
+<p>当你支持通用链接时，iOS用户可以点击链接到你的网站，并无缝地重定向到你安装的应用程序，而无需经过Safari。如果你的应用没有安装，点击一个链接到你的网站打开你的网站在Safari。</p>
+<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p><a href="https://developer.apple.com/library/content/documentation/General/Conceptual/AppSearch/UniversalLinks.html#//apple_ref/doc/uid/TP40016308-CH12-SW1" target="_blank" rel="external">App Search Programming Guide</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/17/iOS小知识积累(长期更新)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1808,159 +1993,6 @@ ERROR: Error fetching remote repo &apos;origin&apos;
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/14/iOS中isEqual:方法详解/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="FlyOceanFish">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="FlyOceanFish' Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/10/14/iOS中isEqual:方法详解/" itemprop="url">iOS中isEqual:方法详解</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-14T09:27:00+08:00">
-                2017-10-14
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/iOS/" itemprop="url" rel="index">
-                    <span itemprop="name">iOS</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>　　大家对于这个方法其实再熟悉不过了，比较对象的时候用这个方法，如果使用==针对对象则仅仅比较的是内存地址的引用。但是大家可能会忽略另一个细节，对象的hash值</p>
-<p>引用苹果官方的一句话：</p>
-<pre><code>This method defines what it means for instances to be equal. For example, a container object might define two containers as equal if their corresponding objects all respond YES to an isEqual:  request. See the NSData, NSDictionary, NSArray, and NSString class   specifications for examples of the use of this method.
-
-If two objects are equal, they must have the same hash value. This last point is particularly important if you define isEqual: in a subclass and intend to put instances of that subclass into a collection. Make sure you also define hash in your subclass.
-</code></pre><h2 id="自定义对象，重写isEqual方法"><a href="#自定义对象，重写isEqual方法" class="headerlink" title="自定义对象，重写isEqual方法"></a>自定义对象，重写isEqual方法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">@implementation Person</div><div class="line">- (instancetype)initWithName:(NSString *)name andSex:(NSString *)sex&#123;</div><div class="line">    self = [super init];</div><div class="line">    if (self) &#123;</div><div class="line">        self.name = name;</div><div class="line">        self.sex = sex;</div><div class="line">    &#125;</div><div class="line">    return self;</div><div class="line">&#125;</div><div class="line">- (BOOL)isEqual:(id)object &#123;</div><div class="line">    if (self == object) &#123;</div><div class="line">        return YES;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    if (![object isKindOfClass:[Person class]]) &#123;</div><div class="line">        return NO;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    return [self isEqualToPerson:(Person *)object];</div><div class="line">&#125;</div><div class="line">- (BOOL)isEqualToPerson:(Person *)person &#123;</div><div class="line">    if (!person) &#123;</div><div class="line">        return NO;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    BOOL haveEqualNames = (!self.name &amp;&amp; !person.name) || [self.name isEqualToString:person.name];</div><div class="line">    BOOL haveEqualSex = (!self.sex &amp;&amp; !person.sex) || [self.sex isEqualToString:person.sex];</div><div class="line"></div><div class="line">    return haveEqualNames &amp;&amp; haveEqualSex;</div><div class="line">&#125;</div><div class="line">-(NSUInteger)hash&#123;</div><div class="line">    return self.name.hash^self.sex.hash;</div><div class="line">&#125;</div><div class="line">@end</div></pre></td></tr></table></figure>
-<p>上边代码是我定义的Person类并且重写了isEqual方法，大家可能发现了我还重写了hash方法。如果不重写hash方法会出现什么问题呢？？</p>
-<p>正常比较两个对象是否相等已经够用了，但是如果我们使用NSSet等等这样与hash相关的类就会产生问题了。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">Person *person1 = [[Person alloc] initWithName:@&quot;ocean&quot; andSex:@&quot;boy&quot;];</div><div class="line">Person *person2 = [[Person alloc] initWithName:@&quot;ocean&quot; andSex:@&quot;boy&quot;];</div><div class="line">NSSet *set = [NSSet setWithObjects:person1,person2, nil];</div><div class="line">NSLog(@&quot;set---%@&quot;,set);</div><div class="line">if ([person1 isEqual:person2]) &#123;</div><div class="line">    NSLog(@&quot;相等&quot;);</div><div class="line">&#125;else&#123;</div><div class="line">    NSLog(@&quot;不相等&quot;);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>如果我们不重写hash方法set打印出来后会有两个对象，是由于系统默认给我们实现了一个hash方法，perons1和person2的hash值不相等。如果重写了则只会打印出一个对象。</p>
-<p>系统默认实现<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">-(NSUInteger)hash&#123;</div><div class="line">    return (NSUInteger)self</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>如果两个对象相等，则hash必须要相等</p>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="http://nshipster.com/equality/" target="_blank" rel="external">Equality</a><br><a href="https://developer.apple.com/documentation/objectivec/1418956-nsobject/1418795-isequal?language=objc" target="_blank" rel="external">Apple Developer Documentation</a><br><a href="https://www.mikeash.com/pyblog/friday-qa-2010-06-18-implementing-equality-and-hashing.html" target="_blank" rel="external">Implementing Equality and Hashing</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2015,7 +2047,7 @@ If two objects are equal, they must have the same hash value. This last point is
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-count">24</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2251,24 +2283,6 @@ If two objects are equal, they must have the same hash value. This last point is
 
 
 
-
-
-<!-- LOCAL: You can save these files to your site and update links -->
-    
-        
-        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
-        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
-    
-<!-- END LOCAL -->
-
-    
-      <style>
-        a.gitment-editor-footer-tip { display: none; }
-        .gitment-container.gitment-footer-container { display: none; }
-      </style>
-    
-
-    
 
 
 
