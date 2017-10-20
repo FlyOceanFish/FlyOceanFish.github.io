@@ -186,7 +186,14 @@ CocoaPods 0.33中加入了 Trunk 服务，使用 Trunk 服务可以方便的发�
 ![7FA508FC-B6CB-4ED1-B31E-1799F83BCE6F.png](http://upload-images.jianshu.io/upload_images/6644906-870e654c65f46478.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 此图代表我们已经发布成功
 
-不过此时我们pod search还搜不到我们的podspec。因为还没审核通过要等个几天，然后运行pod setup更新本地的spec，再搜索一下试试看。
+不过此时我们pod search还搜不到我们的podspec。
+
+可以通过一下两步之后再尝试搜索:
+* 运行pod setup更新本地的spec，再搜索一下试试看。
+* 删除~/Library/Caches/CocoaPods目录下的search_index.json文件
+>pod setup成功后会生成~/Library/Caches/CocoaPods/search_index.json文件。
+终端输入rm ~/Library/Caches/CocoaPods/search_index.json
+删除成功后再执行pod search
 
 ## 参考链接
 [CocoaPods](https://guides.cocoapods.org/using/index.html)

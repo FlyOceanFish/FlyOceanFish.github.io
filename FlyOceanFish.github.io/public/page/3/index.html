@@ -695,7 +695,15 @@
 </code></pre><p><img src="http://upload-images.jianshu.io/upload_images/6644906-1c0e9356bacb2005.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="7117B254-7688-427F-A205-69968ABF3AE3.png"><br>3、发布我们的podspec</p>
 <pre><code>pod trunk push
 </code></pre><p><img src="http://upload-images.jianshu.io/upload_images/6644906-870e654c65f46478.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="7FA508FC-B6CB-4ED1-B31E-1799F83BCE6F.png"><br>此图代表我们已经发布成功</p>
-<p>不过此时我们pod search还搜不到我们的podspec。因为还没审核通过要等个几天，然后运行pod setup更新本地的spec，再搜索一下试试看。</p>
+<p>不过此时我们pod search还搜不到我们的podspec。</p>
+<p>可以通过一下两步之后再尝试搜索:</p>
+<ul>
+<li>运行pod setup更新本地的spec，再搜索一下试试看。</li>
+<li>删除~/Library/Caches/CocoaPods目录下的search_index.json文件<blockquote>
+<p>pod setup成功后会生成~/Library/Caches/CocoaPods/search_index.json文件。<br>终端输入rm ~/Library/Caches/CocoaPods/search_index.json<br>删除成功后再执行pod search</p>
+</blockquote>
+</li>
+</ul>
 <h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><a href="https://guides.cocoapods.org/using/index.html" target="_blank" rel="external">CocoaPods</a><br><a href="https://stackoverflow.com/questions/32304421/whats-the-difference-between-pod-spec-lint-and-pod-lib-lint" target="_blank" rel="external">between ‘pod spec lint’ and ‘pod lib lint’?</a></p>
 
           
