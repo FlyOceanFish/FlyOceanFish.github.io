@@ -262,6 +262,155 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/25/创建私人Cocoapods仓库/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="FlyOceanFish">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FlyOceanFish' Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/10/25/创建私人Cocoapods仓库/" itemprop="url">创建Cocoapods私人仓库</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-25T17:27:00+08:00">
+                2017-10-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          之前有一篇介绍了怎么创建私人项目手把手教你创建podspec，创建成功之后进行发布。最终发布到Cocoapods官方仓库中。但是有时候我们创建完自己的pod项目之后，并不想公开发布，只限于自己或者公司使用，这时候就需要我们创建自己的私人仓库，将pod项目发布到自己的私人仓库中。
+创建一个git私人项
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/10/25/创建私人Cocoapods仓库/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/18/iOS中App Search/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -355,52 +504,16 @@
       
         
           
-            <p>自从iOS9.0，苹果提供了多种方式让用户获取APP中的信息，甚至你即使没有安装应用。用户可以通过Spotlight、HandOff等方式获取你APP深层次的一些信息。</p>
-<h2 id="实现方式"><a href="#实现方式" class="headerlink" title="实现方式"></a>实现方式</h2><h3 id="NSUserActivity"><a href="#NSUserActivity" class="headerlink" title="NSUserActivity"></a>NSUserActivity</h3><p><code>NSUserActivity</code>类提供了一些方法，可以让您捕获用户之前访问过的特定应用程序状态和导航点，然后使用Handoff(在您的应用程序中学习更多关于启用切换的知识)来恢复它们。在iOS 8和后来的应用程序中，用户希望Handoff帮助他们在一个设备上启动一个活动，并在另一个设备上继续运行。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">self.activity = [[NSUserActivity alloc] initWithActivityType:@&quot;com.rw.activity&quot;]; </div><div class="line">self.activity.title = @&quot;大头鱼&quot;;</div><div class="line">self.activity.keywords=[NSSet setWithArray:@[@&quot;tiger&quot;,@&quot;horse&quot;]]; </div><div class="line">self.activity.eligibleForSearch = YES;   </div><div class="line">self.activity.eligibleForPublicIndexing = YES; </div><div class="line">[self.activity becomeCurrent];</div></pre></td></tr></table></figure>
-<p><img src="http://upload-images.jianshu.io/upload_images/6644906-4a22d5a45c22b6bd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="76416.png"></p>
-<blockquote>
-<p>注意：通过NSUserActivity方式的实现变量要声明成全局变量，否则会被释放掉而没有效果</p>
-</blockquote>
-<h3 id="Core-Spotlight-framework"><a href="#Core-Spotlight-framework" class="headerlink" title="Core Spotlight framework"></a>Core Spotlight framework</h3><p><code>Core Spotlight</code>框架提供了在应用程序中索引内容和管理私有设备索引的方法。<code>Core Spotlight</code>最适合于索引用户特定的内容，比如朋友、被标记为最喜欢的项目、购买的项目等等。当你使用<code>Core Spotlight</code>api使某些内容可以搜索时，可以让用户很容易地在<code>Spotlight</code>搜索结果中找到他们的内容。</p>
-<ul>
-<li>文本<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">CSSearchableItemAttributeSet *attributeSet = [[CSSearchableItemAttributeSet alloc] initWithItemContentType:@&quot;my&quot;];</div><div class="line">attributeSet.title = @&quot;first&quot;;</div><div class="line">attributeSet.contentDescription = @&quot;my app is running!&quot;;</div><div class="line">NSArray *secondArrayKey = [NSArray arrayWithObjects:@&quot;second&quot;,@&quot;测试&quot;,@&quot;secondeVIew&quot;, nil];</div><div class="line">attributeSet.contactKeywords = secondArrayKey;</div><div class="line">attributeSet.keywords = @[@&quot;5月17日&quot;];</div><div class="line">attributeSet.addedDate = [NSDate date];</div><div class="line">CSSearchableItem *searchItem = [[CSSearchableItem alloc] initWithUniqueIdentifier:@&quot;cat&quot; domainIdentifier:@&quot;com.rw&quot; attributeSet:attributeSet];</div><div class="line">[[CSSearchableIndex defaultSearchableIndex] indexSearchableItems:@[searchItem] completionHandler:^(NSError * _Nullable error) &#123;</div><div class="line">        NSLog(@&quot;%@&quot;,error.description);</div><div class="line">    &#125;];</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p><img src="http://upload-images.jianshu.io/upload_images/6644906-b7eae5ac9f2e3757.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="890293.png"></p>
-<ul>
-<li>电话</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">attributeSet.supportsPhoneCall = @(YES);</div><div class="line">attributeSet.phoneNumbers = @[@&quot;15601856811&quot;];</div><div class="line">      attributeSet.accountHandles = @[@&quot;15601856811”];</div></pre></td></tr></table></figure>
-<p><img src="http://upload-images.jianshu.io/upload_images/6644906-84558af39aa45677.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="119931.png"></p>
-<blockquote>
-<p>注：supportsPhoneCall和phoneNumbers两个属性设置之后会显示一个电话图标，但是点击没有反应。只有设置accountHandles的时候，点击之后会拨打电话</p>
-</blockquote>
-<ul>
-<li>更新</li>
-</ul>
-<p>更新与增加是同样的方法，只是将Item的CSSearchableItemAttributeSet重新实例就好啦</p>
-<ul>
-<li>删除</li>
-</ul>
-<ul>
-<li>deleteAllSearchableItemsWithCompletionHandler://删除所有的</li>
-<li>deleteSearchableItemsWithDomainIdentifiers:completionHandler://根据Domain删除</li>
-<li>deleteSearchableItemsWithIdentifiers:completionHandler://根据Identifiers删除</li>
-</ul>
-<h3 id="Web-Markup"><a href="#Web-Markup" class="headerlink" title="Web Markup"></a>Web Markup</h3><p>如果你的应用程序的部分或全部内容也可以在你的网站上使用，你可以使用web标记来让用户访问你在搜索结果中的内容。使用web标记可以让Applebot web爬虫索引你在苹果服务器端索引中的内容，这使得它可以在Spotlight和Safari搜索结果中对所有iOS用户开放。</p>
-<ul>
-<li><a href="https://developer.apple.com/library/content/documentation/AppleApplications/Reference/SafariWebContent/PromotingAppswithAppBanners/PromotingAppswithAppBanners.html#//apple_ref/doc/uid/TP40002051-CH6" target="_blank" rel="external">Smart App Banners</a></li>
-</ul>
-<p>在你的网站上，一个Smart App Banners邀请那些没有安装你的应用程序的用户从App Store下载它，它给已经安装了你的应用程序的用户安装了一个简单的方法，可以在它里面打开一个页面。如下图:</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/6644906-bb50d8ad936e580a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
-<ul>
-<li><a href="https://developer.apple.com/library/content/documentation/General/Conceptual/AppSearch/FindingImages.html#//apple_ref/doc/uid/TP40016308-CH14-SW1" target="_blank" rel="external">Support Universal Links</a></li>
-</ul>
-<p>当你支持通用链接时，iOS用户可以点击链接到你的网站，并无缝地重定向到你安装的应用程序，而无需经过Safari。如果你的应用没有安装，点击一个链接到你的网站打开你的网站在Safari。</p>
-<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p><a href="https://developer.apple.com/library/content/documentation/General/Conceptual/AppSearch/UniversalLinks.html#//apple_ref/doc/uid/TP40016308-CH12-SW1" target="_blank" rel="external">App Search Programming Guide</a></p>
-
-          
+          自从iOS9.0，苹果提供了多种方式让用户获取APP中的信息，甚至你即使没有安装应用。用户可以通过Spotlight、HandOff等方式获取你APP深层次的一些信息。
+实现方式NSUserActivityNSUserActivity类提供了一些方法，可以让您捕获用户之前访问过的特定应用程序状态和导
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/10/18/iOS中App Search/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -540,110 +653,15 @@
       
         
           
-            <p><strong><em>以前工作中有很多小的知识点，但是有时候只是用了，没有真正积累下来，有时候也会忘记。所以写这篇文章就是慢慢的将以前小的知识点或者之后用到的用文字的形式记录下来。【码字、分享不容易，各位的关注是小的动力！动动亲的小手指关注一下我哈。】</em></strong><br>1、_Nullable和_Nonnull(Xcode 6.3 )<br>_Nullable表示可能是NULL或nil；_Nonnull表示不应该是NULL或nil。如果不遵循会有警告<br>如果需要每个属性或每个方法都去指定nonnull和nullable，是一件非常繁琐的事。苹果为了减轻我们的工作量，专门提供了两个宏：NS_ASSUME_NONNULL_BEGIN和NS_ASSUME_NONNULL_END。<br>2、__kindof(Xcode 6.3 )<br>表示我们不用强转类型了。比如：</p>
-<pre><code>- (__kindof UITableViewCell *)dequeueReusableCellWithIdentifier:(NSString *)identifier;
-</code></pre><p>我们我可以直接用某个cell接收，不用再写（SomeCell*）这种形式强转了。</p>
-<pre><code>@property (nonatomic, readonly, copy) NSArray&lt;__kindof UIView *&gt; *subviews;
-</code></pre><p>这样，写下面的代码时就没有任何警告了：</p>
-<pre><code>UIButton *button = view.subviews.lastObject;
-</code></pre><p>3、instancetype、id、NSObject<br>instancetype 与 id 不一样, instancetype 只能在方法声明中作为返回类型使用。我们写方法返回的时候用instancetype而不用id了。instancetype代表当前类的类型。</p>
-<ul>
-<li>id关键字在编译时不被检查，而NSObject在编译时会被检查是否被调用一些错误方法。</li>
-<li>id可以是任何对象，包括非NSObject对象</li>
-<li>定义id的时候不使用*，是一个指针，NSObject却需要。</li>
-</ul>
-<p>4、Storyboard References (iOS 9)<br>可以帮我们简化Storyboard,平时我们的做法是将一个大的Storyboard人为的去分成几个小的，然后代码组装起来。Storyboard References可以帮我们简化这一步。如果本身有一个Storyboard很负责，可以选择其中联系很大的一部分，然后点击 Xcode 的菜单栏，选择”Editor-&gt;Refactor to Storyboard”。这时候就有一个独立的Storyboard了。<br>5、打印当前ViewController 的名字<br>这个对于我们拿到一个陌生的代码，调试的时候非常方便。比如我们运行一个APP，看到一个界面，但是想知道对应哪个ViewController的时候。</p>
-<ul>
-<li><p>添加Symbolic Exception<br><img src="http://upload-images.jianshu.io/upload_images/6644906-649d65ae020b72cb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="A7AB9D87-CF83-4F63-8D66-9C5A113B76ED.png"></p>
-</li>
-<li><p>添加Symob和Action<br><img src="http://upload-images.jianshu.io/upload_images/6644906-6aca286b93c6de2b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="73D79C18-5E28-4A87-B039-4DDA566FD5F7.png"></p>
-</li>
-</ul>
-<p>6、Autolayout中Intrinstic Size、Compression Resistance Priority、Compression Resistance Priority</p>
-<ul>
-<li>Intrinstic Size就是不用设置frame，视图通过内容、字体大小等属性就能获得的大小。我们设置的Content Hugging Priority和Compression Resistance Priority都是针对于这个的。</li>
-<li>Content Hugging Priority 内容拥抱，就是想变小的优先级</li>
-<li>Compression Resistance Priority抗压缩，就是想变大的优先级</li>
-</ul>
-<p><img src="http://upload-images.jianshu.io/upload_images/6644906-625f6cbcf66800cf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="A90EC537-5342-47B0-8207-9F3DBC0AB8A3.png"><br>如上图视图内容比文字内容宽，这个时候我们想要视图变小，与文字大小一样（此时intrinsic的大小就是文字区域部分的大小）。所以只要改变Content Hugging Priority的Horizontal的优先级变大就好了<br>7、topLayoutGuide&amp;&amp; bottomLayoutGuide<br>这两个属性可以理解为性表示不希望被透明的状态栏或导航栏（UITabBar、UIToolBar、NavigationBar等）遮挡的内容范围的最高或最低位置。这个属性的值是它的length属性的值。如下：</p>
-<pre><code>[view mas_makeConstraints:^(MASConstraintMaker *make) {
-    make.top.mas_equalTo(self.mas_topLayoutGuideBottom);
-    make.leading.mas_equalTo(self.view.mas_leading);
-    make.trailing.mas_equalTo(self.view.mas_trailing);
-    make.bottom.mas_equalTo(self.mas_bottomLayoutGuideTop);
-}];
-</code></pre><p>8、Autolayout中约束LayoutConstraint的有效无效（8.0）<br>有时候我们经常遇到一个view在不同的场景下约束不同，通常做法就是在不同场景下先删除再增加这样操作，这样效率反而不高。我们可以通过active这个属性设置生效不生效。</p>
-<pre><code>self.mLayoutConstraintWidth.active = YES;
-</code></pre><p>9、隐藏导航栏返回按钮旁边的文字</p>
-<pre><code>[[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(0, -60) forBarMetrics:UIBarMetricsDefault];
-</code></pre><p>10、替换返回按钮图片<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">UIImage *bgImage = [[UIImage imageNamed:@&quot;return&quot;] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];</div><div class="line">[[UINavigationBar appearance] setBackIndicatorImage:bgImage];</div><div class="line">[[UINavigationBar appearance] setBackIndicatorTransitionMaskImage:bgImage];</div></pre></td></tr></table></figure></p>
-<p>11、头文件导入<br>@class 在.h文件时引入其他.h文件的时候，效率更高</p>
-<p>#include “” 自己写的文件</p>
-<p>#include &lt;&gt; 引入系统的</p>
-<p>#import &lt;&gt; 用于包含系统文件</p>
-<p>#import “”自己写的文件，搜索路径更广<br>import比include更好，能够避免文件的重复导入，效率更高<br>不过还有一个更好的的方式<a href="https://stackoverflow.com/questions/18947516/import-vs-import-ios-7/18947634#" target="_blank" rel="external">@import</a>，这种方式让我们不必在设置里边添加包了，它会帮我们自动关联。<br>12、内存管理语义</p>
-<ul>
-<li><strong><em>assign</em></strong> “设置方法”只会执行针对”纯量类型”(例如CGFloat或NSInteger等)的简单赋值操作</li>
-<li><strong><em>strong</em></strong> 此特质表明该属性定义了一种”拥有关系”。为这种属性设置新值时，设置方法会先保留新值，并释放旧值，然后再将新值设置上去。</li>
-<li><strong><em>weak</em></strong> （5.0以上，可以说是对unsafe_unretained的一个升级,更安全，但是由于要遍历是否已经销毁，并且设置成nil，所以是消耗性能）此特质表明该属性定义了一种”非拥有关系”。为这种属性设置新值时，设置方法既不保留新值，也不释放旧值。此特质同assign类似，然而在属性所指的对象遭到摧毁时，属性值也会清空(nil)。</li>
-<li><strong><em>unsafe_unretained</em></strong> (5.0以下必须使用而不能使用weak，优点比weak快，缺点容易造成野指针)此特质的语义和assign相同，但是它使用于”对象类型”，该特质表达一种”非拥有关系”，当对象遭到摧毁时，属性值不会自动清空（”不安全”,unsafe）这一点与weak有区别。</li>
-<li><strong><em>copy</em></strong> 此特质所表达的所属关系与strong类似。然而设置方法并不保留新值，而是将其”拷贝”。警惕NSMutableArray为copy的时候奔溃问题。copy之后是NSArray添加对象会crash。<br>13、查找或判断xib是否存在<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">NSString *path = [[NSBundle mainBundle] pathForResource:NSStringFromClass(className) ofType:@&quot;nib&quot;];</div><div class="line">Boolean exist = [[NSFileManager defaultManager] fileExistsAtPath:path];</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>备注：其实关键就是Typ是”nib”而不是”xib”。因为我们打出的包，系统将我们的xib文件编译成了以nib为结尾的文件。<br>14、UI_APPEARANCE_SELECTOR<br>当我们自定义控件的时候可以在属性后边增加这个声明。代表支持appearance方法。如果你自己调用了setXX方法，则appearance方法失效。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">@property (nonatomic, assign) CGFloat selectionIndicatorHeight UI_APPEARANCE_SELECTOR;</div></pre></td></tr></table></figure></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[XXXClass appearance].selectionIndicatorHeight = xxxx</div></pre></td></tr></table></figure>
-<p>15、旋转动画方向问题<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">button.transform = CGAffineTransformRotate(button.transform,M_PI);</div></pre></td></tr></table></figure></p>
-<p>我们先旋转180顺时针<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">button.transform = CGAffineTransformIdentity;</div></pre></td></tr></table></figure></p>
-<p>当我们调用上句话的时候，是顺时针旋转180返回原位置，但是很多时候我们想原路返回，其实就是想逆时针返回。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">button.transform = CGAffineTransformRotate(button.transform,M_PI-0.0001);</div></pre></td></tr></table></figure></p>
-<p>只要这么设置就会逆时针返回了。旋转动画选择了最短路径返回</p>
-<p>16、纯代码布局，添加约束<br>如果我们使用纯代码布局，则需要以下代码约束才能起作用；默认左右是有16像素间距的，设置左右各-16才能靠边(这个如果有其他好办法可以留言给我)</p>
-<pre><code>self.view.translatesAutoresizingMaskIntoConstraints = NO;
-</code></pre><p>17、NSDate和NSDateFormatter<br>NSDate：是获取的时间没有时区概念，所以获取的是0时区的时间。</p>
-<pre><code>[NSDate date]//获取的时间与当前时间差8个小时
-</code></pre><p>NSDateFormatter：将日期格式成我们想要的。同时会根据时区、地域给我们做相应的计算。(看注释)</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">NSDateFormatter *formatter = [[NSDateFormatter alloc] init];</div><div class="line">formatter.dateFormat = @&quot;yyyy-MM-dd HH:mm:ss&quot;;</div><div class="line">NSTimeZone *timeZone = [NSTimeZone localTimeZone];</div><div class="line">//  formatter.locale = [NSLocale currentLocale];</div><div class="line"> formatter.timeZone = timeZone;</div><div class="line">NSDate *currentDate = [NSDate date];</div><div class="line">NSString *currentString = [formatter stringFromDate:currentDate];//会将currentDate增加8个小时，获取我们当前时区的时间</div><div class="line">NSDate *date = [formatter dateFromString:@&quot;2017-8-31 9:51:00&quot;];//获取的date是针对0时区的时间，所以会减去8个小时</div></pre></td></tr></table></figure>
-<p>以上代码可以看到我们可以设置timeZone和locale。如果我们只设置local照样能够输出我们想要的结果。但是二者有什么区别呢？</p>
-<ul>
-<li>local是设置区域的。配合setTimeStyle:、setDateStyle:这些方法可以控制日期输出不同的格式。因为每个地方的格式不同。  <a href="https://developer.apple.com/library/content/documentation/MacOSX/Conceptual/BPInternational/InternationalizingYourCode/InternationalizingYourCode.html" target="_blank" rel="external">Formatting Data Using the Locale Settings</a></li>
-</ul>
-<p><img src="http://upload-images.jianshu.io/upload_images/6644906-320495bdfa8f9c47.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="7FAEF832-CBCD-41A2-A4EE-4056FBF1B931.png"></p>
-<ul>
-<li>timeZone设置时区的。主要用来将时间转换成不同时区。</li>
-</ul>
-<p>所以在代码格式化的时候，建议设置timezone来格式化我们的时期</p>
-<p>18、Xcode关闭控制台打印不用信息</p>
-<p> Xcode-&gt;Edit Scheme -&gt; Run -&gt; Arguments, 在Environment Variables里边添加 OS_ACTIVITY_MODE ＝ disable</p>
-<p>19、NSObject中isKindOfClass、isMemberOfClass、isSubclassOfClass区别</p>
-<p>isSubclassOfClass和isKindOfClass的作用基本上是一致的，只不过一个是类方法，一个是对象方法。<br>isKindOfClass来确定一个对象是否是一个类的成员，或者是派生自该类的成员,<br>isMemberOfClass只能确定一个对象是否是当前类的成员.<br>isMemberOfClass 筛选条件更为苛刻，只有当类型完全匹配的时候才会返回YES。</p>
-<p>20、判断当前queue是否是main queue<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">static void *mainQueueKey = &amp;mainQueueKey;</div><div class="line">static dispatch_once_t onceToken;</div><div class="line">dispatch_once(&amp;onceToken, ^&#123;</div><div class="line">  dispatch_queue_set_specific(dispatch_get_main_queue(),</div><div class="line">                              mainQueueKey, mainQueueKey, NULL);</div><div class="line">&#125;);</div><div class="line">return dispatch_get_specific(mainQueueKey) == mainQueueKey;</div></pre></td></tr></table></figure></p>
-<p>21、为什么有的属性要用copy，而不用strong</p>
-<p>像NSString和NSArray这两类，在给变量赋值的时候，如果来源是可变字符串或可变数组的时候，使用copy能够避免原来变量对现在变量的影响。如果用strong的话，原来变量改变时同时会影响我们现在的变量。我们大多数期望的结果是两个变量相互独立，互补影响的，所以使用copy能够避免这类问题<br>22、SEL、IMP</p>
-<p>SEL 函数的ID，相当于将函数的名字用一个唯一识别符与之相对应。<br>IMP 本质是函数指针。其实就是函数的实现，我们在调用方法的时候是一层一层的查找，最终找到了IMP，如果直接调用IMP将会更有效率</p>
-<p>23、消息的转发</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/6644906-9209401db1a78dc4.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="44181-09a882edcb98d535.jpg"><br>runtime在调用方法的时候如果找不到会直接奔溃。如果在当前类找不到的时候，会开始顺序的调用系统的三个方法，如果再找不到会直接crash。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">1.+(Bool) resolveInstanceMethod:(SEL)sel // 对应实例方法</div><div class="line">  + (Bool)resolveClassMethod:(SEL)sel // 对应类方法</div><div class="line">我们可以在这个方法中调用class_addMethod将方法加入就不会crash</div><div class="line">2.- (id)forwardingTargetForSelector:(SEL)aSelector//可以改变查找方法的对象</div><div class="line">3.- (void)forwardInvocation:(NSInvocation *)anInvocation//搭配- (NSMethodSignature *)methodSignatureForSelector:(SEL)aSelector这个使用。通过传递过来的NSInvocation对象，我们可以对此重新注入调用对象、方法、参数等</div></pre></td></tr></table></figure></p>
-<p>24、<code>NSObject</code>的description和debugDescription方法<br>当我们在工程中使用model(继承NSObject)的时候，在断点或者log调试中有时候需要将对象打印到控制台中，但是我们自己写的model打印出的是对象的地址。如果需要打印出有效的信息，这时我们可以重写descrition或者debugDescription方法，打印出我们想要的信息。例如对象的所有属性的值。<strong><em>默认情况下debugDescription调用的是description方法</em></strong></p>
-<p>25、 UIView的setNeedsLayout、layoutIfNeeded 、setNeedsDisplay</p>
-<ul>
-<li><strong><em>setNeedsLayout</em></strong> 标记为需要重新布局，不立即刷新，但layoutSubviews一定会被调用<br>配合layoutIfNeeded立即更新</li>
-<li><strong><em>layoutIfNeeded</em></strong> 如果有有需要刷新的标记，立即调用layoutSubviews进行布局，并且进行页面刷新<br>例如我在使用约束做动画的时候:<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">leftContrain.constant = 100</div><div class="line">UIView.animateWithDuration(0.8, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: UIViewAnimationOptions.AllowAnimatedContent, animations: &#123;</div><div class="line">                self.view.layoutIfNeeded() //立即实现布局</div><div class="line">            &#125;, completion: nil)</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>如果不调用<code>layoutIfNeeded</code>则动画一点卵用没有</p>
-<ul>
-<li><strong><em>setNeedsDisplay或setNeedsDisplayInRect</em></strong>   会调用自动调用drawRect方法，这样可以拿到  UIGraphicsGetCurrentContext，就可以画画了。而setNeedsLayout会默认调用layoutSubViews，<ul>
-<li>setNeedsDisplay 对应画布的大小就是UIView的大小，所以会将整个UIView进行绘制</li>
-<li>setNeedsDisplayInRect 对应画布的大小是调用此方法传入的rect，如果此前UIView已经绘制过一次，则会保留上次的绘制，仅仅对对应传入的rect进行刷新绘制<blockquote>
-<p>This method makes a note of the request and returns immediately. The view is not actually redrawn until the next drawing cycle, at which point all invalidated views are updated.</p>
-</blockquote>
-</li>
-</ul>
-</li>
-</ul>
-<blockquote>
-<p>setNeedsDisplay方便绘图，而layoutSubViews方便出来数据。</p>
-</blockquote>
-
-          
+          以前工作中有很多小的知识点，但是有时候只是用了，没有真正积累下来，有时候也会忘记。所以写这篇文章就是慢慢的将以前小的知识点或者之后用到的用文字的形式记录下来。【码字、分享不容易，各位的关注是小的动力！动动亲的小手指关注一下我哈。】1、_Nullable和_Nonnull(Xcode 6.3 )_Nu
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/10/17/iOS小知识积累(长期更新)/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -783,27 +801,16 @@
       
         
           
-            <p>想想有一段时间没更新博客了，其中有工作稍微忙了点的原因，其实作者找了一个项目一直在练习。另一方面作者购买了一个域名并且通过辛苦努力搭建了一个自己的小窝，欢迎各位的光临哦！（<a href="http://flyoceanfish.top/" target="_blank" rel="external">作者的小窝传送门</a>），以后写的文章将在自己的小窝作为首发了。</p>
-<h2 id="项目背景"><a href="#项目背景" class="headerlink" title="项目背景"></a>项目背景</h2><p>本人练习的项目是一个通过豆瓣公共api实现了电影相关的一个APP。主要功能有推荐、搜索、登录、详情等，由于是刚学习完RN第一个练习项目，所以难免有些生疏和技术的不熟练，哪里有些的不好的地方希望大家可以不吝赐教。本项目是通过两个阶段完成的：第一阶段使用RN自带的控件比如<a href="http://facebook.github.io/react-native/docs/tabbarios.html" target="_blank" rel="external">TabBarIOS</a>、<a href="http://facebook.github.io/react-native/docs/navigatorios.html" target="_blank" rel="external">NavigatorIOS</a>、<a href="http://facebook.github.io/react-native/docs/button.html" target="_blank" rel="external">Button</a>、<a href="http://facebook.github.io/react-native/docs/image.html" target="_blank" rel="external">Image</a>等；第二阶段重构使用了比较火的一些第三方控件<a href="https://www.npmjs.com/package/react-native-navigation" target="_blank" rel="external">react-native-navigation</a>、<a href="https://github.com/remobile/react-native-cache-image" target="_blank" rel="external">react-native-img-cache</a>、<a href="https://github.com/APSL/react-native-button" target="_blank" rel="external">react-native-button</a>。</p>
-<h2 id="项目视频介绍"><a href="#项目视频介绍" class="headerlink" title="项目视频介绍"></a>项目视频介绍</h2><p><img src="http://upload-images.jianshu.io/upload_images/6644906-f0462dc777d36ec2.gif?imageMogr2/auto-orient/strip" alt="项目视频介绍.gif"></p>
-<h3 id="使用到的技术"><a href="#使用到的技术" class="headerlink" title="使用到的技术"></a>使用到的技术</h3><ul>
-<li>ES6 其中主要使用的是箭头函数这个特性，项目中代码其实使用了两种，我注释掉了一种。两种最大的区别就是箭头函数自动绑定this</li>
-<li>Flex 一种布局方式</li>
-<li>JavaScript</li>
-<li>Objective-c<h3 id="项目详细介绍"><a href="#项目详细介绍" class="headerlink" title="项目详细介绍"></a>项目详细介绍</h3>1、项目初始化<br>由于使用到了react-native-navigation第三方框架导航，所以APP代码还有有挺大区别的。<br>直接在index.os.js中将所有的代码注释掉仅仅使用如下一句即可</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">import app from &apos;./app/App&apos;</div></pre></td></tr></table></figure>
-<p>1.1、App.js源码<br>App其实一方面<code>registerScreens()</code>方法注册了所有的Component，另一方面使用了<code>Navigation.startTabBasedApp</code>启动了整个App，实现了UITabBar的效果</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div></pre></td><td class="code"><pre><div class="line">import &#123;Platform&#125; from &apos;react-native&apos;;</div><div class="line">import &#123;Navigation&#125; from &apos;react-native-navigation&apos;;</div><div class="line">import &#123;registerScreens,registerScreenVisibilityListener&#125; from &apos;./Screens/index&apos;;</div><div class="line"></div><div class="line">import Icons from &apos;./Assets/Icon&apos;;</div><div class="line"></div><div class="line">// screen related book keeping</div><div class="line">registerScreens();</div><div class="line">registerScreenVisibilityListener();</div><div class="line"></div><div class="line">const tabs = [&#123;</div><div class="line">        label: &apos;推荐&apos;,</div><div class="line">        screen: &apos;com.fof.FlyOceanMovies.MovieList&apos;,</div><div class="line">        icon: &#123;uri:Icons.star,scale:4.6&#125;,</div><div class="line">        title: &apos;热门推荐&apos;,</div><div class="line">    &#125;,</div><div class="line">    &#123;</div><div class="line">        label: &apos;北美票房&apos;,</div><div class="line">        screen: &apos;com.fof.FlyOceanMovies.USBoxList&apos;,</div><div class="line">        icon: &#123;uri:Icons.featured,scale:1.1&#125;,</div><div class="line">        title: &apos;北美票房&apos;,</div><div class="line">    &#125;,</div><div class="line">    &#123;</div><div class="line">        label: &apos;搜索&apos;,</div><div class="line">        screen: &apos;com.fof.FlyOceanMovies.SearchForm&apos;,</div><div class="line">        icon: &#123;uri:Icons.search,scale:1.2&#125;,</div><div class="line">        title: &apos;搜索&apos;,</div><div class="line">    &#125;</div><div class="line">    ];</div><div class="line"></div><div class="line">// this will start our app</div><div class="line">Navigation.startTabBasedApp(&#123;</div><div class="line">    tabs,</div><div class="line">    animationType: Platform.OS === &apos;ios&apos; ? &apos;slide-down&apos; : &apos;fade&apos;,</div><div class="line">    tabsStyle: &#123;</div><div class="line">        tabBarBackgroundColor: &apos;#003a66&apos;,</div><div class="line">        tabBarButtonColor: &apos;#ffffff&apos;,</div><div class="line">        tabBarSelectedButtonColor: &apos;#ff505c&apos;,</div><div class="line">        tabFontFamily: &apos;BioRhyme-Bold&apos;,</div><div class="line">    &#125;,</div><div class="line">    appStyle: &#123;</div><div class="line">        tabBarBackgroundColor: &apos;#003a66&apos;,</div><div class="line">        navBarButtonColor: &apos;#ffffff&apos;,</div><div class="line">        tabBarButtonColor: &apos;#ffffff&apos;,</div><div class="line">        navBarTextColor: &apos;#ffffff&apos;,</div><div class="line">        tabBarSelectedButtonColor: &apos;#ff505c&apos;,</div><div class="line">        navigationBarColor: &apos;#003a66&apos;,</div><div class="line">        navBarBackgroundColor: &apos;#003a66&apos;,</div><div class="line">        statusBarColor: &apos;#002b4c&apos;,</div><div class="line">        tabFontFamily: &apos;BioRhyme-Bold&apos;,</div><div class="line">    &#125;,</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-<p>2、各个子页面<br>MovieList：首页<br>USBoxList：北美票房<br>SearchForm：搜索<br>MovieDetail：详情<br>Login：登录界面<br>SearchResult：搜索结果页<br>Main.js：相当于CSS样式，其实就是布局</p>
-<p>其中MovieList自己实现了相当于iOS的segmentcontrol的效果使用到了ReactNative中的动画。</p>
-<p>下图详细概括了RN中动画内容，所谓得此图得天下。哈哈</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/6644906-d9ea24281e635f4a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="React Native 动画.png"></p>
-<p>还有一些其他的关注点我都在代码加了注释，大家有兴趣可以详细看一下代码，由于里边包括了我两个阶段的所有代码，所以大家要耐心看哦。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>学习React Native有一段时间了，写这个项目其实不是很熟练，踩了不少坑，写的也不是非常的快。但是没遇到一个坑都停下来好好思考复习巩固自己没掌握的知识，让自己也提升了不少。所以万里之行始于足下，掌握知识的最快方法就是行动起来，找个项目从0开始，完整的写完一个项目。不仅验证了自己所学的知识，同时在写项目中能够学到之前没学到的知识,也巩固了自己的新知识。</p>
-<p><a href="https://github.com/FlyOceanFish/FlyOceanMovies" target="_blank" rel="external">项目完整代码</a></p>
-
-          
+          想想有一段时间没更新博客了，其中有工作稍微忙了点的原因，其实作者找了一个项目一直在练习。另一方面作者购买了一个域名并且通过辛苦努力搭建了一个自己的小窝，欢迎各位的光临哦！（作者的小窝传送门），以后写的文章将在自己的小窝作为首发了。
+项目背景本人练习的项目是一个通过豆瓣公共api实现了电影相关的一个A
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/10/16/React Native项目实践总结/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -943,18 +950,17 @@
       
         
           
-            <p>接上一篇iOS自动打包文章，本文将介绍Android的自动打包。</p>
-<h1 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h1><p>　　Android的SDK已经安装好（这个网上教程一大堆，如果不会的可以自行搜索，实在搞不定的可以留言）</p>
-<h1 id="Android自动打包"><a href="#Android自动打包" class="headerlink" title="Android自动打包"></a>Android自动打包</h1><p>　　其实Android的自动打包与iOS的自动打包基本一样，主要由于开发工具的不同，所以不同点都是由于开发工具不同造成。<br><strong><em>本文将写出与iOS的不同的地方，前边几步相同的就省略了</em></strong><br>1、 <strong><em>配置gradle</em></strong></p>
-<ul>
-<li>找到“构建”-&gt;“增加构建步骤”-&gt;“Excute Shell”。这一步由于服务器上的gradlew一直获取不到权限<br><img src="http://upload-images.jianshu.io/upload_images/6644906-39e67a7b9138b591.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="4ADDE352-E751-4379-8BA2-2402F36ECB5C.png"></li>
-<li>找到“构建”-&gt;“增加构建步骤”-&gt;“Invoke Gradle Script”，选择”Use Gradle Wrapper”。其中Build File 代表build.gradle的路径<br><img src="http://upload-images.jianshu.io/upload_images/6644906-c37c70459c0bee8d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="83CAA3F9-9675-46DE-9332-A8B3C4D579C0.png"></li>
-</ul>
-<p>2、配置上传apk脚本<br>      curl -F “file=@app/build/outputs/apk/app-debug.apk” -F “uKey=4acbf7559e513f1f6081294723ea4d0f” -F “_api_key=d9e87e9febbf20dd4f384876bdf72a22” <a href="https://qiniu-storage.pgyer.com/apiv1/app/upload" target="_blank" rel="external">https://qiniu-storage.pgyer.com/apiv1/app/upload</a></p>
-<p>3、如果构建的时候报找不到“ ANDROID_HOME”，则就在“系统设置”-&gt;“全局属性”中增加，然后“系统管理”-&gt;“读取设置”重新启动Jenkins。<br><img src="http://upload-images.jianshu.io/upload_images/6644906-b7b42037ef20691c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="A658B2DA-D10F-484F-8782-0F77210CC615.png"></p>
-<p>　　很庆幸自己坚持了这么久了，已经把《在mac上快速搭建Android、iOS自动打包环境》这一个系列完成。感性简友的支持。如果自己在搭建过程中有任何问题可以联系我。</p>
-
-          
+          接上一篇iOS自动打包文章，本文将介绍Android的自动打包。
+准备工作　　Android的SDK已经安装好（这个网上教程一大堆，如果不会的可以自行搜索，实在搞不定的可以留言）
+Android自动打包　　其实Android的自动打包与iOS的自动打包基本一样，主要由于开发工具的不同，所以不同点都是
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/10/14/在mac上快速搭建Android、iOS自动打包环境(三)/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1094,32 +1100,26 @@
       
         
           
-            <p>接上一篇文章，环境已经搭建好，紧接着就是开始创建项目，自动编译工程了。</p>
-<p>#自动打包iOS项目</p>
-<ul>
-<li>点击下图的新建项目</li>
-</ul>
-<p><img src="http://upload-images.jianshu.io/upload_images/6644906-9726bf015d2cde77.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="5E049239-E505-47E3-817F-8FBC8736B5D4.png"></p>
-<ul>
-<li>输入一个名字，选择构建一个自由风格的项目，然后点击OK</li>
-</ul>
-<p><img src="http://upload-images.jianshu.io/upload_images/6644906-195089799f629836.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="E8218566-45F0-4B98-86CD-DCB2EBC6CABF.png"></p>
-<ul>
-<li>接下来就是出现如下图，配置git或svn账号，配置Excute shell<br>   1.　<strong><em>配置git账号和打包分支</em></strong><br>　　首先配置的是git账号，由于作者用的gitlab管理源代码，所以选择了git，然后填写Repository URL和Credentials。Credentials点击Add之后选择Username with password,填写自己的账号;最后填写Branches to build。这里我选择了develop分支，这里填写其实非常灵活，有兴趣的可以自行研究一下。<br><img src="http://upload-images.jianshu.io/upload_images/6644906-a99870397b8753c0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="D607C119-F9D7-497B-9522-E7A582598ABE.png"><br>最终配置图如下：</li>
-</ul>
-<p><img src="http://upload-images.jianshu.io/upload_images/6644906-d98bc56830c552ae.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="11E5C43A-EB0B-4333-8883-227DBEDC5002.png"><br>　　2.　<strong><em>脚本设置</em></strong><br>　　这一步主要用来打包 ipa 并上传到蒲公英。我们点击“增加构建步骤”，选择 “Execute Shell”。输入下列脚本:</p>
-<pre><code>IPANAME=&quot;jinkens-myapp&quot;
-fastlane gym --export_method ad-hoc --                     output_name ${IPANAME}
-curl -F &quot;file=@${IPANAME}.ipa&quot; -F    &quot;uKey=USER_KEY&quot; -F &quot;_api_key=API_KEY&quot;    https://qiniu-storage.pgyer.com/apiv1/app/upload
-</code></pre><p>注意：<br>    　　其中，USER_KEY 和 API_KEY 可以在蒲公英的「账户设置」中找到，之后进行相应替换。<br>export_method 可以根据打包类型进行相应设置。可选的值有：app-store、ad-hoc、　development、enterprise。对于 Xcode 8.3 以下的版本，则不需要设置 export_method。<br>设置好之后，类似界面如下所示：<br><img src="http://upload-images.jianshu.io/upload_images/6644906-68e35d3aea302a09.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="42B25C98-F734-4401-81DC-A2379AA4B046.png"><br>3.　<strong><em>配置邮箱插件，自动打包之后能够自动发邮件通知</em></strong><br>　　点击系统管理-&gt;系统设置 找到“Extended E-mail Notification”，填写相应的信息之后。（注意:“系统管理员邮件地址”要填写发送邮件的账号）</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/6644906-ed5de6fe69a856c7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="B8BE5A3A-BAE3-467B-A15E-90996B566480.png"></p>
-<p>4.　<strong><em>配置项目的邮件通知</em></strong><br>　　　点击“增加构建后操作步骤”-&gt;”Editable Email Notification”，填写相应的信息如下图:</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/6644906-e52f63285c4590e8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="F2A2F314-9A91-4A96-9509-7CCAF7348EAC.png"></p>
-<p>　　最后选择Triggers 选择sucees和failure两个即可，之后选择相应的发送人员就好了。<br>　　保存点击立即构建，见证奇迹的时刻到了。几分钟后则会收到邮件</p>
-<p>##邮件表达式详解：##<br>${BUILD_LOG, maxLines, escapeHtml} -显示最终构建日志。<br>maxLines – 显示该日志最多显示的行数，默认250行。<br>escapeHtml -如果为true，格式化HTML。默认false。<br>${BUILD_LOG_REGEX, regex, linesBefore, linesAfter, maxMatches, showTruncatedLines, substText, escapeHtml, matchedLineHtmlStyle} -按正则表达式匹配显示构建日志的行数。<br>匹配符合该正则表达式的行数。参阅java.util.regex.Pattern，默认“(?i)\b(error|exception|fatal|fail(ed|ure)|un(defined|resolved))\b”。<br>linesBefore -包含在匹配行之前的行编号。行数会与当前的另一个行匹配或者linesAfter重叠，默认0。<br>linesAfter -包含在匹配行之后的行编号。行数会与当前的另一个行匹配或者linesBefore重叠，默认0。<br>maxMatches -匹配的最大数量，如果为0，则包含所有匹配。默认为0。<br>showTruncatedLines -如果为true，包含[…truncated ### lines…]行。默认为true。<br>substText -如果非空，把这部分文字插入该邮件，而不是整行。默认为空。<br>escapeHtml -如果为true，格式化HTML。默认false。<br>matchedLineHtmlStyle -如果非空，输出HTML。匹配的行数将变为<b style="”your-style-value”"> html escaped matched line </b>格式。默认为空。<br>${BUILD_NUMBER} -显示当前构建的编号。<br>${BUILD_STATUS} -显示当前构建的状态(失败、成功等等)<br>${BUILD_URL} -显示当前构建的URL地址。<br>${CHANGES, showPaths, format, pathFormat} -显示上一次构建之后的变化。<br>showPaths – 如果为 true,显示提交修改后的地址。默认false。<br>format – 遍历提交信息，一个包含%X的字符串，其中%a表示作者，%d表示日期，%m表示消息，%p表示路径，%r表示版本。注意，并不是所有的版本系统都支持%d和%r。如果指定showPaths将被忽略。默认“[%a] %m\n”。<br>pathFormat -一个包含“%p”的字符串，用来标示怎么打印字符串。<br>${CHANGES_SINCE_LAST_SUCCESS, reverse, format, showPaths, changesFormat, pathFormat} -显示上一次成功构建之后的变化。<br>reverse -在顶部标示新近的构建。默认false。<br>format -遍历构建信息，一个包含%X的字符串，其中%c为所有的改变，%n为构建编号。默认”Changes for Build #%n\n%c\n”。<br>showPaths, changesFormat, pathFormat – 分别定义如${CHANGES}的showPaths、format和pathFormat参数。<br>${CHANGES_SINCE_LAST_UNSTABLE, reverse, format, showPaths, changesFormat, pathFormat} -显示显示上一次不稳固或者成功的构建之后的变化。<br>reverse -在顶部标示新近的构建。默认false。<br>format -遍历构建信息，一个包含%X的字符串，其中%c为所有的改变，%n为构建编号。默认”Changes for Build #%n\n%c\n”。<br>showPaths, changesFormat, pathFormat -分别定义如${CHANGES}的showPaths、format和pathFormat参数。<br>${ENV, var} – 显示一个环境变量。<br>var – 显示该环境变量的名称。如果为空，显示所有，默认为空。<br>${FAILED_TESTS} -如果有失败的测试，显示这些失败的单元测试信息。<br>${JENKINS_URL} -显示Jenkins服务器的地址。(你能在“系统配置”页改变它)。<br>${HUDSON_URL} -不推荐，请使用$JENKINS_URL<br>${PROJECT_NAME} -显示项目的名称。<br>${PROJECT_URL} -显示项目的URL。<br>${SVN_REVISION} -显示SVN的版本号。<br>${CAUSE} -显示谁、通过什么渠道触发这次构建。<br>${JELLY_SCRIPT, template} -从一个Jelly脚本模板中自定义消息内容。有两种模板可供配置：HTML和TEXT。你可以在$JENKINS_HOME/email-templates下自定义替换它。当使用自动义模板时，”template”参数的名称不包含“.jelly”。<br>template -模板名称，默认”html”。<br>${FILE, path} -包含一个指定文件的内容<br>path -文件路径，注意，是工作区目录的相对路径。<br>${TEST_COUNTS, var} -显示测试的数量。<br>var – 默认“total”。<br>total -所有测试的数量。<br>fail -失败测试的数量。<br>skip -跳过测试的数量。</p>
-<p>下一篇将详细介绍Android的自动打包过程，Android的打包比iOS的打包稍微麻烦一些。</p>
+          接上一篇文章，环境已经搭建好，紧接着就是开始创建项目，自动编译工程了。
+#自动打包iOS项目
 
-          
+点击下图的新建项目
+
+
+
+输入一个名字，选择构建一个自由风格的项目，然后点击OK
+
+
+
+接下来就是出现如下图，配置git或svn账号，配置Excute shell   1.　配置git账号和打包分支　　首
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/10/14/在mac上快速搭建Android、iOS自动打包环境(二)/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1259,50 +1259,23 @@ curl -F &quot;file=@${IPANAME}.ipa&quot; -F    &quot;uKey=USER_KEY&quot; -F &quo
       
         
           
-            <p>本文实现了jenkins+fastlane自动打包Android、iOS，然后上传到蒲公英上，最后通过邮件通知相关人员</p>
-<h1 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h1><ul>
-<li><a href="https://jenkins.io" target="_blank" rel="external">jenkins</a></li>
-<li><a href="https://github.com/fastlane/fastlane" target="_blank" rel="external">fastlane</a></li>
-<li>Homebrew</li>
-</ul>
-<h1 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h1><p>1、 安装brew，如果电脑已经安装，可以忽略</p>
-<blockquote>
-<p>curl -LsSf <a href="http://github.com/mxcl/homebrew/tarball/master" target="_blank" rel="external">http://github.com/mxcl/homebrew/tarball/master</a> | sudo tar xvz -C/usr/local –strip 1</p>
-</blockquote>
-<p>2、 安装java环境</p>
-<blockquote>
-<p>brew cask install java</p>
-</blockquote>
-<p>3、安装jenkins</p>
-<blockquote>
-<p>brew install jenkins</p>
-</blockquote>
-<p>4、设置端口</p>
-<blockquote>
-<p>java -jar /usr/local/Cellar/jenkins/2.67/libexec/jenkins.war –httpPort=8080</p>
-</blockquote>
-<p>5、启动jenkins</p>
-<blockquote>
-<p>jenkins</p>
-</blockquote>
-<p>到这步jenkins已经安装完毕，在浏览器中输入<a href="http://localhost:8080" target="_blank" rel="external">http://localhost:8080</a> 即可出现以下界面:</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/6644906-e7bd74cf75b6b438.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="4046DB34-2FB9-481F-A81C-2B3924F33C72.png"><br>6、在终端命令行输入以下命令获取密码，填入输入框之后点击continue</p>
-<blockquote>
-<p>cat /Users/wrf/.jenkins/secrets/initialAdminPassword<br>7、之后出现以下界面，点击install suggested plugin。这步操作安装的插件基本包括了常规使用的全部</p>
-</blockquote>
-<p><img src="http://upload-images.jianshu.io/upload_images/6644906-4bb3b4f4d3d86e8c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="7FCE5BB6-C6D6-4DD6-B60C-510523C6BA33.png"></p>
-<p>8、之后会看见如下界面，如果出现红叉的代表安装失败，只要点击retry即可，基本都会安装成功。之后创建账号就行了。整个jenkins已经安装成功</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/6644906-673e05f3f6de2730.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="E1BFCF45-4DCC-44DD-B30E-18674C91098A.png"><br>9、fastlane安装</p>
-<blockquote>
-<p>brew cask install fastlane</p>
-</blockquote>
-<p>　　至此整个环境已经完全搭好，第二篇文章将详细介绍android、iOS的打包流程。</p>
-<h1 id="遇到的坑"><a href="#遇到的坑" class="headerlink" title="遇到的坑"></a><em>遇到的坑</em></h1><p>　　在这个安装过程中遇到一个坑，研究了好久好不容易解决了。如果通过jenkins官方下载的.dmg文件安装，发现打包都是超时，打包不成功。通过命令行安装的jenkins能正确打包。</p>
-<pre><code>ERROR: Timeout after 10 minutes
-ERROR: Error fetching remote repo &apos;origin&apos;
-</code></pre><p>　　研究之后主要原因其实是这两种方式安装成功之后的安装路径不一样，一个是在shared路径下，一个是在/User/用户名这个路径下</p>
+          本文实现了jenkins+fastlane自动打包Android、iOS，然后上传到蒲公英上，最后通过邮件通知相关人员
+工具
+jenkins
+fastlane
+Homebrew
 
-          
+步骤1、 安装brew，如果电脑已经安装，可以忽略
+
+curl -LsSf http://github.com/mxcl
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/10/14/在mac上快速搭建Android、iOS自动打包环境(一)/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1442,41 +1415,20 @@ ERROR: Error fetching remote repo &apos;origin&apos;
       
         
           
-            <ul>
-<li><a href="http://www.jianshu.com/p/8324b379c020" target="_blank" rel="external">React Native源码分析原理（一）(基于0.48版本)</a></li>
-<li><a href="http://www.jianshu.com/p/0688b24950f4" target="_blank" rel="external">React Native源码分析原理（二）(基于0.48版本)</a></li>
-</ul>
-<p>上一篇文章大家如果仔细阅读揣摩对RN有了一个初步的认识了，接下来将基于上一篇文章的这种初步认识然我们详细了解一下RN的启动过程</p>
-<h3 id="启动过程"><a href="#启动过程" class="headerlink" title="启动过程"></a>启动过程</h3><p>[RCTRootView initWithBundleURL:…]<br>[RCTBridge initWithBundleURL:…]<br>[RCTBridge setUp]<br>初始化batchedBridge<br>[RCTCxxBridge start]<br>开启一个线程jsThread用于js<br>[RCTCxxBridge _initModulesWithDispatchGroup]<br>初始化JSCExecutorFactory, 用于执行js代码以及处理回调 JSCExecutor::JSCExecutor()<br>JSCExecutor::initOnJSVMThread()<br>installGlobalProxy -&gt; nativeModuleProxy<br>RCTJavaScriptLoader -&gt; 加载js代码<br>[RCTCxxBridge executeSourceCode]<br>[RCTRootView initWithBridge:…]<br>[RCTRootView bundleFinishedLoading]<br>初始化RCTRootContentView<br>[RCTRootView runApplication]//是Native调用js的一个完美例子。本质调用了AppRegistry的runApplication方法<br>我们初始化RN工程一般都是如下代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@&quot;index.ios&quot; fallbackResource:nil];</div><div class="line"></div><div class="line">RCTRootView *rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation</div><div class="line">                                                    moduleName:@&quot;AwesomeProject&quot;</div><div class="line">                                             initialProperties:nil</div><div class="line">                                                 launchOptions:launchOptions];</div></pre></td></tr></table></figure></p>
-<p>1、 获取到app的js入口文件的NSURL<br>2 、初始化RCTRootView, 传递的参数moduleName:@”AwesomeProject”是我们在入口的js文件中注册的, initialProperties:nil, 将作为js中的跟view的props, 可以用来传递需要的初始数据</p>
-<p>进入RCTRootView初始化中，其实很简单<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">RCTBridge *bridge = [[RCTBridge alloc] initWithBundleURL:bundleURL</div><div class="line">                                          moduleProvider:nil</div><div class="line">                                           launchOptions:launchOptions];</div><div class="line"></div><div class="line">return [self initWithBridge:bridge moduleName:moduleName initialProperties:initialProperties];</div></pre></td></tr></table></figure></p>
-<p>就实例化了一个RCTBridge，这个RCTBridge的实例其实就是一个外壳而已，接下来我们看看内部，为啥是一个外壳。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[self setUp];</div></pre></td></tr></table></figure></p>
-<p>内部中这个方法就是关键，这个方法里边实例化了一个真正的Bridge，即<code>RCTCxxBridge</code>或<code>RCTBatchedBridge</code>，所以说一开始实例化的Bridge只是一个壳子而已。为什么会出现两个不同的Bridge呢？主要是0.44之前的都是用的<code>RCTBatchedBridge</code>，之后RN用的是<code>RCTCxxBridge</code>，根据它的官方资料<code>RCTCxxBridge</code>会慢慢取代<code>RCTBatchedBridge</code>。(<code>RCTCxxBridge</code>有个问题就是依赖了4个包，而且这4个包被墙了具体可以看<a href="http://www.jianshu.com/p/1927785a3ba7" target="_blank" rel="external">将RN工程嵌入到现有原生iOS应用</a>)。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">self.batchedBridge = [[bridgeClass alloc] initWithParentBridge:self];</div><div class="line">[self.batchedBridge start];</div></pre></td></tr></table></figure></p>
-<p>首先是bridgeClass的获取，具体代码是优先加载<code>RCTCxxBridge</code>，如果获取不到的话，其次加载<code>RCTBatchedBridge</code>。本次分析是基于0.48并且工程初始化是使用了<code>RCTCxxBridge</code>，所以下边只要提到Bridge说的就是<code>RCTCxxBridge</code>。</p>
-<p>start是一个非常有料的方法。就像之前说的Bridge其实就是实现了一个调度管理的作用，那调度管理什么呢？所有需要调度管理的前提环境和类全部都是在start方法进行了初始化。</p>
-<p>1、  首先做的是实例化了一个js线程，我们之前所说的js thread就是它，用来执行js代码的线程<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">// Set up the JS thread early</div><div class="line">_jsThread = [[NSThread alloc] initWithTarget:self</div><div class="line">                                    selector:@selector(runJSRunLoop)</div><div class="line">                                      object:nil];</div><div class="line">_jsThread.name = RCTJSThreadName;</div><div class="line">_jsThread.qualityOfService = NSOperationQualityOfServiceUserInteractive;</div><div class="line">[_jsThread start];</div></pre></td></tr></table></figure></p>
-<p>这个线程执行的方法是<code>runJSRunLoop</code>通过名字大家也能猜出一个大概吧。其实就是启动了线程的runloop，保证了_jsThread能够一直运行。</p>
-<p>2、创建了一个group，用来初始化Birdge。接下来就开始加载我们本地所有的已经实现了RCTBridgeModule协议的modules<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"> dispatch_group_t prepareBridge = dispatch_group_create();</div><div class="line">// Initialize all native modules that cannot be loaded lazily</div><div class="line">[self _initModulesWithDispatchGroup:prepareBridge];</div></pre></td></tr></table></figure></p>
-<p>3、让我们看看initModulesWithDispatchGroup内部<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">for (Class moduleClass in RCTGetModuleClasses()) &#123;</div><div class="line">   NSString *moduleName = RCTBridgeModuleNameForClass(moduleClass);</div><div class="line"></div><div class="line">   // Don&apos;t initialize the old executor in the new bridge.</div><div class="line">   // TODO mhorowitz #10487027: after D3175632 lands, we won&apos;t need</div><div class="line">   // this, because it won&apos;t be eagerly initialized.</div><div class="line">   if ([moduleName isEqual:@&quot;RCTJSCExecutor&quot;]) &#123;</div><div class="line">     continue;</div><div class="line">   &#125;</div><div class="line"></div><div class="line">   // Check for module name collisions</div><div class="line">   RCTModuleData *moduleData = moduleDataByName[moduleName];</div><div class="line">   if (moduleData) &#123;</div><div class="line">     if (moduleData.hasInstance) &#123;</div><div class="line">       // Existing module was preregistered, so it takes precedence</div><div class="line">       continue;</div><div class="line">     &#125; else if ([moduleClass new] == nil) &#123;</div><div class="line">       // The new module returned nil from init, so use the old module</div><div class="line">       continue;</div><div class="line">     &#125; else if ([moduleData.moduleClass new] != nil) &#123;</div><div class="line">       // Both modules were non-nil, so it&apos;s unclear which should take precedence</div><div class="line">       RCTLogError(@&quot;Attempted to register RCTBridgeModule class %@ for the &quot;</div><div class="line">                   &quot;name &apos;%@&apos;, but name was already registered by class %@&quot;,</div><div class="line">                   moduleClass, moduleName, moduleData.moduleClass);</div><div class="line">     &#125;</div><div class="line">   &#125;</div><div class="line"></div><div class="line">   // Instantiate moduleData</div><div class="line">   // TODO #13258411: can we defer this until config generation?</div><div class="line">   moduleData = [[RCTModuleData alloc] initWithModuleClass:moduleClass</div><div class="line">                                                    bridge:self];</div><div class="line">   moduleDataByName[moduleName] = moduleData;</div><div class="line">   [moduleClassesByID addObject:moduleClass];</div><div class="line">   [moduleDataByID addObject:moduleData];</div><div class="line"> &#125;</div></pre></td></tr></table></figure></p>
-<p>主要是循环遍历用2个数组分别存储了所有的class和RCTModuleData(存储着我们class所有的信息包括class名称、所有的方法、等一些有效的信息和一个instance。还有一个Dictionary key是class，value是moudleData。这个就是通过class名称去取moduleData用的。</p>
-<p>这个方法中有一个很重要的方法<code>RCTGetModuleClasses()</code>。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">void RCTRegisterModule(Class);</div><div class="line">void RCTRegisterModule(Class moduleClass)</div><div class="line">&#123;</div><div class="line">  static dispatch_once_t onceToken;</div><div class="line">  dispatch_once(&amp;onceToken, ^&#123;</div><div class="line">    RCTModuleClasses = [NSMutableArray new];</div><div class="line">  &#125;);</div><div class="line"></div><div class="line">  RCTAssert([moduleClass conformsToProtocol:@protocol(RCTBridgeModule)],</div><div class="line">            @&quot;%@ does not conform to the RCTBridgeModule protocol&quot;,</div><div class="line">            moduleClass);</div><div class="line"></div><div class="line">  // Register module</div><div class="line">  [RCTModuleClasses addObject:moduleClass];</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>这个就是我们一直说的必须要实现了RCTBridgeModule这个协议，如果实现其实会直接报错的。这个加载是通过<code>RCT_EXPORT_MODULE()</code>宏来实现的，宏是通过运行时<code>+load()</code>方法在我们应用启动的时候其实已经将所有的module加入到了数组之中。</p>
-<p>4 、以上终于完成了Modules信息的保存, 接着会进行JSExecutorFactory的初始化和相关的设置, JSExecutorFactory内部会持有一个JSCExecutor 所有与JS的通信，一定都通过JSCExecutor来进行, 所以需要重点关注, 它的构造函数中调用了initOnJSVMThread(), 里面进行了很多的JS上下文的准备, 创建JSClass, 全局的context, 以及添加全局的回调.注意在这个里面使用到的JSC<em>JSXXX的宏的作用, 实际上是会转换为调用苹果的JavaScriptCore对应的方法(去掉JSC</em>), 同时还要留意JSCExecutor构造函数中为js的上下文中设置了一个Proxy, nativeModuleProxy.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">void JSCExecutor::initOnJSVMThread()</div><div class="line">  // 在js的上下文中注册全局的闭包回调 , 这两个是我们需要重点关注的回调.</div><div class="line">  nativeFlushQueueImmediate</div><div class="line">  nativeCallSyncHook</div><div class="line"></div><div class="line">    installNativeHook&lt;&amp;JSCExecutor::nativeFlushQueueImmediate&gt;(&quot;nativeFlushQueueImmediate&quot;);</div><div class="line">    // 这一个注册的回调, 可以用于在js中直接调用oc, 注意, 在rn中js调用oc一般都是由oc发起的,</div><div class="line">    // 这就像我们的界面一般是有用户的操作才会触发系统调用, rn中类似的,</div><div class="line">    // 当oc调了js后, 在对应的js回调中才会实现调用oc的逻辑</div><div class="line"></div><div class="line"> // 在react native MessageQueue.js中的源码中可以找到 这样一段代码,</div><div class="line"> // 就是当oc没有及时的在消息队列中调js的时候, 大于5ms后js就会调用这个回调, 主动调用oc</div><div class="line"></div><div class="line">   MIN_TIME_BETWEEN_FLUSHES_MS = 5ms;</div><div class="line">      if (global.nativeFlushQueueImmediate &amp;&amp;</div><div class="line">        (now - this._lastFlush &gt;= MIN_TIME_BETWEEN_FLUSHES_MS ||</div><div class="line">         this._inCall === 0)) &#123;</div><div class="line">      var queue = this._queue;</div><div class="line">      this._queue = [[], [], [], this._callID];</div><div class="line">      this._lastFlush = now;</div><div class="line">      global.nativeFlushQueueImmediate(queue);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">// 这个回调是用来调用查找native中对应的方法相关信息的</div><div class="line"></div><div class="line">installNativeHook&lt;&amp;JSCExecutor::nativeCallSyncHook&gt;(&quot;nativeCallSyncHook&quot;);</div><div class="line">在react native的 NativeModules.js中有相关的调用来获取native方法的相关信息</div><div class="line">function genMethod(moduleID: number, methodID: number, type: MethodType) &#123;</div><div class="line">//...</div><div class="line">    return global.nativeCallSyncHook(moduleID, methodID, args);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>为js的上下设置 nativeModuleProxy, 这一个属性很重要, js端用来获取所有注册的nativeModule. 在js中我们需要引入native端的时候回写这样的类似代码 var {NativeModules} from ‘react-native’, 实际上就是获取到我们这里设置的.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">JSCExecutor::JSCExecutor()</div><div class="line">  &#123;</div><div class="line">  // 这个函数在js的全局上下文中设置了`nativeModuleProxy`,</div><div class="line">// 使得在js端可以获取到, 同时注意这个函数的第三个参数中</div><div class="line">// 还包装了一个方法用于调用, 里面涉及到JSCNativeModules这个类,</div><div class="line">// 就是获取NativeModule的操作, 后面分析</div><div class="line">    installGlobalProxy(m_context, &quot;nativeModuleProxy&quot;,</div><div class="line">                       exceptionWrapMethod&lt;&amp;JSCExecutor::getNativeModule&gt;());</div><div class="line">  &#125;</div><div class="line"></div><div class="line">在react-native 的NativeModules.js底部有这样的代码, 就直接调用了上面在native端设置的全局属性了</div><div class="line"></div><div class="line">let NativeModules : &#123;[moduleName: string]: Object&#125; = &#123;&#125;;</div><div class="line">if (global.nativeModuleProxy) &#123;</div><div class="line">  NativeModules = global.nativeModuleProxy;</div><div class="line">&#125;</div><div class="line">module.exports = NativeModules;</div></pre></td></tr></table></figure></p>
-<p>那么js中是怎么获取到我们之前在native端已经生成好的’配置表’信息的呢? 这个问题需要我们重点关注下, 在之前的react-native版本中, 是通过native端直接在js的上下文中注入这样一个__fbBatchedBridgeConfig配置表,<br>传过去一个json(remoteModuleConfig). 现在的版本中改了一些. 还是上面这段代码. 在如下的调用栈中,我们只需要关注最后一个函数.</p>
-<p>JSCExecutor::getNativeModule()<br>JSCNativeModules::getModule()<br>JSCNativeModules::createModule()<br>ModuleRegistry::getConfig()<br>RCTNativeModule::getMethods()<br>NSStringFromSelector(selector) hasPrefix:@”rct_export”(初始化RCTModuleMethod信息)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line">folly::Optional&lt;Object&gt; JSCNativeModules::createModule(const std::string&amp; name, JSContextRef context) &#123;</div><div class="line">  if (!m_genNativeModuleJS) &#123;</div><div class="line">// 获取js中contenxt中的global</div><div class="line">    auto global = Object::getGlobalObject(context);  </div><div class="line">// 获取 global中的__fbGenNativeModule对象</div><div class="line">    m_genNativeModuleJS = global.getProperty(&quot;__fbGenNativeModule&quot;).asObject();</div><div class="line">    m_genNativeModuleJS-&gt;makeProtected();</div><div class="line">  &#125;</div><div class="line"></div><div class="line"> // 这个方法最终会调到 RCTNativeModule::getMethods()中,</div><div class="line"> // 取得之前使用宏暴露的所有的方法  -&gt; 前缀是 &quot;__rct_export__&quot;</div><div class="line"> auto result = m_moduleRegistry-&gt;getConfig(name);</div><div class="line"></div><div class="line"></div><div class="line">  if (!result.hasValue()) &#123;</div><div class="line">    return nullptr;</div><div class="line">  &#125;</div><div class="line">// 调用 js中的__fbGenNativeModule方法, 并且传递过去native端的配置表, 用于端js处理</div><div class="line">  Value moduleInfo = m_genNativeModuleJS-&gt;callAsFunction(&#123;</div><div class="line">    Value::fromDynamic(context, result-&gt;config),</div><div class="line">    Value::makeNumber(context, result-&gt;index)</div><div class="line">  &#125;);</div><div class="line">  return moduleInfo.asObject().getProperty(&quot;module&quot;).asObject();</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 下面是对应的js中的处理, NativeModules.js</div><div class="line">// 暴露一个全局的属性给native(就是上面我们调用的js中的方法, 触发了后面的js后取到native端的配置表, 并且保存)</div><div class="line">// export this method as a global so we can call it from native</div><div class="line">global.__fbGenNativeModule = genModule;</div><div class="line"></div><div class="line">function genModule(...) &#123;</div><div class="line">  // 获取到native端调用时传递过来的配置信息</div><div class="line">  const [moduleName, constants, methods, promiseMethods, syncMethods] = config;</div><div class="line">  const module = &#123;&#125;;</div><div class="line">  // 遍历 所有的native的方法列表, 获取所有native的方法的详细信息</div><div class="line">  methods &amp;&amp; methods.forEach((methodName, methodID) =&gt; &#123;</div><div class="line">    module[methodName] = genMethod(moduleID, methodID, methodType);</div><div class="line">  &#125;);</div><div class="line"></div><div class="line">&#125;</div><div class="line">function genMethod(...) &#123;</div><div class="line">  /// ...</div><div class="line">  // 调用之前native端在js中注入的回调, 获取native中的所有方法的详细信息</div><div class="line">  return global.nativeCallSyncHook(moduleID, methodID, args);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>5、 使用dispatch_group方式初始化Instance(执行代码需要), 和加载js代码RCTJavaScriptLoader,这个类比较单纯，就是用来加载js代码的，没有其他用处<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">NSData *sourceCode = [RCTJavaScriptLoader attemptSynchronousLoadOfBundleAtURL:self.bundleURL</div><div class="line">                                                                 runtimeBCVersion:bcVersion</div><div class="line">                                                                     sourceLength:NULL</div><div class="line">                                                                            error:&amp;error];</div></pre></td></tr></table></figure></p>
-<p>6、 modules and source code都已经准备好了, 在notify中JSCExecutor专属的Thread内执行jsbundle代码执行js代码. 执行完毕后会将_displayLink添加到runloop(注意是在jsThread所在的runloop)中, 开始运行。</p>
-<p>[RCTCxxBridge executeSourceCode: ]<br>[RCTCxxBridge enqueueApplicationScript:]<br>void Instance::loadScriptFromString()<br>void NativeToJsBridge::loadApplication()<br>void JSCExecutor::loadApplicationScript()<br>void JSCExecutor::flush()<br>void JSCExecutor::bindBridge()<br>上面的调用栈中我们主要关注后面几个函数</p>
-<p><code>void JSCExecutor::loadApplicationScript()</code>, 在这个函数中注意下面两行代码, 注意, RN中有个很明显的问题就是, 首次进入RN模块的时候, 加载的很慢, 会有几秒的加载时间, 其实就是在这个函数中加载jsBundle造成的, 如果要优化加载的时间, 以及不同模块页面切换流畅, 就需要对jsBundle文件进行精简, 缓存等操作。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">// 执行js代码, 加载jsBundle</div><div class="line">evaluateScript(m_context, jsScript, jsSourceURL);</div><div class="line">// 在加载完jsbundle后主动调用一次, 为js的上下文环境添加必要的全局属性和回调</div><div class="line">flush();</div></pre></td></tr></table></figure></p>
-<p>void JSCExecutor::bindBridge()保存js的上下文环境中必要的全局属性和回调, 这些在 react native的 MessageQueue.js中定义的调用方法, 当native需要调用js的方法的时候, 需要通过调用这些js方法, 在这些方法中, js端会根据传递的信息查找到在js中需要调用的方法.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">    auto global = Object::getGlobalObject(m_context);</div><div class="line">    auto batchedBridgeValue = global.getProperty(&quot;__fbBatchedBridge&quot;);</div><div class="line">// 这些是在MessageQueue.js中定义的调用方法</div><div class="line">    auto batchedBridge = batchedBridgeValue.asObject();</div><div class="line">    m_callFunctionReturnFlushedQueueJS = batchedBridge.getProperty(&quot;callFunctionReturnFlushedQueue&quot;).asObject();</div><div class="line">    m_invokeCallbackAndReturnFlushedQueueJS = batchedBridge.getProperty(&quot;invokeCallbackAndReturnFlushedQueue&quot;).asObject();</div><div class="line">    m_flushedQueueJS = batchedBridge.getProperty(&quot;flushedQueue&quot;).asObject();</div><div class="line">    m_callFunctionReturnResultAndFlushedQueueJS = batchedBridge.getProperty(&quot;callFunctionReturnResultAndFlushedQueue&quot;).asObject();</div><div class="line">  &#125;</div></pre></td></tr></table></figure></p>
-<p>7 、上面的工作完成之后, 初始化bridge的工作就完成了, jsBundle已经加载完成, oc端的’配置表’也已经处理好, 并且成功已经传递给js端, js的上下文配置已经准备好, 下面就是开始执行我们的js代码了, React就会开始计算好所有的布局信息, 以及Component层级关系等, 等待native端完成对应的真正的页面渲染和布局. 回到RCTRootView的初始化方法中, 注意在[RCTRootView initWithBridge:…]的初始化方法中, 注册了几个js执行情况的通知, 我们重点关注js执行完毕后的通知RCTJavaScriptDidLoadNotification<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">- (instancetype)initWithBundleURL:(NSURL *)bundleURL</div><div class="line">                       moduleName:(NSString *)moduleName</div><div class="line">                initialProperties:(NSDictionary *)initialProperties</div><div class="line">                    launchOptions:(NSDictionary *)launchOptions</div><div class="line">&#123;</div><div class="line">  RCTBridge *bridge = [[RCTBridge alloc] initWithBundleURL:bundleURL</div><div class="line">                                            moduleProvider:nil</div><div class="line">                                             launchOptions:launchOptions];</div><div class="line">// 上面完成了bridge的初始化工作 , 下面开始完成rootView的初始化</div><div class="line">  return [self initWithBridge:bridge moduleName:moduleName initialProperties:initialProperties];</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>下面是js执行完毕后的通知RCTJavaScriptDidLoadNotification中的一系列的处理</p>
-<p>[RCTRootView javaScriptDidLoad]<br>[RCTRootView bundleFinishedLoading]<br>RCTRootContentView (创建contentView)<br>[RCTRootView runApplication]<br>在创建RCTRootContentView的时候, 注意有个参数是reactTag, 这个属性很重要, 每一个reactTag都应该是唯一的, 从1开始, 每次递增10. RCTRootContentView初始化时, 还需要在RCTUIManager中通过reactTag去注册, 从而由RCTUIManager来统一管理所有的js端使用Component对应的每个原生view(_viewRegistry[tag]表), 有了这个, 我们就可以很方便的在其他地方通过reactTag获取到我们的Component所在的rootView.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">    /**</div><div class="line">     * Every root view that is created must have a unique react tag.</div><div class="line">     * Numbering of these tags goes from 1, 11, 21, 31, etc</div><div class="line">     *</div><div class="line">     * NOTE: Since the bridge persists, the RootViews might be reused, so the</div><div class="line">     * react tag must be re-assigned every time a new UIManager is created.</div><div class="line">     */</div><div class="line"></div><div class="line">- (NSNumber *)allocateRootTag</div><div class="line">&#123;</div><div class="line">  NSNumber *rootTag = objc_getAssociatedObject(self, _cmd) ?: @1;</div><div class="line">  objc_setAssociatedObject(self, _cmd, @(rootTag.integerValue + 10), OBJC_ASSOCIATION_RETAIN_NONATOMIC);</div><div class="line">  return rootTag;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>然后才是[RCTRootView runApplication], 这里就会调用js里面AppRegistry对应的方法runApplication了, 在AppRegistry.js中有下面的一段注释, 已经解释得很清楚了<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * `AppRegistry` is the JS entry point to running all React Native apps.  App</div><div class="line"> * root components should register themselves with</div><div class="line"> * `AppRegistry.registerComponent`, then the native system can load the bundle</div><div class="line"> * for the app and then actually run the app when it&apos;s ready by invoking</div><div class="line"> * `AppRegistry.runApplication`.</div><div class="line"> *</div><div class="line"> * To &quot;stop&quot; an application when a view should be destroyed, call</div><div class="line"> * `AppRegistry.unmountApplicationComponentAtRootTag` with the tag that was</div><div class="line"> * passed into `runApplication`. These should always be used as a pair.</div><div class="line"> *</div><div class="line"> * `AppRegistry` should be `require`d early in the `require` sequence to make</div><div class="line"> * sure the JS execution environment is setup before other modules are</div><div class="line"> * `require`d.</div><div class="line"> */</div><div class="line"></div><div class="line">- (void)runApplication:(RCTBridge *)bridge</div><div class="line">&#123;</div><div class="line">  NSString *moduleName = _moduleName ?: @&quot;&quot;;</div><div class="line">  NSDictionary *appParameters = @&#123;</div><div class="line">    @&quot;rootTag&quot;: _contentView.reactTag,</div><div class="line">    @&quot;initialProps&quot;: _appProperties ?: @&#123;&#125;,</div><div class="line">  &#125;;</div><div class="line">// 调用AppRegistry.js中的runApplication开始运行</div><div class="line">  RCTLogInfo(@&quot;Running application %@ (%@)&quot;, moduleName, appParameters);</div><div class="line">  [bridge enqueueJSCall:@&quot;AppRegistry&quot;</div><div class="line">                 method:@&quot;runApplication&quot;</div><div class="line">                   args:@[moduleName, appParameters]</div><div class="line">             completion:NULL];</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>8、 因为执行js代码的时候, js端会计算好每个view的布局, 属性等信息, 然后通过调用native的系统方法来完成, 页面的渲染, 页面的布局. 这个过程中就涉及到了js 和native的互调通信了. 这个过程分为两个部分.</p>
-
           
+React Native源码分析原理（一）(基于0.48版本)
+React Native源码分析原理（二）(基于0.48版本)
+
+上一篇文章大家如果仔细阅读揣摩对RN有了一个初步的认识了，接下来将基于上一篇文章的这种初步认识然我们详细了解一下RN的启动过程
+启动过程[RCTRootView ini
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/10/14/React Native源码分析原理（二）(基于0.48版本)/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1616,39 +1568,18 @@ ERROR: Error fetching remote repo &apos;origin&apos;
       
         
           
-            <ul>
-<li><a href="http://www.jianshu.com/p/8324b379c020" target="_blank" rel="external">React Native源码分析原理（一）(基于0.48版本)</a></li>
-<li><a href="http://www.jianshu.com/p/0688b24950f4" target="_blank" rel="external">React Native源码分析原理（二）(基于0.48版本)</a><h3 id="React和React-Native初步认识"><a href="#React和React-Native初步认识" class="headerlink" title="React和React Native初步认识"></a>React和React Native初步认识</h3>说起Facebook的React Native就不得不说一下React，React是个什么东东呢？<blockquote>
-<p>React 是一个用于构建用户界面的 JAVASCRIPT 库。<br>React主要用于构建UI，很多人认为 React 是 MVC 中的 V（视图）。<br>React 起源于 Facebook 的内部项目，用来架设 Instagram 的网站，并于 2013 年 5 月开源。<br>React 拥有较高的性能，代码逻辑非常简单，越来越多的人已开始关注和使用它。</p>
-</blockquote>
-</li>
-</ul>
-<p><strong><em>React</em></strong></p>
-<blockquote>
-<p>1.声明式设计 −React采用声明范式，可以轻松描述应用。<br>2.高效 −React通过对DOM的模拟，最大限度地减少与DOM的交互。<br>3.灵活 −React可以与已知的库或框架很好地配合。<br>4.JSX − JSX 是 JavaScript 语法的扩展。React 开发不一定使用 JSX ，但我们建议使用它。<br>5.组件 − 通过 React 构建组件，使得代码更加容易得到复用，能够很好的应用在大项目的开发中。<br>6.单向响应的数据流 − React 实现了单向响应的数据流，从而减少了重复代码，这也是它为什么比传统数据绑定更简单。</p>
-</blockquote>
-<p>根据以上内容相信大家对React有了一个初步认识。其实高效、简单使用是React最大的特点了。</p>
-<p><strong><em>React Native</em></strong></p>
-<p>React Native说白了就是让React拥有了与原生APP交互，能够写接近原生APP的功能，就像它的两个单词一样，一个React，一个Native。有了它就能让js和oc或Android能够方便的相互调用，实现了能够通过js开发接近原生的APP的功能。是的，非常接近原生APP的体检，尤其绘制出的视图全部都是原生的！但是它与混合开发是不同的，一般我们说的混合开发是原生APP和html混合开发，但是体验上是比较差的。React Native也秉承了React的理念 <code>Learn Once, Write Anywhere</code>,而不是混合开发所追崇的<code>Write Once,Run Anywhere</code>。现在像携程、腾讯等这样的公司已经都使用了React Native写项目了，所以是时候大家也跟进一波，不管用不用，先学习攒着嘛！哈哈。毕竟技多不压身的嘛。</p>
-<h3 id="通讯框架图和几个核心类的作用"><a href="#通讯框架图和几个核心类的作用" class="headerlink" title="通讯框架图和几个核心类的作用"></a>通讯框架图和几个核心类的作用</h3><p>首先让我们看看React Native的js与oc交互框架（个人整理的，非官方的）。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/6644906-cb4d495b7b74ffd4.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="通讯图.001.jpeg"></p>
-<ul>
-<li><p><code>RCTCxxxBridge.h</code> oc与js之间的调用都是通过这个桥梁(0.44以前是RCTBatchedBridge.h这个类)。这个桥梁持有各个具体功能类和一个jsThread,它的作用其实就是一个调度的作用。注意所有js代码的执行都是在此jsThread中执行，这个Thread是放在runloop中的，会保持一直运行的。此线程也是大家常听说的js线程。一个项目中最好只有一个Bridge，要不是比较消耗性能的。</p>
-<ul>
-<li><code>JSCExecutor.h</code> 所有的js与oc的通信都是通过此类来实现的</li>
-<li><code>BatchedBridge.js</code>这个js文件仅仅是一个导入文件。导入了<code>MessageQueue.js</code>这个文件。<ul>
-<li><code>MessageQueue.js</code>这个文件是js端与oc通信的一个桥梁文件，里边有个计时器将要调用oc方法的事件放入一个queue中，当oc没有及时的在消息队列中调js的时候, 大于5ms后js就会调用这个回调, 主动调用oc</li>
-</ul>
-</li>
-<li><code>NativeModule.js</code> 实现了js调用oc代码。大家注意这个调用其实都是oc先调用js文件，执行js，在这时候传入适当的参数，然后实现了js调用oc方法哦。</li>
-</ul>
-</li>
-<li><p><code>RCTBridgeModule.h</code> 这个类非常重要，只要想与js实现通信，这个协议必须实现。如果不实现此协议我们js在调用原生方法就会报错，RN在内部会将第一检验的就是类有没有实现这个协议。除了一个标识的作用，还给我们提供了几个宏供我们使用。这几个宏也是js调用原生的具体实现</p>
-</li>
-<li><code>RCTUIManager.h</code>    <code>UIManage.js</code>这两个类一个是在oc端，一个是在js端，通过这两个类RN将我们的component转换成了我们原生的视图类。该类实现了视图的创建、查找、删除等功能。创建View的时候，每个View都有一个</li>
-</ul>
-
           
+React Native源码分析原理（一）(基于0.48版本)
+React Native源码分析原理（二）(基于0.48版本)React和React Native初步认识说起Facebook的React Native就不得不说一下React，React是个什么东东呢？
+React 是一个用于构建用
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/10/14/React Native源码分析原理（一）(基于0.48版本)/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1788,178 +1719,16 @@ ERROR: Error fetching remote repo &apos;origin&apos;
       
         
           
-            <p>SDWebImage源码解读与学习（一）我写的这篇文章已经详细介绍了SDWebImage框架中所有的核心类和具体作用，结尾处也简单示例了一下SDWebImage的使用，相信大家对SDWebImage已经有了一个大体的认识。这次我将带领大家解读一下SDWebImage加载网络图片这个过程。</p>
-<p>1、<strong><em>当我们给UIImageView设置图片URL是，首先调用的是UIView+WebCache这个category中的方法。</em></strong><br><img src="http://upload-images.jianshu.io/upload_images/6644906-74a919d76d926e47.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="E49A659E-4846-4B94-8F2A-5F66A12823CC.png"><br>这个方法主要干了两件事情。1)取消当前视图正在下载图片的线程2）调用SDWebImageManager的loadImageWithURL方法开始下载图片。当线程下载成功回到到SDWebImageManager的block时，此时会调用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[self.imageCache storeImage:transformedImage imageData:(imageWasTransformed ? nil : downloadedData) forKey:key toDisk:cacheOnDisk completion:nil];</div></pre></td></tr></table></figure></p>
-<p>这个方法将下载的图片缓存到磁盘和内存中</p>
-<p>2、<strong><em>接下来让我分析SDWebImageManager类中loadImageWithURL方法</em></strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/6644906-4846398c5d5c0023.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="C226D78D-7C3D-49BC-9D85-A47751E182DB.png"><br>该方法中通过如上图SDImageCache去查缓存是否已经有这张图片，如果查到了</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/6644906-7d6e794aee939298.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="A2245A8E-0D42-4C26-9025-854D9C0413B0.png"><br>并不是忙着直接回调，而是判断是否是SDWebImageRefreshCached或者SDWebImageManagerDelegate的方法</p>
-<p>  <strong>如果判断条件成立：</strong><br>会调用SDWebImageDownloader中downloadImageWithURL启动线程开始下载图片，SDWebImageDownloaderOperation下载成功之后会做一系列的处理。包括根据格式生成矫正过的UIImage、解压缩图片等等</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/6644906-a7027f4456efa0bd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="F7419FF6-36E7-44D6-802B-1ACE0F31ECC7.png"></p>
-<p><strong>如果判断条件不成立:</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/6644906-68fa443f8341635a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="BBAFDDF7-B13B-48DE-9BA9-8553756AD727.png"><br>如上图则直接调用callCompletionBlockForOperation:completion:image:data:error:cacheType:finished:url这个方法,这个方法最终回调到UIView+WebCache这个类中，此类然后通过判断是UIImageView或UIButton将图片设置到视图上。</p>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>整个加载过程就是这样，可以看到SDWebImageManager就像一个大脑一样，负责调度各个类完成图片下载、缓存的功能，让各个类各司其职。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/14/SDWebImage源码解读与学习（一）/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="FlyOceanFish">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="FlyOceanFish' Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/10/14/SDWebImage源码解读与学习（一）/" itemprop="url">SDWebImage源码解读与学习（一）</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-14T10:27:00+08:00">
-                2017-10-14
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/iOS/" itemprop="url" rel="index">
-                    <span itemprop="name">iOS</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>SDWebImage可以说是一个家喻户晓的一个优秀的图片加载框架，极大的方便了我们加载网络图片。好的代码和框架都是我们学习的资源，所以我将一点一点的，从全局到局部的思路对SDWebImage的源码进行解读。</p>
-<p>首先让我们了解一下这么优秀的框架都干了啥，有哪些优点！</p>
-<h2 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h2><ul>
-<li>通过UIImageView、 UIButton的category的方式实现，可以让我们方便的引入和使用</li>
-<li>异步下载图片</li>
-<li>在内存和硬盘上异步缓存图片，有自动过期处理机制</li>
-<li>在后台实现了图片解压</li>
-<li>保证了同样的图片地址不会下载多次</li>
-<li>保证了主线程永远不会被阻塞</li>
-<li>使用GCD和ARC</li>
-<li>支持UIImage (JPEG, PNG, …)</li>
-<li><strong><em>支持WebP</em></strong></li>
-</ul>
-<h2 id="SDWebImage框架类图"><a href="#SDWebImage框架类图" class="headerlink" title="SDWebImage框架类图"></a>SDWebImage框架类图</h2><p>通过此图我们可以了解到SDWebImage整个框架的设计思路，可以看到SDWebImage有哪些核心类和方法(如果不清晰，建议下载下来看)</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/6644906-69c145b9f4f11725.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="SDWebImage框架类图.png"></p>
-<h2 id="核心类的作用"><a href="#核心类的作用" class="headerlink" title="核心类的作用"></a>核心类的作用</h2><p><strong><em>SDWebImageManager</em></strong><br>通过调用各个不同的类实现了缓存查询和图片的下载<br><strong><em>SDWebImageDownloader</em></strong><br>在内部通过调用下载类去下载我们需要的图片，这个类是通过设计模式的外观模式实现的。即使以后通过其他方式的下载，只要重写一个下载类更改此类的逻辑就好，根本影响不到我们本身代码的调用<br><strong><em>SDWebImageDownloaderOperation</em></strong><br>一个线程，继承于NSOperation，内部通过NSURLRequest和NSURLSession的方式实现图片的下载<br><strong><em>SDWebImageDecoder</em></strong><br>实现了图片的解码<br><strong><em>NSData+ImageContentType</em></strong><br>判断出图片的格式。jpeg、png、gif、tiff、webp<br><strong><em>SDImageCache</em></strong><br>在磁盘或内存图片的缓存和读取。当达到内存警告的时候，清除内存的缓存;当程序UIApplicationWillTerminateNotification时，清除磁盘缓存<br><strong><em>SDImageCacheConfig</em></strong><br>主要配合SDImageCache使用，帮我们配置是否需要解压缩图片、是否关闭iCloud备份、是否缓存到内存、缓存时间、缓存大小<br><strong><em>SDWebImageCompat</em></strong><br>根据屏幕的Scale生成不同Scale的图片<br><strong><em>UIImage+MultiFormat</em></strong><br>根据图片的类型生成不同的图片，包括gif、webp、和其他三种大的类型图片的生成方式<br><strong><em>UIView+WebCache</em></strong><br>将所有的UIView的category的图片下载操作提取出来，做成公用的下载方法</p>
-<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">#import &lt;SDWebImage/UIImageView+WebCache.h&gt;</div><div class="line">...</div><div class="line">[imageView sd_setImageWithURL:[NSURL URLWithString:@&quot;http://www.domain.com/path/to/image.jpg&quot;]</div><div class="line">             placeholderImage:[UIImage imageNamed:@&quot;placeholder.png&quot;]];</div></pre></td></tr></table></figure>
-<p>可以看到如果我们UIButton、UIImageView如果想使用网络图片，直接调用一个方法即可实现我们想要的，是不是很简单啊？？</p>
-
-          
+          SDWebImage源码解读与学习（一）我写的这篇文章已经详细介绍了SDWebImage框架中所有的核心类和具体作用，结尾处也简单示例了一下SDWebImage的使用，相信大家对SDWebImage已经有了一个大体的认识。这次我将带领大家解读一下SDWebImage加载网络图片这个过程。
+1、当我们
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/10/14/SDWebImage源码解读与学习（二）/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -2047,7 +1816,7 @@ ERROR: Error fetching remote repo &apos;origin&apos;
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2069,7 +1838,7 @@ ERROR: Error fetching remote repo &apos;origin&apos;
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

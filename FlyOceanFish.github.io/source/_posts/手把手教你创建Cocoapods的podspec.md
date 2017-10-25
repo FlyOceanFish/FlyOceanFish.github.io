@@ -1,12 +1,13 @@
 ---
-title: 手把手教你创建Cocoapods的podspec # 这是标题
+title: 手把手教你创建CocoaPods的podspec # 这是标题
 date: 2017-10-14 09:27:00
 categories:  # 这里写的分类会自动汇集到 categories 页面上，分类可以多级
 - iOS # 一级分类
 tags:   # 这里写的标签会自动汇集到 tags 页面上
 - iOS
+- CocoaPods
 ---
-现在大部分iOS项目都是在用Cocoapods来管理项目了，但是当我们自己写的一个公有或者私有项目的时候，想要支持Cocoapods，那应该怎么做呢？本教程手把手的教大家如何创建podsepc
+现在大部分iOS项目都是在用CocoaPods来管理项目了，但是当我们自己写的一个公有或者私有项目的时候，想要支持CocoaPods，那应该怎么做呢？本教程手把手的教大家如何创建podsepc
 ## 步骤
 1. github上创建自己的共有项目
 ![2220EA18-9E12-4891-B409-EB99776CBA78.png](http://upload-images.jianshu.io/upload_images/6644906-af82c503463a2495.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
