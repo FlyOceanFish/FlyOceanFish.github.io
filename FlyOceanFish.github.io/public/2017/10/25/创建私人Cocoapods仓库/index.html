@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="FlyOceanFish&#39; Blog">
 <meta property="og:description" content="之前有一篇介绍了怎么创建私人项目手把手教你创建podspec，创建成功之后进行发布。最终发布到Cocoapods官方仓库中。但是有时候我们创建完自己的pod项目之后，并不想公开发布，只限于自己或者公司使用，这时候就需要我们创建自己的私人仓库，将pod项目发布到自己的私人仓库中。 创建一个git私人项目由于github只能创建公开项目，如果要创建私人项目是要花钱的，所以我这边使用的是码市，免费最多能">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-10-25T09:31:18.000Z">
+<meta property="og:updated_time" content="2017-10-26T02:20:58.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="创建Cocoapods私人仓库">
 <meta name="twitter:description" content="之前有一篇介绍了怎么创建私人项目手把手教你创建podspec，创建成功之后进行发布。最终发布到Cocoapods官方仓库中。但是有时候我们创建完自己的pod项目之后，并不想公开发布，只限于自己或者公司使用，这时候就需要我们创建自己的私人仓库，将pod项目发布到自己的私人仓库中。 创建一个git私人项目由于github只能创建公开项目，如果要创建私人项目是要花钱的，所以我这边使用的是码市，免费最多能">
@@ -409,7 +409,11 @@
 <blockquote>
 <p>git repo push FlyOceanSpecs Utils.podspec</p>
 </blockquote>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>我的Podfile文件如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"># Uncomment the next line to define a global platform for your project</div><div class="line"> platform :ios, &apos;9.0&apos;</div><div class="line"> source &apos;https://git.coding.net/FlyOceanFish/FlyOceanSpecs.git&apos;</div><div class="line"> source &apos;https://github.com/CocoaPods/Specs.git&apos;</div><div class="line">target &apos;test&apos; do</div><div class="line">  # Uncomment the next line if you&apos;re using Swift or would like to use dynamic frameworks</div><div class="line">   use_frameworks!</div><div class="line">  pod &apos;YTOBaiduMapKit&apos;</div><div class="line">  # Pods for test</div><div class="line"></div><div class="line">end</div></pre></td></tr></table></figure>
+<p>这就可以正常使用了</p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>这个过程其实还是挺复杂的，大家如果有什么问题可以给我留言，我会及时回复的</p>
+<p>注:<br><strong>以上是我制作的一个YTOBaiduMapKit，由于百度api针对pod导入只支持全量导入，这样则会导致整个包比较大，所以我制作了一个阉割版，只包括了<code>BaiduMapAPI_Base</code>、<code>BaiduMapAPI_Location</code>、<code>BaiduMapAPI_Map</code>这三个包就是百度基础功能和定位的功能</strong></p>
 
       
     </div>
@@ -592,7 +596,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#创建一个git私人项目"><span class="nav-number">1.</span> <span class="nav-text">创建一个git私人项目</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建podspec"><span class="nav-number">2.</span> <span class="nav-text">创建podspec</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编写xx-podspec文件"><span class="nav-number">3.</span> <span class="nav-text">编写xx.podspec文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#检验spec文件的合法性"><span class="nav-number">4.</span> <span class="nav-text">检验spec文件的合法性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#发布我们的podspec文件到我们的私人仓库"><span class="nav-number">5.</span> <span class="nav-text">发布我们的podspec文件到我们的私人仓库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">6.</span> <span class="nav-text">总结</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#创建一个git私人项目"><span class="nav-number">1.</span> <span class="nav-text">创建一个git私人项目</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建podspec"><span class="nav-number">2.</span> <span class="nav-text">创建podspec</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编写xx-podspec文件"><span class="nav-number">3.</span> <span class="nav-text">编写xx.podspec文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#检验spec文件的合法性"><span class="nav-number">4.</span> <span class="nav-text">检验spec文件的合法性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#发布我们的podspec文件到我们的私人仓库"><span class="nav-number">5.</span> <span class="nav-text">发布我们的podspec文件到我们的私人仓库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用"><span class="nav-number">6.</span> <span class="nav-text">使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">7.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
 
           </div>

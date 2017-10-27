@@ -126,5 +126,26 @@ end
 
 > git repo push FlyOceanSpecs Utils.podspec
 
+## 使用
+我的Podfile文件如下:
+
+````
+# Uncomment the next line to define a global platform for your project
+ platform :ios, '9.0'
+ source 'https://git.coding.net/FlyOceanFish/FlyOceanSpecs.git'
+ source 'https://github.com/CocoaPods/Specs.git'
+target 'test' do
+  # Uncomment the next line if you're using Swift or would like to use dynamic frameworks
+   use_frameworks!
+  pod 'YTOBaiduMapKit'
+  # Pods for test
+
+end
+````
+这就可以正常使用了
+
 ## 总结
 这个过程其实还是挺复杂的，大家如果有什么问题可以给我留言，我会及时回复的
+
+注:
+**以上是我制作的一个YTOBaiduMapKit，由于百度api针对pod导入只支持全量导入，这样则会导致整个包比较大，所以我制作了一个阉割版，只包括了`BaiduMapAPI_Base`、`BaiduMapAPI_Location`、`BaiduMapAPI_Map`这三个包就是百度基础功能和定位的功能**
