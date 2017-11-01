@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="iOS," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="以前工作中有很多小的知识点，但是有时候只是用了，没有真正积累下来，有时候也会忘记。所以写这篇文章就是慢慢的将以前小的知识点或者之后用到的用文字的形式记录下来。【码字、分享不容易，各位的关注是小的动力！动动亲的小手指关注一下我哈。】1、_Nullable和_Nonnull(Xcode 6.3 )_Nullable表示可能是NULL或nil；_Nonnull表示不应该是NULL或nil。如果不遵循会有">
+<meta name="keywords" content="iOS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS小知识积累(长期更新)">
+<meta property="og:url" content="http://yoursite.com/2017/10/30/iOS小知识积累(长期更新)/index.html">
+<meta property="og:site_name" content="FlyOceanFish&#39; Blog">
+<meta property="og:description" content="以前工作中有很多小的知识点，但是有时候只是用了，没有真正积累下来，有时候也会忘记。所以写这篇文章就是慢慢的将以前小的知识点或者之后用到的用文字的形式记录下来。【码字、分享不容易，各位的关注是小的动力！动动亲的小手指关注一下我哈。】1、_Nullable和_Nonnull(Xcode 6.3 )_Nullable表示可能是NULL或nil；_Nonnull表示不应该是NULL或nil。如果不遵循会有">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/6644906-649d65ae020b72cb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/6644906-6aca286b93c6de2b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/6644906-625f6cbcf66800cf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/6644906-320495bdfa8f9c47.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/6644906-9209401db1a78dc4.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2017-10-30T06:30:00.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS小知识积累(长期更新)">
+<meta name="twitter:description" content="以前工作中有很多小的知识点，但是有时候只是用了，没有真正积累下来，有时候也会忘记。所以写这篇文章就是慢慢的将以前小的知识点或者之后用到的用文字的形式记录下来。【码字、分享不容易，各位的关注是小的动力！动动亲的小手指关注一下我哈。】1、_Nullable和_Nonnull(Xcode 6.3 )_Nullable表示可能是NULL或nil；_Nonnull表示不应该是NULL或nil。如果不遵循会有">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/6644906-649d65ae020b72cb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/10/30/iOS小知识积累(长期更新)/"/>
+
+
+
+
+
+  <title>iOS小知识积累(长期更新) | FlyOceanFish' Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <a href="https://github.com/FlyOceanFish"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">FlyOceanFish' Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">You Believe,You Can</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/30/iOS小知识积累(长期更新)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="FlyOceanFish">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FlyOceanFish' Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">iOS小知识积累(长期更新)</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-30T09:27:00+08:00">
+                2017-10-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><strong><em>以前工作中有很多小的知识点，但是有时候只是用了，没有真正积累下来，有时候也会忘记。所以写这篇文章就是慢慢的将以前小的知识点或者之后用到的用文字的形式记录下来。【码字、分享不容易，各位的关注是小的动力！动动亲的小手指关注一下我哈。】</em></strong><br>1、_Nullable和_Nonnull(Xcode 6.3 )<br>_Nullable表示可能是NULL或nil；_Nonnull表示不应该是NULL或nil。如果不遵循会有警告<br>如果需要每个属性或每个方法都去指定nonnull和nullable，是一件非常繁琐的事。苹果为了减轻我们的工作量，专门提供了两个宏：NS_ASSUME_NONNULL_BEGIN和NS_ASSUME_NONNULL_END。<br>2、__kindof(Xcode 6.3 )<br>表示我们不用强转类型了。比如：</p>
+<pre><code>- (__kindof UITableViewCell *)dequeueReusableCellWithIdentifier:(NSString *)identifier;
+</code></pre><p>我们我可以直接用某个cell接收，不用再写（SomeCell*）这种形式强转了。</p>
+<pre><code>@property (nonatomic, readonly, copy) NSArray&lt;__kindof UIView *&gt; *subviews;
+</code></pre><p>这样，写下面的代码时就没有任何警告了：</p>
+<pre><code>UIButton *button = view.subviews.lastObject;
+</code></pre><p>3、instancetype、id、NSObject<br>instancetype 与 id 不一样, instancetype 只能在方法声明中作为返回类型使用。我们写方法返回的时候用instancetype而不用id了。instancetype代表当前类的类型。</p>
+<ul>
+<li>id关键字在编译时不被检查，而NSObject在编译时会被检查是否被调用一些错误方法。</li>
+<li>id可以是任何对象，包括非NSObject对象</li>
+<li>定义id的时候不使用*，是一个指针，NSObject却需要。</li>
+</ul>
+<p>4、Storyboard References (iOS 9)<br>可以帮我们简化Storyboard,平时我们的做法是将一个大的Storyboard人为的去分成几个小的，然后代码组装起来。Storyboard References可以帮我们简化这一步。如果本身有一个Storyboard很负责，可以选择其中联系很大的一部分，然后点击 Xcode 的菜单栏，选择”Editor-&gt;Refactor to Storyboard”。这时候就有一个独立的Storyboard了。<br>5、打印当前ViewController 的名字<br>这个对于我们拿到一个陌生的代码，调试的时候非常方便。比如我们运行一个APP，看到一个界面，但是想知道对应哪个ViewController的时候。</p>
+<ul>
+<li><p>添加Symbolic Exception<br><img src="http://upload-images.jianshu.io/upload_images/6644906-649d65ae020b72cb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="A7AB9D87-CF83-4F63-8D66-9C5A113B76ED.png"></p>
+</li>
+<li><p>添加Symob和Action<br><img src="http://upload-images.jianshu.io/upload_images/6644906-6aca286b93c6de2b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="73D79C18-5E28-4A87-B039-4DDA566FD5F7.png"></p>
+</li>
+</ul>
+<p>6、Autolayout中Intrinstic Size、Compression Resistance Priority、Compression Resistance Priority</p>
+<ul>
+<li>Intrinstic Size就是不用设置frame，视图通过内容、字体大小等属性就能获得的大小。我们设置的Content Hugging Priority和Compression Resistance Priority都是针对于这个的。</li>
+<li>Content Hugging Priority 内容拥抱，就是想变小的优先级</li>
+<li>Compression Resistance Priority抗压缩，就是想变大的优先级</li>
+</ul>
+<p><img src="http://upload-images.jianshu.io/upload_images/6644906-625f6cbcf66800cf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="A90EC537-5342-47B0-8207-9F3DBC0AB8A3.png"><br>如上图视图内容比文字内容宽，这个时候我们想要视图变小，与文字大小一样（此时intrinsic的大小就是文字区域部分的大小）。所以只要改变Content Hugging Priority的Horizontal的优先级变大就好了<br>7、topLayoutGuide&amp;&amp; bottomLayoutGuide<br>这两个属性可以理解为性表示不希望被透明的状态栏或导航栏（UITabBar、UIToolBar、NavigationBar等）遮挡的内容范围的最高或最低位置。这个属性的值是它的length属性的值。如下：</p>
+<pre><code>[view mas_makeConstraints:^(MASConstraintMaker *make) {
+    make.top.mas_equalTo(self.mas_topLayoutGuideBottom);
+    make.leading.mas_equalTo(self.view.mas_leading);
+    make.trailing.mas_equalTo(self.view.mas_trailing);
+    make.bottom.mas_equalTo(self.mas_bottomLayoutGuideTop);
+}];
+</code></pre><p>8、Autolayout中约束LayoutConstraint的有效无效（8.0）<br>有时候我们经常遇到一个view在不同的场景下约束不同，通常做法就是在不同场景下先删除再增加这样操作，这样效率反而不高。我们可以通过active这个属性设置生效不生效。</p>
+<pre><code>self.mLayoutConstraintWidth.active = YES;
+</code></pre><p>9、隐藏导航栏返回按钮旁边的文字</p>
+<pre><code>[[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(0, -60) forBarMetrics:UIBarMetricsDefault];
+</code></pre><p>10、替换返回按钮图片<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">UIImage *bgImage = [[UIImage imageNamed:@&quot;return&quot;] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];</div><div class="line">[[UINavigationBar appearance] setBackIndicatorImage:bgImage];</div><div class="line">[[UINavigationBar appearance] setBackIndicatorTransitionMaskImage:bgImage];</div></pre></td></tr></table></figure></p>
+<p>11、头文件导入<br>@class 在.h文件时引入其他.h文件的时候，效率更高</p>
+<p>#include “” 自己写的文件</p>
+<p>#include &lt;&gt; 引入系统的</p>
+<p>#import &lt;&gt; 用于包含系统文件</p>
+<p>#import “”自己写的文件，搜索路径更广<br>import比include更好，能够避免文件的重复导入，效率更高<br>不过还有一个更好的的方式<a href="https://stackoverflow.com/questions/18947516/import-vs-import-ios-7/18947634#" target="_blank" rel="external">@import</a>，这种方式让我们不必在设置里边添加包了，它会帮我们自动关联。<br>12、内存管理语义</p>
+<ul>
+<li><strong><em>assign</em></strong> “设置方法”只会执行针对”纯量类型”(例如CGFloat或NSInteger等)的简单赋值操作</li>
+<li><strong><em>strong</em></strong> 此特质表明该属性定义了一种”拥有关系”。为这种属性设置新值时，设置方法会先保留新值，并释放旧值，然后再将新值设置上去。</li>
+<li><strong><em>weak</em></strong> （5.0以上，可以说是对unsafe_unretained的一个升级,更安全，但是由于要遍历是否已经销毁，并且设置成nil，所以是消耗性能）此特质表明该属性定义了一种”非拥有关系”。为这种属性设置新值时，设置方法既不保留新值，也不释放旧值。此特质同assign类似，然而在属性所指的对象遭到摧毁时，属性值也会清空(nil)。</li>
+<li><strong><em>unsafe_unretained</em></strong> (5.0以下必须使用而不能使用weak，优点比weak快，缺点容易造成野指针)此特质的语义和assign相同，但是它使用于”对象类型”，该特质表达一种”非拥有关系”，当对象遭到摧毁时，属性值不会自动清空（”不安全”,unsafe）这一点与weak有区别。</li>
+<li><strong><em>copy</em></strong> 此特质所表达的所属关系与strong类似。然而设置方法并不保留新值，而是将其”拷贝”。警惕NSMutableArray为copy的时候奔溃问题。copy之后是NSArray添加对象会crash。<br>13、查找或判断xib是否存在<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">NSString *path = [[NSBundle mainBundle] pathForResource:NSStringFromClass(className) ofType:@&quot;nib&quot;];</div><div class="line">Boolean exist = [[NSFileManager defaultManager] fileExistsAtPath:path];</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>备注：其实关键就是Typ是”nib”而不是”xib”。因为我们打出的包，系统将我们的xib文件编译成了以nib为结尾的文件。<br>14、UI_APPEARANCE_SELECTOR<br>当我们自定义控件的时候可以在属性后边增加这个声明。代表支持appearance方法。如果你自己调用了setXX方法，则appearance方法失效。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">@property (nonatomic, assign) CGFloat selectionIndicatorHeight UI_APPEARANCE_SELECTOR;</div></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[XXXClass appearance].selectionIndicatorHeight = xxxx</div></pre></td></tr></table></figure>
+<p>15、旋转动画方向问题<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">button.transform = CGAffineTransformRotate(button.transform,M_PI);</div></pre></td></tr></table></figure></p>
+<p>我们先旋转180顺时针<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">button.transform = CGAffineTransformIdentity;</div></pre></td></tr></table></figure></p>
+<p>当我们调用上句话的时候，是顺时针旋转180返回原位置，但是很多时候我们想原路返回，其实就是想逆时针返回。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">button.transform = CGAffineTransformRotate(button.transform,M_PI-0.0001);</div></pre></td></tr></table></figure></p>
+<p>只要这么设置就会逆时针返回了。旋转动画选择了最短路径返回</p>
+<p>16、纯代码布局，添加约束<br>如果我们使用纯代码布局，则需要以下代码约束才能起作用；默认左右是有16像素间距的，设置左右各-16才能靠边(这个如果有其他好办法可以留言给我)</p>
+<pre><code>self.view.translatesAutoresizingMaskIntoConstraints = NO;
+</code></pre><p>17、NSDate和NSDateFormatter<br>NSDate：是获取的时间没有时区概念，所以获取的是0时区的时间。</p>
+<pre><code>[NSDate date]//获取的时间与当前时间差8个小时
+</code></pre><p>NSDateFormatter：将日期格式成我们想要的。同时会根据时区、地域给我们做相应的计算。(看注释)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">NSDateFormatter *formatter = [[NSDateFormatter alloc] init];</div><div class="line">formatter.dateFormat = @&quot;yyyy-MM-dd HH:mm:ss&quot;;</div><div class="line">NSTimeZone *timeZone = [NSTimeZone localTimeZone];</div><div class="line">//  formatter.locale = [NSLocale currentLocale];</div><div class="line"> formatter.timeZone = timeZone;</div><div class="line">NSDate *currentDate = [NSDate date];</div><div class="line">NSString *currentString = [formatter stringFromDate:currentDate];//会将currentDate增加8个小时，获取我们当前时区的时间</div><div class="line">NSDate *date = [formatter dateFromString:@&quot;2017-8-31 9:51:00&quot;];//获取的date是针对0时区的时间，所以会减去8个小时</div></pre></td></tr></table></figure>
+<p>以上代码可以看到我们可以设置timeZone和locale。如果我们只设置local照样能够输出我们想要的结果。但是二者有什么区别呢？</p>
+<ul>
+<li>local是设置区域的。配合setTimeStyle:、setDateStyle:这些方法可以控制日期输出不同的格式。因为每个地方的格式不同。  <a href="https://developer.apple.com/library/content/documentation/MacOSX/Conceptual/BPInternational/InternationalizingYourCode/InternationalizingYourCode.html" target="_blank" rel="external">Formatting Data Using the Locale Settings</a></li>
+</ul>
+<p><img src="http://upload-images.jianshu.io/upload_images/6644906-320495bdfa8f9c47.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="7FAEF832-CBCD-41A2-A4EE-4056FBF1B931.png"></p>
+<ul>
+<li>timeZone设置时区的。主要用来将时间转换成不同时区。</li>
+</ul>
+<p>所以在代码格式化的时候，建议设置timezone来格式化我们的时期</p>
+<p>18、Xcode关闭控制台打印不用信息</p>
+<p> Xcode-&gt;Edit Scheme -&gt; Run -&gt; Arguments, 在Environment Variables里边添加 OS_ACTIVITY_MODE ＝ disable</p>
+<p>19、NSObject中isKindOfClass、isMemberOfClass、isSubclassOfClass区别</p>
+<p>isSubclassOfClass和isKindOfClass的作用基本上是一致的，只不过一个是类方法，一个是对象方法。<br>isKindOfClass来确定一个对象是否是一个类的成员，或者是派生自该类的成员,<br>isMemberOfClass只能确定一个对象是否是当前类的成员.<br>isMemberOfClass 筛选条件更为苛刻，只有当类型完全匹配的时候才会返回YES。</p>
+<p>20、判断当前queue是否是main queue<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">static void *mainQueueKey = &amp;mainQueueKey;</div><div class="line">static dispatch_once_t onceToken;</div><div class="line">dispatch_once(&amp;onceToken, ^&#123;</div><div class="line">  dispatch_queue_set_specific(dispatch_get_main_queue(),</div><div class="line">                              mainQueueKey, mainQueueKey, NULL);</div><div class="line">&#125;);</div><div class="line">return dispatch_get_specific(mainQueueKey) == mainQueueKey;</div></pre></td></tr></table></figure></p>
+<p>21、为什么有的属性要用copy，而不用strong</p>
+<p>像NSString和NSArray这两类，在给变量赋值的时候，如果来源是可变字符串或可变数组的时候，使用copy能够避免原来变量对现在变量的影响。如果用strong的话，原来变量改变时同时会影响我们现在的变量。我们大多数期望的结果是两个变量相互独立，互补影响的，所以使用copy能够避免这类问题<br>22、SEL、IMP</p>
+<p>SEL 函数的ID，相当于将函数的名字用一个唯一识别符与之相对应。<br>IMP 本质是函数指针。其实就是函数的实现，我们在调用方法的时候是一层一层的查找，最终找到了IMP，如果直接调用IMP将会更有效率</p>
+<p>23、消息的转发</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/6644906-9209401db1a78dc4.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="44181-09a882edcb98d535.jpg"><br>runtime在调用方法的时候如果找不到会直接奔溃。如果在当前类找不到的时候，会开始顺序的调用系统的三个方法，如果再找不到会直接crash。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">1.+(Bool) resolveInstanceMethod:(SEL)sel // 对应实例方法</div><div class="line">  + (Bool)resolveClassMethod:(SEL)sel // 对应类方法</div><div class="line">我们可以在这个方法中调用class_addMethod将方法加入就不会crash</div><div class="line">2.- (id)forwardingTargetForSelector:(SEL)aSelector//可以改变查找方法的对象</div><div class="line">3.- (void)forwardInvocation:(NSInvocation *)anInvocation//搭配- (NSMethodSignature *)methodSignatureForSelector:(SEL)aSelector这个使用。通过传递过来的NSInvocation对象，我们可以对此重新注入调用对象、方法、参数等</div></pre></td></tr></table></figure></p>
+<p>24、<code>NSObject</code>的description和debugDescription方法<br>当我们在工程中使用model(继承NSObject)的时候，在断点或者log调试中有时候需要将对象打印到控制台中，但是我们自己写的model打印出的是对象的地址。如果需要打印出有效的信息，这时我们可以重写descrition或者debugDescription方法，打印出我们想要的信息。例如对象的所有属性的值。<strong><em>默认情况下debugDescription调用的是description方法</em></strong></p>
+<p>25、 UIView的setNeedsLayout、layoutIfNeeded 、setNeedsDisplay</p>
+<ul>
+<li><strong><em>setNeedsLayout</em></strong> 标记为需要重新布局，不立即刷新，但layoutSubviews一定会被调用<br>配合layoutIfNeeded立即更新</li>
+<li><strong><em>layoutIfNeeded</em></strong> 如果有有需要刷新的标记，立即调用layoutSubviews进行布局，并且进行页面刷新<br>例如我在使用约束做动画的时候:<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">leftContrain.constant = 100</div><div class="line">UIView.animateWithDuration(0.8, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: UIViewAnimationOptions.AllowAnimatedContent, animations: &#123;</div><div class="line">                self.view.layoutIfNeeded() //立即实现布局</div><div class="line">            &#125;, completion: nil)</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>如果不调用<code>layoutIfNeeded</code>则动画一点卵用没有</p>
+<ul>
+<li><strong><em>setNeedsDisplay或setNeedsDisplayInRect</em></strong>   会调用自动调用drawRect方法，这样可以拿到  UIGraphicsGetCurrentContext，就可以画画了。而setNeedsLayout会默认调用layoutSubViews，<ul>
+<li>setNeedsDisplay 对应画布的大小就是UIView的大小，所以会将整个UIView进行绘制</li>
+<li>setNeedsDisplayInRect 对应画布的大小是调用此方法传入的rect，如果此前UIView已经绘制过一次，则会保留上次的绘制，仅仅对对应传入的rect进行刷新绘制<blockquote>
+<p>This method makes a note of the request and returns immediately. The view is not actually redrawn until the next drawing cycle, at which point all invalidated views are updated.</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>setNeedsDisplay方便绘图，而layoutSubViews方便出来数据。</p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/10/25/创建私人Cocoapods仓库/" rel="next" title="创建Cocoapods私人仓库">
+                <i class="fa fa-chevron-left"></i> 创建Cocoapods私人仓库
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/10/31/通过Fastlane自动化发布Spec/" rel="prev" title="通过Fastlane自动化发布Spec">
+                通过Fastlane自动化发布Spec <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="vcomments"></div>
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="FlyOceanFish" />
+            
+              <p class="site-author-name" itemprop="name">FlyOceanFish</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">FlyOceanFish</span>
+
+  
+</div>
+
+<!--
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.3</div>
+
+-->
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_lines.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine@1.1.6/dist/Valine.min.js"></script>
+  <script type="text/javascript">
+    new Valine({
+        av: AV,
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        app_id: 'BUyek27xhBJW608unzBEyhWI-gzGzoHsz',
+        app_key: 'lT2NUWTMwPfNYl6xMQUtUxDv',
+        placeholder: '请输入评论'
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.3"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=5.1.3"></script>
+
+
+  
+
+</body>
+</html>
+<script type="text/javascript" src="/js/src/love.js"></script>
