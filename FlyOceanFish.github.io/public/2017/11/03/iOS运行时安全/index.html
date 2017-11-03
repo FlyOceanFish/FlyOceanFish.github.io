@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="iOS," />
+  <meta name="keywords" content="iOS,安全," />
 
 
 
@@ -79,22 +79,18 @@
 
 
 
-<meta name="description" content="接上一篇iOS自动打包文章，本文将介绍Android的自动打包。 准备工作　　Android的SDK已经安装好（这个网上教程一大堆，如果不会的可以自行搜索，实在搞不定的可以留言） Android自动打包　　其实Android的自动打包与iOS的自动打包基本一样，主要由于开发工具的不同，所以不同点都是由于开发工具不同造成。本文将写出与iOS的不同的地方，前边几步相同的就省略了1、 配置gradle">
-<meta name="keywords" content="iOS">
+<meta name="description" content="暗桩和自杀分支添加一些直观看上去有用的迷惑的方法到类中，并且看起来比较有用。 12345- (BOOL)userIsAuthenticated:(BOO)auth&amp;#123;  /* 无提示地擦除加密密钥 */  /* 无提示地擦除用户数据 */  /* 无提示地禁用所有认证 */&amp;#125; 自杀分支不仅能够擦除用户数据，还可以混淆攻击者让他放弃攻击 进程调试检测当一个应用程序被调试的时候，内核">
+<meta name="keywords" content="iOS,安全">
 <meta property="og:type" content="article">
-<meta property="og:title" content="在mac上快速搭建Android、iOS自动打包环境(三)">
-<meta property="og:url" content="http://yoursite.com/2017/10/14/在mac上快速搭建Android、iOS自动打包环境(三)/index.html">
+<meta property="og:title" content="iOS运行时安全">
+<meta property="og:url" content="http://yoursite.com/2017/11/03/iOS运行时安全/index.html">
 <meta property="og:site_name" content="FlyOceanFish&#39; Blog">
-<meta property="og:description" content="接上一篇iOS自动打包文章，本文将介绍Android的自动打包。 准备工作　　Android的SDK已经安装好（这个网上教程一大堆，如果不会的可以自行搜索，实在搞不定的可以留言） Android自动打包　　其实Android的自动打包与iOS的自动打包基本一样，主要由于开发工具的不同，所以不同点都是由于开发工具不同造成。本文将写出与iOS的不同的地方，前边几步相同的就省略了1、 配置gradle">
+<meta property="og:description" content="暗桩和自杀分支添加一些直观看上去有用的迷惑的方法到类中，并且看起来比较有用。 12345- (BOOL)userIsAuthenticated:(BOO)auth&amp;#123;  /* 无提示地擦除加密密钥 */  /* 无提示地擦除用户数据 */  /* 无提示地禁用所有认证 */&amp;#125; 自杀分支不仅能够擦除用户数据，还可以混淆攻击者让他放弃攻击 进程调试检测当一个应用程序被调试的时候，内核">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/6644906-39e67a7b9138b591.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/6644906-c37c70459c0bee8d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/6644906-b7b42037ef20691c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2017-10-16T08:45:26.000Z">
+<meta property="og:updated_time" content="2017-11-03T00:37:54.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="在mac上快速搭建Android、iOS自动打包环境(三)">
-<meta name="twitter:description" content="接上一篇iOS自动打包文章，本文将介绍Android的自动打包。 准备工作　　Android的SDK已经安装好（这个网上教程一大堆，如果不会的可以自行搜索，实在搞不定的可以留言） Android自动打包　　其实Android的自动打包与iOS的自动打包基本一样，主要由于开发工具的不同，所以不同点都是由于开发工具不同造成。本文将写出与iOS的不同的地方，前边几步相同的就省略了1、 配置gradle">
-<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/6644906-39e67a7b9138b591.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta name="twitter:title" content="iOS运行时安全">
+<meta name="twitter:description" content="暗桩和自杀分支添加一些直观看上去有用的迷惑的方法到类中，并且看起来比较有用。 12345- (BOOL)userIsAuthenticated:(BOO)auth&amp;#123;  /* 无提示地擦除加密密钥 */  /* 无提示地擦除用户数据 */  /* 无提示地禁用所有认证 */&amp;#125; 自杀分支不仅能够擦除用户数据，还可以混淆攻击者让他放弃攻击 进程调试检测当一个应用程序被调试的时候，内核">
 
 
 
@@ -124,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/10/14/在mac上快速搭建Android、iOS自动打包环境(三)/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/11/03/iOS运行时安全/"/>
 
 
 
 
 
-  <title>在mac上快速搭建Android、iOS自动打包环境(三) | FlyOceanFish' Blog</title>
+  <title>iOS运行时安全 | FlyOceanFish' Blog</title>
   
 
 
@@ -267,7 +263,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/14/在mac上快速搭建Android、iOS自动打包环境(三)/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/03/iOS运行时安全/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="FlyOceanFish">
@@ -284,7 +280,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">在mac上快速搭建Android、iOS自动打包环境(三)</h2>
+          <h2 class="post-title" itemprop="name headline">iOS运行时安全</h2>
         
 
         <div class="post-meta">
@@ -296,8 +292,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-14T14:27:03+08:00">
-                2017-10-14
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-03T09:00:00+08:00">
+                2017-11-03
               </time>
             
 
@@ -321,6 +317,17 @@
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/iOS/" itemprop="url" rel="index">
                     <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/安全/" itemprop="url" rel="index">
+                    <span itemprop="name">安全</span>
                   </a>
                 </span>
 
@@ -356,17 +363,30 @@
       
 
       
-        <p>接上一篇iOS自动打包文章，本文将介绍Android的自动打包。</p>
-<h1 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h1><p>　　Android的SDK已经安装好（这个网上教程一大堆，如果不会的可以自行搜索，实在搞不定的可以留言）</p>
-<h1 id="Android自动打包"><a href="#Android自动打包" class="headerlink" title="Android自动打包"></a>Android自动打包</h1><p>　　其实Android的自动打包与iOS的自动打包基本一样，主要由于开发工具的不同，所以不同点都是由于开发工具不同造成。<br><strong><em>本文将写出与iOS的不同的地方，前边几步相同的就省略了</em></strong><br>1、 <strong><em>配置gradle</em></strong></p>
+        <h2 id="暗桩和自杀分支"><a href="#暗桩和自杀分支" class="headerlink" title="暗桩和自杀分支"></a>暗桩和自杀分支</h2><p>添加一些直观看上去有用的迷惑的方法到类中，并且看起来比较有用。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">- (BOOL)userIsAuthenticated:(BOO)auth&#123;</div><div class="line">  /* 无提示地擦除加密密钥 */</div><div class="line">  /* 无提示地擦除用户数据 */</div><div class="line">  /* 无提示地禁用所有认证 */</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>自杀分支不仅能够擦除用户数据，还可以混淆攻击者让他放弃攻击</p>
+<h2 id="进程调试检测"><a href="#进程调试检测" class="headerlink" title="进程调试检测"></a>进程调试检测</h2><p>当一个应用程序被调试的时候，内核会自动设置一个进程状态标志表示进程正在被调试。我们可以检测这个标志，一旦知道自己程序被调试，我们就可以做一些相应的安全措施了。如退出程序、禁用功能等等。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">#define DEBUGGER_CHECK &#123;\</div><div class="line">size_t size = sizeof(struct kinfo_proc);\</div><div class="line">struct kinfo_proc info;\</div><div class="line">int ret,name[4];\</div><div class="line">\</div><div class="line">memset(&amp;info, 0, sizeof(struct kinfo_proc));\</div><div class="line">name[0] = CTL_KERN;\</div><div class="line">name[1] = KERN_PROC;\</div><div class="line">name[2] = KERN_PROC_PID;\</div><div class="line">name[3] = getpid();\</div><div class="line">\</div><div class="line">if ((ret = (sysctl(name, 4, &amp;info, &amp;size, NULL, 0)))) &#123;\</div><div class="line">    exit(EXIT_FAILURE);\</div><div class="line">&#125;\</div><div class="line">if (info.kp_proc.p_flag&amp;P_TRACED) &#123;\</div><div class="line">    NSLog(@&quot;正在调试&quot;);\</div><div class="line">    /*代码调试在这里做出响应*/\</div><div class="line">&#125;\</div><div class="line">&#125;\</div></pre></td></tr></table></figure>
+<h2 id="阻挡调试器"><a href="#阻挡调试器" class="headerlink" title="阻挡调试器"></a>阻挡调试器</h2><p>保证我们程序不被调试，这个只能说增加了难度。如果一个专业的可以通过解密应用程序永久移除它等等的手段。所以我们要越狱检测、调试检测等等相互辅助才能达到最好的效果。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">#import &lt;sys/ptrace.h&gt;</div><div class="line"></div><div class="line">ptrace(PT_DENY_ATTACH,0,0,0);</div></pre></td></tr></table></figure>
+<p>但是iPhone的环境中没有开发这个ptrace.h文件，所以只能使用dlopen来拿到</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">#import &lt;dlfcn.h&gt;</div><div class="line">#import&lt;sys/types.h&gt;</div><div class="line"></div><div class="line">typedef int(*ptrace_ptr_t)(int _request, pid_t _pid, caddr_t _addr, int _data);</div><div class="line"></div><div class="line">#if!defined(PT_DENY_ATTACH)</div><div class="line"></div><div class="line">#define PT_DENY_ATTACH 31</div><div class="line"></div><div class="line">#endif  // !defined(PT_DENY_ATTACH)</div><div class="line"></div><div class="line">void disable_gdb() &#123;</div><div class="line"></div><div class="line">    void* handle = dlopen(0, RTLD_GLOBAL |RTLD_NOW);</div><div class="line"></div><div class="line">    ptrace_ptr_t ptrace_ptr = dlsym(handle,&quot;ptrace&quot;);</div><div class="line"></div><div class="line">    ptrace_ptr(PT_DENY_ATTACH, 0, 0, 0);</div><div class="line"></div><div class="line">    dlclose(handle);</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>在工程的main.m中增加以下代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">int main(int argc, char *argv[]) &#123;</div><div class="line">    /**防止GDB挂起*/</div><div class="line">#ifndef DUBUG</div><div class="line">    disable_gdb();</div><div class="line">#endif</div><div class="line">    @autoreleasepool &#123;</div><div class="line">        return UIApplicationMain(argc, argv, nil,NSStringFromClass([AppDelegate class]));</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="运行时库类完整性检查"><a href="#运行时库类完整性检查" class="headerlink" title="运行时库类完整性检查"></a>运行时库类完整性检查</h2><h3 id="检查内存地址空间"><a href="#检查内存地址空间" class="headerlink" title="检查内存地址空间"></a>检查内存地址空间</h3><p>恶意代码的注入，都是需要加载到内存地址空间中，所以可以检查方法的内存位置</p>
+<p><strong>通过dladdr函数检查</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">#import &lt;objc/runtime.h&gt;</div><div class="line">#import &lt;dlfcn.h&gt;</div><div class="line"></div><div class="line">static int inline check_func(const char *cls,const char *sel)&#123;</div><div class="line">    Dl_info info;</div><div class="line">    IMP imp = class_getMethodImplementation(objc_getClass(cls), sel_registerName(sel));</div><div class="line">    printf(&quot;pointer %p&quot;,imp);</div><div class="line">    if (dladdr(imp,&amp;info)) &#123;</div><div class="line">        if (strcmp(info.dli_fname,&quot;System/Library/Frameworks/Foundation.framework/Foundation&quot;)||</div><div class="line">            strncmp(info.dli_sname, &quot;-[NSURLConnection init]&quot;, 22)) &#123;</div><div class="line">            printf(&quot;Danger&quot;);</div><div class="line">            exit(0);</div><div class="line">        &#125;</div><div class="line">        printf(&quot;相同&quot;);</div><div class="line">    &#125;else&#123;</div><div class="line">        printf(&quot;error:不相同&quot;);</div><div class="line">        exit(0);</div><div class="line">    &#125;</div><div class="line">    return 1;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>使用：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">check_func(&quot;NSURLConnection&quot;, &quot;initWithRequest:delegate:&quot;);</div></pre></td></tr></table></figure></p>
+<p>我们也可以通过runtime来实现验证类中所有的方法</p>
+<p><strong>注意点</strong></p>
 <ul>
-<li>找到“构建”-&gt;“增加构建步骤”-&gt;“Excute Shell”。这一步由于服务器上的gradlew一直获取不到权限<br><img src="http://upload-images.jianshu.io/upload_images/6644906-39e67a7b9138b591.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="4ADDE352-E751-4379-8BA2-2402F36ECB5C.png"></li>
-<li>找到“构建”-&gt;“增加构建步骤”-&gt;“Invoke Gradle Script”，选择”Use Gradle Wrapper”。其中Build File 代表build.gradle的路径<br><img src="http://upload-images.jianshu.io/upload_images/6644906-c37c70459c0bee8d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="83CAA3F9-9675-46DE-9332-A8B3C4D579C0.png"></li>
+<li>函数命名未无法理解的函数</li>
+<li>在不同位置检查类。因为攻击者可以在任意点上将代码注入</li>
+<li>考虑检查通用类。比如NSStrin个、NSData等。这些类可以很轻易的劫持大量内存信息</li>
 </ul>
-<p>2、配置上传apk脚本<br>      curl -F “file=@app/build/outputs/apk/app-debug.apk” -F “uKey=4acbf7559e513f1f6081294723ea4d0f” -F “_api_key=d9e87e9febbf20dd4f384876bdf72a22” <a href="https://qiniu-storage.pgyer.com/apiv1/app/upload" target="_blank" rel="external">https://qiniu-storage.pgyer.com/apiv1/app/upload</a></p>
-<p>3、如果构建的时候报找不到“ ANDROID_HOME”，则就在“系统设置”-&gt;“全局属性”中增加，然后“系统管理”-&gt;“读取设置”重新启动Jenkins。<br><img src="http://upload-images.jianshu.io/upload_images/6644906-b7b42037ef20691c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="A658B2DA-D10F-484F-8782-0F77210CC615.png"></p>
-<p>　　很庆幸自己坚持了这么久了，已经把《在mac上快速搭建Android、iOS自动打包环境》这一个系列完成。感性简友的支持。如果自己在搭建过程中有任何问题可以联系我。</p>
-
+<h2 id="内联函数"><a href="#内联函数" class="headerlink" title="内联函数"></a>内联函数</h2><p><code>inline或__attribute__(always_inline)</code></p>
+<p>内联函数式编译器将函数功能<strong>插入到每处代码</strong>被调用的地方，所以让攻击者看不到内联函数的调用。<font color="red">(声明内联要用static)</font>它是增加文件的体积来提高程序性能。因为内联函数是没有函数调用的开销，可以有效提高性能；它也能够有效的复用代码。</p>
+<h2 id="反汇编复杂化"><a href="#反汇编复杂化" class="headerlink" title="反汇编复杂化"></a>反汇编复杂化</h2>
       
     </div>
     
@@ -385,6 +405,8 @@
           
             <a href="/tags/iOS/" rel="tag"># iOS</a>
           
+            <a href="/tags/安全/" rel="tag"># 安全</a>
+          
         </div>
       
 
@@ -396,8 +418,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/10/14/在mac上快速搭建Android、iOS自动打包环境(二)/" rel="next" title="在mac上快速搭建Android、iOS自动打包环境(二)">
-                <i class="fa fa-chevron-left"></i> 在mac上快速搭建Android、iOS自动打包环境(二)
+              <a href="/2017/11/02/iOS文件擦除/" rel="next" title="iOS文件擦除">
+                <i class="fa fa-chevron-left"></i> iOS文件擦除
               </a>
             
           </div>
@@ -405,10 +427,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/10/16/React Native项目实践总结/" rel="prev" title="React Native项目实践总结">
-                React Native项目实践总结 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -550,7 +568,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#准备工作"><span class="nav-number">1.</span> <span class="nav-text">准备工作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Android自动打包"><span class="nav-number">2.</span> <span class="nav-text">Android自动打包</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#暗桩和自杀分支"><span class="nav-number">1.</span> <span class="nav-text">暗桩和自杀分支</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程调试检测"><span class="nav-number">2.</span> <span class="nav-text">进程调试检测</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#阻挡调试器"><span class="nav-number">3.</span> <span class="nav-text">阻挡调试器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#运行时库类完整性检查"><span class="nav-number">4.</span> <span class="nav-text">运行时库类完整性检查</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#检查内存地址空间"><span class="nav-number">4.1.</span> <span class="nav-text">检查内存地址空间</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内联函数"><span class="nav-number">5.</span> <span class="nav-text">内联函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#反汇编复杂化"><span class="nav-number">6.</span> <span class="nav-text">反汇编复杂化</span></a></li></ol></div>
             
 
           </div>

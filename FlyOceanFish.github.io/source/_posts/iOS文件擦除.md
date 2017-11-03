@@ -3,6 +3,7 @@ title: iOS文件擦除 # 这是标题
 date: 2017-11-02 09:00:00
 categories:  # 这里写的分类会自动汇集到 categories 页面上，分类可以多级
 - iOS # 一级分类
+- 安全
 tags:   # 这里写的标签会自动汇集到 tags 页面上
 - iOS
 - 安全
