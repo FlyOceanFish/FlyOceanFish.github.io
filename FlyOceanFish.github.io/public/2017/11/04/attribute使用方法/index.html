@@ -79,18 +79,20 @@
 
 
 
-<meta name="description" content="这次项目中遇到一个需求，将数字每隔3个用逗号隔开。因为如果数字太大确实看着有点眼花。　　所以就想着写了一个NSString的category，用起来效果还不错，代码如下： .h的声明#import &amp;lt;Foundation/Foundation.h&amp;gt;  @interface NSString (NumberSplitWithComma) /**  *数字以逗号隔开 例：123，321.1">
+<meta name="description" content="因为遇到attribute这个东西，但是又不知道这个东西是干嘛的，所以就百度研究了一下这个东西是什么在简书上看到一篇描述的非常全的一篇文章就转过来了。 attribute这个东西在我们写SDK或者提供类、方法等给其他人用的时候可以做一些检查、警告等挺有用的。">
 <meta name="keywords" content="iOS">
 <meta property="og:type" content="article">
-<meta property="og:title" content="iOS中将数字用符合隔开(比如逗号)">
-<meta property="og:url" content="http://yoursite.com/2017/10/14/iOS中将数字用符合隔开(比如逗号)/index.html">
+<meta property="og:title" content="iOS中__attribute__使用方法">
+<meta property="og:url" content="http://yoursite.com/2017/11/04/attribute使用方法/index.html">
 <meta property="og:site_name" content="FlyOceanFish&#39; Blog">
-<meta property="og:description" content="这次项目中遇到一个需求，将数字每隔3个用逗号隔开。因为如果数字太大确实看着有点眼花。　　所以就想着写了一个NSString的category，用起来效果还不错，代码如下： .h的声明#import &amp;lt;Foundation/Foundation.h&amp;gt;  @interface NSString (NumberSplitWithComma) /**  *数字以逗号隔开 例：123，321.1">
+<meta property="og:description" content="因为遇到attribute这个东西，但是又不知道这个东西是干嘛的，所以就百度研究了一下这个东西是什么在简书上看到一篇描述的非常全的一篇文章就转过来了。 attribute这个东西在我们写SDK或者提供类、方法等给其他人用的时候可以做一些检查、警告等挺有用的。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-10-16T08:45:26.000Z">
+<meta property="og:image" content="http://cwb.assets.jianshu.io/notes/images/4901567/weibo/image_aaa2852a6b2b.jpg">
+<meta property="og:updated_time" content="2017-11-03T05:47:03.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="iOS中将数字用符合隔开(比如逗号)">
-<meta name="twitter:description" content="这次项目中遇到一个需求，将数字每隔3个用逗号隔开。因为如果数字太大确实看着有点眼花。　　所以就想着写了一个NSString的category，用起来效果还不错，代码如下： .h的声明#import &amp;lt;Foundation/Foundation.h&amp;gt;  @interface NSString (NumberSplitWithComma) /**  *数字以逗号隔开 例：123，321.1">
+<meta name="twitter:title" content="iOS中__attribute__使用方法">
+<meta name="twitter:description" content="因为遇到attribute这个东西，但是又不知道这个东西是干嘛的，所以就百度研究了一下这个东西是什么在简书上看到一篇描述的非常全的一篇文章就转过来了。 attribute这个东西在我们写SDK或者提供类、方法等给其他人用的时候可以做一些检查、警告等挺有用的。">
+<meta name="twitter:image" content="http://cwb.assets.jianshu.io/notes/images/4901567/weibo/image_aaa2852a6b2b.jpg">
 
 
 
@@ -120,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/10/14/iOS中将数字用符合隔开(比如逗号)/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/11/04/attribute使用方法/"/>
 
 
 
 
 
-  <title>iOS中将数字用符合隔开(比如逗号) | FlyOceanFish' Blog</title>
+  <title>iOS中__attribute__使用方法 | FlyOceanFish' Blog</title>
   
 
 
@@ -263,7 +265,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/14/iOS中将数字用符合隔开(比如逗号)/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/04/attribute使用方法/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="FlyOceanFish">
@@ -280,7 +282,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">iOS中将数字用符合隔开(比如逗号)</h2>
+          <h2 class="post-title" itemprop="name headline">iOS中__attribute__使用方法</h2>
         
 
         <div class="post-meta">
@@ -292,8 +294,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-14T09:27:00+08:00">
-                2017-10-14
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-04T15:00:00+08:00">
+                2017-11-04
               </time>
             
 
@@ -352,88 +354,9 @@
       
 
       
-        <p>这次项目中遇到一个需求，将数字每隔3个用逗号隔开。因为如果数字太大确实看着有点眼花。<br>　　所以就想着写了一个NSString的category，用起来效果还不错，代码如下：</p>
-<h3 id="h的声明"><a href="#h的声明" class="headerlink" title=".h的声明"></a>.h的声明</h3><pre><code>#import &lt;Foundation/Foundation.h&gt;
+        <p>因为遇到<strong>attribute</strong>这个东西，但是又不知道这个东西是干嘛的，所以就百度研究了一下这个东西是什么<br>在简书上看到一篇描述的非常全的一篇文章就转过来了。</p>
+<p><strong>attribute</strong>这个东西在我们写SDK或者提供类、方法等给其他人用的时候<br>可以做一些检查、警告等挺有用的。<br><img src="http://cwb.assets.jianshu.io/notes/images/4901567/weibo/image_aaa2852a6b2b.jpg" alt="图片"></p>
 
-@interface NSString (NumberSplitWithComma)
-/**
- *数字以逗号隔开 例：123，321.11
- */
-- (NSString *)ld_numberSplitWithComma;
-/**
- *@param puctutation 符合
- *数字以某个符合隔开 例：123，321.11
- */
-- (NSString *)ld_numberSplitWithPunctutaion:(NSString *)puctutation;
-@end
-</code></pre><h3 id="m文件的实现"><a href="#m文件的实现" class="headerlink" title=".m文件的实现"></a>.m文件的实现</h3><pre><code>#import &quot;NSString+NumberSplitWithComma.h&quot;
-
-@implementation NSString (NumberSplitWithComma)
-
-- (NSString *)ld_numberSplitWithComma{
-    if ([self private_isNumber]) {
-        NSMutableString *muString = [NSMutableString tringWithString:self];
-        return [self private_insert:muString withPunctuation:@&quot;,&quot;];
-    }else{
-        return self;
-    }
-}
-- (NSString *)ld_numberSplitWithPunctutaion:(NSString *)puctutation{
-    if ([self private_isNumber]) {
-         NSMutableString *muString = [NSMutableString stringWithString:self];
-         return [self private_insert:muString withPunctuation:puctutation];
-     }else{
-         return self;
-     }
-}
-- (NSMutableString *)private_insert:(NSMutableString *)string withPunctuation:(NSString *)punctuation{
-    NSUInteger maxLength = string.length;
-    if ([string containsString:punctuation]) {
-        maxLength = [string rangeOfString:punctuation].location;
-    }else if ([string containsString:@&quot;.&quot;]){
-        maxLength = [string rangeOfString:@&quot;.&quot;].location;
-    }
-    if (maxLength-([string containsString:@&quot;-&quot;]?1:0)&gt;3) {
-        [string insertString:punctuation atIndex:(maxLength-3)];
-        [self private_insert:string withPunctuation:punctuation];
-    }else{
-        return string;
-    }
-    return string;
-}
- - (Boolean)private_isNumber{
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@&quot;SELF MATCHES %@&quot;,@&quot;^[-0-9.]*$&quot;];
-    if ([predicate evaluateWithObject:self]) {
-        return YES;
-     }
-    return NO;
- }
-</code></pre><h1 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h1><p>　　有简友反应可以使用NSNumberFormatter，然后研究了一番，确实能够很方便的达到效果。<br>1、通过使用formatter style，苹果帮我们定义好的格式。</p>
-<pre><code>NSNumberFormatter *numberFormatter =   [[NSNumberFormatter alloc] init];
-[numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
-NSString *formattedNumberString = [numberFormatter stringFromNumber:@122344.4563];
-NSLog(@&quot;formattedNumberString: %@&quot;, formattedNumberString);
-// Output for locale en_US: &quot;formattedNumberString: formattedNumberString: 122,344.453&quot;
-</code></pre><p>NSNumberFormatter 的numberStyle是一个枚举</p>
-<pre><code>    typedef NS_ENUM(NSUInteger, NSNumberFormatterStyle) {
-NSNumberFormatterNoStyle = kCFNumberFormatterNoStyle,四舍五入
-NSNumberFormatterDecimalStyle = kCFNumberFormatterDecimalStyle,金额 100,200,300.123
-NSNumberFormatterCurrencyStyle = kCFNumberFormatterCurrencyStyle,货币 $100,200,300.12
-NSNumberFormatterPercentStyle = kCFNumberFormatterPercentStyle,百分比 12%
-NSNumberFormatterScientificStyle = kCFNumberFormatterScientificStyle,科学计数法 1.234E8
-NSNumberFormatterSpellOutStyle = kCFNumberFormatterSpellOutStyle,口语 One...
-NSNumberFormatterOrdinalStyle NS_ENUM_AVAILABLE(10_11, 9_0) = kCFNumberFormatterOrdinalStyle,
-NSNumberFormatterCurrencyISOCodeStyle NS_ENUM_AVAILABLE(10_11, 9_0) = kCFNumberFormatterCurrencyISOCodeStyle,
-NSNumberFormatterCurrencyPluralStyle NS_ENUM_AVAILABLE(10_11, 9_0) = kCFNumberFormatterCurrencyPluralStyle,
-NSNumberFormatterCurrencyAccountingStyle NS_ENUM_AVAILABLE(10_11, 9_0) = kCFNumberFormatterCurrencyAccountingStyle,
-};
-</code></pre><p>２、通过一个格式字符串自定义格式</p>
-<pre><code>NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
-[numberFormatter setPositiveFormat:@&quot;###0.##&quot;];
-NSString *formattedNumberString = [numberFormatter stringFromNumber:@122344.4563];
-NSLog(@&quot;formattedNumberString: %@&quot;, formattedNumberString);
-// Output for locale en_US: &quot;formattedNumberString: formattedNumberString: 122,344.45&quot;
-</code></pre>
       
     </div>
     
@@ -463,8 +386,8 @@ NSLog(@&quot;formattedNumberString: %@&quot;, formattedNumberString);
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/10/14/NSInvocation/" rel="next" title="NSInvocation">
-                <i class="fa fa-chevron-left"></i> NSInvocation
+              <a href="/2017/11/03/iOS运行时安全/" rel="next" title="iOS运行时安全">
+                <i class="fa fa-chevron-left"></i> iOS运行时安全
               </a>
             
           </div>
@@ -473,8 +396,8 @@ NSLog(@&quot;formattedNumberString: %@&quot;, formattedNumberString);
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/10/14/React Native组件生命周期/" rel="prev" title="React Native组件生命周期">
-                React Native组件生命周期 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/11/05/iOS越狱检查/" rel="prev" title="iOS越狱检查">
+                iOS越狱检查 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -531,17 +454,8 @@ NSLog(@&quot;formattedNumberString: %@&quot;, formattedNumberString);
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -607,22 +521,6 @@ NSLog(@&quot;formattedNumberString: %@&quot;, formattedNumberString);
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#h的声明"><span class="nav-number">1.</span> <span class="nav-text">.h的声明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#m文件的实现"><span class="nav-number">2.</span> <span class="nav-text">.m文件的实现</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#补充"><span class="nav-number"></span> <span class="nav-text">补充</span></a></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
