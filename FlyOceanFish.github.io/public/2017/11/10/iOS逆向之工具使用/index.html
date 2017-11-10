@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="iOS,CocoaPods," />
+  <meta name="keywords" content="iOS,安全,逆向," />
 
 
 
@@ -79,18 +79,26 @@
 
 
 
-<meta name="description" content="之前有一篇介绍了怎么创建私人项目手把手教你创建podspec，创建成功之后进行发布。最终发布到Cocoapods官方仓库中。但是有时候我们创建完自己的pod项目之后，并不想公开发布，只限于自己或者公司使用，这时候就需要我们创建自己的私人仓库，将pod项目发布到自己的私人仓库中。 创建一个git私人项目由于github只能创建公开项目，如果要创建私人项目是要花钱的，所以我这边使用的是码市，免费最多能">
-<meta name="keywords" content="iOS,CocoaPods">
+<meta name="description" content="上一篇已经大体给大家介绍了几款工具，相信大家都有所了解了。如果不了解可以再去看看。哈哈。言归正传，接下来就是通过一个案例展示一下Hopper、ios-deploy等这些工具的结合使用；另一方面就是让大家体验下lldb中break等调试语句的使用 这次给大家演示的是通过这些工具获取当前应用对应的视图控制器(接下来整个流程看着很复杂，其实这个过程只是展示工具的使用，如果真想实现这个功能有个更简单的方法">
+<meta name="keywords" content="iOS,安全,逆向">
 <meta property="og:type" content="article">
-<meta property="og:title" content="创建Cocoapods私人仓库">
-<meta property="og:url" content="http://yoursite.com/2017/10/25/创建私人Cocoapods仓库/index.html">
+<meta property="og:title" content="iOS逆向之工具使用">
+<meta property="og:url" content="http://yoursite.com/2017/11/10/iOS逆向之工具使用/index.html">
 <meta property="og:site_name" content="FlyOceanFish&#39; Blog">
-<meta property="og:description" content="之前有一篇介绍了怎么创建私人项目手把手教你创建podspec，创建成功之后进行发布。最终发布到Cocoapods官方仓库中。但是有时候我们创建完自己的pod项目之后，并不想公开发布，只限于自己或者公司使用，这时候就需要我们创建自己的私人仓库，将pod项目发布到自己的私人仓库中。 创建一个git私人项目由于github只能创建公开项目，如果要创建私人项目是要花钱的，所以我这边使用的是码市，免费最多能">
+<meta property="og:description" content="上一篇已经大体给大家介绍了几款工具，相信大家都有所了解了。如果不了解可以再去看看。哈哈。言归正传，接下来就是通过一个案例展示一下Hopper、ios-deploy等这些工具的结合使用；另一方面就是让大家体验下lldb中break等调试语句的使用 这次给大家演示的是通过这些工具获取当前应用对应的视图控制器(接下来整个流程看着很复杂，其实这个过程只是展示工具的使用，如果真想实现这个功能有个更简单的方法">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-10-31T01:40:39.000Z">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/6644906-b722309c13a8e411.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/6644906-ce25bacf06f61740.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/6644906-2bf096c3dafbba94.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/6644906-9290ec48aea4acd1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/6644906-5a36325fcfffb06b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/6644906-3fc1812e14302597.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/6644906-8fcf2c9181285933.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2017-11-10T06:01:11.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="创建Cocoapods私人仓库">
-<meta name="twitter:description" content="之前有一篇介绍了怎么创建私人项目手把手教你创建podspec，创建成功之后进行发布。最终发布到Cocoapods官方仓库中。但是有时候我们创建完自己的pod项目之后，并不想公开发布，只限于自己或者公司使用，这时候就需要我们创建自己的私人仓库，将pod项目发布到自己的私人仓库中。 创建一个git私人项目由于github只能创建公开项目，如果要创建私人项目是要花钱的，所以我这边使用的是码市，免费最多能">
+<meta name="twitter:title" content="iOS逆向之工具使用">
+<meta name="twitter:description" content="上一篇已经大体给大家介绍了几款工具，相信大家都有所了解了。如果不了解可以再去看看。哈哈。言归正传，接下来就是通过一个案例展示一下Hopper、ios-deploy等这些工具的结合使用；另一方面就是让大家体验下lldb中break等调试语句的使用 这次给大家演示的是通过这些工具获取当前应用对应的视图控制器(接下来整个流程看着很复杂，其实这个过程只是展示工具的使用，如果真想实现这个功能有个更简单的方法">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/6644906-b722309c13a8e411.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
 
@@ -120,13 +128,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/10/25/创建私人Cocoapods仓库/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/11/10/iOS逆向之工具使用/"/>
 
 
 
 
 
-  <title>创建Cocoapods私人仓库 | FlyOceanFish' Blog</title>
+  <title>iOS逆向之工具使用 | FlyOceanFish' Blog</title>
   
 
 
@@ -273,7 +281,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/25/创建私人Cocoapods仓库/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/10/iOS逆向之工具使用/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="FlyOceanFish">
@@ -290,7 +298,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">创建Cocoapods私人仓库</h2>
+          <h2 class="post-title" itemprop="name headline">iOS逆向之工具使用</h2>
         
 
         <div class="post-meta">
@@ -302,8 +310,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-25T17:27:00+08:00">
-                2017-10-25
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-10T14:00:00+08:00">
+                2017-11-10
               </time>
             
 
@@ -327,6 +335,17 @@
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/iOS/" itemprop="url" rel="index">
                     <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/安全/" itemprop="url" rel="index">
+                    <span itemprop="name">安全</span>
                   </a>
                 </span>
 
@@ -362,68 +381,78 @@
       
 
       
-        <p>之前有一篇介绍了怎么创建私人项目<a href="http://flyoceanfish.top/2017/10/14/%E6%89%8B%E6%8A%8A%E6%89%8B%E6%95%99%E4%BD%A0%E5%88%9B%E5%BB%BACocoapods%E7%9A%84podspec/" target="_blank" rel="external">手把手教你创建podspec</a>，创建成功之后进行发布。最终发布<br>到Cocoapods官方仓库中。但是有时候我们创建完自己的pod项目之后，并不想公开发布，只限于自己或者公司使用，这时候就需要我们创建自己的私人仓库，将pod项目发布到自己的私人仓库中。</p>
-<h2 id="创建一个git私人项目"><a href="#创建一个git私人项目" class="headerlink" title="创建一个git私人项目"></a>创建一个git私人项目</h2><p>由于github只能创建公开项目，如果要创建私人项目是要花钱的，所以我这边使用的是<a href="https://coding.net" target="_blank" rel="external">码市</a>，免费最多能<br>创建5个私人项目，挺不错的。<strong>这个私人项目是我们用来存储spec的总仓库</strong></p>
-<h2 id="创建podspec"><a href="#创建podspec" class="headerlink" title="创建podspec"></a>创建podspec</h2><ul>
-<li>创建spec工程</li>
+        <p>上一篇已经大体给大家介绍了几款工具，相信大家都有所了解了。如果不了解可以再去看看。哈哈。言归正传，接下来就是通过一个案例展示一下Hopper、ios-deploy等这些工具的结合使用；另一方面就是让大家体验下lldb中break等调试语句的使用</p>
+<p>这次给大家演示的是通过这些工具获取当前应用对应的视图控制器(接下来整个流程看着很复杂，其实这个过程只是展示工具的使用，如果真想实现这个功能有个更简单的方法，大家有可能想到了，没想到也没关系，我在文章的最后边给大家揭露)</p>
+<h2 id="获取当前可见视图对应的控制器"><a href="#获取当前可见视图对应的控制器" class="headerlink" title="获取当前可见视图对应的控制器"></a>获取当前可见视图对应的控制器</h2><ul>
+<li>真机连接，开始lldb远程调试</li>
 </ul>
+<p>注意执行下列语句要保证终端已经cd到WeiXin.app目录下</p>
 <blockquote>
-<p>pod lib create [名称]</p>
+<p>ios-deploy –debug –bundle WeiXin.app</p>
 </blockquote>
-<p>这个与<code>pod spec create</code>的区别其实就是帮我们拉了一个模板，确实能省很多事情，里边包括了一个Example工程</p>
+<p>执行完这个语句要等一会APP安装到手机并且启动之后，终端出现如下以<code>(lldb)</code>开头了代表启动成功，可以远程调试了。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/6644906-b722309c13a8e411.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="2ADCF3E1-88BC-4F98-9F72-693A56F113CB.png"></p>
 <ul>
-<li>再创建一个git私人项目</li>
+<li>打全局断点</li>
 </ul>
-<p>这个是用来存放我们Xcode工程和代码的。说白了就是托管我们代码的地方，主要是用来配饰spec中<code>s.source</code>用的</p>
+<blockquote>
+<p>br set -n viewWillAppear:</p>
+</blockquote>
+<p>这个时候只要进入任何界面都会停住同时终端会如下显示(关于lldb中break等语句的使用推荐大家看这篇文章<a href="http://blog.csdn.net/quanqinyang/article/details/51321338" target="_blank" rel="external">lldb使用技巧</a>)</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/6644906-ce25bacf06f61740.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="0653D621-991E-4DF4-B916-7952B0C343EE.png"></p>
+<p>图中我标出的1代表断点的名称，删除等操作用的到</p>
+<p>操作APP，这时候会停住，终端如下图：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/6644906-2bf096c3dafbba94.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="4DE7AB92-DD65-440B-A8EB-B40E0C21A634.png"></p>
+<p>这个时候我们就拿到了当前视图对应的控制器的名字了。然后输入<code>br dis</code>回车，再输入<code>c</code>就可以让代码继续了。</p>
 <ul>
-<li>将我们要公开的代码和Example提交到git仓库</li>
+<li>获取当前视图名称</li>
 </ul>
-<p>在第一步我们创建的工程中执行</p>
 <blockquote>
-<p>git add .</p>
-<p>git commit -m ‘init’</p>
-<p>git remote add orgin [刚才我们创建仓库的地址]</p>
-<p>git push origin master</p>
-</blockquote>
-<p>到这里为止已经将我们的代码提交到刚才创建的代码仓库中了。(如果没有权限则要配置.ssh中公钥私钥)<br>由于spec文件的原因我们其实还有一步没有做，其实就是打tag，只有打了tag才行,<code>:tag =&gt; s.version.to_s</code>就是这句话用到的<br>接下来我们继续打tag</p>
+<p>(lldb) po $x0</p>
+<mmuinavigationcontroller: 0x11c1a3c00="">
+
+<p>(lldb) po [(MMUINavigationController*)0x11c1a3c00 viewControllers]</p>
+</mmuinavigationcontroller:></blockquote>
+<p>大家看有的教程是<code>po $r0</code> 这是命令是对应32位机器操作的；<code>po $x0</code>是对应64位的命令</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/6644906-9290ec48aea4acd1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="1DB7FB69-8138-4231-BB7F-5461BCC2E14F.png"></p>
+<p><strong>上边是通过断点的方式获取到了当前视图控制器的名字，接下来给大家展示另一种方式</strong></p>
+<p>第二种：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">(lldb) e UIApplication *$app = [UIApplication sharedApplication]</div><div class="line">(lldb) e UIWindow *$keyWindow = $app.keyWindow</div><div class="line"></div><div class="line">(lldb) po $keyWindow.rootViewController</div><div class="line">&lt;MMTabBarController: 0x138947000&gt;</div><div class="line"></div><div class="line">(lldb) e MMTabBarController *$tab = $keyWindow.rootViewController</div><div class="line"></div><div class="line">(lldb) po $tab.viewControllers</div><div class="line">&lt;__NSArrayM 0x139775c50&gt;(</div><div class="line">&lt;MMUINavigationController: 0x1380a2a00&gt;,</div><div class="line">&lt;MMUINavigationController: 0x138938a00&gt;,</div><div class="line">&lt;MMUINavigationController: 0x13893d600&gt;,</div><div class="line">&lt;MMUINavigationController: 0x138943600&gt;</div><div class="line">)</div><div class="line"></div><div class="line">(lldb)e MMUINavigationController *$navi2 = $tab.viewControllers[2]</div><div class="line"></div><div class="line">(lldb) po $navi2.visibleViewController</div><div class="line"></div><div class="line">(SeePeopleNearbyViewController *) $8 = 0x00000001398f55c0</div></pre></td></tr></table></figure></p>
+<p>这种方式其实就是通过lldb远程调试中的<code>e</code>语法能够执行任何oc语句的特性与Cycript类似</p>
+<p>第三种：</p>
+<p>直接打开Xcode的View Debug Hierarchy即可。😁😁</p>
+<h2 id="通过内存地址打断点调试"><a href="#通过内存地址打断点调试" class="headerlink" title="通过内存地址打断点调试"></a>通过内存地址打断点调试</h2><p>首先要给大家普及几个知识，接下来做起来可能就得心应手了。</p>
 <blockquote>
-<p>git tag 0.1.0</p>
-<p>git push –tags</p>
+<p>模块偏移后的基地址 = ASLR偏移量+ 模块偏移前基地址</p>
 </blockquote>
-<h2 id="编写xx-podspec文件"><a href="#编写xx-podspec文件" class="headerlink" title="编写xx.podspec文件"></a>编写xx.podspec文件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line">#</div><div class="line"># Be sure to run `pod lib lint Utils.podspec&apos; to ensure this is a</div><div class="line"># valid spec before submitting.</div><div class="line">#</div><div class="line"># Any lines starting with a # are optional, but their use is encouraged</div><div class="line"># To learn more about a Podspec see http://guides.cocoapods.org/syntax/podspec.html</div><div class="line">#</div><div class="line"></div><div class="line">Pod::Spec.new do |s|</div><div class="line">  s.name             = &apos;Utils&apos;</div><div class="line">  s.version          = &apos;0.1.0&apos;</div><div class="line">  s.summary          = &apos;Utils.&apos;</div><div class="line"></div><div class="line"># This description is used to generate tags and improve search results.</div><div class="line">#   * Think: What does it do? Why did you write it? What is the focus?</div><div class="line">#   * Try to keep it short, snappy and to the point.</div><div class="line">#   * Write the description between the DESC delimiters below.</div><div class="line">#   * Finally, don&apos;t worry about the indent, CocoaPods strips it!</div><div class="line"></div><div class="line">  s.description      = &lt;&lt;-DESC</div><div class="line">Utils封装常用组件</div><div class="line">                       DESC</div><div class="line"></div><div class="line">  s.homepage         = &apos;https://coding.net/u/FlyOceanFish/p/Utils&apos;</div><div class="line">  # s.screenshots     = &apos;www.example.com/screenshots_1&apos;, &apos;www.example.com/screenshots_2&apos;</div><div class="line">  s.license          = &#123; :type =&gt; &apos;MIT&apos;, :file =&gt; &apos;LICENSE&apos; &#125;</div><div class="line">  s.author           = &#123; &apos;FlyOceanFish&apos; =&gt; &apos;978456068@126.com&apos; &#125;</div><div class="line">  s.source           = &#123; :git =&gt; &apos;https://git.coding.net/FlyOceanFish/Utils.git&apos;, :tag =&gt; s.version.to_s &#125;</div><div class="line">  # s.social_media_url = &apos;https://twitter.com/&lt;TWITTER_USERNAME&gt;&apos;</div><div class="line"></div><div class="line">  s.ios.deployment_target = &apos;8.0&apos;</div><div class="line"></div><div class="line">  s.source_files = &apos;Utils/Classes/**/*&apos;</div><div class="line"></div><div class="line">  # s.resource_bundles = &#123;</div><div class="line">  #   &apos;Utils&apos; =&gt; [&apos;Utils/Assets/*.png&apos;]</div><div class="line">  # &#125;</div><div class="line"></div><div class="line">  # s.public_header_files = &apos;Pod/Classes/**/*.h&apos;</div><div class="line">    s.frameworks = &apos;UIKit&apos;, &apos;MapKit&apos;</div><div class="line">  # s.dependency &apos;AFNetworking&apos;, &apos;~&gt; 2.3&apos;</div><div class="line">end</div></pre></td></tr></table></figure>
-<p>这个是我写的，也可以参考我之前的一篇文章</p>
-<h2 id="检验spec文件的合法性"><a href="#检验spec文件的合法性" class="headerlink" title="检验spec文件的合法性"></a>检验spec文件的合法性</h2><blockquote>
-<p>pod spec lint</p>
-</blockquote>
-<p>如果有什么错误，可以参照提示修改就行了</p>
-<h2 id="发布我们的podspec文件到我们的私人仓库"><a href="#发布我们的podspec文件到我们的私人仓库" class="headerlink" title="发布我们的podspec文件到我们的私人仓库"></a>发布我们的podspec文件到我们的私人仓库</h2><ul>
-<li>首先添加私人仓库源</li>
-</ul>
-<p>这个私人仓库源其实就是我们第一步创建的那个仓库地址</p>
-<blockquote>
-<p>git repo</p>
-</blockquote>
-<p>这个命令可以看到我们目前的私人仓库源</p>
-<blockquote>
-<p>git repo add [仓库源名称][仓库地址]</p>
-</blockquote>
-<p>比如:</p>
-<blockquote>
-<p>git repo add FlyOceanSpecs <a href="https://git.coding.net/FlyOceanFish/FlyOceanSpecs.git" target="_blank" rel="external">https://git.coding.net/FlyOceanFish/FlyOceanSpecs.git</a></p>
-</blockquote>
-<p>仓库源随便起名字，不过这个我们发布我们的spec项目的时候用的到。仓库地址就是我们<br>第一步创建的那个git仓库地址</p>
 <ul>
-<li>发布到私人仓库</li>
+<li><p>模块偏移后的基地址:这个地址才是对象真正的地址，我们调试过程中使用的地址都是此地址。</p>
+</li>
+<li><p>模块偏移前基地址：这个其实就是Hopper解析我们应用中的所显示的地址</p>
+</li>
+<li><p><a href="http://blog.csdn.net/better0332/article/details/5262990" target="_blank" rel="external">ASLR(Address Space Layout Randomization,地址空间格局的随机化)</a>偏移量：这是ASLR所随机产生的一个内存地址.其实就是一个安全措施，<code>模块偏移前基地址</code>通过任何汇编工具都很容易能够拿到，不过要想拿到<code>ASLR</code>偏移量就没那么简单。</p>
+</li>
 </ul>
-<p>接上一步我们的FlyOceanSpecs仓库源</p>
-<blockquote>
-<p>git repo push FlyOceanSpecs Utils.podspec</p>
+<h3 id="ASLR偏移量"><a href="#ASLR偏移量" class="headerlink" title="ASLR偏移量"></a>ASLR偏移量</h3><blockquote>
+<p>image list -o -f “WeChat”</p>
 </blockquote>
-<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>我的Podfile文件如下:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"># Uncomment the next line to define a global platform for your project</div><div class="line"> platform :ios, &apos;9.0&apos;</div><div class="line"> source &apos;https://git.coding.net/FlyOceanFish/FlyOceanSpecs.git&apos;</div><div class="line"> source &apos;https://github.com/CocoaPods/Specs.git&apos;</div><div class="line">target &apos;test&apos; do</div><div class="line">  # Uncomment the next line if you&apos;re using Swift or would like to use dynamic frameworks</div><div class="line">   use_frameworks!</div><div class="line">  pod &apos;YTOBaiduMapKit&apos;</div><div class="line">  # Pods for test</div><div class="line"></div><div class="line">end</div></pre></td></tr></table></figure>
-<p>这就可以正常使用了</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>这个过程其实还是挺复杂的，大家如果有什么问题可以给我留言，我会及时回复的</p>
-<p>注:<br><strong>以上是我制作的一个YTOBaiduMapKit，由于百度api针对pod导入只支持全量导入，这样则会导致整个包比较大，所以我制作了一个阉割版，只包括了<code>BaiduMapAPI_Base</code>、<code>BaiduMapAPI_Location</code>、<code>BaiduMapAPI_Map</code>这三个包就是百度基础功能和定位的功能</strong></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/6644906-5a36325fcfffb06b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="A612F9FE-E91D-479F-A6F1-E48CD50E7E0F.png"></p>
+<p>其中<code>0x0000000000300000</code>就是<strong>ASLR偏移量偏移量</strong></p>
+<h3 id="获取模块偏移前基地址"><a href="#获取模块偏移前基地址" class="headerlink" title="获取模块偏移前基地址"></a>获取模块偏移前基地址</h3><p>将.app文件拖到Hopper应用中，注意选择64位的要不计算的地址不对，要与你手机的位数匹配起来。过程可能比较忙耐心等待一下</p>
+<p>我们拿拦截消息为例：在Hopper中搜索函数的名称<br><img src="http://upload-images.jianshu.io/upload_images/6644906-3fc1812e14302597.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="A97E9160-D079-4330-8E8F-14710F764DC3.png"></p>
+<p><code>0x00000001029c2964</code>就是我们要获取的<strong>模块偏移前基地址</strong></p>
+<p>大家找一个计算器这是16进制的加起来即可。</p>
+<p>0x102cc2964</p>
+<p>打断点</p>
+<blockquote>
+<p>br a -s 0x102cc2964</p>
+</blockquote>
+<p>接下来各位可以找一个美女发个消息看看啦。哈哈</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/6644906-8fcf2c9181285933.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="5DF1BE04-2972-450B-BA6B-BF58DA855679.png"></p>
+<blockquote>
+<p>ni</p>
+<p>(lldb) po $x0</p>
+<cmessagemgr: 0x1c41b8aa0="">
+</cmessagemgr:></blockquote>
 
       
     </div>
@@ -443,7 +472,9 @@
           
             <a href="/tags/iOS/" rel="tag"># iOS</a>
           
-            <a href="/tags/CocoaPods/" rel="tag"># CocoaPods</a>
+            <a href="/tags/安全/" rel="tag"># 安全</a>
+          
+            <a href="/tags/逆向/" rel="tag"># 逆向</a>
           
         </div>
       
@@ -456,8 +487,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/10/18/iOS中App Search/" rel="next" title="iOS中App Search">
-                <i class="fa fa-chevron-left"></i> iOS中App Search
+              <a href="/2017/11/09/iOS非越狱逆向工程/" rel="next" title="iOS非越狱逆向工程">
+                <i class="fa fa-chevron-left"></i> iOS非越狱逆向工程
               </a>
             
           </div>
@@ -465,10 +496,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/10/30/iOS小知识积累(长期更新)/" rel="prev" title="iOS小知识积累(长期更新)">
-                iOS小知识积累(长期更新) <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -610,7 +637,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#创建一个git私人项目"><span class="nav-number">1.</span> <span class="nav-text">创建一个git私人项目</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建podspec"><span class="nav-number">2.</span> <span class="nav-text">创建podspec</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编写xx-podspec文件"><span class="nav-number">3.</span> <span class="nav-text">编写xx.podspec文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#检验spec文件的合法性"><span class="nav-number">4.</span> <span class="nav-text">检验spec文件的合法性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#发布我们的podspec文件到我们的私人仓库"><span class="nav-number">5.</span> <span class="nav-text">发布我们的podspec文件到我们的私人仓库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用"><span class="nav-number">6.</span> <span class="nav-text">使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">7.</span> <span class="nav-text">总结</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#获取当前可见视图对应的控制器"><span class="nav-number">1.</span> <span class="nav-text">获取当前可见视图对应的控制器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#通过内存地址打断点调试"><span class="nav-number">2.</span> <span class="nav-text">通过内存地址打断点调试</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ASLR偏移量"><span class="nav-number">2.1.</span> <span class="nav-text">ASLR偏移量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取模块偏移前基地址"><span class="nav-number">2.2.</span> <span class="nav-text">获取模块偏移前基地址</span></a></li></ol></li></ol></div>
             
 
           </div>
