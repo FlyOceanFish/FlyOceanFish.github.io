@@ -1,13 +1,13 @@
 ---
 title: iOS小知识积累(长期更新) # 这是标题
-date: 2017-10-30 09:27:00
-updated: 2017-10-30 14:30:00
+date: 2017-11-25 09:35:00
+updated: 2017-11-25 14:30:00
 categories:  # 这里写的分类会自动汇集到 categories 页面上，分类可以多级
 - iOS # 一级分类
 tags:   # 这里写的标签会自动汇集到 tags 页面上
 - iOS
 ---
-***以前工作中有很多小的知识点，但是有时候只是用了，没有真正积累下来，有时候也会忘记。所以写这篇文章就是慢慢的将以前小的知识点或者之后用到的用文字的形式记录下来。【码字、分享不容易，各位的关注是小的动力！动动亲的小手指关注一下我哈。】***
+***以前工作中有很多小的知识点，但是有时候只是用了，没有真正积累下来，有时候也会忘记。所以写这篇文章就是慢慢的将以前小的知识点或者之后用到的用文字的形式记录下来。***
 1、_Nullable和_Nonnull(Xcode 6.3 )
 _Nullable表示可能是NULL或nil；_Nonnull表示不应该是NULL或nil。如果不遵循会有警告
 如果需要每个属性或每个方法都去指定nonnull和nullable，是一件非常繁琐的事。苹果为了减轻我们的工作量，专门提供了两个宏：NS_ASSUME_NONNULL_BEGIN和NS_ASSUME_NONNULL_END。
@@ -205,3 +205,17 @@ UIView.animateWithDuration(0.8, delay: 0, usingSpringWithDamping: 0.5, initialSp
 
 
 >setNeedsDisplay方便绘图，而layoutSubViews方便出来数据。
+
+26、通知的命名的正确姿势
+
+>[Name of associated class]+[Did|Will]+[UniquePartOfName]+Notification
+
+我们可以按照苹果模板写
+
+.h文件
+
+>UIKIT_EXTERN NSNotification const FOFAnimalDidBecomePersonNotification
+
+.m文件
+
+>NSNotification FOFAnimalDidBecomePersonNotificationFOFAnimalDidBecomePersonNotification = @"FOFAnimalDidBecomePersonNotification";
