@@ -1,7 +1,7 @@
 ---
 title: iOS小知识积累(长期更新) # 这是标题
 date: 2017-11-25 09:35:00
-updated: 2017-11-25 14:30:00
+updated: 2017-11-27 09:06:00
 categories:  # 这里写的分类会自动汇集到 categories 页面上，分类可以多级
 - iOS # 一级分类
 tags:   # 这里写的标签会自动汇集到 tags 页面上
@@ -219,3 +219,21 @@ UIView.animateWithDuration(0.8, delay: 0, usingSpringWithDamping: 0.5, initialSp
 .m文件
 
 >NSNotification FOFAnimalDidBecomePersonNotificationFOFAnimalDidBecomePersonNotification = @"FOFAnimalDidBecomePersonNotification";
+
+27、对象、类、元类、isa
+
+类对象代表类,Class类型。如[类名 class];
+
+所有类的实例都由类对象生成,**类对象会把实例的isa的值修改成自己的地址,每个实例的isa都指向该实例的类对象**
+
+因为类也是一个对象,那它也必须是另一个类的实例,这个类就是元类 `metaclass`
+
+>元类保存了**类方法**(静态方法"+")的列表。当一个类方法被调用时,元类会首先查找它本身是否有该类方法的实现,如果没有则该元类会向它的父类查找该方法,直到一直找到继承链的头。
+
+  > 元类(metaclass)也是一个对象,那么元类的isa指针又指向哪里呢?为了设计上的完整,所有的元类的isa指针都会指向一个根元类(root metaclass)。
+
+![图.png](http://upload-images.jianshu.io/upload_images/6644906-f8bf2f90a3aa0f7c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+28、Cocoapods导入第三方包Xcode没有自动补全提示功能
+选择Target -> Build Settings 菜单，找到\”User Header Search Paths\”设置项
+新增一个值"${SRCROOT}"，并且选择\”Recursive\”，这样xcode就会在项目目录中递归搜索文件

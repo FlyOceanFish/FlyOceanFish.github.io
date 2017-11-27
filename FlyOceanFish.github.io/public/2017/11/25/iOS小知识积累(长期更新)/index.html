@@ -92,7 +92,8 @@
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/6644906-625f6cbcf66800cf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/6644906-320495bdfa8f9c47.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/6644906-9209401db1a78dc4.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2017-11-25T06:30:00.000Z">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/6644906-f8bf2f90a3aa0f7c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2017-11-27T01:06:00.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS小知识积累(长期更新)">
 <meta name="twitter:description" content="以前工作中有很多小的知识点，但是有时候只是用了，没有真正积累下来，有时候也会忘记。所以写这篇文章就是慢慢的将以前小的知识点或者之后用到的用文字的形式记录下来。1、_Nullable和_Nonnull(Xcode 6.3 )_Nullable表示可能是NULL或nil；_Nonnull表示不应该是NULL或nil。如果不遵循会有警告如果需要每个属性或每个方法都去指定nonnull和nullable，">
@@ -483,6 +484,16 @@
 <blockquote>
 <p>NSNotification FOFAnimalDidBecomePersonNotificationFOFAnimalDidBecomePersonNotification = @”FOFAnimalDidBecomePersonNotification”;</p>
 </blockquote>
+<p>27、对象、类、元类、isa</p>
+<p>类对象代表类,Class类型。如[类名 class];</p>
+<p>所有类的实例都由类对象生成,<strong>类对象会把实例的isa的值修改成自己的地址,每个实例的isa都指向该实例的类对象</strong></p>
+<p>因为类也是一个对象,那它也必须是另一个类的实例,这个类就是元类 <code>metaclass</code></p>
+<blockquote>
+<p>元类保存了<strong>类方法</strong>(静态方法”+”)的列表。当一个类方法被调用时,元类会首先查找它本身是否有该类方法的实现,如果没有则该元类会向它的父类查找该方法,直到一直找到继承链的头。</p>
+<p>元类(metaclass)也是一个对象,那么元类的isa指针又指向哪里呢?为了设计上的完整,所有的元类的isa指针都会指向一个根元类(root metaclass)。</p>
+</blockquote>
+<p><img src="http://upload-images.jianshu.io/upload_images/6644906-f8bf2f90a3aa0f7c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图.png"></p>
+<p>28、Cocoapods导入第三方包Xcode没有自动补全提示功能<br>选择Target -&gt; Build Settings 菜单，找到\”User Header Search Paths\”设置项<br>新增一个值”${SRCROOT}”，并且选择\”Recursive\”，这样xcode就会在项目目录中递归搜索文件</p>
 
       
     </div>
