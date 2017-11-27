@@ -494,6 +494,16 @@
 </blockquote>
 <p><img src="http://upload-images.jianshu.io/upload_images/6644906-f8bf2f90a3aa0f7c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图.png"></p>
 <p>28、Cocoapods导入第三方包Xcode没有自动补全提示功能<br>选择Target -&gt; Build Settings 菜单，找到\”User Header Search Paths\”设置项<br>新增一个值”${SRCROOT}”，并且选择\”Recursive\”，这样xcode就会在项目目录中递归搜索文件</p>
+<p>29、__bridge</p>
+<p>OC对象和CF(CoreFoundation)对象之间转换</p>
+<ul>
+<li><p>__bridge:OC对象转换成CF对象，转化时只涉及对象类型不涉及对象所有权的转化。（内存还是oc管理）</p>
+</li>
+<li><p>__bridge_transfer:常用在讲CF对象转换成OC对象时，将CF对象的所有权交给OC对象，此时ARC就能自动管理该内存；（作用同CFBridgingRelease()）</p>
+</li>
+<li><p><strong>bridge_retained:（与</strong>bridge_transfer相反）常用在将OC对象转换成CF对象时，将OC对象的所有权交给CF对象来管理；(作用同CFBridgingRetain())，最后调用CFRelease将其手动释放.</p>
+</li>
+</ul>
 
       
     </div>

@@ -237,3 +237,13 @@ UIView.animateWithDuration(0.8, delay: 0, usingSpringWithDamping: 0.5, initialSp
 28、Cocoapods导入第三方包Xcode没有自动补全提示功能
 选择Target -> Build Settings 菜单，找到\”User Header Search Paths\”设置项
 新增一个值"${SRCROOT}"，并且选择\”Recursive\”，这样xcode就会在项目目录中递归搜索文件
+
+29、__bridge
+
+OC对象和CF(CoreFoundation)对象之间转换
+
+* __bridge:OC对象转换成CF对象，转化时只涉及对象类型不涉及对象所有权的转化。（内存还是oc管理）
+
+* __bridge_transfer:常用在讲CF对象转换成OC对象时，将CF对象的所有权交给OC对象，此时ARC就能自动管理该内存；（作用同CFBridgingRelease()）
+
+* __bridge_retained:（与__bridge_transfer相反）常用在将OC对象转换成CF对象时，将OC对象的所有权交给CF对象来管理；(作用同CFBridgingRetain())，最后调用CFRelease将其手动释放.
