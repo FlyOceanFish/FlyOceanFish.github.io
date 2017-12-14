@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="iOS,安全," />
+  <meta name="keywords" content="iOS,算法," />
 
 
 
@@ -79,18 +79,21 @@
 
 
 
-<meta name="description" content="暗桩和自杀分支添加一些直观看上去有用的迷惑的方法到类中，并且看起来比较有用。 12345- (BOOL)userIsAuthenticated:(BOO)auth&amp;#123;  /* 无提示地擦除加密密钥 */  /* 无提示地擦除用户数据 */  /* 无提示地禁用所有认证 */&amp;#125; 自杀分支不仅能够擦除用户数据，还可以混淆攻击者让他放弃攻击 进程调试检测当一个应用程序被调试的时候，内核">
-<meta name="keywords" content="iOS,安全">
+<meta name="description" content="概念堆是一棵顺序存储的完全二叉树,分为大根堆和小根堆 分类 小根堆 每个结点的关键字都不大于其孩子结点的关键字。  大根堆 每个结点的关键字都不小于其孩子结点的关键字   举例举例来说，对于n个元素的序列{R0, R1, … , Rn}当且仅当满足下列关系之一时，称之为堆： (1) Ri &amp;lt;= R2i+1 且 Ri &amp;lt;= R2i+2 (小根堆) (2) Ri &amp;gt;= R2i+1 且">
+<meta name="keywords" content="iOS,算法">
 <meta property="og:type" content="article">
-<meta property="og:title" content="iOS运行时安全">
-<meta property="og:url" content="http://yoursite.com/2017/11/03/iOS运行时安全/index.html">
+<meta property="og:title" content="堆排序">
+<meta property="og:url" content="http://yoursite.com/2017/10/14/算法堆排序/index.html">
 <meta property="og:site_name" content="FlyOceanFish&#39; Blog">
-<meta property="og:description" content="暗桩和自杀分支添加一些直观看上去有用的迷惑的方法到类中，并且看起来比较有用。 12345- (BOOL)userIsAuthenticated:(BOO)auth&amp;#123;  /* 无提示地擦除加密密钥 */  /* 无提示地擦除用户数据 */  /* 无提示地禁用所有认证 */&amp;#125; 自杀分支不仅能够擦除用户数据，还可以混淆攻击者让他放弃攻击 进程调试检测当一个应用程序被调试的时候，内核">
+<meta property="og:description" content="概念堆是一棵顺序存储的完全二叉树,分为大根堆和小根堆 分类 小根堆 每个结点的关键字都不大于其孩子结点的关键字。  大根堆 每个结点的关键字都不小于其孩子结点的关键字   举例举例来说，对于n个元素的序列{R0, R1, … , Rn}当且仅当满足下列关系之一时，称之为堆： (1) Ri &amp;lt;= R2i+1 且 Ri &amp;lt;= R2i+2 (小根堆) (2) Ri &amp;gt;= R2i+1 且">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-11-03T00:37:54.000Z">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/6644906-d30bd835f0518910.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/6644906-d758db5fcfaaf778.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2017-12-14T06:13:58.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="iOS运行时安全">
-<meta name="twitter:description" content="暗桩和自杀分支添加一些直观看上去有用的迷惑的方法到类中，并且看起来比较有用。 12345- (BOOL)userIsAuthenticated:(BOO)auth&amp;#123;  /* 无提示地擦除加密密钥 */  /* 无提示地擦除用户数据 */  /* 无提示地禁用所有认证 */&amp;#125; 自杀分支不仅能够擦除用户数据，还可以混淆攻击者让他放弃攻击 进程调试检测当一个应用程序被调试的时候，内核">
+<meta name="twitter:title" content="堆排序">
+<meta name="twitter:description" content="概念堆是一棵顺序存储的完全二叉树,分为大根堆和小根堆 分类 小根堆 每个结点的关键字都不大于其孩子结点的关键字。  大根堆 每个结点的关键字都不小于其孩子结点的关键字   举例举例来说，对于n个元素的序列{R0, R1, … , Rn}当且仅当满足下列关系之一时，称之为堆： (1) Ri &amp;lt;= R2i+1 且 Ri &amp;lt;= R2i+2 (小根堆) (2) Ri &amp;gt;= R2i+1 且">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/6644906-d30bd835f0518910.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
 
@@ -120,13 +123,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/11/03/iOS运行时安全/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/10/14/算法堆排序/"/>
 
 
 
 
 
-  <title>iOS运行时安全 | FlyOceanFish' Blog</title>
+  <title>堆排序 | FlyOceanFish' Blog</title>
   
 
 
@@ -273,7 +276,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/03/iOS运行时安全/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/14/算法堆排序/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="FlyOceanFish">
@@ -290,7 +293,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">iOS运行时安全</h2>
+          <h2 class="post-title" itemprop="name headline">堆排序</h2>
         
 
         <div class="post-meta">
@@ -302,8 +305,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-03T09:00:00+08:00">
-                2017-11-03
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-14T14:13:00+08:00">
+                2017-10-14
               </time>
             
 
@@ -336,8 +339,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/iOS/安全/" itemprop="url" rel="index">
-                    <span itemprop="name">安全</span>
+                  <a href="/categories/iOS/算法/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
                   </a>
                 </span>
 
@@ -373,30 +376,44 @@
       
 
       
-        <h2 id="暗桩和自杀分支"><a href="#暗桩和自杀分支" class="headerlink" title="暗桩和自杀分支"></a>暗桩和自杀分支</h2><p>添加一些直观看上去有用的迷惑的方法到类中，并且看起来比较有用。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">- (BOOL)userIsAuthenticated:(BOO)auth&#123;</div><div class="line">  /* 无提示地擦除加密密钥 */</div><div class="line">  /* 无提示地擦除用户数据 */</div><div class="line">  /* 无提示地禁用所有认证 */</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>自杀分支不仅能够擦除用户数据，还可以混淆攻击者让他放弃攻击</p>
-<h2 id="进程调试检测"><a href="#进程调试检测" class="headerlink" title="进程调试检测"></a>进程调试检测</h2><p>当一个应用程序被调试的时候，内核会自动设置一个进程状态标志表示进程正在被调试。我们可以检测这个标志，一旦知道自己程序被调试，我们就可以做一些相应的安全措施了。如退出程序、禁用功能等等。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">#define DEBUGGER_CHECK &#123;\</div><div class="line">size_t size = sizeof(struct kinfo_proc);\</div><div class="line">struct kinfo_proc info;\</div><div class="line">int ret,name[4];\</div><div class="line">\</div><div class="line">memset(&amp;info, 0, sizeof(struct kinfo_proc));\</div><div class="line">name[0] = CTL_KERN;\</div><div class="line">name[1] = KERN_PROC;\</div><div class="line">name[2] = KERN_PROC_PID;\</div><div class="line">name[3] = getpid();\</div><div class="line">\</div><div class="line">if ((ret = (sysctl(name, 4, &amp;info, &amp;size, NULL, 0)))) &#123;\</div><div class="line">    exit(EXIT_FAILURE);\</div><div class="line">&#125;\</div><div class="line">if (info.kp_proc.p_flag&amp;P_TRACED) &#123;\</div><div class="line">    NSLog(@&quot;正在调试&quot;);\</div><div class="line">    /*代码调试在这里做出响应*/\</div><div class="line">&#125;\</div><div class="line">&#125;\</div></pre></td></tr></table></figure>
-<h2 id="阻挡调试器"><a href="#阻挡调试器" class="headerlink" title="阻挡调试器"></a>阻挡调试器</h2><p>保证我们程序不被调试，这个只能说增加了难度。如果一个专业的可以通过解密应用程序永久移除它等等的手段。所以我们要越狱检测、调试检测等等相互辅助才能达到最好的效果。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">#import &lt;sys/ptrace.h&gt;</div><div class="line"></div><div class="line">ptrace(PT_DENY_ATTACH,0,0,0);</div></pre></td></tr></table></figure>
-<p>但是iPhone的环境中没有开发这个ptrace.h文件，所以只能使用dlopen来拿到</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">#import &lt;dlfcn.h&gt;</div><div class="line">#import&lt;sys/types.h&gt;</div><div class="line"></div><div class="line">typedef int(*ptrace_ptr_t)(int _request, pid_t _pid, caddr_t _addr, int _data);</div><div class="line"></div><div class="line">#if!defined(PT_DENY_ATTACH)</div><div class="line"></div><div class="line">#define PT_DENY_ATTACH 31</div><div class="line"></div><div class="line">#endif  // !defined(PT_DENY_ATTACH)</div><div class="line"></div><div class="line">void disable_gdb() &#123;</div><div class="line"></div><div class="line">    void* handle = dlopen(0, RTLD_GLOBAL |RTLD_NOW);</div><div class="line"></div><div class="line">    ptrace_ptr_t ptrace_ptr = dlsym(handle,&quot;ptrace&quot;);</div><div class="line"></div><div class="line">    ptrace_ptr(PT_DENY_ATTACH, 0, 0, 0);</div><div class="line"></div><div class="line">    dlclose(handle);</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>在工程的main.m中增加以下代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">int main(int argc, char *argv[]) &#123;</div><div class="line">    /**防止GDB挂起*/</div><div class="line">#ifndef DUBUG</div><div class="line">    disable_gdb();</div><div class="line">#endif</div><div class="line">    @autoreleasepool &#123;</div><div class="line">        return UIApplicationMain(argc, argv, nil,NSStringFromClass([AppDelegate class]));</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h2 id="运行时库类完整性检查"><a href="#运行时库类完整性检查" class="headerlink" title="运行时库类完整性检查"></a>运行时库类完整性检查</h2><h3 id="检查内存地址空间"><a href="#检查内存地址空间" class="headerlink" title="检查内存地址空间"></a>检查内存地址空间</h3><p>恶意代码的注入，都是需要加载到内存地址空间中，所以可以检查方法的内存位置</p>
-<p><strong>通过dladdr函数检查</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">#import &lt;objc/runtime.h&gt;</div><div class="line">#import &lt;dlfcn.h&gt;</div><div class="line"></div><div class="line">static int inline check_func(const char *cls,const char *sel)&#123;</div><div class="line">    Dl_info info;</div><div class="line">    IMP imp = class_getMethodImplementation(objc_getClass(cls), sel_registerName(sel));</div><div class="line">    printf(&quot;pointer %p&quot;,imp);</div><div class="line">    if (dladdr(imp,&amp;info)) &#123;</div><div class="line">        if (strcmp(info.dli_fname,&quot;System/Library/Frameworks/Foundation.framework/Foundation&quot;)||</div><div class="line">            strncmp(info.dli_sname, &quot;-[NSURLConnection init]&quot;, 22)) &#123;</div><div class="line">            printf(&quot;Danger&quot;);</div><div class="line">            exit(0);</div><div class="line">        &#125;</div><div class="line">        printf(&quot;相同&quot;);</div><div class="line">    &#125;else&#123;</div><div class="line">        printf(&quot;error:不相同&quot;);</div><div class="line">        exit(0);</div><div class="line">    &#125;</div><div class="line">    return 1;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p><strong>使用：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">check_func(&quot;NSURLConnection&quot;, &quot;initWithRequest:delegate:&quot;);</div></pre></td></tr></table></figure></p>
-<p>我们也可以通过runtime来实现验证类中所有的方法</p>
-<p><strong>注意点</strong></p>
-<ul>
-<li>函数命名未无法理解的函数</li>
-<li>在不同位置检查类。因为攻击者可以在任意点上将代码注入</li>
-<li>考虑检查通用类。比如NSStrin个、NSData等。这些类可以很轻易的劫持大量内存信息</li>
+        <h1 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h1><p>堆是一棵顺序存储的完全二叉树,分为大根堆和小根堆</p>
+<h2 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h2><ul>
+<li><p>小根堆</p>
+<p>每个结点的关键字都不大于其孩子结点的关键字。</p>
+</li>
+<li><p>大根堆</p>
+<p>每个结点的关键字都不小于其孩子结点的关键字</p>
+</li>
 </ul>
-<h2 id="内联函数"><a href="#内联函数" class="headerlink" title="内联函数"></a>内联函数</h2><p><code>inline或__attribute__(always_inline)</code></p>
-<p>内联函数式编译器将函数功能<strong>插入到每处代码</strong>被调用的地方，所以让攻击者看不到内联函数的调用。<font color="red">(声明内联要用static)</font>它是增加文件的体积来提高程序性能。因为内联函数是没有函数调用的开销，可以有效提高性能；它也能够有效的复用代码。</p>
-<h2 id="反汇编复杂化"><a href="#反汇编复杂化" class="headerlink" title="反汇编复杂化"></a>反汇编复杂化</h2>
+<h2 id="举例"><a href="#举例" class="headerlink" title="举例"></a>举例</h2><p>举例来说，对于n个元素的序列{R0, R1, … , Rn}当且仅当满足下列关系之一时，称之为堆：</p>
+<p>(1) Ri &lt;= R2i+1 且 Ri &lt;= R2i+2 (小根堆)</p>
+<p>(2) Ri &gt;= R2i+1 且 Ri &gt;= R2i+2 (大根堆)</p>
+<p>其中i=1,2,…,n/2向下取整;</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/6644906-d30bd835f0518910.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="318837-20160422104522335-1248911478.png"></p>
+<p>如上图所示，序列R{3, 8, 15, 31, 25}是一个典型的小根堆。</p>
+<p>堆中有两个父结点，元素3和元素8。</p>
+<p>元素3在数组中以R[0]表示，它的左孩子结点是R[1]，右孩子结点是R[2]。</p>
+<p>元素8在数组中以R[1]表示，它的左孩子结点是R[3]，右孩子结点是R[4]，它的父结点是R[0]。可以看出，它们满足以下规律：</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>设当前元素在数组中以R[i]表示，那么，</p>
+<p>(1) 它的左孩子结点是：R[2*i+1];</p>
+<p>(2) 它的右孩子结点是：R[2*i+2];</p>
+<p>(3) 它的父结点是：R[(i-1)/2];</p>
+<p>(4) R[i] &lt;= R[2*i+1] 且 R[i] &lt;= R[2i+2]。</p>
+<h1 id="OC代码实现"><a href="#OC代码实现" class="headerlink" title="OC代码实现"></a>OC代码实现</h1><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><ol>
+<li><p>根据初始数组去构造初始堆（构建一个完全二叉树，保证所有的父结点都比它的孩子结点数值大）。</p>
+</li>
+<li><p>每次交换第一个和最后一个元素，输出最后一个元素（最大值），然后把剩下元素重新调整为大根堆。</p>
+</li>
+</ol>
+<p>其实思路很简单，最重要的是怎么将一个初始化的数组构建一个大根堆呢？？</p>
+<p>采用的方式是<font color="red" size="4">自下而上，从右到左</font>自下而上，从右到左的思路，以3个为一个单元，进行构建。</p>
+<p>这么说大家可能还会搞不懂，接下来让我们举例说明！</p>
+<p>假设有一个无序数组[1, 3, 4, 5, 2, 6, 9, 7, 8, 0]<br><img src="http://upload-images.jianshu.io/upload_images/6644906-d758db5fcfaaf778.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="318837-20160422104522991-406805984.png"></p>
+<p><font color="red">这其中有个很重要的操作就是递归操作，图中的(4)</font></p>
+<h2 id="具体代码"><a href="#具体代码" class="headerlink" title="具体代码"></a>具体代码</h2><p>代码中我加了很多注释，相信大家能够看懂。:-D<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div></pre></td><td class="code"><pre><div class="line">//  ViewController.m</div><div class="line">//  Copyright © 2017年 FlyOceanFish. All rights reserved.</div><div class="line">//</div><div class="line"></div><div class="line">#import &quot;ViewController.h&quot;</div><div class="line"></div><div class="line">@interface ViewController ()</div><div class="line">&#123;</div><div class="line">    NSMutableArray *array;</div><div class="line">&#125;</div><div class="line">@end</div><div class="line"></div><div class="line">@implementation ViewController</div><div class="line"></div><div class="line">- (void)viewDidLoad &#123;</div><div class="line">    [super viewDidLoad];</div><div class="line">    array = [@[@20,@1,@4,@3,@40,@22,@9,@35,@6,@11,@18,@0] mutableCopy];</div><div class="line">    for (NSInteger i=array.count/2; i&gt;=0; i--) &#123;</div><div class="line">        [self headpSort:array parent:i length:array.count];//初始化建立大根堆</div><div class="line">    &#125;</div><div class="line">    for (NSInteger i=array.count-1; i&gt;0; i--) &#123;//循环交换将最大的R0放到最后边</div><div class="line">        NSInteger tem = [array[0] integerValue];</div><div class="line">        [array replaceObjectAtIndex:0 withObject:@([array[i] integerValue])];</div><div class="line">        [array replaceObjectAtIndex:i withObject:@(tem)];</div><div class="line">        [self headpSort:array parent:0 length:i];//交换完成后，树中最大的自然排到了最后边，故只要对剩余的i个数重新调整为大根堆</div><div class="line">        NSLog(@&quot;排序后:%@&quot;,array);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">/**</div><div class="line"> 这种遍历比较是自下而上的进行比较方式（从树的下部往上比较，以三个数为一个部分（假设左右子节点都有））</div><div class="line"> */</div><div class="line">- (void)headpSort:(NSMutableArray *)array parent:(NSInteger)parent length:(NSInteger)length&#123;</div><div class="line">    NSInteger parentValue = [array[parent] intValue];</div><div class="line">    NSInteger rightChild = 2*parent+2;</div><div class="line">    NSInteger maxChildIndex = -1;</div><div class="line">    NSInteger maxChild = -1;</div><div class="line">    if (rightChild&lt;length) &#123;//这里的操作是先比较左右子节点的大小，那其中最大的再去跟父节点比较</div><div class="line">        if (array[rightChild]&lt;array[rightChild-1]) &#123;</div><div class="line">            maxChild =[array[rightChild-1] intValue];</div><div class="line">            maxChildIndex = rightChild-1;</div><div class="line">        &#125;else&#123;</div><div class="line">            maxChild =[array[rightChild] intValue];</div><div class="line">            maxChildIndex = rightChild;</div><div class="line">        &#125;</div><div class="line">    &#125;else if (rightChild-1&lt;length)&#123;</div><div class="line">        maxChild = [array[rightChild-1] intValue];</div><div class="line">        maxChildIndex = rightChild-1;</div><div class="line">    &#125;</div><div class="line">    if (maxChild&gt;0) &#123;</div><div class="line">        if ([array[parent] intValue]&lt;maxChild) &#123;</div><div class="line">            [array replaceObjectAtIndex:parent withObject:@(maxChild)];</div><div class="line">            [array replaceObjectAtIndex:maxChildIndex withObject:@(parentValue)];</div><div class="line">            [self headpSort:array parent:maxChildIndex length:length];//如果子节点是其他子节点的父节点的话，有可能比其子节点小，故需要递归</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">@end</div></pre></td></tr></table></figure></p>
+<h1 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h1><p>看的过程可能很爽，一看就明白，也有可能云里雾里。实践出真知！所以建议大家用代码根据原理亲自去实现一遍，相信一切皆明了。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="http://www.cnblogs.com/jingmoxukong/p/4303826.html" target="_blank" rel="external">堆排序</a></p>
+
       
     </div>
     
@@ -415,7 +432,7 @@
           
             <a href="/tags/iOS/" rel="tag"># iOS</a>
           
-            <a href="/tags/安全/" rel="tag"># 安全</a>
+            <a href="/tags/算法/" rel="tag"># 算法</a>
           
         </div>
       
@@ -428,8 +445,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/11/02/iOS文件擦除/" rel="next" title="iOS文件擦除">
-                <i class="fa fa-chevron-left"></i> iOS文件擦除
+              <a href="/2017/10/14/React Native源码分析原理（二）(基于0.48版本)/" rel="next" title="React Native源码分析原理（二）(基于0.48版本)">
+                <i class="fa fa-chevron-left"></i> React Native源码分析原理（二）(基于0.48版本)
               </a>
             
           </div>
@@ -438,8 +455,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/11/04/attribute使用方法/" rel="prev" title="iOS中__attribute__使用方法">
-                iOS中__attribute__使用方法 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/10/14/在mac上快速搭建Android、iOS自动打包环境(一)/" rel="prev" title="在mac上快速搭建Android、iOS自动打包环境(一)">
+                在mac上快速搭建Android、iOS自动打包环境(一) <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -582,7 +599,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#暗桩和自杀分支"><span class="nav-number">1.</span> <span class="nav-text">暗桩和自杀分支</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程调试检测"><span class="nav-number">2.</span> <span class="nav-text">进程调试检测</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#阻挡调试器"><span class="nav-number">3.</span> <span class="nav-text">阻挡调试器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#运行时库类完整性检查"><span class="nav-number">4.</span> <span class="nav-text">运行时库类完整性检查</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#检查内存地址空间"><span class="nav-number">4.1.</span> <span class="nav-text">检查内存地址空间</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内联函数"><span class="nav-number">5.</span> <span class="nav-text">内联函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#反汇编复杂化"><span class="nav-number">6.</span> <span class="nav-text">反汇编复杂化</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#概念"><span class="nav-number">1.</span> <span class="nav-text">概念</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#分类"><span class="nav-number">1.1.</span> <span class="nav-text">分类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#举例"><span class="nav-number">1.2.</span> <span class="nav-text">举例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">1.3.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#OC代码实现"><span class="nav-number">2.</span> <span class="nav-text">OC代码实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#思路"><span class="nav-number">2.1.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#具体代码"><span class="nav-number">2.2.</span> <span class="nav-text">具体代码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结-1"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">4.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
