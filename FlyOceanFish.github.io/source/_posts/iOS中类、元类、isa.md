@@ -37,6 +37,19 @@ Class aclass = [Person class];
 
 > <font color='red'>这张图是非常精髓的，直接诠释了元类和isa。大家可以一边阅读本文，一边回忆此图，多看几遍。</font>
 
+## clang之后的代码
+
+```Objective-C
+static void OBJC_CLASS_SETUP_$_Cat(void ) {
+	OBJC_METACLASS_$_Cat.isa = &OBJC_METACLASS_$_NSObject;//meta class的isa指向NSObject的metal class
+	OBJC_METACLASS_$_Cat.superclass = &OBJC_METACLASS_$_NSObject;
+	OBJC_METACLASS_$_Cat.cache = &_objc_empty_cache;
+	OBJC_CLASS_$_Cat.isa = &OBJC_METACLASS_$_Cat;//Cat 的Class对象的isa指向他的meta class
+	OBJC_CLASS_$_Cat.superclass = &OBJC_CLASS_$_NSObject;
+	OBJC_CLASS_$_Cat.cache = &_objc_empty_cache;
+}
+```
+通过以上的clang之后的代码也可以看出isa的指向与图片的是相对应的
 ---
 上边都是概念性质偏多，不知道大家理解的如何。现在看一个实例来具体介绍上边的内容。
 ## 代码示例
