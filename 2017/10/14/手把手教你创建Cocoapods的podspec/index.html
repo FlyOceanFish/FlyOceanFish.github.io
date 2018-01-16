@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="iOS," />
+  <meta name="keywords" content="iOS,CocoaPods," />
 
 
 
@@ -79,13 +79,13 @@
 
 
 
-<meta name="description" content="现在大部分iOS项目都是在用Cocoapods来管理项目了，但是当我们自己写的一个公有或者私有项目的时候，想要支持Cocoapods，那应该怎么做呢？本教程手把手的教大家如何创建podsepc 步骤 github上创建自己的共有项目 创建自己的Xcode工程，并提交到该repository 创建podspec文件我们cd当我们项目的根目录下。本项目中就是上图的文件夹下。执行如下命令： pod sp">
-<meta name="keywords" content="iOS">
+<meta name="description" content="现在大部分iOS项目都是在用CocoaPods来管理项目了，但是当我们自己写的一个公有或者私有项目的时候，想要支持CocoaPods，那应该怎么做呢？本教程手把手的教大家如何创建podsepc 步骤 github上创建自己的共有项目 创建自己的Xcode工程，并提交到该repository 创建podspec文件我们cd当我们项目的根目录下。本项目中就是上图的文件夹下。执行如下命令： pod sp">
+<meta name="keywords" content="iOS,CocoaPods">
 <meta property="og:type" content="article">
-<meta property="og:title" content="手把手教你创建Cocoapods的podspec">
+<meta property="og:title" content="手把手教你创建CocoaPods的podspec">
 <meta property="og:url" content="http://yoursite.com/2017/10/14/手把手教你创建Cocoapods的podspec/index.html">
 <meta property="og:site_name" content="FlyOceanFish&#39; Blog">
-<meta property="og:description" content="现在大部分iOS项目都是在用Cocoapods来管理项目了，但是当我们自己写的一个公有或者私有项目的时候，想要支持Cocoapods，那应该怎么做呢？本教程手把手的教大家如何创建podsepc 步骤 github上创建自己的共有项目 创建自己的Xcode工程，并提交到该repository 创建podspec文件我们cd当我们项目的根目录下。本项目中就是上图的文件夹下。执行如下命令： pod sp">
+<meta property="og:description" content="现在大部分iOS项目都是在用CocoaPods来管理项目了，但是当我们自己写的一个公有或者私有项目的时候，想要支持CocoaPods，那应该怎么做呢？本教程手把手的教大家如何创建podsepc 步骤 github上创建自己的共有项目 创建自己的Xcode工程，并提交到该repository 创建podspec文件我们cd当我们项目的根目录下。本项目中就是上图的文件夹下。执行如下命令： pod sp">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/6644906-af82c503463a2495.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/6644906-b677f02da468d7cb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
@@ -94,10 +94,10 @@
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/6644906-e7ff39a2608266f9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/6644906-1c0e9356bacb2005.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/6644906-870e654c65f46478.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2017-10-16T13:34:48.000Z">
+<meta property="og:updated_time" content="2017-10-25T13:12:05.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="手把手教你创建Cocoapods的podspec">
-<meta name="twitter:description" content="现在大部分iOS项目都是在用Cocoapods来管理项目了，但是当我们自己写的一个公有或者私有项目的时候，想要支持Cocoapods，那应该怎么做呢？本教程手把手的教大家如何创建podsepc 步骤 github上创建自己的共有项目 创建自己的Xcode工程，并提交到该repository 创建podspec文件我们cd当我们项目的根目录下。本项目中就是上图的文件夹下。执行如下命令： pod sp">
+<meta name="twitter:title" content="手把手教你创建CocoaPods的podspec">
+<meta name="twitter:description" content="现在大部分iOS项目都是在用CocoaPods来管理项目了，但是当我们自己写的一个公有或者私有项目的时候，想要支持CocoaPods，那应该怎么做呢？本教程手把手的教大家如何创建podsepc 步骤 github上创建自己的共有项目 创建自己的Xcode工程，并提交到该repository 创建podspec文件我们cd当我们项目的根目录下。本项目中就是上图的文件夹下。执行如下命令： pod sp">
 <meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/6644906-af82c503463a2495.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
@@ -134,12 +134,22 @@
 
 
 
-  <title>手把手教你创建Cocoapods的podspec | FlyOceanFish' Blog</title>
+  <title>手把手教你创建CocoaPods的podspec | FlyOceanFish' Blog</title>
   
 
 
 
 
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?8f73d05f1a471433ed938c462af80741";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
 
 
 
@@ -288,7 +298,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">手把手教你创建Cocoapods的podspec</h2>
+          <h2 class="post-title" itemprop="name headline">手把手教你创建CocoaPods的podspec</h2>
         
 
         <div class="post-meta">
@@ -360,7 +370,7 @@
       
 
       
-        <p>现在大部分iOS项目都是在用Cocoapods来管理项目了，但是当我们自己写的一个公有或者私有项目的时候，想要支持Cocoapods，那应该怎么做呢？本教程手把手的教大家如何创建podsepc</p>
+        <p>现在大部分iOS项目都是在用CocoaPods来管理项目了，但是当我们自己写的一个公有或者私有项目的时候，想要支持CocoaPods，那应该怎么做呢？本教程手把手的教大家如何创建podsepc</p>
 <h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><ol>
 <li>github上创建自己的共有项目<br><img src="http://upload-images.jianshu.io/upload_images/6644906-af82c503463a2495.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="2220EA18-9E12-4891-B409-EB99776CBA78.png"></li>
 <li>创建自己的Xcode工程，并提交到该repository<br><img src="http://upload-images.jianshu.io/upload_images/6644906-b677f02da468d7cb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="0EF5DF0F-67C1-41D4-B3BA-5F8A8BB0BE78.png"></li>
@@ -385,7 +395,15 @@
 </code></pre><p><img src="http://upload-images.jianshu.io/upload_images/6644906-1c0e9356bacb2005.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="7117B254-7688-427F-A205-69968ABF3AE3.png"><br>3、发布我们的podspec</p>
 <pre><code>pod trunk push
 </code></pre><p><img src="http://upload-images.jianshu.io/upload_images/6644906-870e654c65f46478.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="7FA508FC-B6CB-4ED1-B31E-1799F83BCE6F.png"><br>此图代表我们已经发布成功</p>
-<p>不过此时我们pod search还搜不到我们的podspec。因为还没审核通过要等个几天，然后运行pod setup更新本地的spec，再搜索一下试试看。</p>
+<p>不过此时我们pod search还搜不到我们的podspec。</p>
+<p>可以通过一下两步之后再尝试搜索:</p>
+<ul>
+<li>运行pod setup更新本地的spec，再搜索一下试试看。</li>
+<li>删除~/Library/Caches/CocoaPods目录下的search_index.json文件<blockquote>
+<p>pod setup成功后会生成~/Library/Caches/CocoaPods/search_index.json文件。<br>终端输入rm ~/Library/Caches/CocoaPods/search_index.json<br>删除成功后再执行pod search</p>
+</blockquote>
+</li>
+</ul>
 <h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><a href="https://guides.cocoapods.org/using/index.html" target="_blank" rel="external">CocoaPods</a><br><a href="https://stackoverflow.com/questions/32304421/whats-the-difference-between-pod-spec-lint-and-pod-lib-lint" target="_blank" rel="external">between ‘pod spec lint’ and ‘pod lib lint’?</a></p>
 
       
@@ -405,6 +423,8 @@
         <div class="post-tags">
           
             <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+            <a href="/tags/CocoaPods/" rel="tag"># CocoaPods</a>
           
         </div>
       
@@ -427,8 +447,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/10/14/将RN工程嵌入到现有原生iOS应用/" rel="prev" title="将RN工程嵌入到现有原生iOS应用">
-                将RN工程嵌入到现有原生iOS应用 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/10/14/NSInvocation/" rel="prev" title="NSInvocation">
+                NSInvocation <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -458,6 +478,10 @@
 
           
 
+  
+    <div class="comments" id="comments">
+      <div id="vcomments"></div>
+    </div>
   
 
 
@@ -510,7 +534,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-count">44</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -521,7 +545,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -532,7 +556,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -587,7 +611,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
+        <div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
@@ -770,6 +794,21 @@
 
 
 
+
+  
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine@1.1.6/dist/Valine.min.js"></script>
+  <script type="text/javascript">
+    new Valine({
+        av: AV,
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        app_id: 'BUyek27xhBJW608unzBEyhWI-gzGzoHsz',
+        app_key: 'lT2NUWTMwPfNYl6xMQUtUxDv',
+        placeholder: '请输入评论'
+    });
+  </script>
 
 
 

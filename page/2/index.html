@@ -131,6 +131,16 @@
 
 
 
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?8f73d05f1a471433ed938c462af80741";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
 
 
 
@@ -262,7 +272,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/14/UIPageViewController使用和控件的封装/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/20/iOS中hook dealloc方法/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="FlyOceanFish">
@@ -281,7 +291,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/10/14/UIPageViewController使用和控件的封装/" itemprop="url">UIPageViewController使用和控件的封装</a></h2>
+                <a class="post-title-link" href="/2017/11/20/iOS中hook dealloc方法/" itemprop="url">能够hook住dealloc方法吗？</a></h2>
         
 
         <div class="post-meta">
@@ -293,8 +303,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-14T09:27:00+08:00">
-                2017-10-14
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-20T09:10:00+08:00">
+                2017-11-20
               </time>
             
 
@@ -355,18 +365,17 @@
       
         
           
-            <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>我们经常会遇到一个场景，就是同时有几个视图需要左右滑动显示。大家可能会通过UIScrollview来实现，也能实现。但是如果不自己实现一些懒加载、缓存其实对性能还是有浪费的。接下来我们就让U闪亮登场。UIPageViewController加载不同的UIViewController可以有效的将不同逻辑进行了分离，减轻了总UIViewController的负担。<br>我通过UIPageViewController简单封装了一个工具，就是加载不同的视图，支持上下滑动、左右滑动。并且具有懒加载和缓存的功能，在一定程度上提高了性能。</p>
-<h4 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">    self.array = @[[FirstViewController class],[SecondViewController class],[FirstViewController class]];</div><div class="line">//实例化UIPageViewController，并且指定方向和动画。可以设置options。UIPageViewControllerOptionInterPageSpacingKey两个视图的间距</div><div class="line">    UIPageViewController *page = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal options:@&#123;UIPageViewControllerOptionInterPageSpacingKey:@10&#125;];</div><div class="line">    page.delegate = self;</div><div class="line">    page.dataSource = self;</div><div class="line">`</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">typedef NS_ENUM(NSInteger, UIPageViewControllerTransitionStyle) &#123;</div><div class="line">    UIPageViewControllerTransitionStylePageCurl = 0, //翻书的效果</div><div class="line">    UIPageViewControllerTransitionStyleScroll = 1 // 正常滑动切换效果</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">typedef NS_ENUM(NSInteger, UIPageViewControllerNavigationDirection) &#123;</div><div class="line">    UIPageViewControllerNavigationDirectionForward,</div><div class="line">    UIPageViewControllerNavigationDirectionReverse</div><div class="line">&#125;;</div><div class="line">其实这两个就是一对。如果是左右滑动的话，一个代表从左到右，另一个就是从右到左；如果上下滑动，一个代表从上到下，另一个就是从下到上。</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">//设置当前显示ViewController,这里通过一个方法集中生成，其实也是做到缓存功能。</div><div class="line">    [page setViewControllers:@[[self private_viewControllerForPage:0]] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];</div><div class="line">    [self addChildViewController:page];</div><div class="line">    [self.view addSubview:page.view];</div><div class="line">    [page didMoveToParentViewController:self];</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">//实例化UIViewController,并且缓存起来</div><div class="line">- (UIViewController *)private_viewControllerForPage:(NSUInteger)pageIndex&#123;</div><div class="line">    if (pageIndex&lt;self.pageViewControllerClasses.count) &#123;</div><div class="line">        if (pageIndex&lt;self.cacheViewControllerArray.count) &#123;</div><div class="line">            return self.cacheViewControllerArray[pageIndex];</div><div class="line">        &#125;else&#123;</div><div class="line">            Class controllerClass =  self.pageViewControllerClasses[pageIndex];</div><div class="line">            UIViewController *controller = [[controllerClass alloc] init];</div><div class="line">            [self.cacheViewControllerArray insertObject:controller atIndex:pageIndex];</div><div class="line">            return controller;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    return nil;</div><div class="line"></div><div class="line">&#125;</div><div class="line">- (NSInteger)private_indexOfViewController:(UIViewController *)viewController&#123;</div><div class="line">    NSInteger index = [self.cacheViewControllerArray indexOfObject:viewController];</div><div class="line">    return index;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h4 id="代理方法"><a href="#代理方法" class="headerlink" title="代理方法"></a>代理方法</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">//向后滑动的时候，调用此方法。获取之前显示过的UIViewController</div><div class="line">- (nullable UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController&#123;</div><div class="line">    NSInteger currentIndex = [self private_indexOfViewController:viewController];</div><div class="line">    if (currentIndex&gt;0) &#123;</div><div class="line">        return [self private_viewControllerForPage:currentIndex-1];</div><div class="line">    &#125;</div><div class="line">    return nil;</div><div class="line">&#125;</div><div class="line">//向前滑动的时候，调用此方法。获取之后要显示的UIViewController</div><div class="line">- (nullable UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController&#123;</div><div class="line">    NSInteger currentIndex = [self private_indexOfViewController:viewController];</div><div class="line">    if (currentIndex&gt;=0) &#123;</div><div class="line">        return [self private_viewControllerForPage:currentIndex+1];</div><div class="line">    &#125;</div><div class="line">    return nil;</div><div class="line">&#125;</div><div class="line">//滑动结束后回调此方法</div><div class="line">- (void)pageViewController:(UIPageViewController *)pageViewController didFinishAnimating:(BOOL)finished previousViewControllers:(NSArray&lt;UIViewController *&gt; *)previousViewControllers transitionCompleted:(BOOL)completed&#123;</div><div class="line">    if (completed&amp;&amp;self.YTOPageViewControllerPageChanged) &#123;</div><div class="line">        self.YTOPageViewControllerPageChanged([self private_indexOfViewController:pageViewController.viewControllers.firstObject]);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>上边就是UIPageViewController的基本用法。大家可以自行去探索一下。其实挺好玩的，也可以实现一下显示两个视图，看起来就是一本打开的书的效果。<br>下边是我封装的一个工具类，大家可以参考一下。只要传入你需要显示的UIViewController<br>的class名字就可以。</p>
-<h2 id="效果图"><a href="#效果图" class="headerlink" title="效果图"></a>效果图</h2><p><img src="http://upload-images.jianshu.io/upload_images/6644906-c23a7e673aca129a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="效果.png"></p>
-<h2 id="控件地址"><a href="#控件地址" class="headerlink" title="控件地址"></a>控件地址</h2><p><strong><em>大家觉着有用别忘了star一下哦！</em></strong><br><a href="https://github.com/FlyOceanFish/YTOSectionsViewController" target="_blank" rel="external">YTOSectionsViewController</a></p>
-
-          
+          一个朋友群里讨论能够hook住dealloc方法吗？然后当时我就想为什么hook不住吗？所以我就在群里问为什么呢？奈何他也不知道。所以剩下的只能是我自己去尝试一下了。
+大家hook方法的时候第一步肯定是首先获取到方法的实现。用到如下代码:
+1Method repMethod = class_getI
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/11/20/iOS中hook dealloc方法/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -413,7 +422,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/14/NSObject的+load和+initialize详解/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/10/iOS逆向之工具使用/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="FlyOceanFish">
@@ -432,7 +441,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/10/14/NSObject的+load和+initialize详解/" itemprop="url">NSObject的+load和+initialize详解</a></h2>
+                <a class="post-title-link" href="/2017/11/10/iOS逆向之工具使用/" itemprop="url">iOS逆向之工具使用</a></h2>
         
 
         <div class="post-meta">
@@ -444,8 +453,328 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-14T09:27:00+08:00">
-                2017-10-14
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-10T14:00:00+08:00">
+                2017-11-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/安全/" itemprop="url" rel="index">
+                    <span itemprop="name">安全</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          上一篇已经大体给大家介绍了几款工具，相信大家都有所了解了。如果不了解可以再去看看。哈哈。言归正传，接下来就是通过一个案例展示一下Hopper、ios-deploy等这些工具的结合使用；另一方面就是让大家体验下lldb中break等调试语句的使用
+这次给大家演示的是通过这些工具获取当前应用对应的视图控
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/11/10/iOS逆向之工具使用/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/09/iOS非越狱逆向工程/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="FlyOceanFish">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FlyOceanFish' Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/09/iOS非越狱逆向工程/" itemprop="url">iOS非越狱逆向工程</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-09T13:45:00+08:00">
+                2017-11-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/安全/" itemprop="url" rel="index">
+                    <span itemprop="name">安全</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          这几天一直在研究iOS的安全，也动手搞了一下iOS的逆向工程微信。有两个成果吧。一个是拦截了信息；另外一个就是拦截了定位，这样附近的人等需要用到经纬度功能的地方都可以自定义自己想要的经纬度。例如可以定位到日本，去看看日本的美眉。哈哈。。
+由于之前的iOSOpenDev已经不维护，所有网上有个大神对此
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/11/09/iOS非越狱逆向工程/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/07/iOS实现微信列表长按效果/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="FlyOceanFish">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FlyOceanFish' Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/07/iOS实现微信列表长按效果/" itemprop="url">iOS实现微信列表长按效果</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-07T15:12:00+08:00">
+                2017-11-07
               </time>
             
 
@@ -506,45 +835,16 @@
       
         
           
-            <p>文章比较长，第一部分通过runtime的源码介绍了load和initialize两个方法的本质；第二部门通过实例演示了这个两个方法的调用；第三部分就是结论和应用场景</p>
-<p>#通过runtime源码解析load和initialize</p>
-<h2 id="load"><a href="#load" class="headerlink" title="+load"></a>+load</h2><p><img src="http://upload-images.jianshu.io/upload_images/6644906-034736b3848e3b2d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="ADDBC8A1-E2D9-4BCE-8A87-B60FDCC2FB13.png"><br>通过调用堆栈，我们可以看出系统首先调用的是load_images方法</p>
-<h3 id="load-images"><a href="#load-images" class="headerlink" title="load_images"></a>load_images</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">void load_images(const char *path __unused, const struct mach_header *mh)</div><div class="line">&#123;</div><div class="line">    // Return without taking locks if there are no +load methods here.</div><div class="line">    if (!hasLoadMethods((const headerType *)mh)) return;</div><div class="line"></div><div class="line">    recursive_mutex_locker_t lock(loadMethodLock);</div><div class="line"></div><div class="line">    // Discover load methods</div><div class="line">    &#123;</div><div class="line">        rwlock_writer_t lock2(runtimeLock);</div><div class="line">        prepare_load_methods((const headerType *)mh);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    // Call +load methods (without runtimeLock - re-entrant)</div><div class="line">    call_load_methods();</div><div class="line">&#125;</div><div class="line">首先是将所有的load搜索到，放到一个列表中等待调用，然后call_load_methods循环遍历调用</div></pre></td></tr></table></figure>
-<h4 id="prepare-load-methods"><a href="#prepare-load-methods" class="headerlink" title="prepare_load_methods"></a>prepare_load_methods</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div></pre></td><td class="code"><pre><div class="line">void prepare_load_methods(const headerType *mhdr)</div><div class="line">&#123;</div><div class="line">    Module mods;</div><div class="line">    unsigned int midx;</div><div class="line"></div><div class="line">    header_info *hi;</div><div class="line">    for (hi = FirstHeader; hi; hi = hi-&gt;getNext()) &#123;</div><div class="line">        if (mhdr == hi-&gt;mhdr()) break;</div><div class="line">    &#125;</div><div class="line">    if (!hi) return;</div><div class="line"></div><div class="line">    if (hi-&gt;info()-&gt;isReplacement()) &#123;</div><div class="line">        // Ignore any classes in this image</div><div class="line">        return;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    // Major loop - process all modules in the image</div><div class="line">    mods = hi-&gt;mod_ptr;</div><div class="line">    for (midx = 0; midx &lt; hi-&gt;mod_count; midx += 1)</div><div class="line">    &#123;</div><div class="line">        unsigned int index;</div><div class="line"></div><div class="line">        // Skip module containing no classes</div><div class="line">        if (mods[midx].symtab == nil)</div><div class="line">            continue;</div><div class="line"></div><div class="line">        // Minor loop - process all the classes in given module</div><div class="line">        for (index = 0; index &lt; mods[midx].symtab-&gt;cls_def_cnt; index += 1)</div><div class="line">        &#123;</div><div class="line">            // Locate the class description pointer</div><div class="line">            Class cls = (Class)mods[midx].symtab-&gt;defs[index];</div><div class="line">            if (cls-&gt;info &amp; CLS_CONNECTED) &#123;</div><div class="line">                schedule_class_load(cls);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">    // Major loop - process all modules in the header</div><div class="line">    mods = hi-&gt;mod_ptr;</div><div class="line"></div><div class="line">    // NOTE: The module and category lists are traversed backwards</div><div class="line">    // to preserve the pre-10.4 processing order. Changing the order</div><div class="line">    // would have a small chance of introducing binary compatibility bugs.</div><div class="line">    midx = (unsigned int)hi-&gt;mod_count;</div><div class="line">    while (midx-- &gt; 0) &#123;</div><div class="line">        unsigned int index;</div><div class="line">        unsigned int total;</div><div class="line">        Symtab symtab = mods[midx].symtab;</div><div class="line"></div><div class="line">        // Nothing to do for a module without a symbol table</div><div class="line">        if (mods[midx].symtab == nil)</div><div class="line">            continue;</div><div class="line">        // Total entries in symbol table (class entries followed</div><div class="line">        // by category entries)</div><div class="line">        total = mods[midx].symtab-&gt;cls_def_cnt +</div><div class="line">            mods[midx].symtab-&gt;cat_def_cnt;</div><div class="line"></div><div class="line">        // Minor loop - register all categories from given module</div><div class="line">        index = total;</div><div class="line">        while (index-- &gt; mods[midx].symtab-&gt;cls_def_cnt) &#123;</div><div class="line">            old_category *cat = (old_category *)symtab-&gt;defs[index];</div><div class="line">            add_category_to_loadable_list((Category)cat);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>这个方法主要是两个核心方法schedule_class_load和add_category_to_loadable_list主要干了两件事<br>1、获取了所有类后,遍历列表，将其中有+load方法的类加入loadable_class；<br>2、获取所有的类别，遍历列表，将其中有+load方法的类加入loadable_categories.<br>接下来让我们看看schedule_class_load<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">static void schedule_class_load(Class cls)</div><div class="line">&#123;</div><div class="line">    if (cls-&gt;info &amp; CLS_LOADED) return;</div><div class="line">    if (cls-&gt;superclass) schedule_class_load(cls-&gt;superclass);</div><div class="line">    add_class_to_loadable_list(cls);</div><div class="line">    cls-&gt;info |= CLS_LOADED;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>从以上代码可以看出在加载类的load方法的时候，首先是先将父类加入到loadable_class，之后才是子类。所以保证了<strong>父类一定是在子类先调用</strong>！</p>
-<p>####call_load_methods<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">void call_load_methods(void)</div><div class="line">&#123;</div><div class="line">    static bool loading = NO;</div><div class="line">    bool more_categories;</div><div class="line"></div><div class="line">    loadMethodLock.assertLocked();</div><div class="line"></div><div class="line">    // Re-entrant calls do nothing; the outermost call will finish the job.</div><div class="line">    if (loading) return;</div><div class="line">    loading = YES;</div><div class="line"></div><div class="line">    void *pool = objc_autoreleasePoolPush();</div><div class="line"></div><div class="line">    do &#123;</div><div class="line">        // 1. Repeatedly call class +loads until there aren&apos;t any more</div><div class="line">        while (loadable_classes_used &gt; 0) &#123;</div><div class="line">            call_class_loads();</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        // 2. Call category +loads ONCE</div><div class="line">        more_categories = call_category_loads();</div><div class="line"></div><div class="line">        // 3. Run more +loads if there are classes OR more untried categories</div><div class="line">    &#125; while (loadable_classes_used &gt; 0  ||  more_categories);</div><div class="line"></div><div class="line">    objc_autoreleasePoolPop(pool);</div><div class="line"></div><div class="line">    loading = NO;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>call_load_methods循环遍历，首先是调用了class的load方法，然后调用了category的方法<br>接下来让我们看看call_class_loads的代码实现<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">static void call_class_loads(void)</div><div class="line">&#123;</div><div class="line">    int i;</div><div class="line"></div><div class="line">    // Detach current loadable list.</div><div class="line">    struct loadable_class *classes = loadable_classes;</div><div class="line">    int used = loadable_classes_used;</div><div class="line">    loadable_classes = nil;</div><div class="line">    loadable_classes_allocated = 0;</div><div class="line">    loadable_classes_used = 0;</div><div class="line"></div><div class="line">    // Call all +loads for the detached list.</div><div class="line">    for (i = 0; i &lt; used; i++) &#123;</div><div class="line">        Class cls = classes[i].cls;</div><div class="line">        load_method_t load_method = (load_method_t)classes[i].method;</div><div class="line">        if (!cls) continue;</div><div class="line"></div><div class="line">        if (PrintLoading) &#123;</div><div class="line">            _objc_inform(&quot;LOAD: +[%s load]\n&quot;, cls-&gt;nameForLogging());</div><div class="line">        &#125;</div><div class="line">        (*load_method)(cls, SEL_load);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    // Destroy the detached list.</div><div class="line">    if (classes) free(classes);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>核心方法是 (<em>load_method)(cls, SEL_load),`typedef void(</em>load_method_t)(id, SEL);`可以看到load_method是一个函数指针，所以是直接调用了内存地址！</p>
-<p>##+initialize</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/6644906-6cb08b0bb9e17df1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="98779EDD-737F-498D-AD9E-B02508958DDB.png"><br>一样我们通过调用堆栈可以看到系统调用的是_class_initialize方法</p>
-<p>##_class_initialize</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div></pre></td><td class="code"><pre><div class="line">void _class_initialize(Class cls)</div><div class="line">&#123;</div><div class="line">    assert(!cls-&gt;isMetaClass());</div><div class="line"></div><div class="line">    Class supercls;</div><div class="line">    bool reallyInitialize = NO;</div><div class="line"></div><div class="line">    // Make sure super is done initializing BEFORE beginning to initialize cls.</div><div class="line">    // See note about deadlock above.</div><div class="line">    supercls = cls-&gt;superclass;</div><div class="line">    if (supercls  &amp;&amp;  !supercls-&gt;isInitialized()) &#123;</div><div class="line">        _class_initialize(supercls);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    // Try to atomically set CLS_INITIALIZING.</div><div class="line">    &#123;</div><div class="line">        monitor_locker_t lock(classInitLock);</div><div class="line">        if (!cls-&gt;isInitialized() &amp;&amp; !cls-&gt;isInitializing()) &#123;</div><div class="line">            cls-&gt;setInitializing();</div><div class="line">            reallyInitialize = YES;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    if (reallyInitialize) &#123;</div><div class="line">        // We successfully set the CLS_INITIALIZING bit. Initialize the class.</div><div class="line"></div><div class="line">        // Record that we&apos;re initializing this class so we can message it.</div><div class="line">        _setThisThreadIsInitializingClass(cls);</div><div class="line"></div><div class="line">        // Send the +initialize message.</div><div class="line">        // Note that +initialize is sent to the superclass (again) if</div><div class="line">        // this class doesn&apos;t implement +initialize. 2157218</div><div class="line">        if (PrintInitializing) &#123;</div><div class="line">            _objc_inform(&quot;INITIALIZE: calling +[%s initialize]&quot;,</div><div class="line">                         cls-&gt;nameForLogging());</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        // Exceptions: A +initialize call that throws an exception</div><div class="line">        // is deemed to be a complete and successful +initialize.</div><div class="line">        @try &#123;</div><div class="line">            callInitialize(cls);</div><div class="line"></div><div class="line">            if (PrintInitializing) &#123;</div><div class="line">                _objc_inform(&quot;INITIALIZE: finished +[%s initialize]&quot;,</div><div class="line">                             cls-&gt;nameForLogging());</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        @catch (...) &#123;</div><div class="line">            if (PrintInitializing) &#123;</div><div class="line">                _objc_inform(&quot;INITIALIZE: +[%s initialize] threw an exception&quot;,</div><div class="line">                             cls-&gt;nameForLogging());</div><div class="line">            &#125;</div><div class="line">            @throw;</div><div class="line">        &#125;</div><div class="line">        @finally &#123;</div><div class="line">            // Done initializing.</div><div class="line">            // If the superclass is also done initializing, then update</div><div class="line">            //   the info bits and notify waiting threads.</div><div class="line">            // If not, update them later. (This can happen if this +initialize</div><div class="line">            //   was itself triggered from inside a superclass +initialize.)</div><div class="line">            monitor_locker_t lock(classInitLock);</div><div class="line">            if (!supercls  ||  supercls-&gt;isInitialized()) &#123;</div><div class="line">                _finishInitializing(cls, supercls);</div><div class="line">            &#125; else &#123;</div><div class="line">                _finishInitializingAfter(cls, supercls);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        return;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    else if (cls-&gt;isInitializing()) &#123;</div><div class="line">        // We couldn&apos;t set INITIALIZING because INITIALIZING was already set.</div><div class="line">        // If this thread set it earlier, continue normally.</div><div class="line">        // If some other thread set it, block until initialize is done.</div><div class="line">        // It&apos;s ok if INITIALIZING changes to INITIALIZED while we&apos;re here,</div><div class="line">        //   because we safely check for INITIALIZED inside the lock</div><div class="line">        //   before blocking.</div><div class="line">        if (_thisThreadIsInitializingClass(cls)) &#123;</div><div class="line">            return;</div><div class="line">        &#125; else &#123;</div><div class="line">            waitForInitializeToComplete(cls);</div><div class="line">            return;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    else if (cls-&gt;isInitialized()) &#123;</div><div class="line">        // Set CLS_INITIALIZING failed because someone else already</div><div class="line">        //   initialized the class. Continue normally.</div><div class="line">        // NOTE this check must come AFTER the ISINITIALIZING case.</div><div class="line">        // Otherwise: Another thread is initializing this class. ISINITIALIZED</div><div class="line">        //   is false. Skip this clause. Then the other thread finishes</div><div class="line">        //   initialization and sets INITIALIZING=no and INITIALIZED=yes.</div><div class="line">        //   Skip the ISINITIALIZING clause. Die horribly.</div><div class="line">        return;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    else &#123;</div><div class="line">        // We shouldn&apos;t be here.</div><div class="line">        _objc_fatal(&quot;thread-safe class init in objc runtime is buggy!&quot;);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>核心方法就是callInitialize接下来让我们看看该方法的实现</p>
-<p>##callInitialize<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">void callInitialize(Class cls)</div><div class="line">&#123;</div><div class="line">    ((void(*)(Class, SEL))objc_msgSend)(cls, SEL_initialize);</div><div class="line">    asm(&quot;&quot;);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>通过该实现我们可以看出其实initialize的本质就是objc_msgSend，所以遵循消息的转发机制。</p>
-<hr>
-<p>#示例演示<br><strong>Animal 父类</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">@implementation Animal</div><div class="line">+(void)load&#123;</div><div class="line">    NSLog(@&quot;Animal load&quot;);</div><div class="line">&#125;</div><div class="line">+(void)initialize&#123;</div><div class="line">    NSLog(@&quot;Animal initialize&quot;);</div><div class="line">&#125;</div><div class="line">@end</div></pre></td></tr></table></figure></p>
-<p><strong>Dog 子类</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">+(void)load&#123;</div><div class="line">    NSLog(@&quot;Dog load&quot;);</div><div class="line">&#125;</div><div class="line">//分两种情况，一种注释掉该代码，一种打开该代码</div><div class="line">//+(void)initialize&#123;</div><div class="line">//    NSLog(@&quot;Dog initialize&quot;);</div><div class="line">//&#125;</div><div class="line"></div><div class="line">**测试代码**</div><div class="line">````Objective-C</div><div class="line">    Animal *animal = [[Animal alloc] init];</div><div class="line">    Animal *animal2 = [[Animal alloc] init];</div><div class="line">    Animal *animal3 = [[Animal alloc] init];</div><div class="line">    Dog *dog = [[Dog alloc] init];</div><div class="line">    Dog *dog2 = [[Dog alloc] init];</div></pre></td></tr></table></figure></p>
-<ul>
-<li>未注释代码时，打印结果<br>2017-07-31 14:24:47.671 test[53134:5737864] Animal load<br>2017-07-31 14:24:47.809 test[53134:5737864] Dog load<br>2017-07-31 14:24:48.112 test[53134:5737864] Animal initialize<br>2017-07-31 14:24:48.112 test[53134:5737864] Dog initialize</li>
-<li>注释掉代码时，打印结果<br>2017-07-31 14:39:03.916 testaa[53659:5814782] Animal load<br>2017-07-31 14:39:03.917 testaa[53659:5814782] Dog load<br>2017-07-31 14:39:03.966 testaa[53659:5814782] Animal initialize<br>2017-07-31 14:39:03.967 testaa[53659:5814782] Animal initialize</li>
-</ul>
-<p>通过两次打印看到以下现象：</p>
-<ul>
-<li>第一次测试load initialize各打印了一次，并且load比initialize提前打印<br><strong>原因：+ load是应用一启动就调动，+ initialize是我们调用该类方法的时候才会调用，而且这两个方法理论上只会调用一次。</strong></li>
-<li>第二次测试Animal的initialize打印了两次<br><strong>原因：initialize遵循的是objc_msgSend消息的转发机制，第一次打印是因为我们实例化了Animal并且调用了方法；第二次打印是因为Dog子类没有实现该方法，根据消息转发机制的原理，所以会向上查找父类是否实现了该方法，所以调用了父类的initialize的方法了。所以父类的initialize可能会被调用多次所以建议以下写法：</strong></li>
-</ul>
-<figure class="highlight plain"><figcaption><span>(void)initialize &#123;</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">  if (self == [ClassName self]) &#123;</div><div class="line">    // ... do the initialization ...</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>我们可以做个以下尝试Dog不继承Animal，然后在Compile Source中将Dog的顺序拖到Animal之前。<br>如下图：<br><img src="http://upload-images.jianshu.io/upload_images/6644906-88388b9eb906803e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="D790F51D-98BD-4963-B7A9-D7DEE037FE45.png"><br> <strong>可以观察到Dog的Load在Animal之前打印。所以在没有继承关系的时候Load的调用顺序跟我们的Compile Source的排列顺序有关。有继承关系的，父类一定比子类先调用</strong></p>
-<p>#结论</p>
-<ul>
-<li>+load方法是在程序一启动的时候就会调用，并且在main函数之前，是根据Xcode中Compile Sources的顺序调用的。其内部本质是通过函数<strong>内存地址</strong>的方式实现的。所以在有继承关系的时候子类与父类没有任何关系，不会相互影响。</li>
-<li>+initialize方法是我们在第一次使用该类的时候即调用某个方法的时候系统开始调用 ，是一种懒加载的方式。其内部本质是通过<strong>objc_msgSend</strong>发送消息实现的,因此也拥有objc_msgSend带来的特性,也就是说子类会继承父类的方法实现,而分类的实现也会覆盖元类。</li>
-</ul>
-<p>我们常用<a href="http://nshipster.com/method-swizzling/" target="_blank" rel="external">Method Swizzling</a>建议一定要在Load方法中实现。<br><a href="https://stackoverflow.com/questions/30585088/objective-c-cases-when-it-is-useful-to-override-initialize-and-load?lq=1" target="_blank" rel="external">stackoverflow使用场景讨论</a></p>
-
-          
+          不知道大家有没有发现微信聊天历史列表、苹果自带的通讯录历史记录等应用如隐藏的长按功能。哈哈，如果没有也不要气馁，也不要怀疑人生。要不就要换手机了，要不就要升级系统了！
+这个功能看着挺炫的，也挺方便的吧，如果看历史记录等等其他快捷操作的一个入口。如果没有想到正确的实现方法，可能会实现起来很难，或者效果
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/11/07/iOS实现微信列表长按效果/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -591,7 +891,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/14/iOS中将数字用符合隔开(比如逗号)/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/05/iOS越狱检查/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="FlyOceanFish">
@@ -610,7 +910,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/10/14/iOS中将数字用符合隔开(比如逗号)/" itemprop="url">iOS中将数字用符合隔开(比如逗号)</a></h2>
+                <a class="post-title-link" href="/2017/11/05/iOS越狱检查/" itemprop="url">iOS越狱检查</a></h2>
         
 
         <div class="post-meta">
@@ -622,8 +922,168 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-14T09:27:00+08:00">
-                2017-10-14
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-05T15:00:00+08:00">
+                2017-11-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/安全/" itemprop="url" rel="index">
+                    <span itemprop="name">安全</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          沙盒完整性检查通过fork()函数检测。如果沙盒被越狱工具破坏或者是程序在沙盒外运行，那么fork()函数将会执行成功。如果沙盒仍处于激活状态，你的程序就会执行失败，这就说明沙盒没有被篡改。
+123456int result = fork();if(!result)    exit(0);if (r
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/11/05/iOS越狱检查/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/04/attribute使用方法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="FlyOceanFish">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FlyOceanFish' Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/04/attribute使用方法/" itemprop="url">iOS中__attribute__使用方法</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-04T15:00:00+08:00">
+                2017-11-04
               </time>
             
 
@@ -684,89 +1144,17 @@
       
         
           
-            <p>这次项目中遇到一个需求，将数字每隔3个用逗号隔开。因为如果数字太大确实看着有点眼花。<br>　　所以就想着写了一个NSString的category，用起来效果还不错，代码如下：</p>
-<h3 id="h的声明"><a href="#h的声明" class="headerlink" title=".h的声明"></a>.h的声明</h3><pre><code>#import &lt;Foundation/Foundation.h&gt;
+          因为遇到attribute这个东西，但是又不知道这个东西是干嘛的，所以就百度研究了一下这个东西是什么在简书上看到一篇描述的非常全的一篇文章就转过来了。
+attribute这个东西在我们写SDK或者提供类、方法等给其他人用的时候可以做一些检查、警告等挺有用的。
 
-@interface NSString (NumberSplitWithComma)
-/**
- *数字以逗号隔开 例：123，321.11
- */
-- (NSString *)ld_numberSplitWithComma;
-/**
- *@param puctutation 符合
- *数字以某个符合隔开 例：123，321.11
- */
-- (NSString *)ld_numberSplitWithPunctutaion:(NSString *)puctutation;
-@end
-</code></pre><h3 id="m文件的实现"><a href="#m文件的实现" class="headerlink" title=".m文件的实现"></a>.m文件的实现</h3><pre><code>#import &quot;NSString+NumberSplitWithComma.h&quot;
-
-@implementation NSString (NumberSplitWithComma)
-
-- (NSString *)ld_numberSplitWithComma{
-    if ([self private_isNumber]) {
-        NSMutableString *muString = [NSMutableString tringWithString:self];
-        return [self private_insert:muString withPunctuation:@&quot;,&quot;];
-    }else{
-        return self;
-    }
-}
-- (NSString *)ld_numberSplitWithPunctutaion:(NSString *)puctutation{
-    if ([self private_isNumber]) {
-         NSMutableString *muString = [NSMutableString stringWithString:self];
-         return [self private_insert:muString withPunctuation:puctutation];
-     }else{
-         return self;
-     }
-}
-- (NSMutableString *)private_insert:(NSMutableString *)string withPunctuation:(NSString *)punctuation{
-    NSUInteger maxLength = string.length;
-    if ([string containsString:punctuation]) {
-        maxLength = [string rangeOfString:punctuation].location;
-    }else if ([string containsString:@&quot;.&quot;]){
-        maxLength = [string rangeOfString:@&quot;.&quot;].location;
-    }
-    if (maxLength-([string containsString:@&quot;-&quot;]?1:0)&gt;3) {
-        [string insertString:punctuation atIndex:(maxLength-3)];
-        [self private_insert:string withPunctuation:punctuation];
-    }else{
-        return string;
-    }
-    return string;
-}
- - (Boolean)private_isNumber{
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@&quot;SELF MATCHES %@&quot;,@&quot;^[-0-9.]*$&quot;];
-    if ([predicate evaluateWithObject:self]) {
-        return YES;
-     }
-    return NO;
- }
-</code></pre><h1 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h1><p>　　有简友反应可以使用NSNumberFormatter，然后研究了一番，确实能够很方便的达到效果。<br>1、通过使用formatter style，苹果帮我们定义好的格式。</p>
-<pre><code>NSNumberFormatter *numberFormatter =   [[NSNumberFormatter alloc] init];
-[numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
-NSString *formattedNumberString = [numberFormatter stringFromNumber:@122344.4563];
-NSLog(@&quot;formattedNumberString: %@&quot;, formattedNumberString);
-// Output for locale en_US: &quot;formattedNumberString: formattedNumberString: 122,344.453&quot;
-</code></pre><p>NSNumberFormatter 的numberStyle是一个枚举</p>
-<pre><code>    typedef NS_ENUM(NSUInteger, NSNumberFormatterStyle) {
-NSNumberFormatterNoStyle = kCFNumberFormatterNoStyle,四舍五入
-NSNumberFormatterDecimalStyle = kCFNumberFormatterDecimalStyle,金额 100,200,300.123
-NSNumberFormatterCurrencyStyle = kCFNumberFormatterCurrencyStyle,货币 $100,200,300.12
-NSNumberFormatterPercentStyle = kCFNumberFormatterPercentStyle,百分比 12%
-NSNumberFormatterScientificStyle = kCFNumberFormatterScientificStyle,科学计数法 1.234E8
-NSNumberFormatterSpellOutStyle = kCFNumberFormatterSpellOutStyle,口语 One...
-NSNumberFormatterOrdinalStyle NS_ENUM_AVAILABLE(10_11, 9_0) = kCFNumberFormatterOrdinalStyle,
-NSNumberFormatterCurrencyISOCodeStyle NS_ENUM_AVAILABLE(10_11, 9_0) = kCFNumberFormatterCurrencyISOCodeStyle,
-NSNumberFormatterCurrencyPluralStyle NS_ENUM_AVAILABLE(10_11, 9_0) = kCFNumberFormatterCurrencyPluralStyle,
-NSNumberFormatterCurrencyAccountingStyle NS_ENUM_AVAILABLE(10_11, 9_0) = kCFNumberFormatterCurrencyAccountingStyle,
-};
-</code></pre><p>２、通过一个格式字符串自定义格式</p>
-<pre><code>NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
-[numberFormatter setPositiveFormat:@&quot;###0.##&quot;];
-NSString *formattedNumberString = [numberFormatter stringFromNumber:@122344.4563];
-NSLog(@&quot;formattedNumberString: %@&quot;, formattedNumberString);
-// Output for locale en_US: &quot;formattedNumberString: formattedNumberString: 122,344.45&quot;
-</code></pre>
           
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/11/04/attribute使用方法/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -813,7 +1201,7 @@ NSLog(@&quot;formattedNumberString: %@&quot;, formattedNumberString);
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/14/iOS小知识积累(长期更新)/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/03/iOS运行时安全/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="FlyOceanFish">
@@ -832,7 +1220,7 @@ NSLog(@&quot;formattedNumberString: %@&quot;, formattedNumberString);
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/10/14/iOS小知识积累(长期更新)/" itemprop="url">iOS小知识积累(长期更新)</a></h2>
+                <a class="post-title-link" href="/2017/11/03/iOS运行时安全/" itemprop="url">iOS运行时安全</a></h2>
         
 
         <div class="post-meta">
@@ -844,8 +1232,496 @@ NSLog(@&quot;formattedNumberString: %@&quot;, formattedNumberString);
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-14T09:27:00+08:00">
-                2017-10-14
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-03T09:00:00+08:00">
+                2017-11-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/安全/" itemprop="url" rel="index">
+                    <span itemprop="name">安全</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          暗桩和自杀分支添加一些直观看上去有用的迷惑的方法到类中，并且看起来比较有用。
+12345- (BOOL)userIsAuthenticated:(BOO)auth&#123;  /* 无提示地擦除加密密钥 */  /* 无提示地擦除用户数据 */  /* 无提示地禁用所有认证 */&#125;
+自杀
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/11/03/iOS运行时安全/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/02/iOS文件擦除/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="FlyOceanFish">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FlyOceanFish' Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/02/iOS文件擦除/" itemprop="url">iOS文件擦除</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-02T09:00:00+08:00">
+                2017-11-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/安全/" itemprop="url" rel="index">
+                    <span itemprop="name">安全</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          文件擦除为了完全擦除文件，必须将文件打开，并且每个字节都被覆盖。
+
+C语言编写的删除 安全等级很高。
+Objective-C编写的 可能被攻击者劫持方法的实现
+
+SQL记录擦除在iOS手机上只要SQLite数据库文件本身没有被删除，数据库中被删除的数据记录将会被保留在未被分配的存储空间里，直到新记录
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/11/02/iOS文件擦除/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/01/iOS中加密、解密/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="FlyOceanFish">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FlyOceanFish' Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/01/iOS中加密、解密/" itemprop="url">iOS中加密、解密</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-01T15:43:00+08:00">
+                2017-11-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/安全/" itemprop="url" rel="index">
+                    <span itemprop="name">安全</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          对称加密无状态加密
+#import &lt;CommonCrypto/CommonCrypto.h&gt;
+
+分组密码(块加密)即是无状态加密，加密之后除了密文其他信息都会丢失
+12345678910111213#import &lt;CommonCrypto/CommonCrypto.h&gt;C
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/11/01/iOS中加密、解密/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/31/通过Fastlane自动化发布Spec/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="FlyOceanFish">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FlyOceanFish' Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/10/31/通过Fastlane自动化发布Spec/" itemprop="url">通过Fastlane自动化发布Spec</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-31T09:40:00+08:00">
+                2017-10-31
               </time>
             
 
@@ -906,1026 +1782,15 @@ NSLog(@&quot;formattedNumberString: %@&quot;, formattedNumberString);
       
         
           
-            <p><strong><em>以前工作中有很多小的知识点，但是有时候只是用了，没有真正积累下来，有时候也会忘记。所以写这篇文章就是慢慢的将以前小的知识点或者之后用到的用文字的形式记录下来。【码字、分享不容易，各位的关注是小的动力！动动亲的小手指关注一下我哈。】</em></strong><br>1、_Nullable和_Nonnull(Xcode 6.3 )<br>_Nullable表示可能是NULL或nil；_Nonnull表示不应该是NULL或nil。如果不遵循会有警告<br>如果需要每个属性或每个方法都去指定nonnull和nullable，是一件非常繁琐的事。苹果为了减轻我们的工作量，专门提供了两个宏：NS_ASSUME_NONNULL_BEGIN和NS_ASSUME_NONNULL_END。<br>2、__kindof(Xcode 6.3 )<br>表示我们不用强转类型了。比如：</p>
-<pre><code>- (__kindof UITableViewCell *)dequeueReusableCellWithIdentifier:(NSString *)identifier;
-</code></pre><p>我们我可以直接用某个cell接收，不用再写（SomeCell*）这种形式强转了。</p>
-<pre><code>@property (nonatomic, readonly, copy) NSArray&lt;__kindof UIView *&gt; *subviews;
-</code></pre><p>这样，写下面的代码时就没有任何警告了：</p>
-<pre><code>UIButton *button = view.subviews.lastObject;
-</code></pre><p>3、instancetype、id、NSObject<br>instancetype 与 id 不一样, instancetype 只能在方法声明中作为返回类型使用。我们写方法返回的时候用instancetype而不用id了。instancetype代表当前类的类型。</p>
-<ul>
-<li>id关键字在编译时不被检查，而NSObject在编译时会被检查是否被调用一些错误方法。</li>
-<li>id可以是任何对象，包括非NSObject对象</li>
-<li>定义id的时候不使用*，是一个指针，NSObject却需要。</li>
-</ul>
-<p>4、Storyboard References (iOS 9)<br>可以帮我们简化Storyboard,平时我们的做法是将一个大的Storyboard人为的去分成几个小的，然后代码组装起来。Storyboard References可以帮我们简化这一步。如果本身有一个Storyboard很负责，可以选择其中联系很大的一部分，然后点击 Xcode 的菜单栏，选择”Editor-&gt;Refactor to Storyboard”。这时候就有一个独立的Storyboard了。<br>5、打印当前ViewController 的名字<br>这个对于我们拿到一个陌生的代码，调试的时候非常方便。比如我们运行一个APP，看到一个界面，但是想知道对应哪个ViewController的时候。</p>
-<ul>
-<li><p>添加Symbolic Exception<br><img src="http://upload-images.jianshu.io/upload_images/6644906-649d65ae020b72cb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="A7AB9D87-CF83-4F63-8D66-9C5A113B76ED.png"></p>
-</li>
-<li><p>添加Symob和Action<br><img src="http://upload-images.jianshu.io/upload_images/6644906-6aca286b93c6de2b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="73D79C18-5E28-4A87-B039-4DDA566FD5F7.png"></p>
-</li>
-</ul>
-<p>6、Autolayout中Intrinstic Size、Compression Resistance Priority、Compression Resistance Priority</p>
-<ul>
-<li>Intrinstic Size就是不用设置frame，视图通过内容、字体大小等属性就能获得的大小。我们设置的Content Hugging Priority和Compression Resistance Priority都是针对于这个的。</li>
-<li>Content Hugging Priority 内容拥抱，就是想变小的优先级</li>
-<li>Compression Resistance Priority抗压缩，就是想变大的优先级</li>
-</ul>
-<p><img src="http://upload-images.jianshu.io/upload_images/6644906-625f6cbcf66800cf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="A90EC537-5342-47B0-8207-9F3DBC0AB8A3.png"><br>如上图视图内容比文字内容宽，这个时候我们想要视图变小，与文字大小一样（此时intrinsic的大小就是文字区域部分的大小）。所以只要改变Content Hugging Priority的Horizontal的优先级变大就好了<br>7、topLayoutGuide&amp;&amp; bottomLayoutGuide<br>这两个属性可以理解为性表示不希望被透明的状态栏或导航栏（UITabBar、UIToolBar、NavigationBar等）遮挡的内容范围的最高或最低位置。这个属性的值是它的length属性的值。如下：</p>
-<pre><code>[view mas_makeConstraints:^(MASConstraintMaker *make) {
-    make.top.mas_equalTo(self.mas_topLayoutGuideBottom);
-    make.leading.mas_equalTo(self.view.mas_leading);
-    make.trailing.mas_equalTo(self.view.mas_trailing);
-    make.bottom.mas_equalTo(self.mas_bottomLayoutGuideTop);
-}];
-</code></pre><p>8、Autolayout中约束LayoutConstraint的有效无效（8.0）<br>有时候我们经常遇到一个view在不同的场景下约束不同，通常做法就是在不同场景下先删除再增加这样操作，这样效率反而不高。我们可以通过active这个属性设置生效不生效。</p>
-<pre><code>self.mLayoutConstraintWidth.active = YES;
-</code></pre><p>9、隐藏导航栏返回按钮旁边的文字</p>
-<pre><code>[[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(0, -60) forBarMetrics:UIBarMetricsDefault];
-</code></pre><p>10、替换返回按钮图片<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">UIImage *bgImage = [[UIImage imageNamed:@&quot;return&quot;] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];</div><div class="line">[[UINavigationBar appearance] setBackIndicatorImage:bgImage];</div><div class="line">[[UINavigationBar appearance] setBackIndicatorTransitionMaskImage:bgImage];</div></pre></td></tr></table></figure></p>
-<p>11、头文件导入<br>@class 在.h文件时引入其他.h文件的时候，效率更高</p>
-<p>#include “” 自己写的文件</p>
-<p>#include &lt;&gt; 引入系统的</p>
-<p>#import &lt;&gt; 用于包含系统文件</p>
-<p>#import “”自己写的文件，搜索路径更广<br>import比include更好，能够避免文件的重复导入，效率更高<br>不过还有一个更好的的方式<a href="https://stackoverflow.com/questions/18947516/import-vs-import-ios-7/18947634#" target="_blank" rel="external">@import</a>，这种方式让我们不必在设置里边添加包了，它会帮我们自动关联。<br>12、内存管理语义</p>
-<ul>
-<li><strong><em>assign</em></strong> “设置方法”只会执行针对”纯量类型”(例如CGFloat或NSInteger等)的简单赋值操作</li>
-<li><strong><em>strong</em></strong> 此特质表明该属性定义了一种”拥有关系”。为这种属性设置新值时，设置方法会先保留新值，并释放旧值，然后再将新值设置上去。</li>
-<li><strong><em>weak</em></strong> （5.0以上，可以说是对unsafe_unretained的一个升级,更安全，但是由于要遍历是否已经销毁，并且设置成nil，所以是消耗性能）此特质表明该属性定义了一种”非拥有关系”。为这种属性设置新值时，设置方法既不保留新值，也不释放旧值。此特质同assign类似，然而在属性所指的对象遭到摧毁时，属性值也会清空(nil)。</li>
-<li><strong><em>unsafe_unretained</em></strong> (5.0以下必须使用而不能使用weak，优点比weak快，缺点容易造成野指针)此特质的语义和assign相同，但是它使用于”对象类型”，该特质表达一种”非拥有关系”，当对象遭到摧毁时，属性值不会自动清空（”不安全”,unsafe）这一点与weak有区别。</li>
-<li><strong><em>copy</em></strong> 此特质所表达的所属关系与strong类似。然而设置方法并不保留新值，而是将其”拷贝”。警惕NSMutableArray为copy的时候奔溃问题。copy之后是NSArray添加对象会crash。<br>13、查找或判断xib是否存在<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">NSString *path = [[NSBundle mainBundle] pathForResource:NSStringFromClass(className) ofType:@&quot;nib&quot;];</div><div class="line">Boolean exist = [[NSFileManager defaultManager] fileExistsAtPath:path];</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>备注：其实关键就是Typ是”nib”而不是”xib”。因为我们打出的包，系统将我们的xib文件编译成了以nib为结尾的文件。<br>14、UI_APPEARANCE_SELECTOR<br>当我们自定义控件的时候可以在属性后边增加这个声明。代表支持appearance方法。如果你自己调用了setXX方法，则appearance方法失效。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">@property (nonatomic, assign) CGFloat selectionIndicatorHeight UI_APPEARANCE_SELECTOR;</div></pre></td></tr></table></figure></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[XXXClass appearance].selectionIndicatorHeight = xxxx</div></pre></td></tr></table></figure>
-<p>15、旋转动画方向问题<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">button.transform = CGAffineTransformRotate(button.transform,M_PI);</div></pre></td></tr></table></figure></p>
-<p>我们先旋转180顺时针<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">button.transform = CGAffineTransformIdentity;</div></pre></td></tr></table></figure></p>
-<p>当我们调用上句话的时候，是顺时针旋转180返回原位置，但是很多时候我们想原路返回，其实就是想逆时针返回。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">button.transform = CGAffineTransformRotate(button.transform,M_PI-0.0001);</div></pre></td></tr></table></figure></p>
-<p>只要这么设置就会逆时针返回了。旋转动画选择了最短路径返回</p>
-<p>16、纯代码布局，添加约束<br>如果我们使用纯代码布局，则需要以下代码约束才能起作用；默认左右是有16像素间距的，设置左右各-16才能靠边(这个如果有其他好办法可以留言给我)</p>
-<pre><code>self.view.translatesAutoresizingMaskIntoConstraints = NO;
-</code></pre><p>17、NSDate和NSDateFormatter<br>NSDate：是获取的时间没有时区概念，所以获取的是0时区的时间。</p>
-<pre><code>[NSDate date]//获取的时间与当前时间差8个小时
-</code></pre><p>NSDateFormatter：将日期格式成我们想要的。同时会根据时区、地域给我们做相应的计算。(看注释)</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">NSDateFormatter *formatter = [[NSDateFormatter alloc] init];</div><div class="line">formatter.dateFormat = @&quot;yyyy-MM-dd HH:mm:ss&quot;;</div><div class="line">NSTimeZone *timeZone = [NSTimeZone localTimeZone];</div><div class="line">//  formatter.locale = [NSLocale currentLocale];</div><div class="line"> formatter.timeZone = timeZone;</div><div class="line">NSDate *currentDate = [NSDate date];</div><div class="line">NSString *currentString = [formatter stringFromDate:currentDate];//会将currentDate增加8个小时，获取我们当前时区的时间</div><div class="line">NSDate *date = [formatter dateFromString:@&quot;2017-8-31 9:51:00&quot;];//获取的date是针对0时区的时间，所以会减去8个小时</div></pre></td></tr></table></figure>
-<p>以上代码可以看到我们可以设置timeZone和locale。如果我们只设置local照样能够输出我们想要的结果。但是二者有什么区别呢？</p>
-<ul>
-<li>local是设置区域的。配合setTimeStyle:、setDateStyle:这些方法可以控制日期输出不同的格式。因为每个地方的格式不同。  <a href="https://developer.apple.com/library/content/documentation/MacOSX/Conceptual/BPInternational/InternationalizingYourCode/InternationalizingYourCode.html" target="_blank" rel="external">Formatting Data Using the Locale Settings</a></li>
-</ul>
-<p><img src="http://upload-images.jianshu.io/upload_images/6644906-320495bdfa8f9c47.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="7FAEF832-CBCD-41A2-A4EE-4056FBF1B931.png"></p>
-<ul>
-<li>timeZone设置时区的。主要用来将时间转换成不同时区。</li>
-</ul>
-<p>所以在代码格式化的时候，建议设置timezone来格式化我们的时期</p>
-<p>18、Xcode关闭控制台打印不用信息</p>
-<p> Xcode-&gt;Edit Scheme -&gt; Run -&gt; Arguments, 在Environment Variables里边添加 OS_ACTIVITY_MODE ＝ disable</p>
-<p>19、NSObject中isKindOfClass、isMemberOfClass、isSubclassOfClass区别</p>
-<p>isSubclassOfClass和isKindOfClass的作用基本上是一致的，只不过一个是类方法，一个是对象方法。<br>isKindOfClass来确定一个对象是否是一个类的成员，或者是派生自该类的成员,<br>isMemberOfClass只能确定一个对象是否是当前类的成员.<br>isMemberOfClass 筛选条件更为苛刻，只有当类型完全匹配的时候才会返回YES。</p>
-<p>20、判断当前queue是否是main queue<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">static void *mainQueueKey = &amp;mainQueueKey;</div><div class="line">static dispatch_once_t onceToken;</div><div class="line">dispatch_once(&amp;onceToken, ^&#123;</div><div class="line">  dispatch_queue_set_specific(dispatch_get_main_queue(),</div><div class="line">                              mainQueueKey, mainQueueKey, NULL);</div><div class="line">&#125;);</div><div class="line">return dispatch_get_specific(mainQueueKey) == mainQueueKey;</div></pre></td></tr></table></figure></p>
-<p>21、为什么有的属性要用copy，而不用strong</p>
-<p>像NSString和NSArray这两类，在给变量赋值的时候，如果来源是可变字符串或可变数组的时候，使用copy能够避免原来变量对现在变量的影响。如果用strong的话，原来变量改变时同时会影响我们现在的变量。我们大多数期望的结果是两个变量相互独立，互补影响的，所以使用copy能够避免这类问题<br>22、SEL、IMP</p>
-<p>SEL 函数的ID，相当于将函数的名字用一个唯一识别符与之相对应。<br>IMP 本质是函数指针。其实就是函数的实现，我们在调用方法的时候是一层一层的查找，最终找到了IMP，如果直接调用IMP将会更有效率</p>
-<p>23、消息的转发</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/6644906-9209401db1a78dc4.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="44181-09a882edcb98d535.jpg"><br>runtime在调用方法的时候如果找不到会直接奔溃。如果在当前类找不到的时候，会开始顺序的调用系统的三个方法，如果再找不到会直接crash。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">1.+(Bool) resolveInstanceMethod:(SEL)sel // 对应实例方法</div><div class="line">  + (Bool)resolveClassMethod:(SEL)sel // 对应类方法</div><div class="line">我们可以在这个方法中调用class_addMethod将方法加入就不会crash</div><div class="line">2.- (id)forwardingTargetForSelector:(SEL)aSelector//可以改变查找方法的对象</div><div class="line">3.- (void)forwardInvocation:(NSInvocation *)anInvocation//搭配- (NSMethodSignature *)methodSignatureForSelector:(SEL)aSelector这个使用。通过传递过来的NSInvocation对象，我们可以对此重新注入调用对象、方法、参数等</div></pre></td></tr></table></figure></p>
-<p>24、<code>NSObject</code>的description和debugDescription方法<br>当我们在工程中使用model(继承NSObject)的时候，在断点或者log调试中有时候需要将对象打印到控制台中，但是我们自己写的model打印出的是对象的地址。如果需要打印出有效的信息，这时我们可以重写descrition或者debugDescription方法，打印出我们想要的信息。例如对象的所有属性的值。<strong><em>默认情况下debugDescription调用的是description方法</em></strong></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/14/iOS自定义相机界面/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="FlyOceanFish">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="FlyOceanFish' Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/10/14/iOS自定义相机界面/" itemprop="url">iOS自定义相机界面</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-14T09:27:00+08:00">
-                2017-10-14
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/iOS/" itemprop="url" rel="index">
-                    <span itemprop="name">iOS</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>由于项目中需要拍照功能，但是系统原生的相机功能根本满足不了项目的需要，所以就只能自定义一个相加了。苹果再AVFoundation框架中给我们提供了各个api，我们完全可以通过这些api自定义一个满足我们需求的相机。</p>
-<h2 id="关键类"><a href="#关键类" class="headerlink" title="关键类"></a>关键类</h2><p>AVCaptureSession 负责输入流和输出流的管理。<br>AVCaptureDeviceInput 输入流。连接输入采集设备的<br>AVCaptureStillImageOutput 输出流。AVCaptureOutput的子类，主要是负责采集图片数据的，不过这个类再10.0以后废弃掉了，改用AVCapturePhotoOutput这个替换，这个类能够支持RAW格式的图片<br>AVCaptureVideoPreviewLayer 集成CALayer，负责将采集的视频展示出来的一个类，提供了一个预览功能而已</p>
-<h2 id="实现过程"><a href="#实现过程" class="headerlink" title="实现过程"></a>实现过程</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div><div class="line">199</div><div class="line">200</div><div class="line">201</div><div class="line">202</div><div class="line">203</div><div class="line">204</div><div class="line">205</div><div class="line">206</div><div class="line">207</div><div class="line">208</div><div class="line">209</div><div class="line">210</div><div class="line">211</div><div class="line">212</div><div class="line">213</div><div class="line">214</div><div class="line">215</div><div class="line">216</div><div class="line">217</div><div class="line">218</div><div class="line">219</div><div class="line">220</div><div class="line">221</div><div class="line">222</div><div class="line">223</div><div class="line">224</div><div class="line">225</div><div class="line">226</div><div class="line">227</div><div class="line">228</div><div class="line">229</div><div class="line">230</div><div class="line">231</div><div class="line">232</div><div class="line">233</div><div class="line">234</div><div class="line">235</div><div class="line">236</div><div class="line">237</div><div class="line">238</div><div class="line">239</div><div class="line">240</div><div class="line">241</div><div class="line">242</div><div class="line">243</div><div class="line">244</div><div class="line">245</div><div class="line">246</div><div class="line">247</div><div class="line">248</div><div class="line">249</div><div class="line">250</div><div class="line">251</div><div class="line">252</div><div class="line">253</div><div class="line">254</div><div class="line">255</div><div class="line">256</div><div class="line">257</div><div class="line">258</div><div class="line">259</div><div class="line">260</div><div class="line">261</div><div class="line">262</div><div class="line">263</div><div class="line">264</div><div class="line">265</div><div class="line">266</div><div class="line">267</div><div class="line">268</div><div class="line">269</div><div class="line">270</div><div class="line">271</div><div class="line">272</div><div class="line">273</div><div class="line">274</div><div class="line">275</div><div class="line">276</div><div class="line">277</div><div class="line">278</div><div class="line">279</div><div class="line">280</div><div class="line">281</div><div class="line">282</div><div class="line">283</div><div class="line">284</div><div class="line">285</div><div class="line">286</div><div class="line">287</div><div class="line">288</div><div class="line">289</div><div class="line">290</div><div class="line">291</div><div class="line">292</div><div class="line">293</div><div class="line">294</div><div class="line">295</div><div class="line">296</div><div class="line">297</div><div class="line">298</div><div class="line">299</div><div class="line">300</div><div class="line">301</div><div class="line">302</div><div class="line">303</div><div class="line">304</div><div class="line">305</div><div class="line">306</div><div class="line">307</div><div class="line">308</div><div class="line">309</div><div class="line">310</div><div class="line">311</div><div class="line">312</div><div class="line">313</div><div class="line">314</div><div class="line">315</div><div class="line">316</div><div class="line">317</div></pre></td><td class="code"><pre><div class="line">#import &quot;TakePictureViewController.h&quot;</div><div class="line">#import &lt;AVFoundation/AVFoundation.h&gt;</div><div class="line">#import &quot;UIImage+Rotate.h&quot;</div><div class="line">#import &quot;UIControl+Custom.h&quot;</div><div class="line"></div><div class="line">#define KSCREEN_WIDTH            [[UIScreen mainScreen] bounds].size.width</div><div class="line">#define KSCREEN_HEIGHT           [[UIScreen mainScreen] bounds].size.height</div><div class="line"></div><div class="line">typedef NS_ENUM(NSInteger, AVCamSetupResult ) &#123;</div><div class="line">    AVCamSetupResultSuccess,</div><div class="line">    AVCamSetupResultCameraNotAuthorized,</div><div class="line">    AVCamSetupResultSessionConfigurationFailed</div><div class="line">&#125;;</div><div class="line">@interface TakePictureViewController ()</div><div class="line">&#123;</div><div class="line">    BOOL lightOn;</div><div class="line">    AVCaptureDevice *device;</div><div class="line">    ActivityIndicatorTipView *activityView;</div><div class="line">&#125;</div><div class="line">// AVCaptureSession对象来执行输入设备和输出设备之间的数据传递</div><div class="line"></div><div class="line">@property (nonatomic, strong)AVCaptureSession *session;</div><div class="line">// AVCaptureDeviceInput对象是输入流</div><div class="line"></div><div class="line">@property (nonatomic, strong)AVCaptureDeviceInput *videoInput;</div><div class="line"></div><div class="line">// 照片输出流对象</div><div class="line"></div><div class="line">@property (nonatomic, strong)AVCaptureStillImageOutput *stillImageOutput;</div><div class="line"></div><div class="line">// 预览图层，来显示照相机拍摄到的画面</div><div class="line"></div><div class="line">@property (nonatomic, strong)AVCaptureVideoPreviewLayer *previewLayer;</div><div class="line">// 切换前后镜头的按钮</div><div class="line"></div><div class="line">@property (nonatomic, strong)UIButton *toggleButton;</div><div class="line"></div><div class="line">// 放置预览图层的View</div><div class="line">@property (nonatomic, strong)UIView *cameraShowView;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">// 用来展示拍照获取的照片</div><div class="line"></div><div class="line">@property (nonatomic, strong)UIImageView *imageShowView;</div><div class="line"></div><div class="line">@property (nonatomic,strong) UIView *overlayView;</div><div class="line"></div><div class="line">@property (nonatomic) dispatch_queue_t sessionQueue;</div><div class="line"></div><div class="line">@property (nonatomic) AVCamSetupResult setupResult;</div><div class="line"></div><div class="line">@end</div><div class="line"></div><div class="line">@implementation TakePictureViewController</div><div class="line"></div><div class="line">-(BOOL)prefersStatusBarHidden</div><div class="line">&#123;</div><div class="line">    return YES;</div><div class="line">&#125;</div><div class="line"></div><div class="line">-(instancetype)init</div><div class="line">&#123;</div><div class="line">    self = [super init];</div><div class="line">    if (self)</div><div class="line">    &#123;</div><div class="line">        [self initAll];</div><div class="line">    &#125;</div><div class="line">    return self;</div><div class="line">&#125;</div><div class="line">- (void)initAll&#123;</div><div class="line">    [self initialSession];</div><div class="line">    [self initCameraShowView];</div><div class="line">    [self.view addSubview:self.overlayView];</div><div class="line">    [self initAVDevice];</div><div class="line">    [self setUpCameraLayer];</div><div class="line">&#125;</div><div class="line">- (void)initialSession</div><div class="line">&#123;</div><div class="line">    self.session = [[AVCaptureSession alloc] init];</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (void)initCameraShowView</div><div class="line">&#123;</div><div class="line"></div><div class="line">    self.cameraShowView = [[UIView alloc] initWithFrame:self.view.frame];</div><div class="line"></div><div class="line">    [self.view addSubview:self.cameraShowView];</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 这是获取前后摄像头对象的方法</div><div class="line"></div><div class="line">- (AVCaptureDevice *)cameraWithPosition:(AVCaptureDevicePosition)position</div><div class="line">&#123;</div><div class="line">    NSArray *devices = [AVCaptureDevice devicesWithMediaType:AVMediaTypeVideo];</div><div class="line"></div><div class="line">    for (AVCaptureDevice *captureDevice in devices)</div><div class="line">    &#123;</div><div class="line">        if (captureDevice.position == position)</div><div class="line">        &#123;</div><div class="line">            return captureDevice;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    return nil;</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (AVCaptureDevice *)frontCamera</div><div class="line">&#123;</div><div class="line">    return [self cameraWithPosition:AVCaptureDevicePositionFront];</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (AVCaptureDevice *)backCamera</div><div class="line">&#123;</div><div class="line">    return [self cameraWithPosition:AVCaptureDevicePositionBack];</div><div class="line">&#125;</div><div class="line">/**</div><div class="line"> 设备手电筒</div><div class="line"> */</div><div class="line">-(void)initAVDevice</div><div class="line">&#123;</div><div class="line">    device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];</div><div class="line"></div><div class="line">    if (![device hasTorch])</div><div class="line">    &#123;</div><div class="line">        //无手电筒</div><div class="line">        [[[UIAlertView alloc] initWithTitle:@&quot;tishi&quot; message:@&quot;无手电筒&quot; delegate:nil cancelButtonTitle:@&quot;确定&quot; otherButtonTitles:nil, nil] show];</div><div class="line">    &#125;</div><div class="line">    lightOn = NO;</div><div class="line">&#125;</div><div class="line">- (void)configureSession&#123;</div><div class="line"></div><div class="line">    if ( self.setupResult != AVCamSetupResultSuccess ) &#123;</div><div class="line">        return;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    [self.session beginConfiguration];//保证对AVCaptureSession设置的原子性与commitConfiguration配对使用</div><div class="line"></div><div class="line">    self.videoInput = [[AVCaptureDeviceInput alloc] initWithDevice:[self backCamera] error:nil];</div><div class="line"></div><div class="line">    self.stillImageOutput = [[AVCaptureStillImageOutput alloc] init];</div><div class="line">     // 输出流的设置参数AVVideoCodecJPEG参数表示以JPEG的图片格式输出图片</div><div class="line">    NSDictionary *outputSettings = [[NSDictionary alloc] initWithObjectsAndKeys:AVVideoCodecJPEG,AVVideoCodecKey,@(0.1),AVVideoQualityKey,nil];</div><div class="line"></div><div class="line">    [self.stillImageOutput setOutputSettings:outputSettings];</div><div class="line"></div><div class="line">    if ([self.session canAddInput:self.videoInput])</div><div class="line">    &#123;</div><div class="line">        [self.session addInput:self.videoInput];</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    if ([self.session canAddOutput:self.stillImageOutput])</div><div class="line">    &#123;</div><div class="line">        [self.session addOutput:self.stillImageOutput];</div><div class="line">    &#125;</div><div class="line">    [self.session commitConfiguration];</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (void)viewDidLoad &#123;</div><div class="line">    [super viewDidLoad];</div><div class="line">    self.view.backgroundColor = [UIColor whiteColor];</div><div class="line">    self.sessionQueue = dispatch_queue_create(&quot;session queue&quot;, DISPATCH_QUEUE_SERIAL);</div><div class="line">    switch ( [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo] )</div><div class="line">    &#123;</div><div class="line">        case AVAuthorizationStatusAuthorized:</div><div class="line">        &#123;</div><div class="line">            break;</div><div class="line">        &#125;</div><div class="line">        case AVAuthorizationStatusNotDetermined:</div><div class="line">        &#123;</div><div class="line">            dispatch_suspend( self.sessionQueue );</div><div class="line">            [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo completionHandler:^( BOOL granted ) &#123;</div><div class="line">                if ( ! granted ) &#123;</div><div class="line">                    self.setupResult = AVCamSetupResultCameraNotAuthorized;</div><div class="line">                &#125;</div><div class="line">                dispatch_resume( self.sessionQueue );</div><div class="line">            &#125;];</div><div class="line">            break;</div><div class="line">        &#125;</div><div class="line">        default:</div><div class="line">        &#123;</div><div class="line">            self.setupResult = AVCamSetupResultCameraNotAuthorized;</div><div class="line">            break;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    dispatch_async(self.sessionQueue, ^&#123;</div><div class="line">        [self configureSession];</div><div class="line">    &#125;);</div><div class="line">&#125;</div><div class="line">- (void)viewWillAppear:(BOOL)animated</div><div class="line">&#123;</div><div class="line">    [super viewWillAppear:animated];</div><div class="line"></div><div class="line">    dispatch_async( self.sessionQueue, ^&#123;</div><div class="line">        switch ( self.setupResult )</div><div class="line">        &#123;</div><div class="line">            case AVCamSetupResultSuccess:</div><div class="line">            &#123;</div><div class="line">                [self.session startRunning];</div><div class="line">                break;</div><div class="line">            &#125;</div><div class="line">            case AVCamSetupResultCameraNotAuthorized:</div><div class="line">            &#123;</div><div class="line">                dispatch_async( dispatch_get_main_queue(), ^&#123;</div><div class="line">                    NSString *message = @&quot;请允许拍照权限，以用来扫描二维码&quot;;</div><div class="line">                    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@&quot;提示&quot; message:message preferredStyle:UIAlertControllerStyleAlert];</div><div class="line">                    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@&quot;确定&quot; style:UIAlertActionStyleCancel handler:nil];</div><div class="line">                    [alertController addAction:cancelAction];</div><div class="line">                    UIAlertAction *settingsAction = [UIAlertAction actionWithTitle:@&quot;设置&quot; style:UIAlertActionStyleDefault handler:^( UIAlertAction *action ) &#123;</div><div class="line">                        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString] options:@&#123;&#125; completionHandler:nil];</div><div class="line">                    &#125;];</div><div class="line">                    [alertController addAction:settingsAction];</div><div class="line">                    [self presentViewController:alertController animated:YES completion:nil];</div><div class="line">                &#125; );</div><div class="line">                break;</div><div class="line">            &#125;</div><div class="line">            case AVCamSetupResultSessionConfigurationFailed:</div><div class="line">            &#123;</div><div class="line">                dispatch_async( dispatch_get_main_queue(), ^&#123;</div><div class="line">                    NSString *message = @&quot;没有拍照权限，所以不能扫描二维码&quot;;</div><div class="line">                    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@&quot;提示&quot; message:message preferredStyle:UIAlertControllerStyleAlert];</div><div class="line">                    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@&quot;确定&quot; style:UIAlertActionStyleCancel handler:nil];</div><div class="line">                    [alertController addAction:cancelAction];</div><div class="line">                    [self presentViewController:alertController animated:YES completion:nil];</div><div class="line">                &#125; );</div><div class="line">                break;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125; );</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (void)viewDidDisappear:(BOOL)animated</div><div class="line">&#123;</div><div class="line">    [super viewDidDisappear:animated];</div><div class="line">    dispatch_async( self.sessionQueue, ^&#123;</div><div class="line">        if ( self.setupResult == AVCamSetupResultSuccess ) &#123;</div><div class="line">            [self.session stopRunning];</div><div class="line">        &#125;</div><div class="line">    &#125; );</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (void)setUpCameraLayer</div><div class="line">&#123;</div><div class="line">    if (self.previewLayer == nil)</div><div class="line">    &#123;</div><div class="line">        self.previewLayer = [[AVCaptureVideoPreviewLayer alloc] initWithSession:self.session];</div><div class="line"></div><div class="line">        UIView * view = self.cameraShowView;</div><div class="line"></div><div class="line">        CALayer * viewLayer = [view layer];</div><div class="line"></div><div class="line">        // UIView的clipsToBounds属性和CALayer的setMasksToBounds属性表达的意思是一致的,决定子视图的显示范围。当取值为YES的时候，剪裁超出父视图范围的子视图部分，当取值为NO时，不剪裁子视图。</div><div class="line"></div><div class="line">        [viewLayer setMasksToBounds:YES];</div><div class="line"></div><div class="line">        CGRect bounds = [view bounds];</div><div class="line"></div><div class="line">        [self.previewLayer setFrame:bounds];</div><div class="line"></div><div class="line">        [self.previewLayer setVideoGravity:AVLayerVideoGravityResizeAspect];</div><div class="line"></div><div class="line">        [viewLayer addSublayer:self.previewLayer];</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">/**</div><div class="line"> 打开设备手电筒</div><div class="line"> */</div><div class="line">-(void) actionTurnOn</div><div class="line">&#123;</div><div class="line">    [device lockForConfiguration:nil];</div><div class="line"></div><div class="line">    [device setTorchMode:AVCaptureTorchModeOn];</div><div class="line"></div><div class="line">    [device unlockForConfiguration];</div><div class="line">&#125;</div><div class="line">/**</div><div class="line"> 关闭设备手电筒</div><div class="line"> */</div><div class="line">-(void) actionTurnOff</div><div class="line">&#123;</div><div class="line">    [device lockForConfiguration:nil];</div><div class="line"></div><div class="line">    [device setTorchMode: AVCaptureTorchModeOff];</div><div class="line"></div><div class="line">    [device unlockForConfiguration];</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">// 拍照</div><div class="line"></div><div class="line">- (void)actionStartCamera</div><div class="line">&#123;</div><div class="line">    dispatch_async(self.sessionQueue, ^&#123;</div><div class="line">        AVCaptureConnection *videoConnection = [self.stillImageOutput connectionWithMediaType:AVMediaTypeVideo];</div><div class="line"></div><div class="line">        if (!videoConnection)</div><div class="line">        &#123;</div><div class="line">            return;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        [self.stillImageOutput  captureStillImageAsynchronouslyFromConnection:videoConnection completionHandler:^(CMSampleBufferRef imageDataSampleBuffer, NSError *error) &#123;</div><div class="line"></div><div class="line">            if (imageDataSampleBuffer == NULL) &#123;</div><div class="line"></div><div class="line">                return;</div><div class="line"></div><div class="line">            &#125;</div><div class="line"></div><div class="line">            NSData *imageData = [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageDataSampleBuffer];</div><div class="line"></div><div class="line">            UIImage *originalImage = [UIImage imageWithData:imageData];</div><div class="line">            //1.旋转照片</div><div class="line">            UIImage *rotateImage = [originalImage rotate:UIImageOrientationRight];</div><div class="line">    &#125;);</div><div class="line">&#125;</div><div class="line">@end</div></pre></td></tr></table></figure>
-<h2 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h2><p>1、AVCaptureSession的配置过程和startRunning是阻挡主线程的一个耗时操作，所以我们放到另外的queue中操作，能够避免阻挡主线程<br>2、由于我们拍照不需要质量非常高的照片，所以我们通过setOutputSettings设置了图片质量，这样减少了很大一部分内存，可以根据情况来设置图片的质量。<br>3、拍完照片图片是倒立的，所以我们做了一个旋转操作，将图片正立了过来</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/14/macOS各个文件夹的作用/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="FlyOceanFish">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="FlyOceanFish' Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/10/14/macOS各个文件夹的作用/" itemprop="url">macOS各个文件夹的作用</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-14T09:27:00+08:00">
-                2017-10-14
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/iOS/" itemprop="url" rel="index">
-                    <span itemprop="name">iOS</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>以前大家对于Linux系统可能不是非常熟悉，如果是后台服务器的会非常熟悉，但是作为我们前端开发的可能就不太熟悉了。但是由于苹果的Mac电脑的越来越普及，大家对于系统下的文件夹有所了解还是有一定帮助的。</p>
-<ul>
-<li>/bin<br>目录包含了引导启动所需的命令或普通用户可能用的命令(可能在引导启动后)。这些命令都是二进制文件的可执行程序( bin是binary - -二进制的简称)，多是系统中重要的系统文件。  </li>
-<li>/dev<br>目录包括所有设备的设备文件。设备文件用特定的约定命名，这在设备列表中说明。<br>设备文件在安装时由系统产生，以后可以用/dev/makedev 描述。/dev/makedev.local 是系统管理员为本地设备文件(或连接)写的描述文稿(即如一些非标准设备驱动不是标准makedev的一部分)</li>
-<li>/etc<br>目录包含各种系统配置文件，下面说明其中的一些。其他的你应该知道它们属于哪个程序，并阅读该程序的man页。许多网络配置文件也在/etc中</li>
-<li>/etc/rc.d<br>启动的配置文件和脚本</li>
-<li>/home<br>用户主目录的基点，比如用户user的主目录就是/home/user，可以用~user表示</li>
-<li>/lib<br>标准程序设计库，又叫动态链接共享库，作用类似windows里的.dll文件</li>
-<li>/sbin<br>系统管理命令，这里存放的是系统管理员使用的管理程序</li>
-<li>/tmp<br>公用的临时文件存储点</li>
-<li>/root<br>系统管理员的主目录（呵呵，特权阶级）</li>
-<li>/mnt<br>系统提供这个目录是让用户临时挂载其他的文件系统。</li>
-<li>/lost+found<br>这个目录平时是空的，系统非正常关机而留下“无家可归”的文件（windows下叫什么.chk）就在这里</li>
-<li>/proc<br>虚拟的目录，是系统内存的映射。可直接访问这个目录来获取系统信息。</li>
-<li>/var<br>某些大文件的溢出区，比方说各种服务的日志文件</li>
-<li><strong><em>/usr</em></strong><br>是个很重要的目录，通常这一文件系统很大，因为所有程序安装在这里。/usr 里的所有文件一般来自linux发行版(distribution )；本地安装的程序和其他东西在/usr/local 下，因为这样可以在升级新版系统或新发行版时无须重新安装全部程序。/usr 目录下的许多内容是可选的，但这些功能会使用户使用系统更加有效。/usr可容纳许多大型的软件包和它们的配置文件。</li>
-<li>/usr/x11r6<br>存放x window的目录</li>
-<li>/usr/bin<br>集中了几乎所有用户命令，是系统的软件库。另有些命令在/bin 或/usr/local/bin 中</li>
-<li>/usr/sbin<br>包括了根文件系统不必要的系统管理命令</li>
-<li>/usr/include<br>包含了c语言的头文件，这些文件多以. h结尾，用来描述c语言程序中用到的数据结构、子过程和常量。为了保持一致性，这实际上应该放在/usr/lib 下，但习惯上一直沿用了这个名字。</li>
-<li>/usr/lib<br>常用的动态链接库和软件包的配置文件</li>
-<li>/usr/src<br>源代码，linux内核的源代码就放在/usr/src/linux里</li>
-<li>/usr/local<br>本地安装的软件和其他文件放在这里。这与/usr很相似。用户可能会在这发现一些比较大的软件包</li>
-<li>/usr/local/bin<br>本地增加的命令 （就是在shell终端里执行的一些非系统命令）</li>
-<li>/usr/local/lib<br>本地增加的库</li>
-</ul>
-<p>大家其实有兴趣的话需要关注的就是/usr路径下的文件夹，因为这个文件夹下的所有的东西都与我们用户相关的，尤其跟我们关系最大的就是就是/usr/local和其下边的文件夹</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/14/pod install vs. pod update/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="FlyOceanFish">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="FlyOceanFish' Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/10/14/pod install vs. pod update/" itemprop="url">pod install vs. pod update</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-14T09:27:00+08:00">
-                2017-10-14
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/iOS/" itemprop="url" rel="index">
-                    <span itemprop="name">iOS</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="背景"><a href="#背景" class="headerlink" title="背景　　"></a>背景　　</h1><p>　　作为iOS管理第三方包很好用的一个工具CocoaPods，大部分在使用过程中一开始使用pod install,之后就一直使用pod update。其实这种做法是不对，本篇文章将详细介绍这几个命令的区别，也希望iOS开发者能够合理使用这几个命名</p>
-<h2 id="pod-init"><a href="#pod-init" class="headerlink" title="pod init"></a>pod init</h2><p>　　初始化一个工程，此时会产生Podfile这么一个文件，我们可以添加需要引入的第三方包</p>
-<h2 id="pod-install"><a href="#pod-install" class="headerlink" title="pod install"></a>pod install</h2><pre><code>pod install --verbose
-</code></pre><p><strong><em>用这个命令可以看到所有的执行操作</em></strong><br>　　第一次构建工程时要使用该命令，但是如果我们编辑了Podfile文件，例如添加、删除、更新了一个pod也会使用该命令</p>
-<ul>
-<li>我们运行这个命令的时候，开始下载安装新的pods，它会将我们每一个第三方包的版本写入一个叫Podfile.lock的文件。这个文件包含了我们安装的所有的第三方包的信息</li>
-<li>当我们运行这个命令的时候，它只会下载不在Podfile.lock文件里的第三方包<ul>
-<li>对于Podfile.lock里边有的详细的第三方包（有版本)，它只会下载对应的版本，不管这个第三方包有没有新的版本</li>
-<li>如果Podfile.lock里边没有的第三方包，它将下载你Podfile里边写的（例如pod ‘MyPod’, ‘~&gt;1.2’），如果不写版本默认下载最新的版本</li>
-</ul>
-</li>
-</ul>
-<h2 id="pod-update"><a href="#pod-update" class="headerlink" title="pod update"></a>pod update</h2><p>　　如果我们运行pod update PODNAME 将只更新这一个第三方包到最新的版本<br>如果我们直接运行pod update 没有pod名称，它将会更新我们所有的第三方包</p>
-<h2 id="pod-outdated"><a href="#pod-outdated" class="headerlink" title="pod outdated"></a>pod outdated</h2><p>　　将列出所有的在Podfile.lock文件里的所有第三方包现在对应的最新的版本</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>　　如果我们在Podfile文件增加、减少、或者改变了版本的时候运行pod install；如果我们想更新第三包的时候使用pod update命令</p>
-<p>接下来一篇我将详细介绍如果创建自己的spec。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/14/Rect Native(>0.45)通过cocopods初始化工程/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="FlyOceanFish">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="FlyOceanFish' Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/10/14/Rect Native(>0.45)通过cocopods初始化工程/" itemprop="url">Rect Native(>0.45)通过cocopods初始化工程</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-14T09:27:00+08:00">
-                2017-10-14
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/React-Native/" itemprop="url" rel="index">
-                    <span itemprop="name">React Native</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>由于React Native 0.45以上版本增加了4个依赖包，并且被墙了，所以大家在初始化工程之后运行会报错，就是因为缺少了文件。其实就是Bridge文件或者它所依赖的文件。0.45以后的bidge开始使用了RCTCxxBridge,之前都是RCTBatchedBridge，根据Facebook的官方资料RCTBatchedBridge慢慢会被废弃掉的，建议使用RCTCxxBridge。因为使用RCTCxxBridge我们就必须导入被墙的4个依赖包，就会点繁琐。使用RCTBatchedBridge比较简单不用翻墙的。一下是两个Bridge对应的不同Podfile。</p>
-<h3 id="RCTBatchedBridge对应的Podfile文件内容"><a href="#RCTBatchedBridge对应的Podfile文件内容" class="headerlink" title="RCTBatchedBridge对应的Podfile文件内容"></a>RCTBatchedBridge对应的Podfile文件内容</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"># Uncomment the next line to define a global platform for your project</div><div class="line"># platform :ios, &apos;9.0&apos;</div><div class="line"></div><div class="line">target &apos;TestReactNative&apos; do</div><div class="line">  # Uncomment the next line if you&apos;re using Swift or would like to use dynamic frameworks</div><div class="line">  # use_frameworks!</div><div class="line"></div><div class="line">  # Pods for TestReactNative</div><div class="line">  pod &apos;React&apos;, :path =&gt; &apos;../node_modules/react-native&apos;, :subspecs =&gt; [</div><div class="line">    &apos;Core&apos;,</div><div class="line">    &apos;DevSupport&apos;, # 如果RN版本 &gt;= 0.43，则需要加入此行才能开启开发者菜单</div><div class="line">    &apos;RCTText&apos;,</div><div class="line">    &apos;RCTNetwork&apos;,</div><div class="line">    &apos;RCTWebSocket&apos;, # 这个模块是用于调试功能的</div><div class="line">    &apos;BatchedBridge&apos;//这个是重点，在ReactNative提供的官方例子中没导入，所以按照官方文档去做初始化的工程会报错</div><div class="line">    # 在这里继续添加你所需要的模块</div><div class="line">  ]</div><div class="line">  # 如果你的RN版本 &gt;= 0.42.0，请加入下面这行</div><div class="line">  pod &quot;Yoga&quot;, :path =&gt; &quot;../node_modules/react-native/ReactCommon/yoga&quot;</div><div class="line">end</div></pre></td></tr></table></figure>
-<h3 id="RCTCxxBridge对应的Podfile文件内容"><a href="#RCTCxxBridge对应的Podfile文件内容" class="headerlink" title="RCTCxxBridge对应的Podfile文件内容"></a>RCTCxxBridge对应的Podfile文件内容</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"># Uncomment the next line to define a global platform for your project</div><div class="line"># platform :ios, &apos;9.0&apos;</div><div class="line">react_native_path = &apos;../node_modules/react-native&apos;</div><div class="line"></div><div class="line">target &apos;StudyReactNative&apos; do</div><div class="line">  # Uncomment the next line if you&apos;re using Swift or would like to use dynamic frameworks</div><div class="line">  use_frameworks!</div><div class="line"></div><div class="line">  # Native Navigation!</div><div class="line">  #pod &apos;native-navigation&apos;, :path =&gt; &apos;../node_modules/native-navigation&apos;</div><div class="line"></div><div class="line">  # To use CocoaPods with React Native, you need to add this specific Yoga spec as well</div><div class="line">  pod &apos;Yoga&apos;, :path =&gt; react_native_path + &apos;/ReactCommon/yoga&apos;</div><div class="line"></div><div class="line">  # Third party deps</div><div class="line">  pod &apos;DoubleConversion&apos;, :podspec =&gt; react_native_path + &apos;/third-party-podspecs/DoubleConversion.podspec&apos;</div><div class="line">  pod &apos;GLog&apos;, :podspec =&gt; react_native_path + &apos;/third-party-podspecs/GLog.podspec&apos;</div><div class="line">  pod &apos;Folly&apos;, :podspec =&gt; react_native_path + &apos;/third-party-podspecs/Folly.podspec&apos;</div><div class="line"></div><div class="line">  # You don&apos;t necessarily need all of these subspecs, but this would be a typical setup.</div><div class="line">  pod &apos;React&apos;, :path =&gt; react_native_path, :subspecs =&gt; [</div><div class="line">    &apos;Core&apos;,</div><div class="line">    &apos;CxxBridge&apos;,</div><div class="line">    &apos;RCTText&apos;,</div><div class="line">    &apos;RCTNetwork&apos;,</div><div class="line">    &apos;RCTWebSocket&apos;, # needed for debugging</div><div class="line">    &apos;RCTImage&apos;,</div><div class="line">    &apos;RCTNetwork&apos;,</div><div class="line">    # Add any other subspecs you want to use in your project</div><div class="line">    &apos;DevSupport&apos;</div><div class="line">  ]</div><div class="line">end</div></pre></td></tr></table></figure>
-<p>这里因为导入了四个包，被墙了所以要翻墙。</p>
-<p>四个包的地址<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">fetch_and_unpack glog-0.3.4.tar.gz https://github.com/google/glog/archive/v0.3.4.tar.gz &quot;\&quot;$SCRIPTDIR/ios-configure-glog.sh\&quot;&quot;</div><div class="line">fetch_and_unpack double-conversion-1.1.5.tar.gz https://github.com/google/double-conversion/archive/v1.1.5.tar.gz</div><div class="line">fetch_and_unpack boost_1_63_0.tar.gz https://github.com/react-native-community/boost-for-react-native/releases/download/v1.63.0-0/boost_1_63_0.tar.gz</div><div class="line">fetch_and_unpack folly-2016.09.26.00.tar.gz https://github.com/facebook/folly/archive/v2016.09.26.00.tar.gz</div></pre></td></tr></table></figure></p>
-<p>其实可以通过上边地址自己下载下来放到<br>XXReactNative工程/node_modules/react-native/third-party文件夹下<br>如果没有third-party这个文件夹就新建一个。</p>
-<p>也可以通过百度云盘<a href="https://pan.baidu.com/s/1kVDUAZ9#list/path=%2F" target="_blank" rel="external">third-party</a>下载下来解压缩之后放到XXReactNative工程/node_modules/react-native这个路径下就可以了<br>之后运行pod install即可<br><img src="http://upload-images.jianshu.io/upload_images/6644906-01d13bd37248e3e4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="7DC30CAE-BDB1-439A-810E-1BE35FCC8EA4.png"></p>
-<h2 id="更新以前的工程"><a href="#更新以前的工程" class="headerlink" title="更新以前的工程"></a>更新以前的工程</h2><p>我通过以上方法来更新我以前的工程，同时替换package.json为最新的，发现报错。此时需要我们yarn  install或npm install，然后在ios工程的根目录下执行pod install</p>
-<h2 id="‘boost-iterator-iterator-adaptor-hpp’-file-not-found"><a href="#‘boost-iterator-iterator-adaptor-hpp’-file-not-found" class="headerlink" title="‘boost/iterator/iterator_adaptor.hpp’ file not found"></a>‘boost/iterator/iterator_adaptor.hpp’ file not found</h2><ul>
-<li><p>/Users/Vanessa/.rncache 中 boost_1_63_0.tar.gz， double-conversion-1.1.5.tar.gz， folly-2016.09.26.00.tar.gz， glog-0.3.4.tar.gz 文件下载不完整</p>
-</li>
-<li><p>node_modules/react-native/third-party 文件不完整</p>
-</li>
-</ul>
-<p>解决方案：</p>
-<p>删除 .rncache 后重新下载，或手动下载后放入 .rncache 中</p>
-<p>把以上文件解压后放入 node_modules/react-native/third-party 下</p>
-<p>Clean &amp; Build</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/14/NSInvocation/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="FlyOceanFish">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="FlyOceanFish' Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/10/14/NSInvocation/" itemprop="url">NSInvocation</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-14T09:27:00+08:00">
-                2017-10-14
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/iOS/" itemprop="url" rel="index">
-                    <span itemprop="name">iOS</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>NSInvocation是命令模式的一种实现，它包含选择器、方法签名、相应的参数以及目标对象。所谓的方法签名，即方法所对应的返回值类型和参数类型。当NSInvocatio被调用，它会在运行时通过目标对象去寻找对应的方法，从而确保唯一性，可以用[receiver message]来解释。实际开发过程中直接创建NSInvocation的情况不多见，这些事情通常交给系统来做。比如bang的JSPatch中arm64方法替换的实现就是利用runtime消息转发最后一步中的NSInvocation实现的。</p>
-<h3 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h3><p>基于这种命令模式，可以利用NSInvocation调用任意SEL甚至block。NSInvocation与NSMethodSignature配合来完成调用。NSMethodSignature这个类的对象保存了方法的名称、参数和返回值</p>
-<ul>
-<li>SEL<br>系统<code>NSObject</code>自带的<code>performSelector</code>默认只支持一个参数，我们可以给NSObject增加一个category，增加以下方法就可以支持多个参数的调用了</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">- (id)performSelector:(SEL)aSelector withArguments:(NSArray *)arguments &#123;</div><div class="line">    if (aSelector == nil) return nil;</div><div class="line">    NSMethodSignature *signature = [[self class] instanceMethodSignatureForSelector:aSelector];</div><div class="line">    NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:signature];</div><div class="line">    invocation.target = self;</div><div class="line">    invocation.selector = aSelector; // invocation 有2个隐藏参数，所以 argument 从2开始</div><div class="line">    if ([arguments isKindOfClass:[NSArray class]]) &#123;</div><div class="line">        NSInteger count = MIN(arguments.count, signature.numberOfArguments - 2);</div><div class="line">        for (int i = 0; i &lt; count; i++) &#123;</div><div class="line">            const char *type = [signature getArgumentTypeAtIndex:2 + i]; // 需要做参数类型判断然后解析成对应类型，这里默认所有参数均为OC对象</div><div class="line">            if (strcmp(type, &quot;@&quot;) == 0) &#123;</div><div class="line">                id argument = arguments[i]; [invocation setArgument:&amp;argument atIndex:2 + i];</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    [invocation invoke];</div><div class="line">    id returnVal;</div><div class="line">    if (strcmp(signature.methodReturnType, &quot;@&quot;) == 0) &#123;</div><div class="line">        [invocation getReturnValue:&amp;returnVal];</div><div class="line">    &#125; // 需要做返回类型判断。比如返回值为常量需要包装成对象，这里仅以最简单的`@`为例</div><div class="line">    return returnVal;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p><img src="http://upload-images.jianshu.io/upload_images/6644906-b09479039ddf5488.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="ED3CFE7D-C30A-4ADD-929D-B5F7CB806E82.png"></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/6644906-c1af7b09f14982c9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="FCB4F1F5-1F15-4FDC-A3AE-C1DC95AF32BF.png"></p>
-<h3 id="block"><a href="#block" class="headerlink" title="block"></a>block</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line">static id invokeBlock(id block ,NSArray *arguments) &#123;</div><div class="line">    if (block == nil) return nil;</div><div class="line">    id target = [block  copy];</div><div class="line"></div><div class="line">    const char *_Block_signature(void *);</div><div class="line">    const char *signature = _Block_signature((__bridge void *)target);</div><div class="line"></div><div class="line">    NSMethodSignature *methodSignature = [NSMethodSignature signatureWithObjCTypes:signature];</div><div class="line">    NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:methodSignature];</div><div class="line">    invocation.target = target;</div><div class="line"></div><div class="line">    // invocation 有1个隐藏参数，所以 argument 从1开始</div><div class="line">    if ([arguments isKindOfClass:[NSArray class]]) &#123;</div><div class="line">        NSInteger count = MIN(arguments.count, methodSignature.numberOfArguments - 1);</div><div class="line">        for (int i = 0; i &lt; count; i++) &#123;</div><div class="line">            const char *type = [methodSignature getArgumentTypeAtIndex:1 + i];</div><div class="line">            NSString *typeStr = [NSString stringWithUTF8String:type];</div><div class="line">            if ([typeStr containsString:@&quot;\&quot;&quot;]) &#123;</div><div class="line">                type = [typeStr substringToIndex:1].UTF8String;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            // 需要做参数类型判断然后解析成对应类型，这里默认所有参数均为OC对象</div><div class="line">            if (strcmp(type, &quot;@&quot;) == 0) &#123;</div><div class="line">                id argument = arguments[i];</div><div class="line">                [invocation setArgument:&amp;argument atIndex:1 + i];</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    [invocation invoke];</div><div class="line"></div><div class="line">    id returnVal;</div><div class="line">    const char *type = methodSignature.methodReturnType;</div><div class="line">    NSString *returnType = [NSString stringWithUTF8String:type];</div><div class="line">    if ([returnType containsString:@&quot;\&quot;&quot;]) &#123;</div><div class="line">        type = [returnType substringToIndex:1].UTF8String;</div><div class="line">    &#125;</div><div class="line">    if (strcmp(type, &quot;@&quot;) == 0) &#123;</div><div class="line">        [invocation getReturnValue:&amp;returnVal];</div><div class="line">    &#125;</div><div class="line">    // 需要做返回类型判断。比如返回值为常量需要包装成对象，这里仅以最简单的`@`为例</div><div class="line">    return returnVal;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p><img src="http://upload-images.jianshu.io/upload_images/6644906-f5230ba3653b8382.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="9E8A9D90-F9A9-4DD3-AA21-9953E4953C8D.png"></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/6644906-bf7381308a1d6b66.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<h3 id="SEL与block比较"><a href="#SEL与block比较" class="headerlink" title="SEL与block比较"></a>SEL与block比较</h3><blockquote>
-<ul>
-<li>invocation<br>SEL既有target也有selector，block只有target</li>
-<li>signature<br>SEL有两个隐藏参数，类型均为@，分别对应target和selector。block有一个隐藏参数，类型为@?，对应target且block的target为他本身</li>
-<li>type<br>以OC对象为例：SEL的type为@，block的type会跟上具体类型，如@”NSString”</li>
-</ul>
-</blockquote>
-<h3 id="再谈block"><a href="#再谈block" class="headerlink" title="再谈block"></a>再谈block</h3><p>在block的invocation中有这样的代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">const char *_Block_signature(void *);</div><div class="line">const char *signature = _Block_signature((__bridge void *)target);</div></pre></td></tr></table></figure></p>
-<p>_Block_signature其实是JavaScriptCore/ObjcRuntimeExtras.h<br>中的私有API(这个头文件并没有公开<a href="http://trac.webkit.org/browser/trunk/Source/JavaScriptCore/API/ObjcRuntimeExtras.h" target="_blank" rel="external">可以戳这里查看</a>)</p>
-<p>既然苹果把API封了，那就自己实现咯，万能的github早有答案<a href="https://github.com/ebf/CTObjectiveCRuntimeAdditions" target="_blank" rel="external">CTObjectiveCRuntimeAdditions</a>把CTBlockDescription.h<br>和CTBlockDescription.m<br>拖到项目中，代码这样写<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line">static id invokeBlock(id block ,NSArray *arguments) &#123;</div><div class="line">    if (block == nil) return nil;</div><div class="line">    id target = [block  copy];</div><div class="line"></div><div class="line">    CTBlockDescription *ct = [[CTBlockDescription alloc] initWithBlock:target];</div><div class="line">    NSMethodSignature *methodSignature = ct.blockSignature;</div><div class="line">    NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:methodSignature];</div><div class="line">    invocation.target = target;</div><div class="line"></div><div class="line">    // invocation 有1个隐藏参数，所以 argument 从1开始</div><div class="line">    if ([arguments isKindOfClass:[NSArray class]]) &#123;</div><div class="line">        NSInteger count = MIN(arguments.count, methodSignature.numberOfArguments - 1);</div><div class="line">        for (int i = 0; i &lt; count; i++) &#123;</div><div class="line">            const char *type = [methodSignature getArgumentTypeAtIndex:1 + i];</div><div class="line">            NSString *typeStr = [NSString stringWithUTF8String:type];</div><div class="line">            if ([typeStr containsString:@&quot;\&quot;&quot;]) &#123;</div><div class="line">                type = [typeStr substringToIndex:1].UTF8String;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            // 需要做参数类型判断然后解析成对应类型，这里默认所有参数均为OC对象</div><div class="line">            if (strcmp(type, &quot;@&quot;) == 0) &#123;</div><div class="line">                id argument = arguments[i];</div><div class="line">                [invocation setArgument:&amp;argument atIndex:1 + i];</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    [invocation invoke];</div><div class="line"></div><div class="line">    id returnVal;</div><div class="line">    const char *type = methodSignature.methodReturnType;</div><div class="line">    NSString *returnType = [NSString stringWithUTF8String:type];</div><div class="line">    if ([returnType containsString:@&quot;\&quot;&quot;]) &#123;</div><div class="line">        type = [returnType substringToIndex:1].UTF8String;</div><div class="line">    &#125;</div><div class="line">    if (strcmp(type, &quot;@&quot;) == 0) &#123;</div><div class="line">        [invocation getReturnValue:&amp;returnVal];</div><div class="line">    &#125;</div><div class="line">    // 需要做返回类型判断。比如返回值为常量需要包装成对象，这里仅以最简单的`@`为例</div><div class="line">    return returnVal;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/6644906-143e6ac30788e9c1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="17D15BD3-98AA-46E9-BAD4-2747E16DD677.png"></p>
-<h3 id="NSInvocation-h"><a href="#NSInvocation-h" class="headerlink" title="NSInvocation.h"></a>NSInvocation.h</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div></pre></td><td class="code"><pre><div class="line">@interface NSInvocation : NSObject &#123;</div><div class="line">@private</div><div class="line">    __strong void *_frame;</div><div class="line">    __strong void *_retdata;</div><div class="line">    id _signature;</div><div class="line">    id _container;</div><div class="line">    uint8_t _retainedArgs;</div><div class="line">    uint8_t _reserved[15];</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 通过NSMethodSignature对象创建NSInvocation对象，NSMethodSignature为方法签名类</div><div class="line">+ (NSInvocation *)invocationWithMethodSignature:(NSMethodSignature *)sig;</div><div class="line"></div><div class="line">// 获取NSMethodSignature对象</div><div class="line">@property (readonly, retain) NSMethodSignature *methodSignature;</div><div class="line"></div><div class="line">// 保留参数，它会将传入的所有参数以及target都retain一遍</div><div class="line">- (void)retainArguments;</div><div class="line"></div><div class="line">// 判断参数是否还存在</div><div class="line">// 调用retainArguments之前，值为NO，调用之后值为YES</div><div class="line">@property (readonly) BOOL argumentsRetained;</div><div class="line"></div><div class="line">// 设置消息调用者，注意：target最好不要是局部变量</div><div class="line">@property (nullable, assign) id target;</div><div class="line"></div><div class="line">// 设置要调用的消息</div><div class="line">@property SEL selector;</div><div class="line"></div><div class="line">// 获取消息返回值</div><div class="line">- (void)getReturnValue:(void *)retLoc;</div><div class="line"></div><div class="line">// 设置消息返回值</div><div class="line">- (void)setReturnValue:(void *)retLoc;</div><div class="line"></div><div class="line">// 获取消息参数</div><div class="line">- (void)getArgument:(void *)argumentLocation atIndex:(NSInteger)idx;</div><div class="line"></div><div class="line">// 设置消息参数</div><div class="line">- (void)setArgument:(void *)argumentLocation atIndex:(NSInteger)idx;</div><div class="line"></div><div class="line">// 发送消息，即执行方法</div><div class="line">- (void)invoke;</div><div class="line"></div><div class="line">// target发送消息，既设置了target同时执行方法。这一步要注意在调用此方法之前必须设置了selector和argument</div><div class="line">- (void)invokeWithTarget:(id)target;</div><div class="line"></div><div class="line">@end</div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/14/React Native组件生命周期/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="FlyOceanFish">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="FlyOceanFish' Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/10/14/React Native组件生命周期/" itemprop="url">React Native组件生命周期</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-14T09:27:00+08:00">
-                2017-10-14
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/React-Native/" itemprop="url" rel="index">
-                    <span itemprop="name">React Native</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h2><p>RN的Component如同iOS中ViewController一样，同样具有自己的生命周期，如果大家对于ViewController的生命周期熟悉的话，相信看明白也不在话下的</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/6644906-f3f49bf47382bddf.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Component生命周期.jpeg"></p>
-
-          
+          在程序的世界里，很多程序的产生其实就是由于作者本身’懒’的原因，所以就做了一个程序，方便了自己也方便了大家。在做组件化的时候，大家肯定遇到过繁琐的发布spec。既要提交git又要发布到自己的私有仓库，通过命令来实现也有很多条，那有没有发布只要执行一条语句，就能帮我们自动执行我们想要的所有语句呢？答案
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/10/31/通过Fastlane自动化发布Spec/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1963,7 +1828,7 @@ NSLog(@&quot;formattedNumberString: %@&quot;, formattedNumberString);
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2013,7 +1878,7 @@ NSLog(@&quot;formattedNumberString: %@&quot;, formattedNumberString);
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-count">44</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2024,7 +1889,7 @@ NSLog(@&quot;formattedNumberString: %@&quot;, formattedNumberString);
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -2035,7 +1900,7 @@ NSLog(@&quot;formattedNumberString: %@&quot;, formattedNumberString);
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -2074,7 +1939,7 @@ NSLog(@&quot;formattedNumberString: %@&quot;, formattedNumberString);
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
+        <div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
@@ -2253,6 +2118,21 @@ NSLog(@&quot;formattedNumberString: %@&quot;, formattedNumberString);
 
 
 
+
+  
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine@1.1.6/dist/Valine.min.js"></script>
+  <script type="text/javascript">
+    new Valine({
+        av: AV,
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        app_id: 'BUyek27xhBJW608unzBEyhWI-gzGzoHsz',
+        app_key: 'lT2NUWTMwPfNYl6xMQUtUxDv',
+        placeholder: '请输入评论'
+    });
+  </script>
 
 
 
