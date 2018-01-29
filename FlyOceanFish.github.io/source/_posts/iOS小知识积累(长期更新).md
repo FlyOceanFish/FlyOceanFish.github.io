@@ -1,7 +1,7 @@
 ---
 title: iOS小知识积累(长期更新) # 这是标题
-date: 2017-11-25 09:35:00
-updated: 2017-11-27 09:06:00
+date: 2018-01-29 09:35:00
+updated: 2017-01-29 09:06:00
 categories:  # 这里写的分类会自动汇集到 categories 页面上，分类可以多级
 - iOS # 一级分类
 tags:   # 这里写的标签会自动汇集到 tags 页面上
@@ -247,3 +247,7 @@ OC对象和CF(CoreFoundation)对象之间转换
 * __bridge_transfer:常用在讲CF对象转换成OC对象时，将CF对象的所有权交给OC对象，此时ARC就能自动管理该内存；（作用同CFBridgingRelease()）
 
 * __bridge_retained:（与__bridge_transfer相反）常用在将OC对象转换成CF对象时，将OC对象的所有权交给CF对象来管理；(作用同CFBridgingRetain())，最后调用CFRelease将其手动释放.
+
+30、tableview 分割线靠边
+设置tableview的separate line 的时候，如果已经设置了Separator Inset (left=0)但是线还是不靠边。
+>cell.layoutMargins = UIEdgeInsets.zero
