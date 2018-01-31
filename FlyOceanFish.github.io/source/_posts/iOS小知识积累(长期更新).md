@@ -251,3 +251,6 @@ OC对象和CF(CoreFoundation)对象之间转换
 30、tableview 分割线靠边
 设置tableview的separate line 的时候，如果已经设置了Separator Inset (left=0)但是线还是不靠边。
 >cell.layoutMargins = UIEdgeInsets.zero
+
+31、倒计时UIButton数字闪烁解决方法
+默认`type`是`system`，将`type`改成`custom`即可。[UIbutton+Timer](https://github.com/FlyOceanFish/UIButtonTimer)
