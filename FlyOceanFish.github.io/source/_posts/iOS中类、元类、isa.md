@@ -30,6 +30,16 @@ Person *person = [[Person alloc] init];
 ````Objective-C
 Class aclass = [Person class];
 ````
+所以`Class meta = object_getClass(aclass)`得到的就是元类，与`Class metaClass = objc_getMetaClass(name)`得到的结果一致。
+```
+Person *person = [[Person alloc] init];
+Class class = [Person class];
+Class a = object_getClass(person);
+Class b = object_getClass(class);//元类
+Class c = objc_getMetaClass(object_getClassName(person));//b与c一样都是元类
+BOOL aBOOL = class_isMetaClass(a);//NO
+BOOL bBOOL = class_isMetaClass(b);//YES
+```
 >一切皆对象。每一个对象都对应一个类。 `Person` 类就是`person`变量对象的类,换句话说就是`person`对象的isa指向`Person`对应的结构体的类;`aclass`也是对象，描述它的类就是元类，换句话说`aclass`对象的isa指向的就是`元类`。
 **元类保存了类方法的列表**。当一个类方法被调用时,元类会首先查找它本身是否有该类方法的实现,如果没有则该元类会向它的父类查找该方法,直到一直找到继承链的头。（回答文章上边查找方法所欠缺的地方）
 
