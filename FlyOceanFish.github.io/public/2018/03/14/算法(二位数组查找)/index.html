@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="iOS," />
+  <meta name="keywords" content="iOS,算法," />
 
 
 
@@ -79,22 +79,20 @@
 
 
 
-<meta name="description" content="本文实现了jenkins+fastlane自动打包Android、iOS，然后上传到蒲公英上，最后通过邮件通知相关人员 工具 jenkins fastlane Homebrew  步骤1、 安装brew，如果电脑已经安装，可以忽略  curl -LsSf http://github.com/mxcl/homebrew/tarball/master | sudo tar xvz -C/usr/loc">
-<meta name="keywords" content="iOS">
+<meta name="description" content="题目 在一个二位数组中，每一行都按照从左到右递增的顺序排序，每一列都按照从上到下递增的顺序排序。请完成一个函数，输入这样的一个二位数组和一个整数，判断数组中是否含有该整数。  最简单的思路：就是遍历数组，找到即可。缺点：时间复杂度比较大第二种思路：选择中间一个，然后进行判断，左右判断，这样时间复杂度有所减少。第三种思路：从最右上角开始开始比较，这样每一次都会排出一行或者一列，这样二位数组的范围逐渐">
+<meta name="keywords" content="iOS,算法">
 <meta property="og:type" content="article">
-<meta property="og:title" content="在mac上快速搭建Android、iOS自动打包环境(一)">
-<meta property="og:url" content="http://yoursite.com/2017/10/14/在mac上快速搭建Android、iOS自动打包环境(一)/index.html">
+<meta property="og:title" content="算法(二位数组查找)">
+<meta property="og:url" content="http://yoursite.com/2018/03/14/算法(二位数组查找)/index.html">
 <meta property="og:site_name" content="FlyOceanFish&#39; Blog">
-<meta property="og:description" content="本文实现了jenkins+fastlane自动打包Android、iOS，然后上传到蒲公英上，最后通过邮件通知相关人员 工具 jenkins fastlane Homebrew  步骤1、 安装brew，如果电脑已经安装，可以忽略  curl -LsSf http://github.com/mxcl/homebrew/tarball/master | sudo tar xvz -C/usr/loc">
+<meta property="og:description" content="题目 在一个二位数组中，每一行都按照从左到右递增的顺序排序，每一列都按照从上到下递增的顺序排序。请完成一个函数，输入这样的一个二位数组和一个整数，判断数组中是否含有该整数。  最简单的思路：就是遍历数组，找到即可。缺点：时间复杂度比较大第二种思路：选择中间一个，然后进行判断，左右判断，这样时间复杂度有所减少。第三种思路：从最右上角开始开始比较，这样每一次都会排出一行或者一列，这样二位数组的范围逐渐">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/6644906-e7bd74cf75b6b438.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/6644906-4bb3b4f4d3d86e8c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/6644906-673e05f3f6de2730.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2018-01-22T05:56:56.000Z">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/6644906-8d9decf0865606bf.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2018-03-14T02:15:15.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="在mac上快速搭建Android、iOS自动打包环境(一)">
-<meta name="twitter:description" content="本文实现了jenkins+fastlane自动打包Android、iOS，然后上传到蒲公英上，最后通过邮件通知相关人员 工具 jenkins fastlane Homebrew  步骤1、 安装brew，如果电脑已经安装，可以忽略  curl -LsSf http://github.com/mxcl/homebrew/tarball/master | sudo tar xvz -C/usr/loc">
-<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/6644906-e7bd74cf75b6b438.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta name="twitter:title" content="算法(二位数组查找)">
+<meta name="twitter:description" content="题目 在一个二位数组中，每一行都按照从左到右递增的顺序排序，每一列都按照从上到下递增的顺序排序。请完成一个函数，输入这样的一个二位数组和一个整数，判断数组中是否含有该整数。  最简单的思路：就是遍历数组，找到即可。缺点：时间复杂度比较大第二种思路：选择中间一个，然后进行判断，左右判断，这样时间复杂度有所减少。第三种思路：从最右上角开始开始比较，这样每一次都会排出一行或者一列，这样二位数组的范围逐渐">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/6644906-8d9decf0865606bf.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
 
@@ -124,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/10/14/在mac上快速搭建Android、iOS自动打包环境(一)/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/03/14/算法(二位数组查找)/"/>
 
 
 
 
 
-  <title>在mac上快速搭建Android、iOS自动打包环境(一) | FlyOceanFish' Blog</title>
+  <title>算法(二位数组查找) | FlyOceanFish' Blog</title>
   
 
 
@@ -277,7 +275,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/14/在mac上快速搭建Android、iOS自动打包环境(一)/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/14/算法(二位数组查找)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="FlyOceanFish">
@@ -294,7 +292,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">在mac上快速搭建Android、iOS自动打包环境(一)</h2>
+          <h2 class="post-title" itemprop="name headline">算法(二位数组查找)</h2>
         
 
         <div class="post-meta">
@@ -306,8 +304,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-14T14:27:00+08:00">
-                2017-10-14
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-14T10:15:00+08:00">
+                2018-03-14
               </time>
             
 
@@ -329,8 +327,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/iOS/" itemprop="url" rel="index">
-                    <span itemprop="name">iOS</span>
+                  <a href="/categories/算法/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
                   </a>
                 </span>
 
@@ -366,48 +364,12 @@
       
 
       
-        <p>本文实现了jenkins+fastlane自动打包Android、iOS，然后上传到蒲公英上，最后通过邮件通知相关人员</p>
-<h1 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h1><ul>
-<li><a href="https://jenkins.io" target="_blank" rel="external">jenkins</a></li>
-<li><a href="https://github.com/fastlane/fastlane" target="_blank" rel="external">fastlane</a></li>
-<li>Homebrew</li>
-</ul>
-<h1 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h1><p>1、 安装brew，如果电脑已经安装，可以忽略</p>
-<blockquote>
-<p>curl -LsSf <a href="http://github.com/mxcl/homebrew/tarball/master" target="_blank" rel="external">http://github.com/mxcl/homebrew/tarball/master</a> | sudo tar xvz -C/usr/local –strip 1</p>
+        <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><blockquote>
+<p>在一个二位数组中，每一行都按照从左到右递增的顺序排序，每一列都按照从上到下递增的顺序排序。请完成一个函数，输入这样的一个二位数组和一个整数，判断数组中是否含有该整数。</p>
 </blockquote>
-<p>2、 安装java环境</p>
-<blockquote>
-<p>brew cask install java</p>
-</blockquote>
-<p>3、安装jenkins</p>
-<blockquote>
-<p>brew install jenkins</p>
-</blockquote>
-<p>4、设置端口</p>
-<blockquote>
-<p>java -jar /usr/local/Cellar/jenkins/2.67/libexec/jenkins.war –httpPort=8080</p>
-</blockquote>
-<p>5、启动jenkins</p>
-<blockquote>
-<p>jenkins</p>
-</blockquote>
-<p>到这步jenkins已经安装完毕，在浏览器中输入<a href="http://localhost:8080" target="_blank" rel="external">http://localhost:8080</a> 即可出现以下界面:</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/6644906-e7bd74cf75b6b438.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="4046DB34-2FB9-481F-A81C-2B3924F33C72.png"><br>6、在终端命令行输入以下命令获取密码，填入输入框之后点击continue</p>
-<blockquote>
-<p>cat /Users/wrf/.jenkins/secrets/initialAdminPassword<br>7、之后出现以下界面，点击install suggested plugin。这步操作安装的插件基本包括了常规使用的全部</p>
-</blockquote>
-<p><img src="http://upload-images.jianshu.io/upload_images/6644906-4bb3b4f4d3d86e8c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="7FCE5BB6-C6D6-4DD6-B60C-510523C6BA33.png"></p>
-<p>8、之后会看见如下界面，如果出现红叉的代表安装失败，只要点击retry即可，基本都会安装成功。之后创建账号就行了。整个jenkins已经安装成功</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/6644906-673e05f3f6de2730.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="E1BFCF45-4DCC-44DD-B30E-18674C91098A.png"><br>9、fastlane安装</p>
-<blockquote>
-<p>brew cask install fastlane</p>
-</blockquote>
-<p>　　至此整个环境已经完全搭好，第二篇文章将详细介绍android、iOS的打包流程。</p>
-<h1 id="遇到的坑"><a href="#遇到的坑" class="headerlink" title="遇到的坑"></a><em>遇到的坑</em></h1><p>　　在这个安装过程中遇到一个坑，研究了好久好不容易解决了。如果通过jenkins官方下载的.dmg文件安装，发现打包都是超时，打包不成功。通过命令行安装的jenkins能正确打包。</p>
-<pre><code>ERROR: Timeout after 10 minutes
-ERROR: Error fetching remote repo &apos;origin&apos;
-</code></pre><p>　　研究之后主要原因其实是这两种方式安装成功之后的安装路径不一样，一个是在shared路径下，一个是在/User/用户名这个路径下</p>
+<p>最简单的思路：就是遍历数组，找到即可。缺点：时间复杂度比较大<br>第二种思路：选择中间一个，然后进行判断，左右判断，这样时间复杂度有所减少。<br>第三种思路：从最右上角开始开始比较，这样每一次都会排出一行或者一列<br>，这样二位数组的范围逐渐在减少。如下图：<br><img src="https://upload-images.jianshu.io/upload_images/6644906-8d9decf0865606bf.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="WechatIMG34.jpeg"></p>
+<h1 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h1><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">bool</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> *martrix,<span class="keyword">int</span> rows,<span class="keyword">int</span> columns,<span class="keyword">int</span> num)</span></span>&#123;</div><div class="line">    <span class="keyword">int</span> row = <span class="number">0</span>;</div><div class="line">    <span class="keyword">int</span> column = columns<span class="number">-1</span>;</div><div class="line">    <span class="keyword">if</span> (martrix==<span class="literal">NULL</span>||rows&lt;<span class="number">0</span>||column&lt;<span class="number">1</span>) &#123;</div><div class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">while</span> (row&lt;rows&amp;&amp;column&lt;columns) &#123;</div><div class="line">        <span class="keyword">if</span> (martrix[row*columns+column]==num) &#123;</div><div class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span> (martrix[row*columns+column]&lt;num)&#123;</div><div class="line">            ++row;</div><div class="line">        &#125;<span class="keyword">else</span>&#123;</div><div class="line">            --column;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> a[][<span class="number">4</span>] = &#123;&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>&#125;,&#123;<span class="number">5</span>,<span class="number">6</span>,<span class="number">9</span>,<span class="number">10</span>&#125;,&#123;<span class="number">7</span>,<span class="number">12</span>,<span class="number">18</span>,<span class="number">20</span>&#125;,&#123;<span class="number">9</span>,<span class="number">13</span>,<span class="number">19</span>,<span class="number">30</span>&#125;&#125;;</div><div class="line"><span class="keyword">bool</span> isfind = find(a, <span class="number">4</span>, <span class="number">4</span>, <span class="number">19</span>);</div><div class="line"><span class="built_in">printf</span>(<span class="string">"%d\n"</span>,isfind);</div></pre></td></tr></table></figure>
 
       
     </div>
@@ -427,6 +389,8 @@ ERROR: Error fetching remote repo &apos;origin&apos;
           
             <a href="/tags/iOS/" rel="tag"># iOS</a>
           
+            <a href="/tags/算法/" rel="tag"># 算法</a>
+          
         </div>
       
 
@@ -438,8 +402,8 @@ ERROR: Error fetching remote repo &apos;origin&apos;
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/10/14/React Native源码分析原理（二）(基于0.48版本)/" rel="next" title="React Native源码分析原理（二）(基于0.48版本)">
-                <i class="fa fa-chevron-left"></i> React Native源码分析原理（二）(基于0.48版本)
+              <a href="/2018/03/13/Python记一次自动脚本历程/" rel="next" title="Python记一次自动脚本历程">
+                <i class="fa fa-chevron-left"></i> Python记一次自动脚本历程
               </a>
             
           </div>
@@ -447,10 +411,6 @@ ERROR: Error fetching remote repo &apos;origin&apos;
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/10/14/在mac上快速搭建Android、iOS自动打包环境(二)/" rel="prev" title="在mac上快速搭建Android、iOS自动打包环境(二)">
-                在mac上快速搭建Android、iOS自动打包环境(二) <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -592,7 +552,7 @@ ERROR: Error fetching remote repo &apos;origin&apos;
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#工具"><span class="nav-number">1.</span> <span class="nav-text">工具</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#步骤"><span class="nav-number">2.</span> <span class="nav-text">步骤</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#遇到的坑"><span class="nav-number">3.</span> <span class="nav-text">遇到的坑</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#题目"><span class="nav-number">1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#实现"><span class="nav-number">2.</span> <span class="nav-text">实现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#测试"><span class="nav-number">3.</span> <span class="nav-text">测试</span></a></li></ol></div>
             
 
           </div>
