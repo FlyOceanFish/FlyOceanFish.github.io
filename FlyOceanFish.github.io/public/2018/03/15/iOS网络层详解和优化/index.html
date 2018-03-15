@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="iOS," />
+  <meta name="keywords" content="iOS,网络层," />
 
 
 
@@ -79,18 +79,22 @@
 
 
 
-<meta name="description" content="不知道大家有没有发现微信聊天历史列表、苹果自带的通讯录历史记录等应用如隐藏的长按功能。哈哈，如果没有也不要气馁，也不要怀疑人生。要不就要换手机了，要不就要升级系统了！ 这个功能看着挺炫的，也挺方便的吧，如果看历史记录等等其他快捷操作的一个入口。如果没有想到正确的实现方法，可能会实现起来很难，或者效果没有这么好。如果找到了正确的方法，其实实现起来非常简单。 其实这个效果就是利用了苹果的3Dtouch">
-<meta name="keywords" content="iOS">
+<meta name="description" content="HTTPHTTP方法HTTP属于应用层。具有以下方法：  GET 最常见 HEAD 服务器只返回头部。比如可用于了解资源情况，看看某个对象是否存在，测试资源是否被修改了。 PUT 向服务器写入文档,是全部更新。 PATCH 局部更新。比如我们有一个UserInfo，里面有userId、userName、等10个字段。只编辑部分字段进行提交的时候 POST 写服务器提交数据，通常是表单 TRACE">
+<meta name="keywords" content="iOS,网络层">
 <meta property="og:type" content="article">
-<meta property="og:title" content="iOS实现微信列表长按效果">
-<meta property="og:url" content="http://yoursite.com/2017/11/07/iOS实现微信列表长按效果/index.html">
+<meta property="og:title" content="iOS网络层详情和优化">
+<meta property="og:url" content="http://yoursite.com/2018/03/15/iOS网络层详解和优化/index.html">
 <meta property="og:site_name" content="FlyOceanFish&#39; Blog">
-<meta property="og:description" content="不知道大家有没有发现微信聊天历史列表、苹果自带的通讯录历史记录等应用如隐藏的长按功能。哈哈，如果没有也不要气馁，也不要怀疑人生。要不就要换手机了，要不就要升级系统了！ 这个功能看着挺炫的，也挺方便的吧，如果看历史记录等等其他快捷操作的一个入口。如果没有想到正确的实现方法，可能会实现起来很难，或者效果没有这么好。如果找到了正确的方法，其实实现起来非常简单。 其实这个效果就是利用了苹果的3Dtouch">
+<meta property="og:description" content="HTTPHTTP方法HTTP属于应用层。具有以下方法：  GET 最常见 HEAD 服务器只返回头部。比如可用于了解资源情况，看看某个对象是否存在，测试资源是否被修改了。 PUT 向服务器写入文档,是全部更新。 PATCH 局部更新。比如我们有一个UserInfo，里面有userId、userName、等10个字段。只编辑部分字段进行提交的时候 POST 写服务器提交数据，通常是表单 TRACE">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-01-22T05:56:55.000Z">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/6644906-69ddcaded5aadf03.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://img.blog.csdn.net/20160914100821925?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
+<meta property="og:image" content="http://www.ruanyifeng.com/blogimg/asset/201402/bg2014020502.png">
+<meta property="og:updated_time" content="2018-03-15T02:41:50.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="iOS实现微信列表长按效果">
-<meta name="twitter:description" content="不知道大家有没有发现微信聊天历史列表、苹果自带的通讯录历史记录等应用如隐藏的长按功能。哈哈，如果没有也不要气馁，也不要怀疑人生。要不就要换手机了，要不就要升级系统了！ 这个功能看着挺炫的，也挺方便的吧，如果看历史记录等等其他快捷操作的一个入口。如果没有想到正确的实现方法，可能会实现起来很难，或者效果没有这么好。如果找到了正确的方法，其实实现起来非常简单。 其实这个效果就是利用了苹果的3Dtouch">
+<meta name="twitter:title" content="iOS网络层详情和优化">
+<meta name="twitter:description" content="HTTPHTTP方法HTTP属于应用层。具有以下方法：  GET 最常见 HEAD 服务器只返回头部。比如可用于了解资源情况，看看某个对象是否存在，测试资源是否被修改了。 PUT 向服务器写入文档,是全部更新。 PATCH 局部更新。比如我们有一个UserInfo，里面有userId、userName、等10个字段。只编辑部分字段进行提交的时候 POST 写服务器提交数据，通常是表单 TRACE">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/6644906-69ddcaded5aadf03.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
 
@@ -120,13 +124,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/11/07/iOS实现微信列表长按效果/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/03/15/iOS网络层详解和优化/"/>
 
 
 
 
 
-  <title>iOS实现微信列表长按效果 | FlyOceanFish' Blog</title>
+  <title>iOS网络层详情和优化 | FlyOceanFish' Blog</title>
   
 
 
@@ -273,7 +277,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/07/iOS实现微信列表长按效果/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/15/iOS网络层详解和优化/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="FlyOceanFish">
@@ -290,7 +294,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">iOS实现微信列表长按效果</h2>
+          <h2 class="post-title" itemprop="name headline">iOS网络层详情和优化</h2>
         
 
         <div class="post-meta">
@@ -302,8 +306,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-07T15:12:00+08:00">
-                2017-11-07
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-15T10:41:00+08:00">
+                2018-03-15
               </time>
             
 
@@ -362,28 +366,87 @@
       
 
       
-        <p>不知道大家有没有发现微信聊天历史列表、苹果自带的通讯录历史记录等应用如隐藏的长按功能。哈哈，如果没有也不要气馁，也不要怀疑人生。要不就要换手机了，要不就要升级系统了！</p>
-<p>这个功能看着挺炫的，也挺方便的吧，如果看历史记录等等其他快捷操作的一个入口。如果没有想到正确的实现方法，可能会实现起来很难，或者效果没有这么好。如果找到了正确的方法，其实实现起来非常简单。</p>
-<p>其实这个效果就是利用了苹果的3Dtouch，不支持3Dtouch的手机或系统就没法体验到了。</p>
-<p>卖了一个大关子，也索罗了一顿，接下来让我看看如何实现的。哈哈。</p>
-<h3 id="给需要的UIView注册3DTouch行为"><a href="#给需要的UIView注册3DTouch行为" class="headerlink" title="给需要的UIView注册3DTouch行为"></a>给需要的UIView注册3DTouch行为</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[self registerForPreviewingWithDelegate:self sourceView:cell];</div></pre></td></tr></table></figure>
-<p>这个方法其实就是<code>UIViewController</code>的方法，最后一个参数就是指定需要添加3DTouch的View，这里我们要加的是我们自己的tableviewcell.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath&#123;</div><div class="line">    MYTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@&quot;MYTableViewCell&quot; forIndexPath:indexPath];</div><div class="line">    [self registerForPreviewingWithDelegate:self sourceView:cell];</div><div class="line">    return cell;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="实现UIViewControllerPreviewingDelegate协议"><a href="#实现UIViewControllerPreviewingDelegate协议" class="headerlink" title="实现UIViewControllerPreviewingDelegate协议"></a>实现<code>UIViewControllerPreviewingDelegate</code>协议</h3><p>这个协议有两个方法我们都要实现</p>
+        <h1 id="HTTP"><a href="#HTTP" class="headerlink" title="HTTP"></a>HTTP</h1><h2 id="HTTP方法"><a href="#HTTP方法" class="headerlink" title="HTTP方法"></a>HTTP方法</h2><p>HTTP属于应用层。具有以下方法：</p>
 <ul>
-<li>第一个<code>- (nullable UIViewController *)previewingContext:(id &lt;UIViewControllerPreviewing&gt;)previewingContext viewControllerForLocation:(CGPoint)location</code></li>
+<li>GET 最常见</li>
+<li>HEAD 服务器只返回头部。比如可用于了解资源情况，看看某个对象是否存在，测试资源是否被修改了。</li>
+<li>PUT 向服务器写入文档,是全部更新。</li>
+<li>PATCH 局部更新。比如我们有一个UserInfo，里面有userId、userName、等10个字段。只编辑部分字段进行提交的时候</li>
+<li>POST 写服务器提交数据，通常是表单</li>
+<li>TRACE 允许客户端在最终将请求发送给服务器时，看看请求变成了什么样。因为有可能被防火墙、代理、网关等修改</li>
+<li>OPTIONS 请求服务器告知其支持的各种功能。比如服务器支持哪些方法；对某些特殊资源支持哪些方法等。</li>
+<li>DELETE 请服务器上传请求URL所指定的资源</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">- (nullable UIViewController *)previewingContext:(id &lt;UIViewControllerPreviewing&gt;)previewingContext viewControllerForLocation:(CGPoint)location&#123;</div><div class="line">    PreViewController *vc = [[PreViewController alloc] init];</div><div class="line">    return vc;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>这个协议方法就是我们3DTouch之后要显示的视图，想显示什么就自己实现，完全可以由自己来控制</p>
+<h2 id="状态码"><a href="#状态码" class="headerlink" title="状态码"></a>状态码</h2><ul>
+<li>100-199 信息性状态码，。</li>
+<li>200-299 成功状态码。200是最常见的</li>
+<li>300-399 重定向。302、304比较常见。比如判断服务器图片是否修改了使用304</li>
+<li>400-499 客户端错误。<br>客户端向服务器发送了一些无法处理的东西，比如错误的请求报文，请求一个不存在的URL404</li>
+<li>400-599 服务器内部错误。<h1 id="Api请求过程"><a href="#Api请求过程" class="headerlink" title="Api请求过程"></a>Api请求过程</h1>当我们向服务器发送一个请求的时候，做了以下事情：</li>
+</ul>
+<p>1.DNS Lookup</p>
+<p>2.TCP Handshake</p>
+<p>3.TLS或SSL Handshake</p>
+<p>4.TCP/HTTP Request/Response</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/6644906-69ddcaded5aadf03.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<h2 id="DNS-Lookup"><a href="#DNS-Lookup" class="headerlink" title="DNS Lookup"></a>DNS Lookup</h2><p>DNS(Domain Name System)域名解析系统，计算机之间的通信不认识域名，只能认识IP，所以DNS就是网络请求的第一步，通过域名获取IP</p>
+<h2 id="TCP-Handshake"><a href="#TCP-Handshake" class="headerlink" title="TCP Handshake"></a>TCP Handshake</h2><p>HTTP属于应用层协议，它不关心网络t通信的具体细节，全部交给TCP/IP。TCP（Transmission Control Protocol 传输控制协议）它完成第四层传输层所指定的功能。</p>
+<h3 id="TCP三次握手连接"><a href="#TCP三次握手连接" class="headerlink" title="TCP三次握手连接"></a>TCP三次握手连接</h3><p>第一次握手：建立连接时，客户端发送syn包（syn=j）到服务器，并进入SYN_SENT状态，等待服务器确认；SYN：同步序列编号（Synchronize Sequence Numbers）。</p>
+<p>第二次握手：服务器收到syn包，必须确认客户的SYN（ack=j+1），同时自己也发送一个SYN包（syn=k），即SYN+ACK包，此时服务器进入SYN_RECV状态；</p>
+<p>第三次握手：客户端收到服务器的SYN+ACK包，向服务器发送确认包ACK(ack=k+1），此包发送完毕，客户端和服务器进入ESTABLISHED（TCP连接成功）状态，完成三次握手。<br><img src="http://img.blog.csdn.net/20160914100821925?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt="三次握手"></p>
+<blockquote>
+<font color="red">第三次握手，主机A发送一次确认是为了防止：如果客户端迟迟没有收到服务器返回的确认报文，这时他会放弃连接，重新启动一条连接请求；但问题是：服务器不知客户端没收到，所以他会收到两个连接请求，白白浪费了一条连接开销。</font>
+
+</blockquote>
+<h2 id="SSL握手"><a href="#SSL握手" class="headerlink" title="SSL握手"></a>SSL握手</h2><p>SSL运行在TCP/IP层之上、应用层之下，为应用层提供加密数据通道</p>
+<p>HTTPS比较消耗性能，主要体现在SSL握手消耗的时间。它消耗的时间是TCP握手的时间的3倍甚至更多。</p>
+<p><img src="http://www.ruanyifeng.com/blogimg/asset/201402/bg2014020502.png" alt="SSL四次通信握手图"></p>
+<blockquote>
+<p>“握手阶段”的所有通信都是明文的。整个握手阶段全部结束。接下来，客户端与服务器进入加密通信，就完全是使用普通的HTTP协议，只不过用”会话密钥”加密内容。</p>
+<h1 id="HTTP和HTTPS时间消耗"><a href="#HTTP和HTTPS时间消耗" class="headerlink" title="HTTP和HTTPS时间消耗"></a>HTTP和HTTPS时间消耗</h1><p>HTTP耗时 = TCP握手</p>
+<p>HTTPs耗时 = TCP握手 + SSL握手</p>
+</blockquote>
+<h1 id="keep-alive"><a href="#keep-alive" class="headerlink" title="keep-alive"></a>keep-alive</h1><p>客户端与服务器保持连接的状态，比如长连接</p>
+<pre><code>HTTP/1.1 200 OK
+Connection: Keep-Alive
+Content-Encoding: gzip
+Content-Type: text/html; charset=utf-8
+Date: Thu, 11 Aug 2016 15:23:13 GMT
+Keep-Alive: timeout=5, max=1000
+Last-Modified: Mon, 25 Jul 2016 04:32:39 GMT
+Server: Apache
+</code></pre><ul>
+<li>max:表示服务器还希望为多少个事物保持此连接的活跃状态</li>
+<li>timeout:服务器能够保持多久活跃状态<h1 id="网络优化"><a href="#网络优化" class="headerlink" title="网络优化"></a>网络优化</h1></li>
+<li>优化DNS解析和缓存</li>
+</ul>
+<p>APP内置Server IP列表，该列表可以在App启动服务中下发更新。App启动后的首次网络服务会从Server IP列表中取一个IP地址进行TCP连接，同时DNS解析会并行进行，DNS成功后，会返回最适合用户网络的Server IP，那么这个Server IP会被加入到Server IP列表中被优先使用。</p>
+<p>Server IP列表有权重机制的，DNS解析返回的IP很明显具有最高的权重，每次从Server IP列表中取IP会取权重最高的IP。列表中IP权重也是动态更新的，根据连接或者服务的成功失败来动态调整，这样即使DNS解析失败，用户在使用一段时间后也会选取到适合的Server IP。</p>
 <ul>
-<li>第二个<code>- (void)previewingContext:(id &lt;UIViewControllerPreviewing&gt;)previewingContext commitViewController:(UIViewController *)viewControllerToCommit</code></li>
+<li>网络质量检测（根据网络质量来改变策略）</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">- (void)previewingContext:(id &lt;UIViewControllerPreviewing&gt;)previewingContext commitViewController:(UIViewController *)viewControllerToCommit&#123;</div><div class="line">    [self showViewController:viewControllerToCommit sender:self];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>这个协议方法就是将我们的视图显示出来</p>
-<hr>
-<p>华丽的分割线，到这里基本就实现了长按弹出视图的效果，细心的人可能发现其实还有一个效果就是长按出现视图之后可以向上滑动出现，之后出现了几个按钮。接下来让我们看看怎么加上那几个按钮。</p>
-<p>其实加这几个按钮也非常简单。找到我们之前定义的<code>PreViewController</code>这个类，然后重写<code>-(NSArray&lt;id&lt;UIPreviewActionItem&gt;&gt; *)previewActionItems</code> 这个方法也是<code>UIViewController</code>中本身自带的。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">-(NSArray&lt;id&lt;UIPreviewActionItem&gt;&gt; *)previewActionItems</div><div class="line">&#123;</div><div class="line">    UIPreviewAction *p1 = [UIPreviewAction actionWithTitle:@&quot;删除&quot; style:UIPreviewActionStyleDefault handler:^(UIPreviewAction * _Nonnull action, UIViewController * _Nonnull previewViewController) &#123;</div><div class="line">        NSLog(@&quot;点击了删除&quot;);</div><div class="line">    &#125;];</div><div class="line"></div><div class="line"></div><div class="line">    UIPreviewAction *p2 = [UIPreviewAction actionWithTitle:@&quot;撤销&quot; style:UIPreviewActionStyleSelected handler:^(UIPreviewAction * _Nonnull action, UIViewController * _Nonnull previewViewController) &#123;</div><div class="line">        NSLog(@&quot;点击了撤销&quot;);</div><div class="line">    &#125;];</div><div class="line"></div><div class="line">    return @[p1,p2];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>根据用户是在2G/3G/4G/Wi-Fi的网络环境来设置不同的超时参数，以及网络服务的并发数量。比如在环境比较差的情况下:</p>
+<ol>
+<li>将并发数设置为一个改成串行</li>
+<li>动态设置超时时间</li>
+<li>throttle 进行节流</li>
+</ol>
+<p>AFNetworking中的throttle方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">- (void)throttleBandwidthWithPacketSize:(NSUInteger)numberOfBytes</div><div class="line">                                  delay:(NSTimeInterval)delay;</div></pre></td></tr></table></figure></p>
+<ol>
+<li>管道化连接<br>如果服务器不支持管线化的话，那么响应就会乱序。所以服务器要支持。<br>AFNetworking中通过<code>HTTPShouldUsePipelining</code>属性来设置，默认为NO。<ul>
+<li>减少数据传输量</li>
+</ul>
+</li>
+</ol>
+<p>选择合适的数据格式进行传输，比如使用Protocol Buffer数等，使用WebP图片格式</p>
+<ul>
+<li>提供网络服务重发机制</li>
+</ul>
+<p>当第一次网络请求失败的时候，自动尝试再次重发</p>
+<ul>
+<li>使用HTTP缓存</li>
+</ul>
+<h1 id="cookie"><a href="#cookie" class="headerlink" title="cookie"></a>cookie</h1><p>cookie分为两类：会话cookie和持久cookie。区别通过Discard参数或者有没有设置Expires或Max-Age参数</p>
 
       
     </div>
@@ -403,6 +466,8 @@
           
             <a href="/tags/iOS/" rel="tag"># iOS</a>
           
+            <a href="/tags/网络层/" rel="tag"># 网络层</a>
+          
         </div>
       
 
@@ -414,8 +479,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/11/05/iOS越狱检查/" rel="next" title="iOS越狱检查">
-                <i class="fa fa-chevron-left"></i> iOS越狱检查
+              <a href="/2018/03/14/算法(二位数组查找)/" rel="next" title="算法(二位数组查找)">
+                <i class="fa fa-chevron-left"></i> 算法(二位数组查找)
               </a>
             
           </div>
@@ -423,10 +488,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/11/09/iOS非越狱逆向工程/" rel="prev" title="iOS非越狱逆向工程">
-                iOS非越狱逆向工程 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -568,7 +629,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#给需要的UIView注册3DTouch行为"><span class="nav-number">1.</span> <span class="nav-text">给需要的UIView注册3DTouch行为</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实现UIViewControllerPreviewingDelegate协议"><span class="nav-number">2.</span> <span class="nav-text">实现UIViewControllerPreviewingDelegate协议</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#HTTP"><span class="nav-number">1.</span> <span class="nav-text">HTTP</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP方法"><span class="nav-number">1.1.</span> <span class="nav-text">HTTP方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#状态码"><span class="nav-number">1.2.</span> <span class="nav-text">状态码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Api请求过程"><span class="nav-number">2.</span> <span class="nav-text">Api请求过程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#DNS-Lookup"><span class="nav-number">2.1.</span> <span class="nav-text">DNS Lookup</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TCP-Handshake"><span class="nav-number">2.2.</span> <span class="nav-text">TCP Handshake</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP三次握手连接"><span class="nav-number">2.2.1.</span> <span class="nav-text">TCP三次握手连接</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SSL握手"><span class="nav-number">2.3.</span> <span class="nav-text">SSL握手</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HTTP和HTTPS时间消耗"><span class="nav-number">3.</span> <span class="nav-text">HTTP和HTTPS时间消耗</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#keep-alive"><span class="nav-number">4.</span> <span class="nav-text">keep-alive</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#网络优化"><span class="nav-number">5.</span> <span class="nav-text">网络优化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#cookie"><span class="nav-number">6.</span> <span class="nav-text">cookie</span></a></li></ol></div>
             
 
           </div>

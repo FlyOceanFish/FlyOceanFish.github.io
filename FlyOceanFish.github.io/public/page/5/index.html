@@ -421,7 +421,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/14/UIPageViewController使用和控件的封装/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/14/NSObject的+load和+initialize详解/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="FlyOceanFish">
@@ -440,7 +440,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/10/14/UIPageViewController使用和控件的封装/" itemprop="url">UIPageViewController使用和控件的封装</a></h2>
+                <a class="post-title-link" href="/2017/10/14/NSObject的+load和+initialize详解/" itemprop="url">NSObject的+load和+initialize详解</a></h2>
         
 
         <div class="post-meta">
@@ -514,11 +514,13 @@
       
         
           
-          背景我们经常会遇到一个场景，就是同时有几个视图需要左右滑动显示。大家可能会通过UIScrollview来实现，也能实现。但是如果不自己实现一些懒加载、缓存其实对性能还是有浪费的。接下来我们就让U闪亮登场。UIPageViewController加载不同的UIViewController可以有效的将不
+          文章比较长，第一部分通过runtime的源码介绍了load和initialize两个方法的本质；第二部门通过实例演示了这个两个方法的调用；第三部分就是结论和应用场景
+#通过runtime源码解析load和initialize
++load通过调用堆栈，我们可以看出系统首先调用的是load_images
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/10/14/UIPageViewController使用和控件的封装/#more" rel="contents">
+            <a class="btn" href="/2017/10/14/NSObject的+load和+initialize详解/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -569,7 +571,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/14/iOS中isEqual:方法详解/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/14/iOS自定义相机界面/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="FlyOceanFish">
@@ -588,7 +590,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/10/14/iOS中isEqual:方法详解/" itemprop="url">iOS中isEqual:方法详解</a></h2>
+                <a class="post-title-link" href="/2017/10/14/iOS自定义相机界面/" itemprop="url">iOS自定义相机界面</a></h2>
         
 
         <div class="post-meta">
@@ -662,13 +664,12 @@
       
         
           
-          背景　　大家对于这个方法其实再熟悉不过了，比较对象的时候用这个方法，如果使用==针对对象则仅仅比较的是内存地址的引用。但是大家可能会忽略另一个细节，对象的hash值
-引用苹果官方的一句话：
-This method defines what it means for instances to be e
+          背景由于项目中需要拍照功能，但是系统原生的相机功能根本满足不了项目的需要，所以就只能自定义一个相加了。苹果再AVFoundation框架中给我们提供了各个api，我们完全可以通过这些api自定义一个满足我们需求的相机。
+关键类AVCaptureSession 负责输入流和输出流的管理。AVCaptu
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/10/14/iOS中isEqual:方法详解/#more" rel="contents">
+            <a class="btn" href="/2017/10/14/iOS自定义相机界面/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1021,7 +1022,7 @@ github上创建自己的共有项目
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/14/pod install vs. pod update/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/14/iOS中3DES加密解密/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="FlyOceanFish">
@@ -1040,7 +1041,7 @@ github上创建自己的共有项目
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/10/14/pod install vs. pod update/" itemprop="url">pod install vs. pod update</a></h2>
+                <a class="post-title-link" href="/2017/10/14/iOS中3DES加密解密/" itemprop="url">iOS中3DES加密解密</a></h2>
         
 
         <div class="post-meta">
@@ -1082,6 +1083,17 @@ github上创建自己的共有项目
 
                 
                 
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/安全/" itemprop="url" rel="index">
+                    <span itemprop="name">安全</span>
+                  </a>
+                </span>
+
+                
+                
               
             </span>
           
@@ -1114,12 +1126,14 @@ github上创建自己的共有项目
       
         
           
-          背景　　　　作为iOS管理第三方包很好用的一个工具CocoaPods，大部分在使用过程中一开始使用pod install,之后就一直使用pod update。其实这种做法是不对，本篇文章将详细介绍这几个命令的区别，也希望iOS开发者能够合理使用这几个命名
-pod init　　初始化一个工程，此时会产
+          加密加密分为对称加密和非对称加密。
+
+对称性加密算法，信息接收双方都需事先知道密匙和加解密算法且其密匙是相同的，之后便是对数据进行 加解密了;
+非对称算法与之不同，发送双方A,B事先均生成一堆密匙，然后A将自己的公有密匙发送给B，B将自己的公有密匙发送给A，如果A要给B发送消息，则先需要用B的公有密
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/10/14/pod install vs. pod update/#more" rel="contents">
+            <a class="btn" href="/2017/10/14/iOS中3DES加密解密/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1318,7 +1332,7 @@ pod init　　初始化一个工程，此时会产
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/14/iOS中将数字用符合隔开(比如逗号)/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/14/UIPageViewController使用和控件的封装/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="FlyOceanFish">
@@ -1337,7 +1351,7 @@ pod init　　初始化一个工程，此时会产
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/10/14/iOS中将数字用符合隔开(比如逗号)/" itemprop="url">iOS中将数字用符合隔开(比如逗号)</a></h2>
+                <a class="post-title-link" href="/2017/10/14/UIPageViewController使用和控件的封装/" itemprop="url">UIPageViewController使用和控件的封装</a></h2>
         
 
         <div class="post-meta">
@@ -1411,14 +1425,11 @@ pod init　　初始化一个工程，此时会产
       
         
           
-          这次项目中遇到一个需求，将数字每隔3个用逗号隔开。因为如果数字太大确实看着有点眼花。　　所以就想着写了一个NSString的category，用起来效果还不错，代码如下：
-.h的声明#import &lt;Foundation/Foundation.h&gt;
-
-@interface NSStrin
+          背景我们经常会遇到一个场景，就是同时有几个视图需要左右滑动显示。大家可能会通过UIScrollview来实现，也能实现。但是如果不自己实现一些懒加载、缓存其实对性能还是有浪费的。接下来我们就让U闪亮登场。UIPageViewController加载不同的UIViewController可以有效的将不
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/10/14/iOS中将数字用符合隔开(比如逗号)/#more" rel="contents">
+            <a class="btn" href="/2017/10/14/UIPageViewController使用和控件的封装/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1469,7 +1480,7 @@ pod init　　初始化一个工程，此时会产
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/14/NSInvocation/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/14/pod install vs. pod update/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="FlyOceanFish">
@@ -1488,7 +1499,7 @@ pod init　　初始化一个工程，此时会产
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/10/14/NSInvocation/" itemprop="url">NSInvocation</a></h2>
+                <a class="post-title-link" href="/2017/10/14/pod install vs. pod update/" itemprop="url">pod install vs. pod update</a></h2>
         
 
         <div class="post-meta">
@@ -1562,11 +1573,12 @@ pod init　　初始化一个工程，此时会产
       
         
           
-          NSInvocation是命令模式的一种实现，它包含选择器、方法签名、相应的参数以及目标对象。所谓的方法签名，即方法所对应的返回值类型和参数类型。当NSInvocatio被调用，它会在运行时通过目标对象去寻找对应的方法，从而确保唯一性，可以用[receiver message]来解释。实际开发过程中
+          背景　　　　作为iOS管理第三方包很好用的一个工具CocoaPods，大部分在使用过程中一开始使用pod install,之后就一直使用pod update。其实这种做法是不对，本篇文章将详细介绍这几个命令的区别，也希望iOS开发者能够合理使用这几个命名
+pod init　　初始化一个工程，此时会产
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/10/14/NSInvocation/#more" rel="contents">
+            <a class="btn" href="/2017/10/14/pod install vs. pod update/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1617,7 +1629,7 @@ pod init　　初始化一个工程，此时会产
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/14/iOS中3DES加密解密/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/14/React Native组件生命周期/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="FlyOceanFish">
@@ -1636,7 +1648,7 @@ pod init　　初始化一个工程，此时会产
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/10/14/iOS中3DES加密解密/" itemprop="url">iOS中3DES加密解密</a></h2>
+                <a class="post-title-link" href="/2017/10/14/React Native组件生命周期/" itemprop="url">React Native组件生命周期</a></h2>
         
 
         <div class="post-meta">
@@ -1671,19 +1683,8 @@ pod init　　初始化一个工程，此时会产
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/iOS/" itemprop="url" rel="index">
-                    <span itemprop="name">iOS</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/iOS/安全/" itemprop="url" rel="index">
-                    <span itemprop="name">安全</span>
+                  <a href="/categories/React-Native/" itemprop="url" rel="index">
+                    <span itemprop="name">React Native</span>
                   </a>
                 </span>
 
@@ -1721,14 +1722,13 @@ pod init　　初始化一个工程，此时会产
       
         
           
-          加密加密分为对称加密和非对称加密。
+          生命周期RN的Component如同iOS中ViewController一样，同样具有自己的生命周期，如果大家对于ViewController的生命周期熟悉的话，相信看明白也不在话下的
 
-对称性加密算法，信息接收双方都需事先知道密匙和加解密算法且其密匙是相同的，之后便是对数据进行 加解密了;
-非对称算法与之不同，发送双方A,B事先均生成一堆密匙，然后A将自己的公有密匙发送给B，B将自己的公有密匙发送给A，如果A要给B发送消息，则先需要用B的公有密
-          ...
+
+          
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/10/14/iOS中3DES加密解密/#more" rel="contents">
+            <a class="btn" href="/2017/10/14/React Native组件生命周期/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1820,7 +1820,7 @@ pod init　　初始化一个工程，此时会产
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">53</span>
+                  <span class="site-state-item-count">54</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1842,7 +1842,7 @@ pod init　　初始化一个工程，此时会产
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
