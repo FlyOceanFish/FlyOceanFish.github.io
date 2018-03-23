@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="iOS,锁," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="线程同步提到多线程大家肯定会提到锁，其实真正应该说的是多线程同步，锁只是多线程同步的一部分。 多线程对于数据处理等方面有着优异的表现和性能，然后多线程如果存在着共享资源的时候，这时候不得不会出现脏数据或者拿不到想要的数据。苹果给我了提供了如下的同步工具 原子操作原子操作其中一个就是我们常见的atomic属性修饰符。atomic仅仅只是在getter和setter的时候是原子操作,并不是线程安全。可">
+<meta name="keywords" content="iOS,锁">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS线程同步">
+<meta property="og:url" content="http://yoursite.com/2018/03/23/iOS线程同步/index.html">
+<meta property="og:site_name" content="FlyOceanFish&#39; Blog">
+<meta property="og:description" content="线程同步提到多线程大家肯定会提到锁，其实真正应该说的是多线程同步，锁只是多线程同步的一部分。 多线程对于数据处理等方面有着优异的表现和性能，然后多线程如果存在着共享资源的时候，这时候不得不会出现脏数据或者拿不到想要的数据。苹果给我了提供了如下的同步工具 原子操作原子操作其中一个就是我们常见的atomic属性修饰符。atomic仅仅只是在getter和setter的时候是原子操作,并不是线程安全。可">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/6644906-e5c3e52ba1076030.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2018-03-23T01:47:05.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS线程同步">
+<meta name="twitter:description" content="线程同步提到多线程大家肯定会提到锁，其实真正应该说的是多线程同步，锁只是多线程同步的一部分。 多线程对于数据处理等方面有着优异的表现和性能，然后多线程如果存在着共享资源的时候，这时候不得不会出现脏数据或者拿不到想要的数据。苹果给我了提供了如下的同步工具 原子操作原子操作其中一个就是我们常见的atomic属性修饰符。atomic仅仅只是在getter和setter的时候是原子操作,并不是线程安全。可">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/6644906-e5c3e52ba1076030.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/03/23/iOS线程同步/"/>
+
+
+
+
+
+  <title>iOS线程同步 | FlyOceanFish' Blog</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?8f73d05f1a471433ed938c462af80741";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <a href="https://github.com/FlyOceanFish"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">FlyOceanFish' Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">You Believe,You Can</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/23/iOS线程同步/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="FlyOceanFish">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FlyOceanFish' Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">iOS线程同步</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-23T09:46:00+08:00">
+                2018-03-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="线程同步"><a href="#线程同步" class="headerlink" title="线程同步"></a>线程同步</h1><p>提到多线程大家肯定会提到锁，其实真正应该说的是多线程同步，锁只是多线程同步的一部分。</p>
+<p>多线程对于数据处理等方面有着优异的表现和性能，然后多线程如果存在着共享资源的时候，这时候不得不会出现脏数据或者拿不到想要的数据。苹果给我了提供了如下的同步工具</p>
+<h2 id="原子操作"><a href="#原子操作" class="headerlink" title="原子操作"></a>原子操作</h2><p>原子操作其中一个就是我们常见的<code>atomic</code>属性修饰符。<code>atomic</code>仅仅只是在getter和setter的时候是原子操作,并不是线程安全。可以结合Memory Barriers一起使用确保线程安全</p>
+<h2 id="Memory-Barriers-和Volatile变量"><a href="#Memory-Barriers-和Volatile变量" class="headerlink" title="Memory Barriers 和Volatile变量"></a>Memory Barriers 和<code>Volatile</code>变量</h2><ul>
+<li>Memory Barriers</li>
+</ul>
+<p>为了达到最佳性能，编译器通常会讲汇编级别的指令进行重新排序，从而保持处理器的指令管道尽可能的满。作为优化的一部分，编译器可能会对内存访问的指令进行重新排序(在它认为不会影响数据的正确性的前提下)，然而，这并不一定都是正确的，顺序的变化可能导致一些变量的值得到不正确的结果。</p>
+<p>Memory Barriers是一种不会造成线程block的同步工具，它用于确保内存操作的正确顺序。Memory Barriers像一道屏障，迫使处理器在其前面完成必须的加载或者存储的操作。</p>
+<blockquote>
+<p>OSMemoryBarrier();//在需要的地方加上,确保了一定会按照我们书写的顺序执行</p>
+<ul>
+<li>Volatile</li>
+</ul>
+</blockquote>
+<p>告诉编译器，在读取该变量数值的时候，应该直接从内存读取，而不是从寄存器读取。</p>
+<p>简单讲就是实现了多线程资源共享的是同一份拷贝。比如一个变量，在多线程中，编译器会为每一个线程缓存一份，从而导致其中另一个线程修改了变量A，而其他线程还是使用了原来的变量A。假如加上<code>volatile</code>变量修饰符，则会保证所有的线程是用的同一份数据，其实就是内存中的数据。</p>
+<blockquote>
+<p>举个例子，为了避免过多的访问内存，编译器会为变量作一个cache,里面会存放上变量的copy, 这样就会提高程序执行效率，而变量如果加了volatile, 那么编译器就不会做这样的优化，每次用到该变量时，都会去内存取一次，从而保证取到的是变量的最新的值。通常下面情况下要用到该变量。</p>
+</blockquote>
+<h1 id="锁"><a href="#锁" class="headerlink" title="锁"></a>锁</h1><h2 id="锁的分类"><a href="#锁的分类" class="headerlink" title="锁的分类"></a>锁的分类</h2><table>
+<thead>
+<tr>
+<th>锁</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>互斥锁</td>
+<td>如果多个线程同时竞争一个互斥锁,那么只有一个将被允许访问，其他将被block。</td>
+</tr>
+<tr>
+<td>递归锁</td>
+<td>递归锁是互斥锁上的一个变体。递归锁允许单个线程在释放锁之前多次获取锁。其他线程仍然被阻塞，直到锁的所有者释放锁的次数相同。递归的锁在递归迭代中主要使用，但也可以在需要单独获取锁的多个方法中使用。</td>
+</tr>
+<tr>
+<td>读写锁</td>
+<td>读写锁也被称为共享独占锁。这种类型的锁通常用于更大规模的操作，如果保护的数据结构经常被频繁地读取和修改，则可以显著提高性能。在正常运行期间，多个阅读器可以同时访问数据结构。当一个线程想要写入结构时，它会阻塞，直到所有的读取器释放锁为止，这时它会获得锁并更新结构。当一个写线程在等待锁的时候，新的读取器线程阻塞，直到写线程完成。该系统只支持使用POSIX线程的读写锁。有关如何使用这些锁的更多信息，请参见pthread手册页。</td>
+</tr>
+<tr>
+<td>分布锁</td>
+<td>分布式锁在流程级别上提供互斥的访问。与真正的互斥锁不同，分布式锁不会阻塞进程或阻止进程运行。它只是报告当锁很忙时，让流程决定如何进行。</td>
+</tr>
+<tr>
+<td>自旋锁</td>
+<td>自旋锁定期轮询其锁状态，直到该条件变为真。自旋锁在多处理器系统中最常用，因为锁的等待时间很小。在这种情况下，进行轮询通常比阻塞线程更有效，这涉及到上下文切换和线程数据结构的更新。</td>
+</tr>
+<tr>
+<td>双重检查锁定</td>
+<td>双重检查锁定试图采取一个锁的开销减少测试前锁定标准锁</td>
+</tr>
+</tbody>
+</table>
+<h2 id="锁的注意点"><a href="#锁的注意点" class="headerlink" title="锁的注意点"></a>锁的注意点</h2><h3 id="适当的使用同步机制"><a href="#适当的使用同步机制" class="headerlink" title="适当的使用同步机制"></a>适当的使用同步机制</h3><p>锁和其他的同步工具很影响APP的性能，所以除非我们迫不得已的时候才要使用。</p>
+<h3 id="同步机制的限制"><a href="#同步机制的限制" class="headerlink" title="同步机制的限制"></a>同步机制的限制</h3><p>同步工具只有在应用程序中所有线程一致使用时才有效。如果您创建了一个互斥锁来限制对特定资源的访问，那么在试图操作资源之前，所有的线程都必须获得相同的互斥量。不这样做会破坏互斥锁提供的保护，并且是程序员的错误。</p>
+<h3 id="将代码放在适当的位置"><a href="#将代码放在适当的位置" class="headerlink" title="将代码放在适当的位置"></a>将代码放在适当的位置</h3><p>当我们使用锁和memory barriers的时候，我们要好好思量将代码放在哪里。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">NSLock* arrayLock = GetArrayLock();</div><div class="line">NSMutableArray* myArray = GetSharedArray();</div><div class="line">id anObject;</div><div class="line"></div><div class="line">[arrayLock lock];</div><div class="line">anObject = [myArray objectAtIndex:0];</div><div class="line">[arrayLock unlock];//此时锁已经被释放，其他线程尽量可能将anObject删除并释放</div><div class="line"></div><div class="line">[anObject doSomething];</div></pre></td></tr></table></figure>
+<p>上边代码看着确实没问题，我们取数据的时候加锁。但是有个问题。如果<code>anObject</code>在调用<code>doSomething</code>的时候被其他线程删了，某一时刻被释放了呢？</p>
+<p>正确代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">NSLock* arrayLock = GetArrayLock();</div><div class="line">NSMutableArray* myArray = GetSharedArray();</div><div class="line">id anObject;</div><div class="line"></div><div class="line">[arrayLock lock];</div><div class="line">anObject = [myArray objectAtIndex:0];</div><div class="line">[anObject doSomething];</div></pre></td></tr></table></figure></p>
+<h3 id="小心死锁和活锁"><a href="#小心死锁和活锁" class="headerlink" title="小心死锁和活锁"></a>小心死锁和活锁</h3><p>避免死锁和活锁的最佳方式就是在一次仅仅获取一个锁</p>
+<h2 id="锁的详细介绍"><a href="#锁的详细介绍" class="headerlink" title="锁的详细介绍"></a>锁的详细介绍</h2><p><img src="https://upload-images.jianshu.io/upload_images/6644906-e5c3e52ba1076030.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="1521703441987.jpg"></p>
+<h3 id="互斥锁"><a href="#互斥锁" class="headerlink" title="互斥锁"></a>互斥锁</h3><ul>
+<li><p>POSIX Mutex Lock</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#import <span class="meta-string">&lt;pthread.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="keyword">pthread_mutex_t</span> mutex;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">MyInitFunction</span><span class="params">()</span></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">    pthread_mutex_init(&amp;mutex, <span class="literal">NULL</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">MyLockingFunction</span><span class="params">()</span></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">    pthread_mutex_lock(&amp;mutex);</div><div class="line">    <span class="comment">// Do work.</span></div><div class="line">    pthread_mutex_unlock(&amp;mutex);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>NSLock</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">BOOL moreToDo = YES;</div><div class="line">NSLock *theLock = [[NSLock alloc] init];</div><div class="line">...</div><div class="line">while (moreToDo) &#123;</div><div class="line">    /* Do another increment of calculation */</div><div class="line">    /* until there’s no more to do. */</div><div class="line">    if ([theLock tryLock]) &#123;</div><div class="line">        /* Update display used by all threads. */</div><div class="line">        [theLock unlock];</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><code>NSLock</code>除了提供<code>lock</code>方法，还有 <code>tryLock</code> 和 <code>lockBeforeDate:</code>两个方法</p>
+<ul>
+<li><p>@synchronized</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">- (void)myMethod:(id)anObj</div><div class="line">&#123;</div><div class="line">    @synchronized(anObj)</div><div class="line">    &#123;</div><div class="line">        // Everything between the braces is protected by the @synchronized directive.</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>NSConditionLock<br>一个NSConditionLock对象定义了一个可以锁定的<font color="red">互斥锁</font>，并使用特定的值进行解锁。这个锁可以很好的实现<code>生产-消费</code>的模式</p>
+</li>
+</ul>
+<p>生产者线程：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">id condLock = [[NSConditionLock alloc] initWithCondition:NO_DATA];</div><div class="line"></div><div class="line">while(true)</div><div class="line">&#123;</div><div class="line">    [condLock lock];</div><div class="line">    /* Add data to the queue. */</div><div class="line">    [condLock unlockWithCondition:HAS_DATA];</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>消费者线程:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">while (true)</div><div class="line">&#123;</div><div class="line">    [condLock lockWhenCondition:HAS_DATA];</div><div class="line">    /* Remove data from the queue. */</div><div class="line">    [condLock unlockWithCondition:(isEmpty ? NO_DATA : HAS_DATA)];</div><div class="line"></div><div class="line">    // Process the data locally.</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="递归锁"><a href="#递归锁" class="headerlink" title="递归锁"></a>递归锁</h3><p>NSRecursiveLock类定义了一个锁，它可以被同一个线程多次获取，而不会导致线程陷入死锁。</p>
+<blockquote>
+<p>像互斥锁，如果被同一个线程多次获取，但是只释放一次的话就会导致死锁。只有保证一个线程获取n次，同样的释放n次,才能保证不会死锁</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">NSRecursiveLock *theLock = [[NSRecursiveLock alloc] init];</div><div class="line"></div><div class="line">void MyRecursiveFunction(int value)</div><div class="line">&#123;</div><div class="line">    [theLock lock];</div><div class="line">    if (value != 0)</div><div class="line">    &#123;</div><div class="line">        --value;</div><div class="line">        MyRecursiveFunction(value);</div><div class="line">    &#125;</div><div class="line">    [theLock unlock];</div><div class="line">&#125;</div><div class="line"></div><div class="line">MyRecursiveFunction(5);</div></pre></td></tr></table></figure>
+<h3 id="条件锁"><a href="#条件锁" class="headerlink" title="条件锁"></a>条件锁</h3><ul>
+<li>NSCondition</li>
+</ul>
+<p>NSCondition类提供与POSIX条件相同的语义，但是将所需的锁和条件数据结构封装在一个对象中。结果是一个对象，您可以像一个互斥锁那样锁定，然后像一个条件一样等待。</p>
+<p>所以要使用条件锁，要配合<code>wait</code>和<code>signal</code>使用才能真正发挥出它的作用。</p>
+<p>等待线程：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">[cocoaCondition lock];</div><div class="line">while (timeToDoWork &lt;= 0)</div><div class="line">    [cocoaCondition wait];</div><div class="line"></div><div class="line">timeToDoWork--;</div><div class="line"></div><div class="line">// Do real work here.</div><div class="line"></div><div class="line">[cocoaCondition unlock];</div></pre></td></tr></table></figure></p>
+<p>信号线程:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">[cocoaCondition lock];</div><div class="line">timeToDoWork++;</div><div class="line">[cocoaCondition signal];</div><div class="line">[cocoaCondition unlock];</div></pre></td></tr></table></figure></p>
+<ul>
+<li>POSIX Conditions</li>
+</ul>
+<p>POSIX线程条件锁定要求使用条件数据结构和互斥锁。尽管两个锁结构是分开的，互斥锁在运行时与条件结构密切相关。等待信号的线程应该始终使用相同的互斥锁和条件结构。改变配对会导致错误。<br>等待线程：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">pthread_mutex_t mutex;</div><div class="line">pthread_cond_t condition;</div><div class="line">Boolean     ready_to_go = true;</div><div class="line"></div><div class="line">void MyCondInitFunction()</div><div class="line">&#123;</div><div class="line">    pthread_mutex_init(&amp;mutex);</div><div class="line">    pthread_cond_init(&amp;condition, NULL);</div><div class="line">&#125;</div><div class="line"></div><div class="line">void MyWaitOnConditionFunction()</div><div class="line">&#123;</div><div class="line">    // Lock the mutex.</div><div class="line">    pthread_mutex_lock(&amp;mutex);</div><div class="line"></div><div class="line">    // If the predicate is already set, then the while loop is bypassed;</div><div class="line">    // otherwise, the thread sleeps until the predicate is set.</div><div class="line">    while(ready_to_go == false)</div><div class="line">    &#123;</div><div class="line">        pthread_cond_wait(&amp;condition, &amp;mutex);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    // Do work. (The mutex should stay locked.)</div><div class="line"></div><div class="line">    // Reset the predicate and release the mutex.</div><div class="line">    ready_to_go = false;</div><div class="line">    pthread_mutex_unlock(&amp;mutex);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>信号线程：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">void SignalThreadUsingCondition()</div><div class="line">&#123;</div><div class="line">    // At this point, there should be work for the other thread to do.</div><div class="line">    pthread_mutex_lock(&amp;mutex);</div><div class="line">    ready_to_go = true;</div><div class="line"></div><div class="line">    // Signal the other thread to begin work.</div><div class="line">    pthread_cond_signal(&amp;condition);</div><div class="line"></div><div class="line">    pthread_mutex_unlock(&amp;mutex);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="自旋锁"><a href="#自旋锁" class="headerlink" title="自旋锁"></a>自旋锁</h3><p>何谓自旋锁？它是为实现保护共享资源而提出一种锁机制。其实，自旋锁与互斥锁比较类似，它们都是为了解决对某项资源的互斥使用。无论是互斥锁，还是自旋锁，在任何时刻，最多只能有一个保持者，也就说，在任何时刻最多只能有一个执行单元获得锁。但是两者在调度机制上略有不同。对于互斥锁，如果资源已经被占用，资源申请者只能进入睡眠状态。但是自旋锁不会引起调用者睡眠，如果自旋锁已经被别的执行单元保持，调用者就一直循环在那里看是否该自旋锁的保持者已经释放了锁，”自旋”一词就是因此而得名。</p>
+<ul>
+<li>OSSpinLock<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">// 初始化</div><div class="line">spinLock = OS_SPINKLOCK_INIT;</div><div class="line">// 加锁</div><div class="line">OSSpinLockLock(&amp;spinLock);</div><div class="line">// 解锁</div><div class="line">OSSpinLockUnlock(&amp;spinLock);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p>OSSpinLock有着优异的性能表现，然而在高并发执行(冲突概率大，竞争激烈)的时候，又或者代码片段比较耗时(比如涉及内核执行文件io、socket、thread等)，就容易引发CPU占有率暴涨的风险，因此更适用于一些简短低耗时的代码片段；</p>
+</blockquote>
+<p><font color="red">由于苹果的新系统对于线程优先级的修改，导致了OSSpinLock会出现优先级反转的问题</font></p>
+<ul>
+<li>os_unfair_lock<br>自旋锁已经不再安全，然后苹果新出了 os_unfair_lock_t。（<font color="red">首先它不是自旋锁，其次网上都说它解决了优先级翻转问题，有点误导，这样说不对。由于<code>OSSpinLock</code>比较高效，所以苹果就另外实现了<code>os_unfair_lock_t</code>,锁的效果同样很高效，并且实现思路与<code>OSSpinLock</code>有一部分相同，但是不是自旋锁。</font>）<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">os_unfair_lock_t unfairLock = &amp;(OS_UNFAIR_LOCK_INIT);</div><div class="line">os_unfair_lock_lock(unfairLock);</div><div class="line">//do something</div><div class="line">os_unfair_lock_unlock(unfairLock);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+<blockquote>
+<p>备注：因为这篇是线程的锁，GCD通常叫做任务，虽然底层也是有线程。而且GCD的信号与锁效果虽然相同，但是本质上还是有所区别的。不过可以看我的这篇文章<a href="http://flyoceanfish.top/2018/01/16/iOS%E8%AF%A6%E8%A7%A3GCD/" target="_blank" rel="external">iOS超级超级详细介绍GCD</a></p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+            <a href="/tags/锁/" rel="tag"># 锁</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/15/算法(替换空格)/" rel="next" title="算法(替换空格)">
+                <i class="fa fa-chevron-left"></i> 算法(替换空格)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="vcomments"></div>
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="FlyOceanFish" />
+            
+              <p class="site-author-name" itemprop="name">FlyOceanFish</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">56</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#线程同步"><span class="nav-number">1.</span> <span class="nav-text">线程同步</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#原子操作"><span class="nav-number">1.1.</span> <span class="nav-text">原子操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Memory-Barriers-和Volatile变量"><span class="nav-number">1.2.</span> <span class="nav-text">Memory Barriers 和Volatile变量</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#锁"><span class="nav-number">2.</span> <span class="nav-text">锁</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#锁的分类"><span class="nav-number">2.1.</span> <span class="nav-text">锁的分类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#锁的注意点"><span class="nav-number">2.2.</span> <span class="nav-text">锁的注意点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#适当的使用同步机制"><span class="nav-number">2.2.1.</span> <span class="nav-text">适当的使用同步机制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#同步机制的限制"><span class="nav-number">2.2.2.</span> <span class="nav-text">同步机制的限制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#将代码放在适当的位置"><span class="nav-number">2.2.3.</span> <span class="nav-text">将代码放在适当的位置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#小心死锁和活锁"><span class="nav-number">2.2.4.</span> <span class="nav-text">小心死锁和活锁</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#锁的详细介绍"><span class="nav-number">2.3.</span> <span class="nav-text">锁的详细介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#互斥锁"><span class="nav-number">2.3.1.</span> <span class="nav-text">互斥锁</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#递归锁"><span class="nav-number">2.3.2.</span> <span class="nav-text">递归锁</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#条件锁"><span class="nav-number">2.3.3.</span> <span class="nav-text">条件锁</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自旋锁"><span class="nav-number">2.3.4.</span> <span class="nav-text">自旋锁</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">FlyOceanFish</span>
+
+  
+</div>
+
+<!--
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.3</div>
+
+-->
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_lines.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine@1.1.6/dist/Valine.min.js"></script>
+  <script type="text/javascript">
+    new Valine({
+        av: AV,
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        app_id: 'BUyek27xhBJW608unzBEyhWI-gzGzoHsz',
+        app_key: 'lT2NUWTMwPfNYl6xMQUtUxDv',
+        placeholder: '请输入评论'
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.3"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=5.1.3"></script>
+
+
+  
+
+</body>
+</html>
+<script type="text/javascript" src="/js/src/love.js"></script>
