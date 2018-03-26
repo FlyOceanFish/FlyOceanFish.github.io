@@ -79,21 +79,18 @@
 
 
 
-<meta name="description" content="概念堆是一棵顺序存储的完全二叉树,分为大根堆和小根堆 分类 小根堆 每个结点的关键字都不大于其孩子结点的关键字。  大根堆 每个结点的关键字都不小于其孩子结点的关键字   举例举例来说，对于n个元素的序列{R0, R1, … , Rn}当且仅当满足下列关系之一时，称之为堆： (1) Ri &amp;lt;= R2i+1 且 Ri &amp;lt;= R2i+2 (小根堆) (2) Ri &amp;gt;= R2i+1 且">
+<meta name="description" content="题目 输入一个整数数组，实现一个函数来调整该数组中数字的顺序，使得所有奇数位于数组的前半部分，所有偶数位于数组的后半部分  分析最简单的思路就是从头开始遍历数据，如果遇到一个偶数，则将该位置的偶数取出，然后把位于该数字后边的所有数据都往前移动一位，然后将取出来的数字放到最后一位。此方法时间复杂度为O(n2)。显示不是最高效的。 高效的方法是用两个指针，分别指向数组的开始和结尾。然后指向开始的指针向">
 <meta name="keywords" content="iOS,算法">
 <meta property="og:type" content="article">
-<meta property="og:title" content="堆排序(oc代码实现)">
-<meta property="og:url" content="http://yoursite.com/2017/12/14/算法堆排序/index.html">
+<meta property="og:title" content="算法(调整奇数偶数顺序)">
+<meta property="og:url" content="http://yoursite.com/2018/03/26/算法(调整奇数偶数顺序)/index.html">
 <meta property="og:site_name" content="FlyOceanFish&#39; Blog">
-<meta property="og:description" content="概念堆是一棵顺序存储的完全二叉树,分为大根堆和小根堆 分类 小根堆 每个结点的关键字都不大于其孩子结点的关键字。  大根堆 每个结点的关键字都不小于其孩子结点的关键字   举例举例来说，对于n个元素的序列{R0, R1, … , Rn}当且仅当满足下列关系之一时，称之为堆： (1) Ri &amp;lt;= R2i+1 且 Ri &amp;lt;= R2i+2 (小根堆) (2) Ri &amp;gt;= R2i+1 且">
+<meta property="og:description" content="题目 输入一个整数数组，实现一个函数来调整该数组中数字的顺序，使得所有奇数位于数组的前半部分，所有偶数位于数组的后半部分  分析最简单的思路就是从头开始遍历数据，如果遇到一个偶数，则将该位置的偶数取出，然后把位于该数字后边的所有数据都往前移动一位，然后将取出来的数字放到最后一位。此方法时间复杂度为O(n2)。显示不是最高效的。 高效的方法是用两个指针，分别指向数组的开始和结尾。然后指向开始的指针向">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/6644906-d30bd835f0518910.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/6644906-d758db5fcfaaf778.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2018-03-14T02:14:56.000Z">
+<meta property="og:updated_time" content="2018-03-26T10:41:41.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="堆排序(oc代码实现)">
-<meta name="twitter:description" content="概念堆是一棵顺序存储的完全二叉树,分为大根堆和小根堆 分类 小根堆 每个结点的关键字都不大于其孩子结点的关键字。  大根堆 每个结点的关键字都不小于其孩子结点的关键字   举例举例来说，对于n个元素的序列{R0, R1, … , Rn}当且仅当满足下列关系之一时，称之为堆： (1) Ri &amp;lt;= R2i+1 且 Ri &amp;lt;= R2i+2 (小根堆) (2) Ri &amp;gt;= R2i+1 且">
-<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/6644906-d30bd835f0518910.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta name="twitter:title" content="算法(调整奇数偶数顺序)">
+<meta name="twitter:description" content="题目 输入一个整数数组，实现一个函数来调整该数组中数字的顺序，使得所有奇数位于数组的前半部分，所有偶数位于数组的后半部分  分析最简单的思路就是从头开始遍历数据，如果遇到一个偶数，则将该位置的偶数取出，然后把位于该数字后边的所有数据都往前移动一位，然后将取出来的数字放到最后一位。此方法时间复杂度为O(n2)。显示不是最高效的。 高效的方法是用两个指针，分别指向数组的开始和结尾。然后指向开始的指针向">
 
 
 
@@ -123,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/12/14/算法堆排序/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/03/26/算法(调整奇数偶数顺序)/"/>
 
 
 
 
 
-  <title>堆排序(oc代码实现) | FlyOceanFish' Blog</title>
+  <title>算法(调整奇数偶数顺序) | FlyOceanFish' Blog</title>
   
 
 
@@ -276,7 +273,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/14/算法堆排序/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/26/算法(调整奇数偶数顺序)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="FlyOceanFish">
@@ -293,7 +290,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">堆排序(oc代码实现)</h2>
+          <h2 class="post-title" itemprop="name headline">算法(调整奇数偶数顺序)</h2>
         
 
         <div class="post-meta">
@@ -305,8 +302,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-14T14:13:00+08:00">
-                2017-12-14
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-26T18:35:00+08:00">
+                2018-03-26
               </time>
             
 
@@ -365,43 +362,13 @@
       
 
       
-        <h1 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h1><p>堆是一棵顺序存储的完全二叉树,分为大根堆和小根堆</p>
-<h2 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h2><ul>
-<li><p>小根堆</p>
-<p>每个结点的关键字都不大于其孩子结点的关键字。</p>
-</li>
-<li><p>大根堆</p>
-<p>每个结点的关键字都不小于其孩子结点的关键字</p>
-</li>
-</ul>
-<h2 id="举例"><a href="#举例" class="headerlink" title="举例"></a>举例</h2><p>举例来说，对于n个元素的序列{R0, R1, … , Rn}当且仅当满足下列关系之一时，称之为堆：</p>
-<p>(1) Ri &lt;= R2i+1 且 Ri &lt;= R2i+2 (小根堆)</p>
-<p>(2) Ri &gt;= R2i+1 且 Ri &gt;= R2i+2 (大根堆)</p>
-<p>其中i=1,2,…,n/2向下取整;</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/6644906-d30bd835f0518910.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="318837-20160422104522335-1248911478.png"></p>
-<p>如上图所示，序列R{3, 8, 15, 31, 25}是一个典型的小根堆。</p>
-<p>堆中有两个父结点，元素3和元素8。</p>
-<p>元素3在数组中以R[0]表示，它的左孩子结点是R[1]，右孩子结点是R[2]。</p>
-<p>元素8在数组中以R[1]表示，它的左孩子结点是R[3]，右孩子结点是R[4]，它的父结点是R[0]。可以看出，它们满足以下规律：</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>设当前元素在数组中以R[i]表示，那么，</p>
-<p>(1) 它的左孩子结点是：R[2*i+1];</p>
-<p>(2) 它的右孩子结点是：R[2*i+2];</p>
-<p>(3) 它的父结点是：R[(i-1)/2];</p>
-<p>(4) R[i] &lt;= R[2*i+1] 且 R[i] &lt;= R[2i+2]。</p>
-<h1 id="OC代码实现"><a href="#OC代码实现" class="headerlink" title="OC代码实现"></a>OC代码实现</h1><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><ol>
-<li><p>根据初始数组去构造初始堆（构建一个完全二叉树，保证所有的父结点都比它的孩子结点数值大）。</p>
-</li>
-<li><p>每次交换第一个和最后一个元素，输出最后一个元素（最大值），然后把剩下元素重新调整为大根堆。</p>
-</li>
-</ol>
-<p>其实思路很简单，最重要的是怎么将一个初始化的数组构建一个大根堆呢？？</p>
-<p>采用的方式是<font color="red" size="4">自下而上，从右到左</font>自下而上，从右到左的思路，以3个为一个单元，进行构建。</p>
-<p>这么说大家可能还会搞不懂，接下来让我们举例说明！</p>
-<p>假设有一个无序数组[1, 3, 4, 5, 2, 6, 9, 7, 8, 0]<br><img src="http://upload-images.jianshu.io/upload_images/6644906-d758db5fcfaaf778.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="318837-20160422104522991-406805984.png"></p>
-<p><font color="red">这其中有个很重要的操作就是递归操作，图中的(4)</font></p>
-<h2 id="具体代码"><a href="#具体代码" class="headerlink" title="具体代码"></a>具体代码</h2><p>代码中我加了很多注释，相信大家能够看懂。:-D<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div></pre></td><td class="code"><pre><div class="line">//  ViewController.m</div><div class="line">//  Copyright © 2017年 FlyOceanFish. All rights reserved.</div><div class="line">//</div><div class="line"></div><div class="line">#import &quot;ViewController.h&quot;</div><div class="line"></div><div class="line">@interface ViewController ()</div><div class="line">&#123;</div><div class="line">    NSMutableArray *array;</div><div class="line">&#125;</div><div class="line">@end</div><div class="line"></div><div class="line">@implementation ViewController</div><div class="line"></div><div class="line">- (void)viewDidLoad &#123;</div><div class="line">    [super viewDidLoad];</div><div class="line">    array = [@[@20,@1,@4,@3,@40,@22,@9,@35,@6,@11,@18,@0] mutableCopy];</div><div class="line">    for (NSInteger i=array.count/2; i&gt;=0; i--) &#123;</div><div class="line">        [self headpSort:array parent:i length:array.count];//初始化建立大根堆</div><div class="line">    &#125;</div><div class="line">    for (NSInteger i=array.count-1; i&gt;0; i--) &#123;//循环交换将最大的R0放到最后边</div><div class="line">        NSInteger tem = [array[0] integerValue];</div><div class="line">        [array replaceObjectAtIndex:0 withObject:@([array[i] integerValue])];</div><div class="line">        [array replaceObjectAtIndex:i withObject:@(tem)];</div><div class="line">        [self headpSort:array parent:0 length:i];//交换完成后，树中最大的自然排到了最后边，故只要对剩余的i个数重新调整为大根堆</div><div class="line">        NSLog(@&quot;排序后:%@&quot;,array);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">/**</div><div class="line"> 这种遍历比较是自下而上的进行比较方式（从树的下部往上比较，以三个数为一个部分（假设左右子节点都有））</div><div class="line"> */</div><div class="line">- (void)headpSort:(NSMutableArray *)array parent:(NSInteger)parent length:(NSInteger)length&#123;</div><div class="line">    NSInteger parentValue = [array[parent] intValue];</div><div class="line">    NSInteger rightChild = 2*parent+2;</div><div class="line">    NSInteger maxChildIndex = -1;</div><div class="line">    NSInteger maxChild = -1;</div><div class="line">    if (rightChild&lt;length) &#123;//这里的操作是先比较左右子节点的大小，那其中最大的再去跟父节点比较</div><div class="line">        if (array[rightChild]&lt;array[rightChild-1]) &#123;</div><div class="line">            maxChild =[array[rightChild-1] intValue];</div><div class="line">            maxChildIndex = rightChild-1;</div><div class="line">        &#125;else&#123;</div><div class="line">            maxChild =[array[rightChild] intValue];</div><div class="line">            maxChildIndex = rightChild;</div><div class="line">        &#125;</div><div class="line">    &#125;else if (rightChild-1&lt;length)&#123;</div><div class="line">        maxChild = [array[rightChild-1] intValue];</div><div class="line">        maxChildIndex = rightChild-1;</div><div class="line">    &#125;</div><div class="line">    if (maxChild&gt;0) &#123;</div><div class="line">        if ([array[parent] intValue]&lt;maxChild) &#123;</div><div class="line">            [array replaceObjectAtIndex:parent withObject:@(maxChild)];</div><div class="line">            [array replaceObjectAtIndex:maxChildIndex withObject:@(parentValue)];</div><div class="line">            [self headpSort:array parent:maxChildIndex length:length];//如果子节点是其他子节点的父节点的话，有可能比其子节点小，故需要递归</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">@end</div></pre></td></tr></table></figure></p>
-<h1 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h1><p>看的过程可能很爽，一看就明白，也有可能云里雾里。实践出真知！所以建议大家用代码根据原理亲自去实现一遍，相信一切皆明了。</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="http://www.cnblogs.com/jingmoxukong/p/4303826.html" target="_blank" rel="external">堆排序</a></p>
+        <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><blockquote>
+<p>输入一个整数数组，实现一个函数来调整该数组中数字的顺序，使得所有奇数位于数组的前半部分，所有偶数位于数组的后半部分</p>
+</blockquote>
+<h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><p>最简单的思路就是从头开始遍历数据，如果遇到一个偶数，则将该位置的偶数取出，然后把位于该数字后边的所有数据都往前移动一位，然后将取出来的数字放到最后一位。此方法时间复杂度为O(n<sup>2</sup>)。显示不是最高效的。</p>
+<p>高效的方法是用两个指针，分别指向数组的开始和结尾。然后指向开始的指针向前编写直到遇到第一个偶数，然后停止；指向结尾的指针同时移动直到找到第一个奇数，然后停止移动指针。这时候交换两个指针的内容，并且继续之前的过程，直到两个指针相遇。</p>
+<h1 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">#include &quot;ReOrderOddEven.h&quot;</div><div class="line">void reOrderOddEven(int *pData,unsigned int length)&#123;</div><div class="line">    int *pBegin = pData;</div><div class="line">    int *pEnd = pData+length-1;</div><div class="line">    while (pBegin&lt;pEnd) &#123;</div><div class="line">        while (pBegin&lt;pEnd&amp;&amp;(*pBegin&amp;0x1)!=0) &#123;//奇数</div><div class="line">            pBegin++;</div><div class="line">        &#125;</div><div class="line">        while (pBegin&lt;pEnd&amp;&amp;(*pEnd&amp;0x1)==0) &#123;//偶数</div><div class="line">            pEnd--;</div><div class="line">        &#125;</div><div class="line">        int temp = *pBegin;</div><div class="line">        *pBegin = *pEnd;</div><div class="line">        *pEnd = temp;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">int number[] = &#123;1,2,3,4,5,6,4,3,4,56,7,8,33,22,121,42&#125;;</div><div class="line">reOrderOddEven(number, sizeof(number)/sizeof(number[0]));</div></pre></td></tr></table></figure>
 
       
     </div>
@@ -434,8 +401,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/12/13/React Native之GitHub App项目总结/" rel="next" title="React Native之GitHub Popular App项目总结">
-                <i class="fa fa-chevron-left"></i> React Native之GitHub Popular App项目总结
+              <a href="/2018/03/26/算法(打印1到最大的n位数)/" rel="next" title="算法(打印1到最大的n位数)">
+                <i class="fa fa-chevron-left"></i> 算法(打印1到最大的n位数)
               </a>
             
           </div>
@@ -443,10 +410,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/12/20/iOS带有placeholder的输入框/" rel="prev" title="iOS带有placeholder的输入框">
-                iOS带有placeholder的输入框 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -588,7 +551,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#概念"><span class="nav-number">1.</span> <span class="nav-text">概念</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#分类"><span class="nav-number">1.1.</span> <span class="nav-text">分类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#举例"><span class="nav-number">1.2.</span> <span class="nav-text">举例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">1.3.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#OC代码实现"><span class="nav-number">2.</span> <span class="nav-text">OC代码实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#思路"><span class="nav-number">2.1.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#具体代码"><span class="nav-number">2.2.</span> <span class="nav-text">具体代码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结-1"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">4.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#题目"><span class="nav-number">1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#分析"><span class="nav-number">2.</span> <span class="nav-text">分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#实现"><span class="nav-number">3.</span> <span class="nav-text">实现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#测试"><span class="nav-number">4.</span> <span class="nav-text">测试</span></a></li></ol></div>
             
 
           </div>
