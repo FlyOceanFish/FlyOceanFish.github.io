@@ -254,3 +254,14 @@ OC对象和CF(CoreFoundation)对象之间转换
 
 31、倒计时UIButton数字闪烁解决方法
 默认`type`是`system`，将`type`改成`custom`即可。[UIbutton+Timer](https://github.com/FlyOceanFish/UIButtonTimer)
+
+32、指定队列释放对象
+如果释对象的释放在主线程释放，这样会与我们争夺主线程。但是如果把一些对象释放放到子线程上，这样大大增加了主线程的利用率
+
+```Objective-C
+Person *person = [Person new];
+dispatch_queue_t queue = dispatch_queue_create("com.test.fly", nil);
+dispatch_async(queue, ^{
+    [person class];
+});
+```
