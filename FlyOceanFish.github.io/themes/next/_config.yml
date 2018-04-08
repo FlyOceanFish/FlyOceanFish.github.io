@@ -140,8 +140,8 @@ links_icon: link
 links_title: Links
 links_layout: block
 #links_layout: inline
-#links:
-  #Title: http://example.com/
+links:
+  kyson的技术博客: http://kyson.cn/
 
 # Sidebar Avatar
 # in theme directory(source/images): /images/avatar.gif
