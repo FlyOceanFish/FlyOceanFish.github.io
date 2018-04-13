@@ -88,7 +88,7 @@
 <meta property="og:description" content="介绍现在我们iOS的安装包是通过企业形式的发布，比较狗血的是发布的方式，网站是一个静态网页,没有所谓的后台让你上传一个包，填写一个发布内容、版本号等一系列的信息，然后点击保存按钮。这些操作都是通过我们人工远程连接服务器去，然后备份、修复、复制等一系列的操作。由于正好学习了Python，并且介于这个场景，作者就自己写了一个Python脚本来自动化操作这一系列的操作。 历程脚本运行的问题说做就做，作者">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/6644906-dba402400d4357cf.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2018-03-13T06:53:42.000Z">
+<meta property="og:updated_time" content="2018-04-13T05:13:14.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python记一次自动脚本历程">
 <meta name="twitter:description" content="介绍现在我们iOS的安装包是通过企业形式的发布，比较狗血的是发布的方式，网站是一个静态网页,没有所谓的后台让你上传一个包，填写一个发布内容、版本号等一系列的信息，然后点击保存按钮。这些操作都是通过我们人工远程连接服务器去，然后备份、修复、复制等一系列的操作。由于正好学习了Python，并且介于这个场景，作者就自己写了一个Python脚本来自动化操作这一系列的操作。 历程脚本运行的问题说做就做，作者">
@@ -380,7 +380,7 @@
 <p>第二天一到公司，马上卸载了3.x，装上了2.x。写了一个test.py脚本，然后打包在服务器运行测试。YES，成功了！</p>
 <h2 id="编写正式脚本"><a href="#编写正式脚本" class="headerlink" title="编写正式脚本"></a>编写正式脚本</h2><p>Python学习的时候就知道中文有编码的问题，所以早早就在文件开头写下了</p>
 <blockquote>
-<p>#coding=utf-d</p>
+<p>#coding=utf-8</p>
 </blockquote>
 <p>哈哈，暗自庆幸自己很聪明。接下来开始测试脚本，然后运行。啪啪啪啪！打脸！又报错。因为服务器上文件下有个中文的文件夹，所以路径有一个是带中文的文件夹。报错显示就在这里。</p>
 <p>然后研究。。。。已经写了编码怎么还会报错啊。头大！研究了一会，没救。就在琢磨是不是编码问题，改成了gbk。oh 居然成功了！！<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">#coding=gbk</div></pre></td></tr></table></figure></p>
