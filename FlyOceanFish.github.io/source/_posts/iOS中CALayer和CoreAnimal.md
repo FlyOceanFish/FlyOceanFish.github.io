@@ -1,6 +1,7 @@
 ---
 title: iOS中CALayer和CoreAnimal以例说教 # 这是标题
 date: 2018-04-13 10:00:00
+updated: 2018-04-16 11:11:00
 categories:  # 这里写的分类会自动汇集到 categories 页面上，分类可以多级
 - iOS # 一级分类
 tags:   # 这里写的标签会自动汇集到 tags 页面上
@@ -170,5 +171,35 @@ UIBezierPath *path = [UIBezierPath bezierPathWithArcCenter:CGPointMake(100, 100)
    [pointLayer addAnimation:anim2 forKey:@"animal"];
 ```
 ![动画.gif](https://upload-images.jianshu.io/upload_images/6644906-13134c2bf6b9483d.gif?imageMogr2/auto-orient/strip)
+# 关键帧动画
+CAKeyframeAnimation在这里是实现了一个小圆球沿着一个半圆路径一直旋转运动的动画。（圆心在路径上）
+```
+UIBezierPath *circle = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, 10, 10) cornerRadius:5];
+CAShapeLayer *circleLayer = [CAShapeLayer layer];
+circleLayer.frame = CGRectMake(0, 0, 10, 10);
+circleLayer.fillColor = [UIColor orangeColor].CGColor;
+circleLayer.path = circle.CGPath;
+[self.view.layer addSublayer:circleLayer];
+
+CAKeyframeAnimation * theAnimation;
+
+// Create the animation object, specifying the position property as the key path.
+theAnimation=[CAKeyframeAnimation animationWithKeyPath:@"position"];
+theAnimation.path=thePath;
+theAnimation.duration=5.0;
+theAnimation.repeatCount = 100;
+theAnimation.fillMode = kCAFillModeForwards;
+[circleLayer addAnimation:theAnimation forKey:@"position"];
+
+CAShapeLayer *animalTrack = [CAShapeLayer layer];
+animalTrack.path = thePath;
+animalTrack.strokeColor = [UIColor redColor].CGColor;
+animalTrack.fillColor = [UIColor clearColor].CGColor;
+animalTrack.lineWidth = 1;
+[self.view.layer addSublayer:animalTrack];
+```
+这里一开始有个问题，就是不是圆心沿着路径运动。然后我又换成了UIView试了一下可以的。最后研究主要是circleLayer我们仅仅设置了path,但是frame是没有的，设置了frame之后圆心开始沿着路径运动。
+![帧动画.gif](https://upload-images.jianshu.io/upload_images/6644906-1071184cf602e560.gif?imageMogr2/auto-orient/strip)
+
 # 源码
 [Github源码](https://github.com/FlyOceanFish/CoreAnimalCALayer)
