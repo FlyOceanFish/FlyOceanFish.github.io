@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="iOS," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="序文在众多的json转model的第三方库中，YYModel可谓是表现出了优异的性能，那到底它是底层是如何实现的呢？带着这份好奇心，开启了我们读取YYModel源码之路 源码解读YYModel类图此图可以点击放大，查看高清图。  通过以上类图，我们可以清晰的看到了YYModel整个框架的设计，不得不说设计的非常的棒。  NSObject、NSArray、NSDictionary的category分">
+<meta name="keywords" content="iOS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS读YYModel源码">
+<meta property="og:url" content="http://yoursite.com/2018/06/05/iOS读YYModel源码/index.html">
+<meta property="og:site_name" content="FlyOceanFish&#39; Blog">
+<meta property="og:description" content="序文在众多的json转model的第三方库中，YYModel可谓是表现出了优异的性能，那到底它是底层是如何实现的呢？带着这份好奇心，开启了我们读取YYModel源码之路 源码解读YYModel类图此图可以点击放大，查看高清图。  通过以上类图，我们可以清晰的看到了YYModel整个框架的设计，不得不说设计的非常的棒。  NSObject、NSArray、NSDictionary的category分">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/6644906-17dcf1bbbd2593f6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2018-06-05T09:32:09.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS读YYModel源码">
+<meta name="twitter:description" content="序文在众多的json转model的第三方库中，YYModel可谓是表现出了优异的性能，那到底它是底层是如何实现的呢？带着这份好奇心，开启了我们读取YYModel源码之路 源码解读YYModel类图此图可以点击放大，查看高清图。  通过以上类图，我们可以清晰的看到了YYModel整个框架的设计，不得不说设计的非常的棒。  NSObject、NSArray、NSDictionary的category分">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/6644906-17dcf1bbbd2593f6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/06/05/iOS读YYModel源码/"/>
+
+
+
+
+
+  <title>iOS读YYModel源码 | FlyOceanFish' Blog</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?8f73d05f1a471433ed938c462af80741";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <a href="https://github.com/FlyOceanFish"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">FlyOceanFish' Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">You Believe,You Can</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/05/iOS读YYModel源码/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="FlyOceanFish">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FlyOceanFish' Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">iOS读YYModel源码</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-05T17:18:00+08:00">
+                2018-06-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="序文"><a href="#序文" class="headerlink" title="序文"></a>序文</h1><p>在众多的json转model的第三方库中，YYModel可谓是表现出了优异的性能，那到底它是底层是如何实现的呢？带着这份好奇心，开启了我们读取YYModel源码之路</p>
+<h1 id="源码解读"><a href="#源码解读" class="headerlink" title="源码解读"></a>源码解读</h1><h2 id="YYModel类图"><a href="#YYModel类图" class="headerlink" title="YYModel类图"></a>YYModel类图</h2><p>此图可以点击放大，查看高清图。</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/6644906-17dcf1bbbd2593f6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>通过以上类图，我们可以清晰的看到了YYModel整个框架的设计，不得不说设计的非常的棒。</p>
+<ul>
+<li><code>NSObject</code>、<code>NSArray</code>、<code>NSDictionary</code>的category分别提供最上层api，以供我们json&lt;-&gt;model；</li>
+<li><p><code>YYModel</code>协议供我们在转换过程中的个性化，包括自定义映射、集合泛型、白名单、黑名单、自定义转换过程等等；</p>
+</li>
+<li><p><code>_YYModelMeta</code>和<code>_YYModelPropertyMeta</code> 这两个类算是对<code>YYClassInfo</code>上层业务应用的封装，专门处理转换中的个性化(<code>YYModel</code>协议)</p>
+</li>
+<li><code>YYClassInfo</code>存储了我们定义的model的信息。包括父类、父类信息、所有的方法、属性、变量。其中分别用<code>YYClassMethodInfo</code>、<code>YYClassPropertyInfo</code>、<code>YYClassIvarInfo</code>;（淋漓尽致的表现出了面向对象编程）</li>
+</ul>
+<h2 id="Json转Model"><a href="#Json转Model" class="headerlink" title="Json转Model"></a>Json转Model</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">NSString *json = @&quot;&#123;\&quot;uid\&quot;:123456,\&quot;name\&quot;:\&quot;Harry\&quot;,\&quot;created\&quot;:\&quot;1965-07-31T00:00:00+0000\&quot;,\&quot;books\&quot;:[&#123;\&quot;name\&quot;:\&quot;Harry Potte\&quot;,\&quot;pages\&quot;:256&#125;]&#125;&quot;;</div><div class="line">User *user = [User yy_modelWithJSON:json];</div></pre></td></tr></table></figure>
+<p>接下来我们通过以上小小的例子正式进入源码解读。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">+ (instancetype)yy_modelWithJSON:(id)json &#123;</div><div class="line">    NSDictionary *dic = [self _yy_dictionaryWithJSON:json];</div><div class="line">    return [self yy_modelWithDictionary:dic];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>将我们的json字符串转换成<code>NSDictionary</code>,调用的是系统<code>NSJSONSerialization</code>完成的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">+ (instancetype)yy_modelWithDictionary:(NSDictionary *)dictionary &#123;</div><div class="line">    if (!dictionary || dictionary == (id)kCFNull) return nil;</div><div class="line">    if (![dictionary isKindOfClass:[NSDictionary class]]) return nil;</div><div class="line"></div><div class="line">    Class cls = [self class];</div><div class="line">    _YYModelMeta *modelMeta = [_YYModelMeta metaWithClass:cls];</div><div class="line">    if (modelMeta-&gt;_hasCustomClassFromDictionary) &#123;</div><div class="line">        cls = [cls modelCustomClassForDictionary:dictionary] ?: cls;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    NSObject *one = [cls new];</div><div class="line">    if ([one yy_modelSetWithDictionary:dictionary]) return one;</div><div class="line">    return nil;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这个方法主要实现了两个功能：<br>1.对我们定义的Model进行解析生成_YYModelMeta，其中里边使用了缓存，使得只会解析一遍；<br>2.生成一个实例model，根据<code>_YYModelMeta</code>存储的model信息和上边生成的Dictionary对实例model复制，并且返回</p>
+<h3 id="赋值过程"><a href="#赋值过程" class="headerlink" title="赋值过程"></a>赋值过程</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div></pre></td><td class="code"><pre><div class="line">- (BOOL)yy_modelSetWithDictionary:(NSDictionary *)dic &#123;</div><div class="line">    if (!dic || dic == (id)kCFNull) return NO;</div><div class="line">    if (![dic isKindOfClass:[NSDictionary class]]) return NO;</div><div class="line"></div><div class="line"></div><div class="line">    _YYModelMeta *modelMeta = [_YYModelMeta metaWithClass:object_getClass(self)];</div><div class="line">    if (modelMeta-&gt;_keyMappedCount == 0) return NO;</div><div class="line"></div><div class="line">    if (modelMeta-&gt;_hasCustomWillTransformFromDictionary) &#123;</div><div class="line">        dic = [((id&lt;YYModel&gt;)self) modelCustomWillTransformFromDictionary:dic];</div><div class="line">        if (![dic isKindOfClass:[NSDictionary class]]) return NO;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    ModelSetContext context = &#123;0&#125;;</div><div class="line">    context.modelMeta = (__bridge void *)(modelMeta);</div><div class="line">    context.model = (__bridge void *)(self);</div><div class="line">    context.dictionary = (__bridge void *)(dic);</div><div class="line"></div><div class="line"></div><div class="line">    if (modelMeta-&gt;_keyMappedCount &gt;= CFDictionaryGetCount((CFDictionaryRef)dic)) &#123;//第一种赋值</div><div class="line">        CFDictionaryApplyFunction((CFDictionaryRef)dic, ModelSetWithDictionaryFunction, &amp;context);</div><div class="line">        // 这里是多级keyPath映射的时候。比如</div><div class="line">        //+ (NSDictionary *)modelCustomPropertyMapper &#123;</div><div class="line">        //    return @&#123;@&quot;desc&quot; : @&quot;ext.desc&quot;&#125;;</div><div class="line">        //&#125;</div><div class="line"></div><div class="line">        if (modelMeta-&gt;_keyPathPropertyMetas) &#123;</div><div class="line">            CFArrayApplyFunction((CFArrayRef)modelMeta-&gt;_keyPathPropertyMetas,</div><div class="line">                                 CFRangeMake(0, CFArrayGetCount((CFArrayRef)modelMeta-&gt;_keyPathPropertyMetas)),</div><div class="line">                                 ModelSetWithPropertyMetaArrayFunction,</div><div class="line">                                 &amp;context);</div><div class="line">        &#125;</div><div class="line">        //这里是多个key对应一个属性。比如:</div><div class="line">        // + (NSDictionary *)modelCustomPropertyMapper &#123;</div><div class="line">        //     return @&#123;</div><div class="line">        //              @&quot;name&quot; : @[@&quot;name&quot;,@&quot;Name&quot;,@&quot;AName&quot;]</div><div class="line">        //              &#125;;</div><div class="line">        // &#125;</div><div class="line">        if (modelMeta-&gt;_multiKeysPropertyMetas) &#123;</div><div class="line">            CFArrayApplyFunction((CFArrayRef)modelMeta-&gt;_multiKeysPropertyMetas,</div><div class="line">                                 CFRangeMake(0, CFArrayGetCount((CFArrayRef)modelMeta-&gt;_multiKeysPropertyMetas)),</div><div class="line">                                 ModelSetWithPropertyMetaArrayFunction,</div><div class="line">                                 &amp;context);</div><div class="line">        &#125;</div><div class="line">    &#125; else &#123;//第二种赋值</div><div class="line">        CFArrayApplyFunction((CFArrayRef)modelMeta-&gt;_allPropertyMetas,</div><div class="line">                             CFRangeMake(0, modelMeta-&gt;_keyMappedCount),</div><div class="line">                             ModelSetWithPropertyMetaArrayFunction,</div><div class="line">                             &amp;context);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    if (modelMeta-&gt;_hasCustomTransformFromDictionary) &#123;</div><div class="line">        return [((id&lt;YYModel&gt;)self) modelCustomTransformFromDictionary:dic];</div><div class="line">    &#125;</div><div class="line">    return YES;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这里是有两个赋值逻辑：<br>1.model需要赋值的属性是否不小于Dictionary里的数据。通过遍历数据去赋值；<br>2.model需要赋值的属性是否小于Dictionary里的数据，比如白名单、黑名单等个性化可以导致此情况发生。通过遍历model的属性去赋值</p>
+<blockquote>
+<p>这里使用了两种赋值逻辑，只用第二种的话也是可以的，这样分开处理，性能提升会高一些吧</p>
+</blockquote>
+<p><strong><em>这个赋值过程主要两个核心遍历方法:</em></strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">static void ModelSetWithDictionaryFunction(const void *_key, const void *_value, void *_context) &#123;</div><div class="line">    ModelSetContext *context = _context;</div><div class="line">    __unsafe_unretained _YYModelMeta *meta = (__bridge _YYModelMeta *)(context-&gt;modelMeta);</div><div class="line">    __unsafe_unretained _YYModelPropertyMeta *propertyMeta = [meta-&gt;_mapper objectForKey:(__bridge id)(_key)];</div><div class="line">    __unsafe_unretained id model = (__bridge id)(context-&gt;model);</div><div class="line">    while (propertyMeta) &#123;</div><div class="line">        if (propertyMeta-&gt;_setter) &#123;</div><div class="line">            ModelSetValueForProperty(model, (__bridge __unsafe_unretained id)_value, propertyMeta);</div><div class="line">        &#125;</div><div class="line">        propertyMeta = propertyMeta-&gt;_next;</div><div class="line">    &#125;;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这个方法有个单向链表数据的遍历。其实就是一个key对应多个model属性的时候产生的。比如：</p>
+<blockquote>
+<p><code>+ (NSDictionary *)modelCustomPropertyMapper {
+    return @{
+             @&quot;name&quot;:@&quot;name&quot;,
+             @&quot;Firstname&quot;:@&quot;name&quot;
+             };
+}</code></p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">static void ModelSetWithPropertyMetaArrayFunction(const void *_propertyMeta, void *_context) &#123;</div><div class="line">    ModelSetContext *context = _context;</div><div class="line">    __unsafe_unretained NSDictionary *dictionary = (__bridge NSDictionary *)(context-&gt;dictionary);</div><div class="line">    __unsafe_unretained _YYModelPropertyMeta *propertyMeta = (__bridge _YYModelPropertyMeta *)(_propertyMeta);</div><div class="line">    if (!propertyMeta-&gt;_setter) return;</div><div class="line">    id value = nil;</div><div class="line"></div><div class="line">    if (propertyMeta-&gt;_mappedToKeyArray) &#123;</div><div class="line">        value = YYValueForMultiKeys(dictionary, propertyMeta-&gt;_mappedToKeyArray);</div><div class="line">    &#125; else if (propertyMeta-&gt;_mappedToKeyPath) &#123;</div><div class="line">        value = YYValueForKeyPath(dictionary, propertyMeta-&gt;_mappedToKeyPath);</div><div class="line">    &#125; else &#123;</div><div class="line">        value = [dictionary objectForKey:propertyMeta-&gt;_mappedToKey];</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    if (value) &#123;</div><div class="line">        __unsafe_unretained id model = (__bridge id)(context-&gt;model);</div><div class="line">        ModelSetValueForProperty(model, value, propertyMeta);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这个方法主要分为3中情况:<br>1.多个key对应一个属性<br>2.有多急keypath进行映射<br>3.正常一个key对应一个属性</p>
+<h4 id="核心赋值"><a href="#核心赋值" class="headerlink" title="核心赋值"></a>核心赋值</h4><p>核心赋值主要通过判断各种类型进行赋值，这里做了一些兼容性转换操作等等，最主要的是通过底层<code>objc_msgSend</code>消息发送的方式进行赋值，所以效率极高。由于代码太长，我这里只复制一部分给大家看看，感兴趣的话可以具体看源码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line">static void ModelSetValueForProperty(__unsafe_unretained id model,</div><div class="line">                                     __unsafe_unretained id value,</div><div class="line">                                     __unsafe_unretained _YYModelPropertyMeta *meta) &#123;</div><div class="line">  if (meta-&gt;_isCNumber) &#123;</div><div class="line">      NSNumber *num = YYNSNumberCreateFromID(value);</div><div class="line">      ModelSetNumberToProperty(model, num, meta);</div><div class="line">      if (num) [num class]; // hold the number</div><div class="line">  &#125; else if (meta-&gt;_nsType) &#123;</div><div class="line">      if (value == (id)kCFNull) &#123;</div><div class="line">          ((void (*)(id, SEL, id))(void *) objc_msgSend)((id)model, meta-&gt;_setter, (id)nil);</div><div class="line">      &#125; else &#123;</div><div class="line">          switch (meta-&gt;_nsType) &#123;</div><div class="line">              case YYEncodingTypeNSString:</div><div class="line">              case YYEncodingTypeNSMutableString: &#123;</div><div class="line">                  if ([value isKindOfClass:[NSString class]]) &#123;</div><div class="line">                      if (meta-&gt;_nsType == YYEncodingTypeNSString) &#123;</div><div class="line">                          ((void (*)(id, SEL, id))(void *) objc_msgSend)((id)model, meta-&gt;_setter, value);</div><div class="line">                      &#125; else &#123;</div><div class="line">                          ((void (*)(id, SEL, id))(void *) objc_msgSend)((id)model, meta-&gt;_setter, ((NSString *)value).mutableCopy);</div><div class="line">                      &#125;</div><div class="line">                  &#125; else if ([value isKindOfClass:[NSNumber class]]) &#123;</div><div class="line">                      ((void (*)(id, SEL, id))(void *) objc_msgSend)((id)model,</div><div class="line">                                                                     meta-&gt;_setter,</div><div class="line">                                                                     (meta-&gt;_nsType == YYEncodingTypeNSString) ?</div><div class="line">                                                                     ((NSNumber *)value).stringValue :</div><div class="line">                                                                     ((NSNumber *)value).stringValue.mutableCopy);</div><div class="line">                  &#125; else if ([value isKindOfClass:[NSData class]]) &#123;</div><div class="line">                      NSMutableString *string = [[NSMutableString alloc] initWithData:value encoding:NSUTF8StringEncoding];</div><div class="line">                      ((void (*)(id, SEL, id))(void *) objc_msgSend)((id)model, meta-&gt;_setter, string);</div><div class="line">                  &#125; else if ([value isKindOfClass:[NSURL class]]) &#123;</div><div class="line">                      ((void (*)(id, SEL, id))(void *) objc_msgSend)((id)model,</div><div class="line">                                                                     meta-&gt;_setter,</div><div class="line">                                                                     (meta-&gt;_nsType == YYEncodingTypeNSString) ?</div><div class="line">                                                                     ((NSURL *)value).absoluteString :</div><div class="line">                                                                     ((NSURL *)value).absoluteString.mutableCopy);</div><div class="line">                  &#125; else if ([value isKindOfClass:[NSAttributedString class]]) &#123;</div><div class="line">                      ((void (*)(id, SEL, id))(void *) objc_msgSend)((id)model,</div><div class="line">                                                                     meta-&gt;_setter,</div><div class="line">                                                                     (meta-&gt;_nsType == YYEncodingTypeNSString) ?</div><div class="line">                                                                     ((NSAttributedString *)value).string :</div><div class="line">                                                                     ((NSAttributedString *)value).string.mutableCopy);</div><div class="line">                  &#125;</div><div class="line">              &#125; break;</div><div class="line">              。。。。</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>到这里整个json转model已经结束，这里没有具体分析<code>YYModel</code>是怎么将我们的model模型解析存储到<code>YYClassInfo</code>中的，这个会单独写一篇详细介绍。</p>
+<p>通过以上代码可以看到YY的作者对代码性能的要求极高，并且大部分是C函数的调用，不用通过消息转发直接，所以整体性能肯定会高。向大神致敬！</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/17/iOS视频全屏播放效果/" rel="next" title="iOS视频全屏播放动画的实现">
+                <i class="fa fa-chevron-left"></i> iOS视频全屏播放动画的实现
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="vcomments"></div>
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="FlyOceanFish" />
+            
+              <p class="site-author-name" itemprop="name">FlyOceanFish</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">66</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://kyson.cn/" title="kyson的技术博客" target="_blank">kyson的技术博客</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#序文"><span class="nav-number">1.</span> <span class="nav-text">序文</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#源码解读"><span class="nav-number">2.</span> <span class="nav-text">源码解读</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#YYModel类图"><span class="nav-number">2.1.</span> <span class="nav-text">YYModel类图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Json转Model"><span class="nav-number">2.2.</span> <span class="nav-text">Json转Model</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#赋值过程"><span class="nav-number">2.2.1.</span> <span class="nav-text">赋值过程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#核心赋值"><span class="nav-number">2.2.1.1.</span> <span class="nav-text">核心赋值</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">FlyOceanFish</span>
+
+  
+</div>
+
+<!--
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.3</div>
+
+-->
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_lines.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine@1.1.6/dist/Valine.min.js"></script>
+  <script type="text/javascript">
+    new Valine({
+        av: AV,
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        app_id: 'BUyek27xhBJW608unzBEyhWI-gzGzoHsz',
+        app_key: 'lT2NUWTMwPfNYl6xMQUtUxDv',
+        placeholder: '请输入评论'
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.3"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=5.1.3"></script>
+
+
+  
+
+</body>
+</html>
+<script type="text/javascript" src="/js/src/love.js"></script>
