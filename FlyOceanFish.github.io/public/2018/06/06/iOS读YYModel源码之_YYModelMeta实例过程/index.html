@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="iOS," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="序文上一篇iOS读YYModel源码我们窥探了Json转Model的全过程，不过还差一步_YYModelMeta实例化的过程，所以此文专门针对性的解读_YYModelMeta实例化过程 解读1_YYModelMeta *modelMeta = [_YYModelMeta metaWithClass:cls]; 上层NSObject的Category YYModel仅仅调用了一下api，接下来我们将">
+<meta name="keywords" content="iOS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS读YYModel源码之_YYModelMeta实例过程">
+<meta property="og:url" content="http://yoursite.com/2018/06/06/iOS读YYModel源码之_YYModelMeta实例过程/index.html">
+<meta property="og:site_name" content="FlyOceanFish&#39; Blog">
+<meta property="og:description" content="序文上一篇iOS读YYModel源码我们窥探了Json转Model的全过程，不过还差一步_YYModelMeta实例化的过程，所以此文专门针对性的解读_YYModelMeta实例化过程 解读1_YYModelMeta *modelMeta = [_YYModelMeta metaWithClass:cls]; 上层NSObject的Category YYModel仅仅调用了一下api，接下来我们将">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-06-06T08:02:33.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS读YYModel源码之_YYModelMeta实例过程">
+<meta name="twitter:description" content="序文上一篇iOS读YYModel源码我们窥探了Json转Model的全过程，不过还差一步_YYModelMeta实例化的过程，所以此文专门针对性的解读_YYModelMeta实例化过程 解读1_YYModelMeta *modelMeta = [_YYModelMeta metaWithClass:cls]; 上层NSObject的Category YYModel仅仅调用了一下api，接下来我们将">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/06/06/iOS读YYModel源码之_YYModelMeta实例过程/"/>
+
+
+
+
+
+  <title>iOS读YYModel源码之_YYModelMeta实例过程 | FlyOceanFish' Blog</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?8f73d05f1a471433ed938c462af80741";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <a href="https://github.com/FlyOceanFish"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">FlyOceanFish' Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">You Believe,You Can</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/06/iOS读YYModel源码之_YYModelMeta实例过程/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="FlyOceanFish">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FlyOceanFish' Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">iOS读YYModel源码之_YYModelMeta实例过程</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-06T16:02:00+08:00">
+                2018-06-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="序文"><a href="#序文" class="headerlink" title="序文"></a>序文</h1><p>上一篇<a href="http://flyoceanfish.top/2018/06/05/iOS%E8%AF%BBYYModel%E6%BA%90%E7%A0%81/" target="_blank" rel="external">iOS读YYModel源码</a>我们窥探了Json转Model的全过程，不过还差一步<code>_YYModelMeta</code>实例化的过程，所以此文专门针对性的解读<code>_YYModelMeta</code>实例化过程</p>
+<h1 id="解读"><a href="#解读" class="headerlink" title="解读"></a>解读</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">_YYModelMeta *modelMeta = [_YYModelMeta metaWithClass:cls];</div></pre></td></tr></table></figure>
+<p>上层NSObject的Category YYModel仅仅调用了一下api，接下来我们将这一行进行展开，详细看看里边到底做了什么。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">+ (instancetype)metaWithClass:(Class)cls &#123;</div><div class="line">    if (!cls) return nil;</div><div class="line">    static CFMutableDictionaryRef cache;</div><div class="line">    static dispatch_once_t onceToken;</div><div class="line">    static dispatch_semaphore_t lock;</div><div class="line">    dispatch_once(&amp;onceToken, ^&#123;</div><div class="line">        cache = CFDictionaryCreateMutable(CFAllocatorGetDefault(), 0, &amp;kCFTypeDictionaryKeyCallBacks, &amp;kCFTypeDictionaryValueCallBacks);</div><div class="line">        lock = dispatch_semaphore_create(1);</div><div class="line">    &#125;);</div><div class="line">    dispatch_semaphore_wait(lock, DISPATCH_TIME_FOREVER);</div><div class="line">    _YYModelMeta *meta = CFDictionaryGetValue(cache, (__bridge const void *)(cls));</div><div class="line">    dispatch_semaphore_signal(lock);</div><div class="line">    if (!meta || meta-&gt;_classInfo.needUpdate) &#123;</div><div class="line">        meta = [[_YYModelMeta alloc] initWithClass:cls];</div><div class="line">        if (meta) &#123;</div><div class="line">            dispatch_semaphore_wait(lock, DISPATCH_TIME_FOREVER);</div><div class="line">            CFDictionarySetValue(cache, (__bridge const void *)(cls), (__bridge const void *)(meta));</div><div class="line">            dispatch_semaphore_signal(lock);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    return meta;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这一段代码首先单例化了一个Dictionary缓存，并且先取缓存中的<code>_YYModelMeta</code>，如果没有的话就实例化<code>_YYModelMeta</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">- (instancetype)initWithClass:(Class)cls &#123;</div><div class="line">    YYClassInfo *classInfo = [YYClassInfo classInfoWithClass:cls];</div><div class="line">    if (!classInfo) return nil;</div><div class="line">    self = [super init];</div><div class="line"></div><div class="line">    // Get black list</div><div class="line">    modelPropertyBlacklist</div><div class="line">    // Get white list</div><div class="line">    modelPropertyWhitelist</div><div class="line">    // Get container property&apos;s generic class</div><div class="line">    modelContainerPropertyGenericClass</div><div class="line">    // Create all property metas.</div><div class="line">    NSMutableDictionary *allPropertyMetas = [NSMutableDictionary new];</div><div class="line">    YYClassInfo *curClassInfo = classInfo;</div><div class="line">    while (curClassInfo &amp;&amp; curClassInfo.superCls != nil) &#123; // recursive parse super class, but ignore root class (NSObject/NSProxy)</div><div class="line">        for (YYClassPropertyInfo *propertyInfo in curClassInfo.propertyInfos.allValues) &#123;</div><div class="line">            if (!propertyInfo.name) continue;</div><div class="line">            if (blacklist &amp;&amp; [blacklist containsObject:propertyInfo.name]) continue;</div><div class="line">            if (whitelist &amp;&amp; ![whitelist containsObject:propertyInfo.name]) continue;</div><div class="line">            _YYModelPropertyMeta *meta = [_YYModelPropertyMeta metaWithClassInfo:classInfo</div><div class="line">                                                                    propertyInfo:propertyInfo</div><div class="line">                                                                         generic:genericMapper[propertyInfo.name]];</div><div class="line">            if (!meta || !meta-&gt;_name) continue;</div><div class="line">            if (!meta-&gt;_getter || !meta-&gt;_setter) continue;</div><div class="line">            if (allPropertyMetas[meta-&gt;_name]) continue;</div><div class="line">            allPropertyMetas[meta-&gt;_name] = meta;</div><div class="line">        &#125;</div><div class="line">        curClassInfo = curClassInfo.superClassInfo;</div><div class="line">    &#125;</div><div class="line">    if (allPropertyMetas.count) _allPropertyMetas = allPropertyMetas.allValues.copy;</div><div class="line">    // create mapper</div><div class="line"></div><div class="line">    return self;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这个实例化代码有点长，我删减了一下。其实主要算是做了4件事情</p>
+<ul>
+<li>实例化了<code>YYClassInfo</code></li>
+<li>回调<code>YYModel</code>协议</li>
+<li>根据上一步协议的回调结果blacklist、whitelist和集合泛型创建<code>_YYModelPropertyMeta</code></li>
+<li>创建自定义的key与<code>_YYModelPropertyMeta</code>的映射</li>
+</ul>
+<p>首先我来来看一下YYClassInfo的实例化，这个过程挺复杂的，也是核心部分<br><strong><em>实例化<code>YYClassInfo</code></em></strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">+ (instancetype)classInfoWithClass:(Class)cls &#123;</div><div class="line">    if (!cls) return nil;</div><div class="line">    static CFMutableDictionaryRef classCache;</div><div class="line">    static CFMutableDictionaryRef metaCache;</div><div class="line">    static dispatch_once_t onceToken;</div><div class="line">    static dispatch_semaphore_t lock;</div><div class="line">    dispatch_once(&amp;onceToken, ^&#123;</div><div class="line">        classCache = CFDictionaryCreateMutable(CFAllocatorGetDefault(), 0, &amp;kCFTypeDictionaryKeyCallBacks, &amp;kCFTypeDictionaryValueCallBacks);</div><div class="line">        metaCache = CFDictionaryCreateMutable(CFAllocatorGetDefault(), 0, &amp;kCFTypeDictionaryKeyCallBacks, &amp;kCFTypeDictionaryValueCallBacks);</div><div class="line">        lock = dispatch_semaphore_create(1);</div><div class="line">    &#125;);</div><div class="line">    dispatch_semaphore_wait(lock, DISPATCH_TIME_FOREVER);</div><div class="line">    YYClassInfo *info = CFDictionaryGetValue(class_isMetaClass(cls) ? metaCache : classCache, (__bridge const void *)(cls));</div><div class="line">    if (info &amp;&amp; info-&gt;_needUpdate) &#123;</div><div class="line">        [info _update];</div><div class="line">    &#125;</div><div class="line">    dispatch_semaphore_signal(lock);</div><div class="line">    if (!info) &#123;</div><div class="line">        info = [[YYClassInfo alloc] initWithClass:cls];</div><div class="line">        if (info) &#123;</div><div class="line">            dispatch_semaphore_wait(lock, DISPATCH_TIME_FOREVER);</div><div class="line">            CFDictionarySetValue(info.isMeta ? metaCache : classCache, (__bridge const void *)(cls), (__bridge const void *)(info));</div><div class="line">            dispatch_semaphore_signal(lock);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    return info;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这个实例化与<code>_YYModelMeta</code>的实例化方法是一样的，接下来我们重点关注<code>[[YYClassInfo alloc] initWithClass:cls];</code>这个方法中调用了一个核心方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div></pre></td><td class="code"><pre><div class="line">- (void)_update &#123;</div><div class="line">    _ivarInfos = nil;</div><div class="line">    _methodInfos = nil;</div><div class="line">    _propertyInfos = nil;</div><div class="line"></div><div class="line">    Class cls = self.cls;</div><div class="line">    unsigned int methodCount = 0;</div><div class="line">    Method *methods = class_copyMethodList(cls, &amp;methodCount);</div><div class="line">    if (methods) &#123;</div><div class="line">        NSMutableDictionary *methodInfos = [NSMutableDictionary new];</div><div class="line">        _methodInfos = methodInfos;</div><div class="line">        for (unsigned int i = 0; i &lt; methodCount; i++) &#123;</div><div class="line">            YYClassMethodInfo *info = [[YYClassMethodInfo alloc] initWithMethod:methods[i]];</div><div class="line">            if (info.name) methodInfos[info.name] = info;</div><div class="line">        &#125;</div><div class="line">        free(methods);</div><div class="line">    &#125;</div><div class="line">    unsigned int propertyCount = 0;</div><div class="line">    objc_property_t *properties = class_copyPropertyList(cls, &amp;propertyCount);</div><div class="line">    if (properties) &#123;</div><div class="line">        NSMutableDictionary *propertyInfos = [NSMutableDictionary new];</div><div class="line">        _propertyInfos = propertyInfos;</div><div class="line">        for (unsigned int i = 0; i &lt; propertyCount; i++) &#123;</div><div class="line">            YYClassPropertyInfo *info = [[YYClassPropertyInfo alloc] initWithProperty:properties[i]];</div><div class="line">            if (info.name) propertyInfos[info.name] = info;</div><div class="line">        &#125;</div><div class="line">        free(properties);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    unsigned int ivarCount = 0;</div><div class="line">    Ivar *ivars = class_copyIvarList(cls, &amp;ivarCount);</div><div class="line">    if (ivars) &#123;</div><div class="line">        NSMutableDictionary *ivarInfos = [NSMutableDictionary new];</div><div class="line">        _ivarInfos = ivarInfos;</div><div class="line">        for (unsigned int i = 0; i &lt; ivarCount; i++) &#123;</div><div class="line">            YYClassIvarInfo *info = [[YYClassIvarInfo alloc] initWithIvar:ivars[i]];</div><div class="line">            if (info.name) ivarInfos[info.name] = info;</div><div class="line">        &#125;</div><div class="line">        free(ivars);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    if (!_ivarInfos) _ivarInfos = @&#123;&#125;;</div><div class="line">    if (!_methodInfos) _methodInfos = @&#123;&#125;;</div><div class="line">    if (!_propertyInfos) _propertyInfos = @&#123;&#125;;</div><div class="line"></div><div class="line">    _needUpdate = NO;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这个方法是通过runtime实现了对Model中属性、变量、方法提取，然后分别实例化了<code>YYClassPropertyInfo</code>、<code>YYClassIvarInfo</code>、<code>YYClassMethodInfo</code>这三个类，并且存储到了相应的数组之中<br><strong><em>根据上一步协议的回调结果blacklist、whitelist和集合泛型创建_YYModelPropertyMeta</em></strong><br>这个过程主要是以下核心代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">_YYModelPropertyMeta *meta = [_YYModelPropertyMeta metaWithClassInfo:classInfo</div><div class="line">                                                        propertyInfo:propertyInfo</div><div class="line">                                                             generic:genericMapper[propertyInfo.name]];</div></pre></td></tr></table></figure></p>
+<p>这个代码内部其实就是根据<code>YYClassPropertyInfo</code>生成一个业务类，包括key的名字、类型、泛型类、是否是数字、setter方法、getter方法等等，其实主要是在<code>YYClassPropertyInfo</code>这个类的基础了增加了一些业务逻辑的数据<br><strong><em>创建自定义的key与_YYModelPropertyMeta的映射</em></strong><br>这个过程就是根据<code>YYModel</code>协议中的<code>modelCustomPropertyMapper</code>方法，将自定义的key的键值对的映射进行处理<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">if ([mappedToKey isKindOfClass:[NSString class]]) &#123;</div><div class="line">  ...</div><div class="line">&#125; else if ([mappedToKey isKindOfClass:[NSArray class]]) &#123;</div><div class="line">  ...           </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这个是两种情况，一种是字符串(两种情况一种是单个的，一种是带<code>.</code>，称之为keyPath)；一种是数组的情况(一个model属性对应多个不同的key)。这两种情况都有一个单向链表实现</p>
+<p>通过以上对数据的处理<code>_YYModelMeta</code>中的属性_mapper、_allPropertyMetas、_keyPathPropertyMetas、_multiKeysPropertyMetas、_keyMappedCount等属性则均相应的存储上了数据</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>这一层数据层设计的也相当的巧妙，有专门存储model信息的类，有专门处理我们自定义的业务逻辑类。上下分了两层。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/06/05/iOS读YYModel源码/" rel="next" title="iOS读YYModel源码">
+                <i class="fa fa-chevron-left"></i> iOS读YYModel源码
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="vcomments"></div>
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="FlyOceanFish" />
+            
+              <p class="site-author-name" itemprop="name">FlyOceanFish</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">67</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://kyson.cn/" title="kyson的技术博客" target="_blank">kyson的技术博客</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#序文"><span class="nav-number">1.</span> <span class="nav-text">序文</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#解读"><span class="nav-number">2.</span> <span class="nav-text">解读</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">FlyOceanFish</span>
+
+  
+</div>
+
+<!--
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.3</div>
+
+-->
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_lines.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine@1.1.6/dist/Valine.min.js"></script>
+  <script type="text/javascript">
+    new Valine({
+        av: AV,
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        app_id: 'BUyek27xhBJW608unzBEyhWI-gzGzoHsz',
+        app_key: 'lT2NUWTMwPfNYl6xMQUtUxDv',
+        placeholder: '请输入评论'
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.3"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=5.1.3"></script>
+
+
+  
+
+</body>
+</html>
+<script type="text/javascript" src="/js/src/love.js"></script>
