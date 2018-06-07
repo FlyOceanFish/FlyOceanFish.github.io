@@ -220,7 +220,171 @@ static void ModelSetValueForProperty(__unsafe_unretained id model,
               。。。。
 }
 ```
+## 对象转NSDictionary
+因为这里转换的结果提供给`yy_modelToJSONData`和`yy_modelToJSONString`这两个方法使用。并且这两个方法核心使用的是`NSJSONSerialization`的api。
+以下是引用苹果[官方文档](https://developer.apple.com/documentation/foundation/nsjsonserialization)
+>  
+A Foundation object that may be converted to JSON must have the following properties:
+>
+>* The top level object is an `NSArray` or `NSDictionary`.
+>
+>* All objects are instances of `NSString`, `NSNumber`, `NSArray`, `NSDictionary`, or `NSNull`.
+>* All dictionary keys are instances of `NSString`.
+>
+>* Numbers are not NaN or infinity.
+
+所以整个转换过程是基于这个前提进行的转换，比如像NSURL、NSAttributedString、NSDate等类型则要转换成NSString。
+
+核心方法就是以下代码：
+```Objective-C
+static id ModelToJSONObjectRecursive(NSObject *model) {
+    if (!model || model == (id)kCFNull) return model;
+    if ([model isKindOfClass:[NSString class]]) return model;
+    if ([model isKindOfClass:[NSNumber class]]) return model;
+    if ([model isKindOfClass:[NSDictionary class]]) {
+        if ([NSJSONSerialization isValidJSONObject:model]) return model;
+        NSMutableDictionary *newDic = [NSMutableDictionary new];
+        [((NSDictionary *)model) enumerateKeysAndObjectsUsingBlock:^(NSString *key, id obj, BOOL *stop) {
+            NSString *stringKey = [key isKindOfClass:[NSString class]] ? key : key.description;
+            if (!stringKey) return;
+            id jsonObj = ModelToJSONObjectRecursive(obj);
+            if (!jsonObj) jsonObj = (id)kCFNull;
+            newDic[stringKey] = jsonObj;
+        }];
+        return newDic;
+    }
+    if ([model isKindOfClass:[NSSet class]]) {
+        NSArray *array = ((NSSet *)model).allObjects;
+        if ([NSJSONSerialization isValidJSONObject:array]) return array;
+        NSMutableArray *newArray = [NSMutableArray new];
+        for (id obj in array) {
+            if ([obj isKindOfClass:[NSString class]] || [obj isKindOfClass:[NSNumber class]]) {
+                [newArray addObject:obj];
+            } else {
+                id jsonObj = ModelToJSONObjectRecursive(obj);
+                if (jsonObj && jsonObj != (id)kCFNull) [newArray addObject:jsonObj];
+            }
+        }
+        return newArray;
+    }
+    if ([model isKindOfClass:[NSArray class]]) {
+        if ([NSJSONSerialization isValidJSONObject:model]) return model;
+        NSMutableArray *newArray = [NSMutableArray new];
+        for (id obj in (NSArray *)model) {
+            if ([obj isKindOfClass:[NSString class]] || [obj isKindOfClass:[NSNumber class]]) {
+                [newArray addObject:obj];
+            } else {
+                id jsonObj = ModelToJSONObjectRecursive(obj);
+                if (jsonObj && jsonObj != (id)kCFNull) [newArray addObject:jsonObj];
+            }
+        }
+        return newArray;
+    }
+    if ([model isKindOfClass:[NSURL class]]) return ((NSURL *)model).absoluteString;
+    if ([model isKindOfClass:[NSAttributedString class]]) return ((NSAttributedString *)model).string;
+    if ([model isKindOfClass:[NSDate class]]) return [YYISODateFormatter() stringFromDate:(id)model];
+    if ([model isKindOfClass:[NSData class]]) return nil;
+
+
+    _YYModelMeta *modelMeta = [_YYModelMeta metaWithClass:[model class]];
+    if (!modelMeta || modelMeta->_keyMappedCount == 0) return nil;
+    NSMutableDictionary *result = [[NSMutableDictionary alloc] initWithCapacity:64];
+    __unsafe_unretained NSMutableDictionary *dic = result; // avoid retain and release in block
+    [modelMeta->_mapper enumerateKeysAndObjectsUsingBlock:^(NSString *propertyMappedKey, _YYModelPropertyMeta *propertyMeta, BOOL *stop) {
+        if (!propertyMeta->_getter) return;
+
+        id value = nil;
+        if (propertyMeta->_isCNumber) {
+            value = ModelCreateNumberFromProperty(model, propertyMeta);
+        } else if (propertyMeta->_nsType) {
+            id v = ((id (*)(id, SEL))(void *) objc_msgSend)((id)model, propertyMeta->_getter);
+            value = ModelToJSONObjectRecursive(v);
+        } else {
+            switch (propertyMeta->_type & YYEncodingTypeMask) {
+                case YYEncodingTypeObject: {
+                    id v = ((id (*)(id, SEL))(void *) objc_msgSend)((id)model, propertyMeta->_getter);
+                    value = ModelToJSONObjectRecursive(v);
+                    if (value == (id)kCFNull) value = nil;
+                } break;
+                case YYEncodingTypeClass: {
+                    Class v = ((Class (*)(id, SEL))(void *) objc_msgSend)((id)model, propertyMeta->_getter);
+                    value = v ? NSStringFromClass(v) : nil;
+                } break;
+                case YYEncodingTypeSEL: {
+                    SEL v = ((SEL (*)(id, SEL))(void *) objc_msgSend)((id)model, propertyMeta->_getter);
+                    value = v ? NSStringFromSelector(v) : nil;
+                } break;
+                default: break;
+            }
+        }
+        if (!value) return;
+
+        if (propertyMeta->_mappedToKeyPath) {
+            NSMutableDictionary *superDic = dic;
+            NSMutableDictionary *subDic = nil;
+            for (NSUInteger i = 0, max = propertyMeta->_mappedToKeyPath.count; i < max; i++) {
+                NSString *key = propertyMeta->_mappedToKeyPath[i];
+                if (i + 1 == max) { // end
+                    if (!superDic[key]) superDic[key] = value;
+                    break;
+                }
+
+                subDic = superDic[key];
+                if (subDic) {
+                    if ([subDic isKindOfClass:[NSDictionary class]]) {
+                        subDic = subDic.mutableCopy;
+                        superDic[key] = subDic;
+                    } else {
+                        break;
+                    }
+                } else {
+                    subDic = [NSMutableDictionary new];
+                    superDic[key] = subDic;
+                }
+                superDic = subDic;
+                subDic = nil;
+            }
+        } else {
+            if (!dic[propertyMeta->_mappedToKey]) {
+                dic[propertyMeta->_mappedToKey] = value;
+            }
+        }
+    }];
+
+    if (modelMeta->_hasCustomTransformToDictionary) {
+        BOOL suc = [((id<YYModel>)model) modelCustomTransformToDictionary:dic];
+        if (!suc) return nil;
+    }
+    return result;
+}
+```
+这个看成2步，第一步是返回NSArray/NSString/NSNumber/NSNull和基于苹果的要求对类型进行转换；第二步则将_YYModelMeta转换成NSDictionary，并且使用到了第一步的逻辑进行了递归。
+
+在解析`_YYModelMeta`属性的时候也可分为两步：第一步判断_isCNumber、Foundation type和其他（YYEncodingTypeObject、ModelToJSONObjectRecursive、YYEncodingTypeSEL）；第二步则是对keypath映射的处理，即_mappedToKeyPath如果存在的话，则要相应生成subDic
+
+对于Model转Json，Model转Data则是基于以上转换的过程。代码如下：
+```Objective-C
+- (NSData *)yy_modelToJSONData {
+    id jsonObject = [self yy_modelToJSONObject];
+    if (!jsonObject) return nil;
+    return [NSJSONSerialization dataWithJSONObject:jsonObject options:0 error:NULL];
+}
+
+- (NSString *)yy_modelToJSONString {
+    NSData *jsonData = [self yy_modelToJSONData];
+    if (jsonData.length == 0) return nil;
+    return [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+}
+
+```
+**这里提一个细节，如下代码：**
+>for (NSUInteger i = 0, max = propertyMeta->_mappedToKeyPath.count; i < max; i++) {
+
+再次感叹一下YY作者对于性能的极致追求！
+
 # 总结
 到这里整个json转model已经结束，这里没有具体分析`YYModel`是怎么将我们的model模型解析存储到`YYClassInfo`中的，这个会单独写一篇详细介绍。
 
 通过以上代码可以看到YY的作者对代码性能的要求极高，并且大部分是C函数的调用，不用通过消息转发直接，所以整体性能肯定会高。向大神致敬！
+
+通常Json转Model可以归纳为两种方法：一种是YY作者的基于消息发送，这种性能是比较高的；另一种则是基于KVC实现的，性能能差一些。
