@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="iOS,WWDC18," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="序言众所周知，iOS中消息推送扮演了不可或缺的位置。不管是本地通知还是远程通知无时不刻的在影响着我们的用户体验，以致于在iOS10的时候苹果对推送大规模重构，独立了已UserNotifications和UserNotificationsUI两个单独的framework，可见重要性一斑。针对于WWDC18苹果又给我们带来了什么惊喜呢？ 新特性 Grouped notifications推送分组 No">
+<meta name="keywords" content="iOS,WWDC18">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS12中推送通知新特性">
+<meta property="og:url" content="http://yoursite.com/2018/06/26/iOS12推送新特性/index.html">
+<meta property="og:site_name" content="FlyOceanFish&#39; Blog">
+<meta property="og:description" content="序言众所周知，iOS中消息推送扮演了不可或缺的位置。不管是本地通知还是远程通知无时不刻的在影响着我们的用户体验，以致于在iOS10的时候苹果对推送大规模重构，独立了已UserNotifications和UserNotificationsUI两个单独的framework，可见重要性一斑。针对于WWDC18苹果又给我们带来了什么惊喜呢？ 新特性 Grouped notifications推送分组 No">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/6644906-44a8e42bb655ad02.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/6644906-4236ec1b397b424c.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/6644906-0a93a4998c90342e.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/6644906-bcf29b863af11e0b.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/6644906-fd30d599f801a0e8.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/6644906-f817e45d3e077143.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/6644906-141ec5cefa721ef2.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/6644906-e75934704fdd6b4d.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/6644906-6d7dd0b8ae6172d1.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/6644906-1472847689393329.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/6644906-2174115f81cf5aa7.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/6644906-51cb5eb4f5b31db1.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2018-06-26T06:50:03.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS12中推送通知新特性">
+<meta name="twitter:description" content="序言众所周知，iOS中消息推送扮演了不可或缺的位置。不管是本地通知还是远程通知无时不刻的在影响着我们的用户体验，以致于在iOS10的时候苹果对推送大规模重构，独立了已UserNotifications和UserNotificationsUI两个单独的framework，可见重要性一斑。针对于WWDC18苹果又给我们带来了什么惊喜呢？ 新特性 Grouped notifications推送分组 No">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/6644906-44a8e42bb655ad02.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/06/26/iOS12推送新特性/"/>
+
+
+
+
+
+  <title>iOS12中推送通知新特性 | FlyOceanFish' Blog</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?8f73d05f1a471433ed938c462af80741";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <a href="https://github.com/FlyOceanFish"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">FlyOceanFish' Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">You Believe,You Can</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/26/iOS12推送新特性/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="FlyOceanFish">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FlyOceanFish' Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">iOS12中推送通知新特性</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-26T13:55:00+08:00">
+                2018-06-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="序言"><a href="#序言" class="headerlink" title="序言"></a>序言</h1><p>众所周知，iOS中消息推送扮演了不可或缺的位置。不管是本地通知还是远程通知无时不刻的在影响着我们的用户体验，以致于在iOS10的时候苹果对推送大规模重构，独立了已<code>UserNotifications</code>和<code>UserNotificationsUI</code>两个单独的framework，可见重要性一斑。针对于WWDC18苹果又给我们带来了什么惊喜呢？</p>
+<h1 id="新特性"><a href="#新特性" class="headerlink" title="新特性"></a>新特性</h1><ul>
+<li>Grouped notifications<br>推送分组</li>
+<li>Notification content extensions<br>推送内容扩展中的可交互和动态更改Action</li>
+<li>Notification management<br>推送消息的管理</li>
+<li>Provisional authorization<br>临时授权</li>
+<li>Critical alerts<br>警告性质的推送<h2 id="推送分组"><a href="#推送分组" class="headerlink" title="推送分组"></a>推送分组</h2></li>
+</ul>
+<p>随着手机上应用的增多，尤其QQ和微信这两大聊天工具，当手机锁屏的时候，伴随着就是好满屏的推送消息。这一现象不知大家有没有觉着不高效和体验性比较差呢？苹果针对锁屏情况下，对消息进行了分组，从而有效的提高了用户的交互体验，分组形式如下：</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/6644906-44a8e42bb655ad02.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="1529981248132.jpg"></p>
+<h3 id="分组形式："><a href="#分组形式：" class="headerlink" title="分组形式："></a>分组形式：</h3><ul>
+<li>苹果会自动帮我们以APP的为分类依据进行消息的分组；</li>
+<li>如果我们设置了<code>threadIdentifier</code>属性则以此属性为依据，进行分组。</li>
+</ul>
+<p><img src="https://upload-images.jianshu.io/upload_images/6644906-4236ec1b397b424c.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="1529981611452.jpg"><br>代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">let content = UNMutableNotificationContent()</span><br><span class="line">content.title = &quot;Notifications Team&quot;</span><br><span class="line">content.body = &quot;WWDC session after party&quot;</span><br><span class="line">content.threadIdentifier = &quot;notifications-team-chat&quot;//通过这个属性设置分组，如果此属性没有设置则以APP为分组依据</span><br></pre></td></tr></table></figure></p>
+<h3 id="摘要-Summary-格式定制"><a href="#摘要-Summary-格式定制" class="headerlink" title="摘要(Summary)格式定制"></a>摘要(Summary)格式定制</h3><p>当苹果自动将推送消息的归拢到一起的时候，最下边会有一个消息摘要。默认格式是:<code>n more notifications from xxx</code>。不过此格式我们是可以定制的。</p>
+<ul>
+<li>第一种<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">let summaryFormat = &quot;%u 更多消息啦啦&quot;</span><br><span class="line">return UNNotificationCategory(identifier: &quot;category-identifier&quot;,</span><br><span class="line">actions: [],</span><br><span class="line">intentIdentifiers: [],</span><br><span class="line">hiddenPreviewsBodyPlaceholder: nil,</span><br><span class="line">categorySummaryFormat: summaryFormat,</span><br><span class="line">options: [])</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><img src="https://upload-images.jianshu.io/upload_images/6644906-0a93a4998c90342e.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="1529979505103.jpg"></p>
+<ul>
+<li>第二种<br>let summaryFormat = “%u 更多消息啦啦！来自OceanFish”<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">let content = UNMutableNotificationContent()</span><br><span class="line">content.body = &quot;...&quot;</span><br><span class="line">content.summaryArgument = &quot;OceanFish&quot;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><img src="https://upload-images.jianshu.io/upload_images/6644906-bcf29b863af11e0b.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="1529979632784.jpg"></p>
+<blockquote>
+<p>同一个category的不同格式，苹果会将其合并在一起；并且不同的<code>summaryArgument</code>苹果也会将其默认合并到一起进行显示</p>
+</blockquote>
+<p><img src="https://upload-images.jianshu.io/upload_images/6644906-fd30d599f801a0e8.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="1529979325697.jpg"></p>
+<blockquote>
+<p>也可以通过<code>let summaryFormat = NSString.localizedUserNotificationString(forKey: &quot;NOTIFICATION_SUMMARY&quot;,
+arguments: nil)</code>来进行本地化服务</p>
+</blockquote>
+<h3 id="数字定制"><a href="#数字定制" class="headerlink" title="数字定制"></a>数字定制</h3><p>有时会出现另一个场景：比如发送了2条推送消息，一条是“你有3个邀请函”，另一条是“你有5个邀请函”。那摘要则会显示你有2更多消息。这显然不是我们想要的！我们最好的期望肯定是”你有8个邀请函”。那这种效果怎么显示呢？</p>
+<p>苹果给我们提供了另外一个属性，结合上边的<a href="#">摘要(Summary)格式定制</a>我们可以实现以上效果。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">let content = UNMutableNotificationContent()</span><br><span class="line">content.body = &quot;...&quot;</span><br><span class="line">content.threadIdentifier = &quot;...&quot;</span><br><span class="line">content.summaryArgument = &quot;Song by Song&quot;</span><br><span class="line">content.summaryArgumentCount = 3</span><br></pre></td></tr></table></figure>
+<p>当多个消息归拢到一起的时候，苹果会将<code>summaryArgumentCount</code>值加在一起，然后进行显示</p>
+<h2 id="推送内容扩展中的可交互和动态更改Action"><a href="#推送内容扩展中的可交互和动态更改Action" class="headerlink" title="推送内容扩展中的可交互和动态更改Action"></a>推送内容扩展中的可交互和动态更改Action</h2><p>之前消息是不支持交互的和动态更改Action的，比如界面有个空心喜欢按钮，用户点击则变成了实心喜欢按钮；有个Acction显示“喜欢”,用户点击之后变成”不喜欢”</p>
+<h4 id="推送界面可交互"><a href="#推送界面可交互" class="headerlink" title="推送界面可交互"></a>推送界面可交互</h4><p><img src="https://upload-images.jianshu.io/upload_images/6644906-f817e45d3e077143.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="1529990894961.jpg"><br>如上图推送界面有个空心喜欢按钮</p>
+<ul>
+<li>首先配置Notification Content Extention的<code>UUNNotificationExtensionUserInteractionEnabled</code>为<code>YES</code></li>
+</ul>
+<p><img src="https://upload-images.jianshu.io/upload_images/6644906-141ec5cefa721ef2.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="1529990622777.jpg"></p>
+<ul>
+<li>然后代码实现</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">import UserNotificationsUI</span><br><span class="line">class NotificationViewController: UIViewController, UNNotificationContentExtension &#123;</span><br><span class="line"></span><br><span class="line">    @IBOutlet var likeButton: UIButton?</span><br><span class="line"></span><br><span class="line">    likeButton?.addTarget(self, action: #selector(likeButtonTapped), for: .touchUpInside)</span><br><span class="line"></span><br><span class="line">    @objc func likeButtonTapped() &#123;</span><br><span class="line">        likeButton?.setTitle(&quot;♥&quot;, for: .normal)</span><br><span class="line">        likedPhoto()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="Action动态化"><a href="#Action动态化" class="headerlink" title="Action动态化"></a>Action动态化</h4><p><img src="https://upload-images.jianshu.io/upload_images/6644906-e75934704fdd6b4d.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="1529990465078.jpg"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/6644906-6d7dd0b8ae6172d1.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="1529990483022.jpg"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">// Notification Content Extensions</span><br><span class="line">class NotificationViewController: UIViewController, UNNotificationContentExtension &#123;</span><br><span class="line"></span><br><span class="line">    func didReceive(_ response: UNNotificationResponse, completionHandler completion:</span><br><span class="line">        (UNNotificationContentExtensionResponseOption) -&gt; Void) &#123;</span><br><span class="line">        if response.actionIdentifier == &quot;like-action&quot; &#123;</span><br><span class="line">            // Update state...</span><br><span class="line">            let unlikeAction = UNNotificationAction(identifier: &quot;unlike-action&quot;,</span><br><span class="line">                                                    title: &quot;Unlike&quot;, options: [])</span><br><span class="line">            let currentActions = extensionContext?.notificationActions</span><br><span class="line">            let commentAction = currentActions![1]</span><br><span class="line">            let newActions = [ unlikeAction, commentAction ]</span><br><span class="line">            extensionContext?.notificationActions = newActions</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><code>performNotificationDefaultAction()</code>用于点击推送的时候启动应用；<code>dismissNotificationContentExtension()</code>用于关闭锁屏页面的推送具体一条消息</p>
+<h2 id="推送消息的管理"><a href="#推送消息的管理" class="headerlink" title="推送消息的管理"></a>推送消息的管理</h2><p>这个主要是苹果针对消息增加了一个“管理”的按钮，消息左滑即可出现。<br><img src="https://upload-images.jianshu.io/upload_images/6644906-1472847689393329.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="1529991382740.jpg"><br>帮助我们快速的针对消息进行设置。</p>
+<ul>
+<li>Deliver Quietly 则会不会播放声音。</li>
+<li>turn off 则会关闭推送</li>
+<li>Setttings 我们可以自己定制</li>
+</ul>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">import UIKit</span><br><span class="line">import UserNotifications</span><br><span class="line">class AppDelegate: UIApplicationDelegate, UNUserNotificationCenterDelegate &#123;</span><br><span class="line">    func userNotificationCenter(_ center: UNUserNotificationCenter,</span><br><span class="line">                                openSettingsFor notification: UNNotification? ) &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="临时授权"><a href="#临时授权" class="headerlink" title="临时授权"></a>临时授权</h2><p>临时授权主要体现就是推送消息过来会有两个按钮，会主动让用户自己选择<br><img src="https://upload-images.jianshu.io/upload_images/6644906-2174115f81cf5aa7.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="1529991740590.jpg"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">let notificationCenter = UNUserNotificationCenter.current()</span><br><span class="line"></span><br><span class="line">noficationCenter.requestAuthorization(options: [.badge,.alert,.sound,.provisional]) &#123; (tag, error) in</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在申请权限的时候，加上<code>provisional</code>即可。</p>
+<h2 id="警告消息"><a href="#警告消息" class="headerlink" title="警告消息"></a>警告消息</h2><p>比如家庭安全、健康、公共安全等因素的时候。此消息需要用户必须采取行动。最简单的一个场景是家里安装了一个摄像头，我们去上班了，此时如果家中有人，则摄像头会推送消息给我们。<br><img src="https://upload-images.jianshu.io/upload_images/6644906-51cb5eb4f5b31db1.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="1529991999274.jpg"></p>
+<ul>
+<li><p>证书申请<br><a href="https://developer.apple.com/contact/request/notifications-critical-alerts-entitlement/" target="_blank" rel="noopener">https://developer.apple.com/contact/request/notifications-critical-alerts-entitlement/</a></p>
+</li>
+<li><p>本地权限申请</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">let notificationCenter = UNUserNotificationCenter.current()</span><br><span class="line">noficationCenter.requestAuthorization(options: [.badge,.alert,.sound,.criticalAlert]) &#123; (tag, error) in</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>在申请权限的时候，加上<code>criticalAlert</code>。</p>
+<ul>
+<li>播放声音<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">let content = UNMutableNotificationContent()</span><br><span class="line">content.title = &quot;WARNING: LOW BLOOD SUGAR&quot;</span><br><span class="line">content.body = &quot;Glucose level at 57.&quot;</span><br><span class="line">content.categoryIdentifier = &quot;low-glucose—alert&quot;</span><br><span class="line">content.sound = UNNotificationSound.criticalSoundNamed(@&quot;warning-sound&quot; withAudioVolume: 1.00)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">// Critical alert push payload</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  // Critical alert push payload</span><br><span class="line"></span><br><span class="line">  &#123;</span><br><span class="line">      &quot;aps&quot; : &#123;</span><br><span class="line">          &quot;sound&quot; : &#123;</span><br><span class="line">              &quot;critical&quot;: 1,</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      &quot;name&quot;: &quot;warning-sound.aiff&quot;,</span><br><span class="line">      &quot;volume&quot;: 1.0</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>至此WWDC中关于推送都已经整理完毕。大家有不懂的欢迎留言相互交流</p>
+<h1 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h1><ul>
+<li><a href="https://developer.apple.com/sample-code/wwdc/2017/Customizing-UserNotifications.zip" target="_blank" rel="noopener">源码Using, Managing, and Customizing Notifications</a></li>
+<li><a href="https://developer.apple.com/videos/play/wwdc2018/710/" target="_blank" rel="noopener">What’s New in User Notifications</a></li>
+<li><a href="https://developer.apple.com/videos/play/wwdc2018/711/" target="_blank" rel="noopener">Using Grouped Notifications</a></li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+            <a href="/tags/WWDC18/" rel="tag"># WWDC18</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/06/06/iOS读YYModel源码之_YYModelMeta实例过程/" rel="next" title="iOS读YYModel源码之_YYModelMeta实例过程">
+                <i class="fa fa-chevron-left"></i> iOS读YYModel源码之_YYModelMeta实例过程
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="vcomments"></div>
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="FlyOceanFish" />
+            
+              <p class="site-author-name" itemprop="name">FlyOceanFish</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">68</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://kyson.cn/" title="kyson的技术博客" target="_blank">kyson的技术博客</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#序言"><span class="nav-number">1.</span> <span class="nav-text">序言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#新特性"><span class="nav-number">2.</span> <span class="nav-text">新特性</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#推送分组"><span class="nav-number">2.1.</span> <span class="nav-text">推送分组</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#分组形式："><span class="nav-number">2.1.1.</span> <span class="nav-text">分组形式：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#摘要-Summary-格式定制"><span class="nav-number">2.1.2.</span> <span class="nav-text">摘要(Summary)格式定制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数字定制"><span class="nav-number">2.1.3.</span> <span class="nav-text">数字定制</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#推送内容扩展中的可交互和动态更改Action"><span class="nav-number">2.2.</span> <span class="nav-text">推送内容扩展中的可交互和动态更改Action</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#推送界面可交互"><span class="nav-number">2.2.0.1.</span> <span class="nav-text">推送界面可交互</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Action动态化"><span class="nav-number">2.2.0.2.</span> <span class="nav-text">Action动态化</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#推送消息的管理"><span class="nav-number">2.3.</span> <span class="nav-text">推送消息的管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#临时授权"><span class="nav-number">2.4.</span> <span class="nav-text">临时授权</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#警告消息"><span class="nav-number">2.5.</span> <span class="nav-text">警告消息</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#引用"><span class="nav-number">4.</span> <span class="nav-text">引用</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">FlyOceanFish</span>
+
+  
+</div>
+
+<!--
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.3</div>
+
+-->
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_lines.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine@1.1.6/dist/Valine.min.js"></script>
+  <script type="text/javascript">
+    new Valine({
+        av: AV,
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        app_id: 'BUyek27xhBJW608unzBEyhWI-gzGzoHsz',
+        app_key: 'lT2NUWTMwPfNYl6xMQUtUxDv',
+        placeholder: '请输入评论'
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.3"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=5.1.3"></script>
+
+
+  
+
+</body>
+</html>
+<script type="text/javascript" src="/js/src/love.js"></script>

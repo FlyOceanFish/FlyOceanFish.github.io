@@ -90,7 +90,7 @@
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/6644906-82d02b690d367496.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/6644906-acc90036799b6de0.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/6644906-23b89a672d9d7523.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2018-02-26T09:01:52.000Z">
+<meta property="og:updated_time" content="2018-06-26T06:33:43.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS11文件存储最佳实践">
 <meta name="twitter:description" content="众所周知，iOS11之前的版本我们无法看到应用里边的任何文件，这主要是由于iOS的沙盒机制导致的。在我们应用的沙盒里边，有三个文件夹供我们使用来存储文件。分别是Documents、Library、tmp。  Documents您应该将所有的应用程序数据文件写入到这个目录下。这个目录用于存储用户数据。该路径可通过配置实现iTunes共享文件。可被iTunes备份。 LibraryPreference">
@@ -380,8 +380,8 @@
 <p>Application supports iTunes file sharing 可以通过iTunes操作手机上APP的<code>Documents</code>中的内容，实现了文件的共享</p>
 </blockquote>
 <p>加上了这两个值之后，此时应用的<code>Documents</code>文件夹中的内容就可以通过Files应用看到了。<br><img src="http://upload-images.jianshu.io/upload_images/6644906-acc90036799b6de0.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="WechatIMG31.jpeg"><br><img src="http://upload-images.jianshu.io/upload_images/6644906-23b89a672d9d7523.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="WechatIMG32.jpeg"></p>
-<h2 id="设置Documents或Library文件夹下的文件不被备份至iCloud"><a href="#设置Documents或Library文件夹下的文件不被备份至iCloud" class="headerlink" title="设置Documents或Library文件夹下的文件不被备份至iCloud"></a>设置Documents或Library文件夹下的文件不被备份至iCloud</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">- (BOOL)addSkipBackupAttributeToItemAtURL:(NSURL *)URL</div><div class="line">&#123;</div><div class="line">    assert([[NSFileManager defaultManager] fileExistsAtPath: [URL path]]);</div><div class="line"></div><div class="line">    NSError *error = nil;</div><div class="line">    BOOL success = [URL setResourceValue:[NSNumber numberWithBool: YES]</div><div class="line">                                  forKey: NSURLIsExcludedFromBackupKey error: &amp;error];</div><div class="line">    if(!success)&#123;</div><div class="line">        NSLog(@&quot;Error excluding %@ from backup %@&quot;, [URL lastPathComponent], error);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    return success;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="检查可用空间大小"><a href="#检查可用空间大小" class="headerlink" title="检查可用空间大小"></a>检查可用空间大小</h2><p>主要用于当我们下载某个文件到手机的时候，如果此时手机的存储空间不够用，可以先提示用户。否则不会下载，增加用户的体验<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">NSURL *fileURL = [[NSURL alloc] initFileURLWithPath:NSTemporaryDirectory()];</div><div class="line">NSError *error = nil;</div><div class="line">NSDictionary *results = [fileURL resourceValuesForKeys:@[NSURLVolumeAvailableCapacityForImportantUsageKey] error:&amp;error];</div><div class="line">if (!results) &#123;</div><div class="line">    NSLog(@&quot;Error retrieving resource keys: %@\n%@&quot;, [error localizedDescription], [error userInfo]);</div><div class="line">    abort();</div><div class="line">&#125;</div><div class="line">NSLog(@&quot;Available capacity for important usage: %@&quot;, results);</div></pre></td></tr></table></figure></p>
+<h2 id="设置Documents或Library文件夹下的文件不被备份至iCloud"><a href="#设置Documents或Library文件夹下的文件不被备份至iCloud" class="headerlink" title="设置Documents或Library文件夹下的文件不被备份至iCloud"></a>设置Documents或Library文件夹下的文件不被备份至iCloud</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">- (BOOL)addSkipBackupAttributeToItemAtURL:(NSURL *)URL</span><br><span class="line">&#123;</span><br><span class="line">    assert([[NSFileManager defaultManager] fileExistsAtPath: [URL path]]);</span><br><span class="line"></span><br><span class="line">    NSError *error = nil;</span><br><span class="line">    BOOL success = [URL setResourceValue:[NSNumber numberWithBool: YES]</span><br><span class="line">                                  forKey: NSURLIsExcludedFromBackupKey error: &amp;error];</span><br><span class="line">    if(!success)&#123;</span><br><span class="line">        NSLog(@&quot;Error excluding %@ from backup %@&quot;, [URL lastPathComponent], error);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return success;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="检查可用空间大小"><a href="#检查可用空间大小" class="headerlink" title="检查可用空间大小"></a>检查可用空间大小</h2><p>主要用于当我们下载某个文件到手机的时候，如果此时手机的存储空间不够用，可以先提示用户。否则不会下载，增加用户的体验<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">NSURL *fileURL = [[NSURL alloc] initFileURLWithPath:NSTemporaryDirectory()];</span><br><span class="line">NSError *error = nil;</span><br><span class="line">NSDictionary *results = [fileURL resourceValuesForKeys:@[NSURLVolumeAvailableCapacityForImportantUsageKey] error:&amp;error];</span><br><span class="line">if (!results) &#123;</span><br><span class="line">    NSLog(@&quot;Error retrieving resource keys: %@\n%@&quot;, [error localizedDescription], [error userInfo]);</span><br><span class="line">    abort();</span><br><span class="line">&#125;</span><br><span class="line">NSLog(@&quot;Available capacity for important usage: %@&quot;, results);</span><br></pre></td></tr></table></figure></p>
 <ul>
 <li>NSURLVolumeAvailableCapacityKey 获取到整个手机剩余的可用空间</li>
 <li>NSURLVolumeTotalCapacityKey 获取到整个手机的存储空间，比如32G的手机获取的数据时32G</li>
@@ -514,7 +514,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">67</span>
+                  <span class="site-state-item-count">68</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -525,7 +525,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -536,7 +536,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

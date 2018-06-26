@@ -388,9 +388,9 @@
 <li>太短的一两个字符的数据不会被缓存</li>
 <li>文本的复制会被缓存，所以可以通过禁用文本框的复制/粘贴功能可以防止缓存</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">textField.autocorrectionType = UITextAutocorrectionTypeNo;//禁用自动纠正功能</div><div class="line">textField.secureTextEntry = YES;//密码</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">textField.autocorrectionType = UITextAutocorrectionTypeNo;//禁用自动纠正功能</span><br><span class="line">textField.secureTextEntry = YES;//密码</span><br></pre></td></tr></table></figure>
 <h2 id="应用程序快照"><a href="#应用程序快照" class="headerlink" title="应用程序快照"></a>应用程序快照</h2><p>当一个应用在后台挂起时，会有一个当前内容的屏幕快照。这样做是为了让用户感觉到程序从后台唤起无缝恢复</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">- (void)applicationWillResignActive:(UIApplication *)application &#123;</div><div class="line">    [UIApplication sharedApplication].keyWindow.hidden = YES;</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (void)applicationDidEnterBackground:(UIApplication *)application &#123;</div><div class="line">    [UIApplication sharedApplication].keyWindow.hidden = YES;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">- (void)applicationWillResignActive:(UIApplication *)application &#123;</span><br><span class="line">    [UIApplication sharedApplication].keyWindow.hidden = YES;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (void)applicationDidEnterBackground:(UIApplication *)application &#123;</span><br><span class="line">    [UIApplication sharedApplication].keyWindow.hidden = YES;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>这样就可以做到屏幕快照的时候是一个空白的页面</p>
 
       
@@ -521,7 +521,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">67</span>
+                  <span class="site-state-item-count">68</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -532,7 +532,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -543,7 +543,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

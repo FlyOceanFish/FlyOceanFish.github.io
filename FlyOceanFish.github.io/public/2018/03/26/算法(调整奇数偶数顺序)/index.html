@@ -367,8 +367,8 @@
 </blockquote>
 <h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><p>最简单的思路就是从头开始遍历数据，如果遇到一个偶数，则将该位置的偶数取出，然后把位于该数字后边的所有数据都往前移动一位，然后将取出来的数字放到最后一位。此方法时间复杂度为O(n<sup>2</sup>)。显示不是最高效的。</p>
 <p>高效的方法是用两个指针，分别指向数组的开始和结尾。然后指向开始的指针向前编写直到遇到第一个偶数，然后停止；指向结尾的指针同时移动直到找到第一个奇数，然后停止移动指针。这时候交换两个指针的内容，并且继续之前的过程，直到两个指针相遇。</p>
-<h1 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">#include &quot;ReOrderOddEven.h&quot;</div><div class="line">void reOrderOddEven(int *pData,unsigned int length)&#123;</div><div class="line">    int *pBegin = pData;</div><div class="line">    int *pEnd = pData+length-1;</div><div class="line">    while (pBegin&lt;pEnd) &#123;</div><div class="line">        while (pBegin&lt;pEnd&amp;&amp;(*pBegin&amp;0x1)!=0) &#123;//奇数</div><div class="line">            pBegin++;</div><div class="line">        &#125;</div><div class="line">        while (pBegin&lt;pEnd&amp;&amp;(*pEnd&amp;0x1)==0) &#123;//偶数</div><div class="line">            pEnd--;</div><div class="line">        &#125;</div><div class="line">        int temp = *pBegin;</div><div class="line">        *pBegin = *pEnd;</div><div class="line">        *pEnd = temp;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">int number[] = &#123;1,2,3,4,5,6,4,3,4,56,7,8,33,22,121,42&#125;;</div><div class="line">reOrderOddEven(number, sizeof(number)/sizeof(number[0]));</div></pre></td></tr></table></figure>
+<h1 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">#include &quot;ReOrderOddEven.h&quot;</span><br><span class="line">void reOrderOddEven(int *pData,unsigned int length)&#123;</span><br><span class="line">    int *pBegin = pData;</span><br><span class="line">    int *pEnd = pData+length-1;</span><br><span class="line">    while (pBegin&lt;pEnd) &#123;</span><br><span class="line">        while (pBegin&lt;pEnd&amp;&amp;(*pBegin&amp;0x1)!=0) &#123;//奇数</span><br><span class="line">            pBegin++;</span><br><span class="line">        &#125;</span><br><span class="line">        while (pBegin&lt;pEnd&amp;&amp;(*pEnd&amp;0x1)==0) &#123;//偶数</span><br><span class="line">            pEnd--;</span><br><span class="line">        &#125;</span><br><span class="line">        int temp = *pBegin;</span><br><span class="line">        *pBegin = *pEnd;</span><br><span class="line">        *pEnd = temp;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">int number[] = &#123;1,2,3,4,5,6,4,3,4,56,7,8,33,22,121,42&#125;;</span><br><span class="line">reOrderOddEven(number, sizeof(number)/sizeof(number[0]));</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -498,7 +498,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">67</span>
+                  <span class="site-state-item-count">68</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -509,7 +509,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -520,7 +520,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

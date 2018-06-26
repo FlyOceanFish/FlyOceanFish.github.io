@@ -373,13 +373,13 @@
 <h1 id="实践"><a href="#实践" class="headerlink" title="实践"></a>实践</h1><p>学习一门语言，要想学好，只有通过实践才能获得快速的成长。所以作者就实践了通过Python抓包的功能</p>
 <h2 id="环境安装"><a href="#环境安装" class="headerlink" title="环境安装"></a>环境安装</h2><p>抓包之前我们得装以下2个插件，第二个不装也可以，用Python自带的，不过这个第三方插件速度等方面优异与Python自带的包，而且<code>Beautiful Soup</code>是推荐安装的</p>
 <ul>
-<li><a href="https://www.crummy.com/software/BeautifulSoup/" target="_blank" rel="external">Beautiful Soup</a><br>Beautiful Soup 是一个可以从HTML或XML文件中提取数据的Python库.它能够通过你喜欢的转换器实现惯用的文档导航,查找,修改文档的方式.Beautiful Soup会帮你节省数小时甚至数天的工作时间</li>
+<li><a href="https://www.crummy.com/software/BeautifulSoup/" target="_blank" rel="noopener">Beautiful Soup</a><br>Beautiful Soup 是一个可以从HTML或XML文件中提取数据的Python库.它能够通过你喜欢的转换器实现惯用的文档导航,查找,修改文档的方式.Beautiful Soup会帮你节省数小时甚至数天的工作时间</li>
 <li>lxml</li>
 </ul>
-<p>Beautiful Soup这个插件有个很大的好处就是有中文文档，方便了广大学友们。哈哈！！<a href="https://www.crummy.com/software/BeautifulSoup/bs4/doc.zh/index.html" target="_blank" rel="external">文档地址传送门</a></p>
-<p>如果使用的是PyCharm作为开发工具的话，大家可以看一下这个文档<a href="http://blog.csdn.net/huatian5/article/details/74502687" target="_blank" rel="external">PyCharm安装第三方模块Request、BeautifulSoup</a></p>
-<h2 id="代码实践"><a href="#代码实践" class="headerlink" title="代码实践"></a>代码实践</h2><p>我们抓取的是嗅事百科网站上的资料地址是:<a href="https://www.qiushibaike.com/8hr/page/1/" target="_blank" rel="external">https://www.qiushibaike.com/8hr/page/1/</a></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># -*- coding: utf-8 -*-</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> urllib2</div><div class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup</div><div class="line">num = <span class="number">0</span></div><div class="line"><span class="keyword">for</span> page <span class="keyword">in</span> range(<span class="number">1</span>, <span class="number">10</span>):</div><div class="line">    url = <span class="string">"https://www.qiushibaike.com/8hr/page/"</span>+str(page)</div><div class="line">    heads = &#123;<span class="string">"User-Agent"</span>: <span class="string">"Mozilla/5.0"</span>&#125;</div><div class="line">    res = urllib2.Request(url, headers=heads)</div><div class="line">    response = urllib2.urlopen(res)</div><div class="line">    html = response.read()</div><div class="line">    soup = BeautifulSoup(html, <span class="string">"lxml"</span>)</div><div class="line">    data = soup.select(<span class="string">"div .content span"</span>)</div><div class="line">    <span class="keyword">for</span> some <span class="keyword">in</span> data:</div><div class="line">        num = num + <span class="number">1</span></div><div class="line">        <span class="keyword">print</span> num</div><div class="line">        unicode_string = unicode(some.string)</div><div class="line">        <span class="keyword">if</span> unicode_string != <span class="string">"None"</span>:</div><div class="line">            <span class="keyword">print</span> unicode_string + <span class="string">"\n"</span></div></pre></td></tr></table></figure>
+<p>Beautiful Soup这个插件有个很大的好处就是有中文文档，方便了广大学友们。哈哈！！<a href="https://www.crummy.com/software/BeautifulSoup/bs4/doc.zh/index.html" target="_blank" rel="noopener">文档地址传送门</a></p>
+<p>如果使用的是PyCharm作为开发工具的话，大家可以看一下这个文档<a href="http://blog.csdn.net/huatian5/article/details/74502687" target="_blank" rel="noopener">PyCharm安装第三方模块Request、BeautifulSoup</a></p>
+<h2 id="代码实践"><a href="#代码实践" class="headerlink" title="代码实践"></a>代码实践</h2><p>我们抓取的是嗅事百科网站上的资料地址是:<a href="https://www.qiushibaike.com/8hr/page/1/" target="_blank" rel="noopener">https://www.qiushibaike.com/8hr/page/1/</a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> urllib2</span><br><span class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup</span><br><span class="line">num = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> page <span class="keyword">in</span> range(<span class="number">1</span>, <span class="number">10</span>):</span><br><span class="line">    url = <span class="string">"https://www.qiushibaike.com/8hr/page/"</span>+str(page)</span><br><span class="line">    heads = &#123;<span class="string">"User-Agent"</span>: <span class="string">"Mozilla/5.0"</span>&#125;</span><br><span class="line">    res = urllib2.Request(url, headers=heads)</span><br><span class="line">    response = urllib2.urlopen(res)</span><br><span class="line">    html = response.read()</span><br><span class="line">    soup = BeautifulSoup(html, <span class="string">"lxml"</span>)</span><br><span class="line">    data = soup.select(<span class="string">"div .content span"</span>)</span><br><span class="line">    <span class="keyword">for</span> some <span class="keyword">in</span> data:</span><br><span class="line">        num = num + <span class="number">1</span></span><br><span class="line">        <span class="keyword">print</span> num</span><br><span class="line">        unicode_string = unicode(some.string)</span><br><span class="line">        <span class="keyword">if</span> unicode_string != <span class="string">"None"</span>:</span><br><span class="line">            <span class="keyword">print</span> unicode_string + <span class="string">"\n"</span></span><br></pre></td></tr></table></figure>
 <blockquote>
 <p># -<em>- coding: utf-8 -</em>-</p>
 </blockquote>
@@ -393,7 +393,7 @@
 <blockquote>
 <p>我们在写 CSS 时，标签名不加任何修饰，类名前加点，id名前加 #，在这里我们也可以利用类似的方法来筛选元素，用到的方法是 soup.select()，返回类型是 list</p>
 </blockquote>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>大家如果有不明白的可以留言，作者也是初学者，可以相互学习共同进步。我的博客<a href="http://flyoceanfish.top/" target="_blank" rel="external">FlyOceanFish</a></p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>大家如果有不明白的可以留言，作者也是初学者，可以相互学习共同进步。我的博客<a href="http://flyoceanfish.top/" target="_blank" rel="noopener">FlyOceanFish</a></p>
 
       
     </div>
@@ -521,7 +521,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">67</span>
+                  <span class="site-state-item-count">68</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -532,7 +532,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -543,7 +543,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

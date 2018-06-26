@@ -369,21 +369,21 @@
       
         <p>自从iOS9.0，苹果提供了多种方式让用户获取APP中的信息，甚至你即使没有安装应用。用户可以通过Spotlight、HandOff等方式获取你APP深层次的一些信息。</p>
 <h2 id="实现方式"><a href="#实现方式" class="headerlink" title="实现方式"></a>实现方式</h2><h3 id="NSUserActivity"><a href="#NSUserActivity" class="headerlink" title="NSUserActivity"></a>NSUserActivity</h3><p><code>NSUserActivity</code>类提供了一些方法，可以让您捕获用户之前访问过的特定应用程序状态和导航点，然后使用Handoff(在您的应用程序中学习更多关于启用切换的知识)来恢复它们。在iOS 8和后来的应用程序中，用户希望Handoff帮助他们在一个设备上启动一个活动，并在另一个设备上继续运行。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">self.activity = [[NSUserActivity alloc] initWithActivityType:@&quot;com.rw.activity&quot;]; </div><div class="line">self.activity.title = @&quot;大头鱼&quot;;</div><div class="line">self.activity.keywords=[NSSet setWithArray:@[@&quot;tiger&quot;,@&quot;horse&quot;]]; </div><div class="line">self.activity.eligibleForSearch = YES;   </div><div class="line">self.activity.eligibleForPublicIndexing = YES; </div><div class="line">[self.activity becomeCurrent];</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">self.activity = [[NSUserActivity alloc] initWithActivityType:@&quot;com.rw.activity&quot;]; </span><br><span class="line">self.activity.title = @&quot;大头鱼&quot;;</span><br><span class="line">self.activity.keywords=[NSSet setWithArray:@[@&quot;tiger&quot;,@&quot;horse&quot;]]; </span><br><span class="line">self.activity.eligibleForSearch = YES;   </span><br><span class="line">self.activity.eligibleForPublicIndexing = YES; </span><br><span class="line">[self.activity becomeCurrent];</span><br></pre></td></tr></table></figure>
 <p><img src="http://upload-images.jianshu.io/upload_images/6644906-4a22d5a45c22b6bd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="76416.png"></p>
 <blockquote>
 <p>注意：通过NSUserActivity方式的实现变量要声明成全局变量，否则会被释放掉而没有效果</p>
 </blockquote>
 <h3 id="Core-Spotlight-framework"><a href="#Core-Spotlight-framework" class="headerlink" title="Core Spotlight framework"></a>Core Spotlight framework</h3><p><code>Core Spotlight</code>框架提供了在应用程序中索引内容和管理私有设备索引的方法。<code>Core Spotlight</code>最适合于索引用户特定的内容，比如朋友、被标记为最喜欢的项目、购买的项目等等。当你使用<code>Core Spotlight</code>api使某些内容可以搜索时，可以让用户很容易地在<code>Spotlight</code>搜索结果中找到他们的内容。</p>
 <ul>
-<li>文本<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">CSSearchableItemAttributeSet *attributeSet = [[CSSearchableItemAttributeSet alloc] initWithItemContentType:@&quot;my&quot;];</div><div class="line">attributeSet.title = @&quot;first&quot;;</div><div class="line">attributeSet.contentDescription = @&quot;my app is running!&quot;;</div><div class="line">NSArray *secondArrayKey = [NSArray arrayWithObjects:@&quot;second&quot;,@&quot;测试&quot;,@&quot;secondeVIew&quot;, nil];</div><div class="line">attributeSet.contactKeywords = secondArrayKey;</div><div class="line">attributeSet.keywords = @[@&quot;5月17日&quot;];</div><div class="line">attributeSet.addedDate = [NSDate date];</div><div class="line">CSSearchableItem *searchItem = [[CSSearchableItem alloc] initWithUniqueIdentifier:@&quot;cat&quot; domainIdentifier:@&quot;com.rw&quot; attributeSet:attributeSet];</div><div class="line">[[CSSearchableIndex defaultSearchableIndex] indexSearchableItems:@[searchItem] completionHandler:^(NSError * _Nullable error) &#123;</div><div class="line">        NSLog(@&quot;%@&quot;,error.description);</div><div class="line">    &#125;];</div></pre></td></tr></table></figure>
+<li>文本<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">CSSearchableItemAttributeSet *attributeSet = [[CSSearchableItemAttributeSet alloc] initWithItemContentType:@&quot;my&quot;];</span><br><span class="line">attributeSet.title = @&quot;first&quot;;</span><br><span class="line">attributeSet.contentDescription = @&quot;my app is running!&quot;;</span><br><span class="line">NSArray *secondArrayKey = [NSArray arrayWithObjects:@&quot;second&quot;,@&quot;测试&quot;,@&quot;secondeVIew&quot;, nil];</span><br><span class="line">attributeSet.contactKeywords = secondArrayKey;</span><br><span class="line">attributeSet.keywords = @[@&quot;5月17日&quot;];</span><br><span class="line">attributeSet.addedDate = [NSDate date];</span><br><span class="line">CSSearchableItem *searchItem = [[CSSearchableItem alloc] initWithUniqueIdentifier:@&quot;cat&quot; domainIdentifier:@&quot;com.rw&quot; attributeSet:attributeSet];</span><br><span class="line">[[CSSearchableIndex defaultSearchableIndex] indexSearchableItems:@[searchItem] completionHandler:^(NSError * _Nullable error) &#123;</span><br><span class="line">        NSLog(@&quot;%@&quot;,error.description);</span><br><span class="line">    &#125;];</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <p><img src="http://upload-images.jianshu.io/upload_images/6644906-b7eae5ac9f2e3757.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="890293.png"></p>
 <ul>
 <li>电话</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">attributeSet.supportsPhoneCall = @(YES);</div><div class="line">attributeSet.phoneNumbers = @[@&quot;15601856811&quot;];</div><div class="line">      attributeSet.accountHandles = @[@&quot;15601856811”];</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">attributeSet.supportsPhoneCall = @(YES);</span><br><span class="line">attributeSet.phoneNumbers = @[@&quot;15601856811&quot;];</span><br><span class="line">      attributeSet.accountHandles = @[@&quot;15601856811”];</span><br></pre></td></tr></table></figure>
 <p><img src="http://upload-images.jianshu.io/upload_images/6644906-84558af39aa45677.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="119931.png"></p>
 <blockquote>
 <p>注：supportsPhoneCall和phoneNumbers两个属性设置之后会显示一个电话图标，但是点击没有反应。只有设置accountHandles的时候，点击之后会拨打电话</p>
@@ -402,15 +402,15 @@
 </ul>
 <h3 id="Web-Markup"><a href="#Web-Markup" class="headerlink" title="Web Markup"></a>Web Markup</h3><p>如果你的应用程序的部分或全部内容也可以在你的网站上使用，你可以使用web标记来让用户访问你在搜索结果中的内容。使用web标记可以让Applebot web爬虫索引你在苹果服务器端索引中的内容，这使得它可以在Spotlight和Safari搜索结果中对所有iOS用户开放。</p>
 <ul>
-<li><a href="https://developer.apple.com/library/content/documentation/AppleApplications/Reference/SafariWebContent/PromotingAppswithAppBanners/PromotingAppswithAppBanners.html#//apple_ref/doc/uid/TP40002051-CH6" target="_blank" rel="external">Smart App Banners</a></li>
+<li><a href="https://developer.apple.com/library/content/documentation/AppleApplications/Reference/SafariWebContent/PromotingAppswithAppBanners/PromotingAppswithAppBanners.html#//apple_ref/doc/uid/TP40002051-CH6" target="_blank" rel="noopener">Smart App Banners</a></li>
 </ul>
 <p>在你的网站上，一个Smart App Banners邀请那些没有安装你的应用程序的用户从App Store下载它，它给已经安装了你的应用程序的用户安装了一个简单的方法，可以在它里面打开一个页面。如下图:</p>
 <p><img src="http://upload-images.jianshu.io/upload_images/6644906-bb50d8ad936e580a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
 <ul>
-<li><a href="https://developer.apple.com/library/content/documentation/General/Conceptual/AppSearch/FindingImages.html#//apple_ref/doc/uid/TP40016308-CH14-SW1" target="_blank" rel="external">Support Universal Links</a></li>
+<li><a href="https://developer.apple.com/library/content/documentation/General/Conceptual/AppSearch/FindingImages.html#//apple_ref/doc/uid/TP40016308-CH14-SW1" target="_blank" rel="noopener">Support Universal Links</a></li>
 </ul>
 <p>当你支持通用链接时，iOS用户可以点击链接到你的网站，并无缝地重定向到你安装的应用程序，而无需经过Safari。如果你的应用没有安装，点击一个链接到你的网站打开你的网站在Safari。</p>
-<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p><a href="https://developer.apple.com/library/content/documentation/General/Conceptual/AppSearch/UniversalLinks.html#//apple_ref/doc/uid/TP40016308-CH12-SW1" target="_blank" rel="external">App Search Programming Guide</a></p>
+<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p><a href="https://developer.apple.com/library/content/documentation/General/Conceptual/AppSearch/UniversalLinks.html#//apple_ref/doc/uid/TP40016308-CH12-SW1" target="_blank" rel="noopener">App Search Programming Guide</a></p>
 
       
     </div>
@@ -538,7 +538,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">67</span>
+                  <span class="site-state-item-count">68</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -549,7 +549,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -560,7 +560,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

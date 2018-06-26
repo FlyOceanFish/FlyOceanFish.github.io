@@ -382,12 +382,12 @@
 <p>网上千篇一律其实本质都教你怎么一步一步的拿到<code>WCDataItem</code>,进而拿到小视频的地址。这里说的就是以另外一种非常简单的方法去获取。</p>
 <h2 id="获取小视频视图名字"><a href="#获取小视频视图名字" class="headerlink" title="获取小视频视图名字"></a>获取小视频视图名字</h2><p>我这里首先是通过Xcode的Debug View Hierarchy得到到小视频视图名字<code>WCTLContentItemTemplateVideo</code>,(有的教程是<code>WCContentItemViewTemplateNewSigh</code>,我这里的微信版本是6.5.21比较新，所以旧的版本有可能是这个名字)</p>
 <h2 id="定位小视频长按事件"><a href="#定位小视频长按事件" class="headerlink" title="定位小视频长按事件"></a>定位小视频长按事件</h2><p><code>WCTLContentItemTemplateVideo</code>通过class-dump处理的.h文件中可以找到几个长按方法，一个一个断点测试可以知道<code>- (void)onLongTouch</code>就是长按事件。</p>
-<p>打断点验证:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">br s -a 0x000000000259c000+0x000000010261092c</div></pre></td></tr></table></figure></p>
+<p>打断点验证:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">br s -a 0x000000000259c000+0x000000010261092c</span><br></pre></td></tr></table></figure></p>
 <p><code>0x000000000259c000</code>通过<code>image list -o -f WeChat</code>获取<br><code>0x000000010261092c</code>通过Hopper获取到<br><img src="http://upload-images.jianshu.io/upload_images/6644906-61c08c5f5b47a55b.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="1511327895597.jpg"></p>
 <hr>
 <p>做到这里与网上的基本类似。只是试图不一样而已。接下来就是重点了。</p>
 <h2 id="找到WCDataItem"><a href="#找到WCDataItem" class="headerlink" title="找到WCDataItem"></a>找到<code>WCDataItem</code></h2><p>既然<code>WCTLContentItemTemplateVideo</code>这个视图就是显示小视频的，所以肯定会有数据源的。查看这个视图看了一下没有什么有价值的类。不过再去观看的时候会发现它是继承于<code>WCContentItemBaseView</code>，到这个类观察一下。<br><img src="http://upload-images.jianshu.io/upload_images/6644906-cb0d85c950682826.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="1511328262098.jpg"><br>看到这个大家则会豁然开朗了。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">po [[[[[$x0 oDataItem]contentObj]mediaList]lastObject]dataUrl</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">po [[[[[$x0 oDataItem]contentObj]mediaList]lastObject]dataUrl</span><br></pre></td></tr></table></figure>
 <p><img src="http://upload-images.jianshu.io/upload_images/6644906-f382cd43eb411aeb.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="1511328559662.jpg"></p>
 <p>通过如上命令可以验证出这个就是我们要找的小视频的地址</p>
 <p>接来怎么做相信大家肯定知道了吧。哈哈哈</p>
@@ -520,7 +520,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">67</span>
+                  <span class="site-state-item-count">68</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -531,7 +531,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -542,7 +542,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

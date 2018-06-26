@@ -372,10 +372,10 @@
 <p>所谓的理想条件如下图1：两个圆大小是一样，同时AB和CD是平行的，AC和BD是两个圆的切线。</p>
 </blockquote>
 <p><img src="https://upload-images.jianshu.io/upload_images/6644906-a7a5e42490c37ea0.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图1"></p>
-<p><img src="https://upload-images.jianshu.io/upload_images/6644906-ff47a9778653b393.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图2"><br>根据图1我们算出A、B、C、D、O、P这6个点的坐标（见图2）。O、P两个坐标稍微复杂点。这时候如果我们在AOC这三个点加一条弧线明显是不行的，没有弧度。<br>所以我们需要调整O、P点的坐标以实现弧度，O、P两个点向里移动，这时候我们在滑动的时候，中间会出现逐渐变瘦的效果。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">CGFloat maxOffx = r1;</div><div class="line">CGFloat maxOffy = r1;</div><div class="line">CGFloat maxD = 8*r1;//滑动最大距离</div><div class="line">CGFloat factor = MIN(maxD, d)/maxD;//这个factor就是需要便宜的百分比</div></pre></td></tr></table></figure></p>
-<p>这时候我们可以算出O、P偏移之后的坐标<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">pointOffO = CGPointMake(pointO.x+maxOffx*factor, pointO.y+maxOffy*factor);</div><div class="line">pointOffP = CGPointMake(pointP.x-maxOffx*factor, pointP.y-maxOffy*factor);</div></pre></td></tr></table></figure></p>
-<p>由于我们滑动过程中会分为四个方向，所以会做如下处理：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">UIBezierPath *ovalPath = [UIBezierPath bezierPath];</div><div class="line">[ovalPath moveToPoint:pointA];</div><div class="line">CGPoint pointOffO;</div><div class="line">CGPoint pointOffP;</div><div class="line"></div><div class="line">if(x1&gt;x2&amp;&amp;y1&gt;y2)&#123;</div><div class="line">    pointOffO = CGPointMake(pointO.x+maxOffx*factor, pointO.y-maxOffy*factor);</div><div class="line">    pointOffP = CGPointMake(pointP.x-maxOffx*factor, pointP.y+maxOffy*factor);</div><div class="line">&#125;else if (x1&lt;x2&amp;&amp;y2&lt;y1)&#123;</div><div class="line">    pointOffO = CGPointMake(pointO.x+maxOffx*factor, pointO.y+maxOffy*factor);</div><div class="line">    pointOffP = CGPointMake(pointP.x-maxOffx*factor, pointP.y-maxOffy*factor);</div><div class="line">&#125;else if (x1&gt;x2&amp;&amp;y1&lt;y2) &#123;</div><div class="line">    pointOffO = CGPointMake(pointO.x-maxOffx*factor, pointO.y-maxOffy*factor);</div><div class="line">    pointOffP = CGPointMake(pointP.x+maxOffx*factor, pointP.y+maxOffy*factor);</div><div class="line">&#125;else&#123;</div><div class="line">    pointOffO = CGPointMake(pointO.x-maxOffx*factor, pointO.y+maxOffy*factor);</div><div class="line">    pointOffP = CGPointMake(pointP.x+maxOffx*factor, pointP.y-maxOffy*factor);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h1 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h1><p><a href="https://github.com/FlyOceanFish/CoreAnimalCALayer" target="_blank" rel="external">Github完整代码</a></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/6644906-ff47a9778653b393.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图2"><br>根据图1我们算出A、B、C、D、O、P这6个点的坐标（见图2）。O、P两个坐标稍微复杂点。这时候如果我们在AOC这三个点加一条弧线明显是不行的，没有弧度。<br>所以我们需要调整O、P点的坐标以实现弧度，O、P两个点向里移动，这时候我们在滑动的时候，中间会出现逐渐变瘦的效果。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">CGFloat maxOffx = r1;</span><br><span class="line">CGFloat maxOffy = r1;</span><br><span class="line">CGFloat maxD = 8*r1;//滑动最大距离</span><br><span class="line">CGFloat factor = MIN(maxD, d)/maxD;//这个factor就是需要便宜的百分比</span><br></pre></td></tr></table></figure></p>
+<p>这时候我们可以算出O、P偏移之后的坐标<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pointOffO = CGPointMake(pointO.x+maxOffx*factor, pointO.y+maxOffy*factor);</span><br><span class="line">pointOffP = CGPointMake(pointP.x-maxOffx*factor, pointP.y-maxOffy*factor);</span><br></pre></td></tr></table></figure></p>
+<p>由于我们滑动过程中会分为四个方向，所以会做如下处理：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">UIBezierPath *ovalPath = [UIBezierPath bezierPath];</span><br><span class="line">[ovalPath moveToPoint:pointA];</span><br><span class="line">CGPoint pointOffO;</span><br><span class="line">CGPoint pointOffP;</span><br><span class="line"></span><br><span class="line">if(x1&gt;x2&amp;&amp;y1&gt;y2)&#123;</span><br><span class="line">    pointOffO = CGPointMake(pointO.x+maxOffx*factor, pointO.y-maxOffy*factor);</span><br><span class="line">    pointOffP = CGPointMake(pointP.x-maxOffx*factor, pointP.y+maxOffy*factor);</span><br><span class="line">&#125;else if (x1&lt;x2&amp;&amp;y2&lt;y1)&#123;</span><br><span class="line">    pointOffO = CGPointMake(pointO.x+maxOffx*factor, pointO.y+maxOffy*factor);</span><br><span class="line">    pointOffP = CGPointMake(pointP.x-maxOffx*factor, pointP.y-maxOffy*factor);</span><br><span class="line">&#125;else if (x1&gt;x2&amp;&amp;y1&lt;y2) &#123;</span><br><span class="line">    pointOffO = CGPointMake(pointO.x-maxOffx*factor, pointO.y-maxOffy*factor);</span><br><span class="line">    pointOffP = CGPointMake(pointP.x+maxOffx*factor, pointP.y+maxOffy*factor);</span><br><span class="line">&#125;else&#123;</span><br><span class="line">    pointOffO = CGPointMake(pointO.x-maxOffx*factor, pointO.y+maxOffy*factor);</span><br><span class="line">    pointOffP = CGPointMake(pointP.x+maxOffx*factor, pointP.y-maxOffy*factor);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h1><p><a href="https://github.com/FlyOceanFish/CoreAnimalCALayer" target="_blank" rel="noopener">Github完整代码</a></p>
 
       
     </div>
@@ -505,7 +505,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">67</span>
+                  <span class="site-state-item-count">68</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -516,7 +516,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -527,7 +527,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

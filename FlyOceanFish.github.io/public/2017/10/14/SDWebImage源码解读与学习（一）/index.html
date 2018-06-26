@@ -380,7 +380,7 @@
 <h2 id="SDWebImage框架类图"><a href="#SDWebImage框架类图" class="headerlink" title="SDWebImage框架类图"></a>SDWebImage框架类图</h2><p>通过此图我们可以了解到SDWebImage整个框架的设计思路，可以看到SDWebImage有哪些核心类和方法(如果不清晰，建议下载下来看)</p>
 <p><img src="http://upload-images.jianshu.io/upload_images/6644906-69c145b9f4f11725.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="SDWebImage框架类图.png"></p>
 <h2 id="核心类的作用"><a href="#核心类的作用" class="headerlink" title="核心类的作用"></a>核心类的作用</h2><p><strong><em>SDWebImageManager</em></strong><br>通过调用各个不同的类实现了缓存查询和图片的下载<br><strong><em>SDWebImageDownloader</em></strong><br>在内部通过调用下载类去下载我们需要的图片，这个类是通过设计模式的外观模式实现的。即使以后通过其他方式的下载，只要重写一个下载类更改此类的逻辑就好，根本影响不到我们本身代码的调用<br><strong><em>SDWebImageDownloaderOperation</em></strong><br>一个线程，继承于NSOperation，内部通过NSURLRequest和NSURLSession的方式实现图片的下载<br><strong><em>SDWebImageDecoder</em></strong><br>实现了图片的解码<br><strong><em>NSData+ImageContentType</em></strong><br>判断出图片的格式。jpeg、png、gif、tiff、webp<br><strong><em>SDImageCache</em></strong><br>在磁盘或内存图片的缓存和读取。当达到内存警告的时候，清除内存的缓存;当程序UIApplicationWillTerminateNotification时，清除磁盘缓存<br><strong><em>SDImageCacheConfig</em></strong><br>主要配合SDImageCache使用，帮我们配置是否需要解压缩图片、是否关闭iCloud备份、是否缓存到内存、缓存时间、缓存大小<br><strong><em>SDWebImageCompat</em></strong><br>根据屏幕的Scale生成不同Scale的图片<br><strong><em>UIImage+MultiFormat</em></strong><br>根据图片的类型生成不同的图片，包括gif、webp、和其他三种大的类型图片的生成方式<br><strong><em>UIView+WebCache</em></strong><br>将所有的UIView的category的图片下载操作提取出来，做成公用的下载方法</p>
-<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">#import &lt;SDWebImage/UIImageView+WebCache.h&gt;</div><div class="line">...</div><div class="line">[imageView sd_setImageWithURL:[NSURL URLWithString:@&quot;http://www.domain.com/path/to/image.jpg&quot;]</div><div class="line">             placeholderImage:[UIImage imageNamed:@&quot;placeholder.png&quot;]];</div></pre></td></tr></table></figure>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#import &lt;SDWebImage/UIImageView+WebCache.h&gt;</span><br><span class="line">...</span><br><span class="line">[imageView sd_setImageWithURL:[NSURL URLWithString:@&quot;http://www.domain.com/path/to/image.jpg&quot;]</span><br><span class="line">             placeholderImage:[UIImage imageNamed:@&quot;placeholder.png&quot;]];</span><br></pre></td></tr></table></figure>
 <p>可以看到如果我们UIButton、UIImageView如果想使用网络图片，直接调用一个方法即可实现我们想要的，是不是很简单啊？？</p>
 
       
@@ -412,8 +412,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/10/14/NSObject的+load和+initialize详解/" rel="next" title="NSObject的+load和+initialize详解">
-                <i class="fa fa-chevron-left"></i> NSObject的+load和+initialize详解
+              <a href="/2017/10/14/iOS中3DES加密解密/" rel="next" title="iOS中3DES加密解密">
+                <i class="fa fa-chevron-left"></i> iOS中3DES加密解密
               </a>
             
           </div>
@@ -509,7 +509,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">67</span>
+                  <span class="site-state-item-count">68</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -520,7 +520,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -531,7 +531,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
