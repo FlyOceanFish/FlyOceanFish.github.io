@@ -137,39 +137,6 @@ Person.m文件
 第二种通过案例1的图示很容易就能看出来这里产生了循环引用。
 那第一种为啥没产生循环引用呢？
 
-这里我们通过对比分析这两个写法的源码来看
-
-第一种写法Block实现的代码
-```C
-struct __SecondViewController__cycleRetainMethod55_block_impl_0 {
-  struct __block_impl impl;
-  struct __SecondViewController__cycleRetainMethod55_block_desc_0* Desc;
-  SecondViewController *self;
-  __SecondViewController__cycleRetainMethod55_block_impl_0(void *fp, struct __SecondViewController__cycleRetainMethod55_block_desc_0 *desc, SecondViewController *_self, int flags=0) : self(_self) {
-    impl.isa = &_NSConcreteStackBlock;
-    impl.Flags = flags;
-    impl.FuncPtr = fp;
-    Desc = desc;
-  }
-};
-```
-第二种写法Block实现的代码
-```C
-struct __SecondViewController__cycleRetainMethod5_block_impl_0 {
-  struct __block_impl impl;
-  struct __SecondViewController__cycleRetainMethod5_block_desc_0* Desc;
-  SecondViewController *self;
-  __SecondViewController__cycleRetainMethod5_block_impl_0(void *fp, struct __SecondViewController__cycleRetainMethod5_block_desc_0 *desc, SecondViewController *_self, int flags=0) : self(_self) {
-    impl.isa = &_NSConcreteStackBlock;
-    impl.Flags = flags;
-    impl.FuncPtr = fp;
-    Desc = desc;
-  }
-};
-```
-大家对比两个源码有没发现？第二种写法Block的实现引用了`SecondViewController *self`,而第一种写法是没有引用的！
->也就是说第一种写法，UIViewController是持有Block的，而Block是不持有UIViewController的，所以不会造成循环引用。
-
-其实为啥不会引用UIViewController呢？大家看Person.m的`- (instancetype)initWithBlock:(Block)block`的方法实现，在返回`self`之前对变量`_blk`赋值了。即`_blk`变量已经赋值，但是此时`_person`变量还没有产生。
+第一种写法，UIViewController持有_person，_person持有block所以形成一个闭环；而第二种写法由于Person.m的`- (instancetype)initWithBlock:(Block)block`的方法实现，在返回`self`之前对变量`_blk`赋值了。即`_blk`变量已经赋值，但是此时`_person`变量还没有产生，所以导致_person变量没有持有block
 # 总结
 Block循环引用其实分析起来很简单，不管中间经过多少变量，只要一层一层的分析，看看有没有持有，画一个简单的引用图即可，是闭环那就是循环引用。而且我们通过编译之后的源码也能非常清楚的知道了什么叫持有了吧。
