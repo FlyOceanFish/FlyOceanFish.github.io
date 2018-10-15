@@ -270,3 +270,11 @@ dispatch_async(queue, ^{
 #define keypath2(OBJ, PATH) \
     (((void)(NO && ((void)OBJ.PATH, NO)), # PATH))
 ```
+34、小括号内联复合表达式
+```Objective-C
+self.testView = ({
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(40, 40, 20, 20)];
+    view.backgroundColor = [UIColor redColor];
+    view;//这里是返回值
+});
+```
