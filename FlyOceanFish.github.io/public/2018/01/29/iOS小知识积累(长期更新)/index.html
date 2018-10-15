@@ -93,7 +93,7 @@
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/6644906-320495bdfa8f9c47.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/6644906-9209401db1a78dc4.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/6644906-f8bf2f90a3aa0f7c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2017-01-29T01:06:00.000Z">
+<meta property="og:updated_time" content="2018-10-15T08:50:00.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS小知识积累(长期更新)">
 <meta name="twitter:description" content="以前工作中有很多小的知识点，但是有时候只是用了，没有真正积累下来，有时候也会忘记。所以写这篇文章就是慢慢的将以前小的知识点或者之后用到的用文字的形式记录下来。1、_Nullable和_Nonnull(Xcode 6.3 )_Nullable表示可能是NULL或nil；_Nonnull表示不应该是NULL或nil。如果不遵循会有警告如果需要每个属性或每个方法都去指定nonnull和nullable，">
@@ -511,6 +511,7 @@
 <p>31、倒计时UIButton数字闪烁解决方法<br>默认<code>type</code>是<code>system</code>，将<code>type</code>改成<code>custom</code>即可。<a href="https://github.com/FlyOceanFish/UIButtonTimer" target="_blank" rel="noopener">UIbutton+Timer</a></p>
 <p>32、指定队列释放对象<br>如果释对象的释放在主线程释放，这样会与我们争夺主线程。但是如果把一些对象释放放到子线程上，这样大大增加了主线程的利用率</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Person *person = [Person new];</span><br><span class="line">dispatch_queue_t queue = dispatch_queue_create(&quot;com.test.fly&quot;, nil);</span><br><span class="line">dispatch_async(queue, ^&#123;</span><br><span class="line">    [person class];</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>33、带自动提示的宏<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#define keypath2(OBJ, PATH) \</span><br><span class="line">    (((void)(NO &amp;&amp; ((void)OBJ.PATH, NO)), # PATH))</span><br></pre></td></tr></table></figure></p>
 
       
     </div>

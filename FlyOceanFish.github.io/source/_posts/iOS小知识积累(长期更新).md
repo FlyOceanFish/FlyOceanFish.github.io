@@ -1,7 +1,7 @@
 ---
 title: iOS小知识积累(长期更新) # 这是标题
 date: 2018-01-29 09:35:00
-updated: 2017-01-29 09:06:00
+updated: 2018-10-15 16:50:00
 categories:  # 这里写的分类会自动汇集到 categories 页面上，分类可以多级
 - iOS # 一级分类
 tags:   # 这里写的标签会自动汇集到 tags 页面上
@@ -264,4 +264,9 @@ dispatch_queue_t queue = dispatch_queue_create("com.test.fly", nil);
 dispatch_async(queue, ^{
     [person class];
 });
+```
+33、带自动提示的宏
+```Objective-C
+#define keypath2(OBJ, PATH) \
+    (((void)(NO && ((void)OBJ.PATH, NO)), # PATH))
 ```
