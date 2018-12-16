@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="iOS," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="static 存储类static 存储类指示编译器在程序的生命周期内保持局部变量的存在，而不需要在每次它进入和离开作用域时进行创建和销毁。因此，使用 static 修饰局部变量可以在函数调用之间保持局部变量的值。 static 修饰符也可以应用于全局变量。当 static 修饰全局变量时，会使变量的作用域限制在声明它的文件内。 指针指针的值是指针本身存储的数值，这个值将被编译器当作一个地址，而不是">
+<meta name="keywords" content="iOS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C语言基础">
+<meta property="og:url" content="http://yoursite.com/2018/08/21/C语言基础/index.html">
+<meta property="og:site_name" content="FlyOceanFish&#39; Blog">
+<meta property="og:description" content="static 存储类static 存储类指示编译器在程序的生命周期内保持局部变量的存在，而不需要在每次它进入和离开作用域时进行创建和销毁。因此，使用 static 修饰局部变量可以在函数调用之间保持局部变量的值。 static 修饰符也可以应用于全局变量。当 static 修饰全局变量时，会使变量的作用域限制在声明它的文件内。 指针指针的值是指针本身存储的数值，这个值将被编译器当作一个地址，而不是">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-10-15T08:57:38.520Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="C语言基础">
+<meta name="twitter:description" content="static 存储类static 存储类指示编译器在程序的生命周期内保持局部变量的存在，而不需要在每次它进入和离开作用域时进行创建和销毁。因此，使用 static 修饰局部变量可以在函数调用之间保持局部变量的值。 static 修饰符也可以应用于全局变量。当 static 修饰全局变量时，会使变量的作用域限制在声明它的文件内。 指针指针的值是指针本身存储的数值，这个值将被编译器当作一个地址，而不是">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/08/21/C语言基础/"/>
+
+
+
+
+
+  <title>C语言基础 | FlyOceanFish' Blog</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?8f73d05f1a471433ed938c462af80741";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <a href="https://github.com/FlyOceanFish"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">FlyOceanFish' Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">You Believe,You Can</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/21/C语言基础/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="FlyOceanFish">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FlyOceanFish' Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">C语言基础</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-21T15:32:00+08:00">
+                2018-08-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="static-存储类"><a href="#static-存储类" class="headerlink" title="static 存储类"></a>static 存储类</h1><p>static 存储类指示编译器在程序的生命周期内保持局部变量的存在，而不需要在每次它进入和离开作用域时进行创建和销毁。因此，使用 static 修饰局部变量可以在函数调用之间保持局部变量的值。</p>
+<p>static 修饰符也可以应用于全局变量。当 static 修饰全局变量时，会使变量的作用域限制在声明它的文件内。</p>
+<h1 id="指针"><a href="#指针" class="headerlink" title="指针"></a>指针</h1><p>指针的值是指针本身存储的数值，这个值将被编译器当作一个地址，而不是一个一般的数值。在32 位程序里，所有类型的指针的值都是一个32 位整数，因为32 位程序里内存地址全都是32 位长。指针所指向的内存区就是从指针的值所代表的那个内存地址开始，长度为<code>sizeof(指针所指向的类型)</code>的一片内存区。以后，<strong>我们说一个指针的值是XX，就相当于说该指针指向了以XX 为首地址的一片内存区域</strong>；我们说一个指针指向了某块内存区域，就相当于说该指针的值是这块内存区域的首地址。指针所指向的内存区和指针所指向的类型是两个完全不同的概念。在例一中，指针所指向的类型已经有了，但由于指针还未初始化，所以它所指向的内存区是不存在的，或者说是无意义的。<br>以后，每遇到一个指针，都应该问问：<strong><em>这个指针的类型是什么</em>？指针指的类型是什么？该指针指向了哪里？（重点注意）</strong></p>
+<h1 id="堆和栈"><a href="#堆和栈" class="headerlink" title="堆和栈"></a>堆和栈</h1><blockquote>
+<p>栈和代码区都是独立存放的，栈是向低地址扩展的数据结构，是一块连续的内存的区域。堆是向高地址扩展的数据结构，是不连续的内存区域。堆和栈不会碰到一起</p>
+</blockquote>
+<h1 id="指针-1"><a href="#指针-1" class="headerlink" title="指针"></a>指针</h1><h2 id="指针存储的值"><a href="#指针存储的值" class="headerlink" title="指针存储的值"></a>指针存储的值</h2><p>指针变量存储的是一个地址，所以不能赋值地址之外的值<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int *num = 100 //是错误的</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">int num = 100;</span><br><span class="line">int* p = &amp;num;//是对的</span><br></pre></td></tr></table></figure>
+<ul>
+<li>取值<blockquote>
+<p>*指针变量名 代表这个指针指向的变量</p>
+</blockquote>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">int num = 100;</span><br><span class="line">int* p = &amp;num;//是对的</span><br><span class="line">*p = 200;//代表p指针指向的变量(赋值运算)</span><br></pre></td></tr></table></figure>
+<h2 id="指针的类型"><a href="#指针的类型" class="headerlink" title="指针的类型"></a>指针的类型</h2><p>指针变量的类型决定了通过这个指针找到变量的首地址以后，连续操作多少个字节空间</p>
+<ul>
+<li><p>指针是int* 连续操作4个字节</p>
+</li>
+<li><p>指针是double* 连续操作8个字节</p>
+</li>
+</ul>
+<p>例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">int num = 1000;//11 1110 1000</span><br><span class="line">char *p1 = &amp;num;</span><br><span class="line">*p1 = 97;//0110 0001</span><br><span class="line">printf(&quot;%d\n&quot;,num);//num现在为865,二进制为11 0110 0001</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">int num1 = 10;</span><br><span class="line">int num = 20;</span><br><span class="line">int* p = &amp;num;</span><br><span class="line">p++;</span><br><span class="line">printf(&quot;%d\n&quot;,*p);//打印为10，因为p++，指针已经移动了4个字节，下一个内存存储10正好是4个字节</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>一维数组的数组名就是数组的地址。不能给数组名赋值，因为数组一旦创建，在内存中就固定了是一个常量，所以不能修改。</p>
+</blockquote>
+<h2 id="索引-中括弧-的本质"><a href="#索引-中括弧-的本质" class="headerlink" title="索引(中括弧)的本质"></a>索引(中括弧)的本质</h2><ul>
+<li>指针变量后边可以使用中括弧，在中括弧中写上下标来访问数据</li>
+<li>p[n];前提是p是一个指针变量。其实等价于*(p+n)</li>
+</ul>
+<h2 id="变量地址分配"><a href="#变量地址分配" class="headerlink" title="变量地址分配"></a>变量地址分配</h2><p>为变量分配地址的时候，是从高地址向低地址分配<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">int num = 10;</span><br><span class="line">int num2 = 20;</span><br><span class="line">int *p1 = &amp;num;</span><br><span class="line">int *p2 = &amp;num2;</span><br><span class="line">printf(p1&gt;p2) //true</span><br></pre></td></tr></table></figure></p>
+<h2 id="指针字符串和数组字符串"><a href="#指针字符串和数组字符串" class="headerlink" title="== 指针字符串和数组字符串 =="></a>== 指针字符串和数组字符串 ==</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">char str1[] = &quot;abcdddd&quot;;//存储在栈区</span><br><span class="line">char* str1 = &quot;abcdddd&quot;;//存储在常量去，不可修改。str1是常量区的地址</span><br></pre></td></tr></table></figure>
+<h3 id="局部变量"><a href="#局部变量" class="headerlink" title="局部变量"></a>局部变量</h3><ul>
+<li><p>指针变量的字符串：指针存储在栈区，字符串是存储在常量区,不可修改</p>
+</li>
+<li><p>数组变量的字符串：字符串是存储在栈区，可以修改。</p>
+</li>
+</ul>
+<h3 id="全局变量"><a href="#全局变量" class="headerlink" title="全局变量"></a>全局变量</h3><ul>
+<li><p>指针变量的字符串：存储在常量区</p>
+</li>
+<li><p>数组变量的字符串：字符串是存储在常量区，指针也是存储在常量区。</p>
+</li>
+</ul>
+<h3 id="修改（可变与不可变）"><a href="#修改（可变与不可变）" class="headerlink" title="修改（可变与不可变）"></a>修改（可变与不可变）</h3><font color="red">不管是全局还是局部变量指针变量的字符串不可修改,所以要想使用必须通过malloc、memset、msetcpy等操作重新申请一块堆区内存；数组变量的字符串可以修改</font>
+
+<h1 id="数组和字符串"><a href="#数组和字符串" class="headerlink" title="数组和字符串"></a>数组和字符串</h1><h2 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h2><p>计算数组长度</p>
+<blockquote>
+<p>sizeof(array)/sizeof(array[0])</p>
+</blockquote>
+<font color="red">注意：计算数组的长度只能在定义的代码块中计算，传递后的数组只是一个指针</font>
+
+<h3 id="二位数组"><a href="#二位数组" class="headerlink" title="二位数组"></a>二位数组</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">char[]=&quot;abdcd&quot;;</span><br><span class="line">char [][10]=&#123;&quot;abc&quot;,&quot;jack&quot;,&quot;martwin&quot;&#125;//这个数组的每一行是1个长度为10的char一维数组。缺点最大长度不能超过10.</span><br></pre></td></tr></table></figure>
+<h3 id="指针数组"><a href="#指针数组" class="headerlink" title="指针数组"></a>指针数组</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">char *names[4]=&#123;&quot;jack&quot;,&quot;martwin&quot;,&quot;lily&quot;,&quot;rose&quot;&#125;;//元素的字符串是存储在常量区的。优点：字符长度不限</span><br><span class="line"></span><br><span class="line">%p,names[0];//打印出数组中每个元素的指针</span><br><span class="line">%s,names[0];//打印出数组中每个元素</span><br></pre></td></tr></table></figure>
+<h1 id="常用函数"><a href="#常用函数" class="headerlink" title="常用函数"></a>常用函数</h1><ul>
+<li><p>fputs 将字符串输出到指定流中</p>
+<ul>
+<li>标准输入流</li>
+<li>文件输入流</li>
+</ul>
+<blockquote>
+<p>fputs(要输出的字符串,指定的流)</p>
+<p>stdout 标准输出流，即控制台</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">char *name = &quot;黑马程序员&quot;;</span><br><span class="line">fputs(name,stdout);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>fopen 获取文件流</p>
+<p>fopen(文件路径,操作文件的模式)</p>
+<p>操作文件的模式：w-&gt;写入；r-&gt;读取数据;a-&gt;向文件中增加数据</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">FILE *pfile = fopen(&quot;/Users/wangrifei/Desktop/a.text&quot;,&quot;w&quot;);</span><br><span class="line">char *name = &quot;FlyOceanFish&quot;;</span><br><span class="line">fputs(name, pfile);</span><br><span class="line">fclose(pfile);//将文件流关闭！！</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>fgets 从指定流中读取字符串</p>
+<ul>
+<li>标准输入流</li>
+<li>文件输入流</li>
+</ul>
+<blockquote>
+<p>fgets(字符数组,接收字符串的长度,流)</p>
+</blockquote>
+</li>
+</ul>
+<p>stdin:标准输入流，键盘、控制台等</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">char input[10];</span><br><span class="line">fgets(input, 10, stdin);</span><br></pre></td></tr></table></figure>
+<font size="4" color="red">申请在常量区的空间不会被回收，直到程序运行结束</font>
+
+<h2 id="指向函数的指针"><a href="#指向函数的指针" class="headerlink" title="指向函数的指针"></a>指向函数的指针</h2><p>1个函数的指针不能任意指向，必须所指向的函数的返回值类型和参数描述必须与指针的描述一样</p>
+<blockquote>
+<p>返回类型 (*指针名)([参数列表])</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">void (*pFunction)();//声明了一个没有返回值没有参数的指针函数</span><br><span class="line">int (*pFun)(int num1,int num2);//声明了一个返回值是int型，并且有2个参数的的函数指针</span><br></pre></td></tr></table></figure>
+<font color="red" size="4">函数的名称就是函数的地址,所以赋值的时候只要将函数的名称赋值给指针函数即可。</font>
+
+<font color="red" size="4">注意：函数名称后边不要加小括号，因为加了小括号就是执行了函数</font>
+
+<h3 id="函数指针调用"><a href="#函数指针调用" class="headerlink" title="函数指针调用"></a>函数指针调用</h3><blockquote>
+<p>pFun(1,2)//调用时，可以认为函数指针便是函数名</p>
+</blockquote>
+<h2 id="结构体"><a href="#结构体" class="headerlink" title="结构体"></a>结构体</h2><ul>
+<li><p>声明方法</p>
+<blockquote>
+<p>struct 名称{};</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">struct Student&#123;</span><br><span class="line">    int age;</span><br><span class="line">    char *name;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用:</p>
+<blockquote>
+<p>struct 结构体名称 变量名称</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">struct Student stu;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>初始化</p>
+<blockquote>
+<p>struct Student stu = {10,”xiaoming”};</p>
+</blockquote>
+<p>或</p>
+<blockquote>
+<p>struct Student stu = {10};</p>
+</blockquote>
+<p>或</p>
+<blockquote>
+<p>struct Student stu = {.age=10,.name=”xiaoming”};</p>
+</blockquote>
+</li>
+</ul>
+<p><font color="red" size="4">结构体之间赋值是值传递</font></p>
+<h3 id="结构体数组"><a href="#结构体数组" class="headerlink" title="结构体数组"></a>结构体数组</h3><blockquote>
+<p>为结构体数组某一个元素赋值的时候要强转，告诉赋值的类型，因为’{}’可以代码数组赋值也可以代表<code>struct</code>赋值</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">struct Student stus[5];</span><br><span class="line">stus[0]=(struct Student)&#123;10,&quot;xiaoming&quot;&#125;;//这个地方要强转</span><br></pre></td></tr></table></figure>
+<h3 id="数组个数"><a href="#数组个数" class="headerlink" title="数组个数"></a>数组个数</h3><blockquote>
+<p>int len = sizeof(stus)/sizeof(struct Student)</p>
+</blockquote>
+<h3 id="结构体指针"><a href="#结构体指针" class="headerlink" title="结构体指针"></a>结构体指针</h3><ul>
+<li><p>声明</p>
+<blockquote>
+<p>struct 结构体名* 变量名</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">struct Student* pStu = &amp;stu;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>访问</p>
+<blockquote>
+<p>(*结构体变量名).</p>
+</blockquote>
+<p>或</p>
+<blockquote>
+<p>结构体指针变量名-&gt;</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(*pStu).age = 20;//结构体取值赋值（要用括号括起来）</span><br><span class="line">或</span><br><span class="line">pStu-&gt;age = 20;//代表把20赋值给pStu指针指向的变量的age成员</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="宏定义"><a href="#宏定义" class="headerlink" title="宏定义"></a>宏定义</h2><p>宏代码是在编译的时候就执行了。</p>
+<blockquote>
+<p>#define 宏名 宏值</p>
+</blockquote>
+<h2 id="static"><a href="#static" class="headerlink" title="static"></a>static</h2><ul>
+<li><p>修饰的变量存储在常量区，函数运行结束不会被回收，<code>static</code>声明的语句只会被执行一次</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">void test()&#123;</span><br><span class="line">    static int num = 0;//只会执行一次</span><br><span class="line">    num++;</span><br><span class="line">    print(&quot;%d&quot;,num);</span><br><span class="line">&#125;</span><br><span class="line">int main(int argc, const char * argv[])&#123;</span><br><span class="line">    test();</span><br><span class="line">    test();</span><br><span class="line">&#125;</span><br><span class="line">//打印出1，2</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="C-存储类"><a href="#C-存储类" class="headerlink" title="C 存储类"></a>C 存储类</h1><ul>
+<li><p><code>auto</code> 是局部变量的默认存储类, 限定变量只能在函数内部使用；</p>
+</li>
+<li><p><code>register</code> 代表了寄存器变量，不在内存中使用；</p>
+</li>
+<li><p><code>static</code>是全局变量的默认存储类,表示变量在程序生命周期内可见；</p>
+</li>
+<li><p><code>extern</code> 表示全局变量，即对程序内所有文件可见,(extern 修饰符通常用于当有两个或多个文件共享相同的全局变量或函数的时候不能修饰局部变量)</p>
+</li>
+</ul>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ul>
+<li><a href="http://blog.csdn.net/soonfly/article/details/51131141" target="_blank" rel="noopener">介绍指针很好的文章</a></li>
+<li><a href="http://www.runoob.com/cprogramming/c-storage-classes.html" target="_blank" rel="noopener">C 存储类</a></li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/07/13/iOS完美实现微信朋友圈视频截取/" rel="next" title="iOS完美实现微信朋友圈视频截取">
+                <i class="fa fa-chevron-left"></i> iOS完美实现微信朋友圈视频截取
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/09/04/iOS之VVeboTableView性能探究之路/" rel="prev" title="iOS之VVeboTableView性能探究之路">
+                iOS之VVeboTableView性能探究之路 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="vcomments"></div>
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="FlyOceanFish" />
+            
+              <p class="site-author-name" itemprop="name">FlyOceanFish</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">76</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://kyson.cn/" title="kyson的技术博客" target="_blank">kyson的技术博客</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#static-存储类"><span class="nav-number">1.</span> <span class="nav-text">static 存储类</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#指针"><span class="nav-number">2.</span> <span class="nav-text">指针</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#堆和栈"><span class="nav-number">3.</span> <span class="nav-text">堆和栈</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#指针-1"><span class="nav-number">4.</span> <span class="nav-text">指针</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#指针存储的值"><span class="nav-number">4.1.</span> <span class="nav-text">指针存储的值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#指针的类型"><span class="nav-number">4.2.</span> <span class="nav-text">指针的类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#索引-中括弧-的本质"><span class="nav-number">4.3.</span> <span class="nav-text">索引(中括弧)的本质</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#变量地址分配"><span class="nav-number">4.4.</span> <span class="nav-text">变量地址分配</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#指针字符串和数组字符串"><span class="nav-number">4.5.</span> <span class="nav-text">== 指针字符串和数组字符串 ==</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#局部变量"><span class="nav-number">4.5.1.</span> <span class="nav-text">局部变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#全局变量"><span class="nav-number">4.5.2.</span> <span class="nav-text">全局变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改（可变与不可变）"><span class="nav-number">4.5.3.</span> <span class="nav-text">修改（可变与不可变）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数组和字符串"><span class="nav-number">5.</span> <span class="nav-text">数组和字符串</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#数组"><span class="nav-number">5.1.</span> <span class="nav-text">数组</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#二位数组"><span class="nav-number">5.1.1.</span> <span class="nav-text">二位数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#指针数组"><span class="nav-number">5.1.2.</span> <span class="nav-text">指针数组</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#常用函数"><span class="nav-number">6.</span> <span class="nav-text">常用函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#指向函数的指针"><span class="nav-number">6.1.</span> <span class="nav-text">指向函数的指针</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#函数指针调用"><span class="nav-number">6.1.1.</span> <span class="nav-text">函数指针调用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结构体"><span class="nav-number">6.2.</span> <span class="nav-text">结构体</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#结构体数组"><span class="nav-number">6.2.1.</span> <span class="nav-text">结构体数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数组个数"><span class="nav-number">6.2.2.</span> <span class="nav-text">数组个数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结构体指针"><span class="nav-number">6.2.3.</span> <span class="nav-text">结构体指针</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#宏定义"><span class="nav-number">6.3.</span> <span class="nav-text">宏定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#static"><span class="nav-number">6.4.</span> <span class="nav-text">static</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#C-存储类"><span class="nav-number">7.</span> <span class="nav-text">C 存储类</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">8.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">FlyOceanFish</span>
+
+  
+</div>
+
+<!--
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.3</div>
+
+-->
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_lines.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine@1.1.6/dist/Valine.min.js"></script>
+  <script type="text/javascript">
+    new Valine({
+        av: AV,
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        app_id: 'BUyek27xhBJW608unzBEyhWI-gzGzoHsz',
+        app_key: 'lT2NUWTMwPfNYl6xMQUtUxDv',
+        placeholder: '请输入评论'
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.3"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=5.1.3"></script>
+
+
+  
+
+</body>
+</html>
+<script type="text/javascript" src="/js/src/love.js"></script>

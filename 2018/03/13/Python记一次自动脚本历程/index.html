@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Python," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="介绍现在我们iOS的安装包是通过企业形式的发布，比较狗血的是发布的方式，网站是一个静态网页,没有所谓的后台让你上传一个包，填写一个发布内容、版本号等一系列的信息，然后点击保存按钮。这些操作都是通过我们人工远程连接服务器去，然后备份、修复、复制等一系列的操作。由于正好学习了Python，并且介于这个场景，作者就自己写了一个Python脚本来自动化操作这一系列的操作。 历程脚本运行的问题说做就做，作者">
+<meta name="keywords" content="Python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python记一次自动脚本历程">
+<meta property="og:url" content="http://yoursite.com/2018/03/13/Python记一次自动脚本历程/index.html">
+<meta property="og:site_name" content="FlyOceanFish&#39; Blog">
+<meta property="og:description" content="介绍现在我们iOS的安装包是通过企业形式的发布，比较狗血的是发布的方式，网站是一个静态网页,没有所谓的后台让你上传一个包，填写一个发布内容、版本号等一系列的信息，然后点击保存按钮。这些操作都是通过我们人工远程连接服务器去，然后备份、修复、复制等一系列的操作。由于正好学习了Python，并且介于这个场景，作者就自己写了一个Python脚本来自动化操作这一系列的操作。 历程脚本运行的问题说做就做，作者">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/6644906-dba402400d4357cf.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2018-04-20T15:50:36.073Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python记一次自动脚本历程">
+<meta name="twitter:description" content="介绍现在我们iOS的安装包是通过企业形式的发布，比较狗血的是发布的方式，网站是一个静态网页,没有所谓的后台让你上传一个包，填写一个发布内容、版本号等一系列的信息，然后点击保存按钮。这些操作都是通过我们人工远程连接服务器去，然后备份、修复、复制等一系列的操作。由于正好学习了Python，并且介于这个场景，作者就自己写了一个Python脚本来自动化操作这一系列的操作。 历程脚本运行的问题说做就做，作者">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/6644906-dba402400d4357cf.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/03/13/Python记一次自动脚本历程/"/>
+
+
+
+
+
+  <title>Python记一次自动脚本历程 | FlyOceanFish' Blog</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?8f73d05f1a471433ed938c462af80741";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <a href="https://github.com/FlyOceanFish"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">FlyOceanFish' Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">You Believe,You Can</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/13/Python记一次自动脚本历程/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="FlyOceanFish">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FlyOceanFish' Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">Python记一次自动脚本历程</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-13T14:52:00+08:00">
+                2018-03-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index">
+                    <span itemprop="name">Python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>现在我们iOS的安装包是通过企业形式的发布，比较狗血的是发布的方式，网站是一个静态网页,没有所谓的后台让你上传一个包，填写一个发布内容、版本号等一系列的信息，然后点击保存按钮。这些操作都是通过我们人工远程连接服务器去，然后备份、修复、复制等一系列的操作。由于正好学习了Python，并且介于这个场景，作者就自己写了一个Python脚本来自动化操作这一系列的操作。</p>
+<h1 id="历程"><a href="#历程" class="headerlink" title="历程"></a>历程</h1><h2 id="脚本运行的问题"><a href="#脚本运行的问题" class="headerlink" title="脚本运行的问题"></a>脚本运行的问题</h2><p>说做就做，作者用了半天的时间脚本也写出来了，现在就是怎么让脚本在服务器上运行啊？难不成在服务器上安装Python环境？这样使用起来就确实很不爽。</p>
+<p>其实大家应该第一想法Python能否打包成可执行文件的。搜索下来确实是可以的！使用<code>pyinstaller</code>即可，喜出望外啊！</p>
+<p>作者此时兴致冲冲的赶紧安装了<code>pyinstaller</code>，马上就打了一个运行包。</p>
+<blockquote>
+<p>pyinstaller -F xx.py</p>
+</blockquote>
+<p>-F 参数可以打出一个安装包<br>-D 默认参数，是一个文件夹</p>
+<h2 id="平台的问题"><a href="#平台的问题" class="headerlink" title="平台的问题"></a>平台的问题</h2><p>运行包打出来，运行下来很不错的样子。问题来了，我们服务器是Windows系统！！怎么运行啊？？</p>
+<p>又搜索研究，最终看<code>pyinstaller</code>死心了。。。要想在Windows系统上运行，必须在Windows系统打包才行！</p>
+<p>好吧，这就把虚拟机装起来，系统搞起来。（VirtualBox不错，免费的）接下来装Python环境，因为Mac上是Python2.x，所以就在Windows系统上装了Python3.x的。然后也顺利打出了.exe文件</p>
+<h2 id="服务器上运行"><a href="#服务器上运行" class="headerlink" title="服务器上运行"></a>服务器上运行</h2><p>在自己虚拟机上运行，一切正常。满怀喜悦复制到服务器上运行（当然是自己写了一个test文件，不是正式的脚步文件）。一下子就弹出了<code>api-ms-win-crt-runtimel1-1-0.dll</code>缺少的错误！oh my god。接下来开始解决dll文件缺失的问题，服务器又不管乱安装文件，最终想找运维帮忙搞一下环境。</p>
+<h2 id="灵机一现"><a href="#灵机一现" class="headerlink" title="灵机一现"></a>灵机一现</h2><p>搞到上一步已经下班了，运维啥的一时半会也找不到，找到人家也不一定马上帮你弄，所以只能第二天再搞。这时是有多心不甘啊！回家路上睡觉之前就在想这个事情。突然灵机一现，回想了白天搜索的过程，其实发现报这个错误都在Python3.x上，会不会在Python2.x上打包就可以了呢？</p>
+<p>第二天一到公司，马上卸载了3.x，装上了2.x。写了一个test.py脚本，然后打包在服务器运行测试。YES，成功了！</p>
+<h2 id="编写正式脚本"><a href="#编写正式脚本" class="headerlink" title="编写正式脚本"></a>编写正式脚本</h2><p>Python学习的时候就知道中文有编码的问题，所以早早就在文件开头写下了</p>
+<blockquote>
+<p>#coding=utf-8</p>
+</blockquote>
+<p>哈哈，暗自庆幸自己很聪明。接下来开始测试脚本，然后运行。啪啪啪啪！打脸！又报错。因为服务器上文件下有个中文的文件夹，所以路径有一个是带中文的文件夹。报错显示就在这里。</p>
+<p>然后研究。。。。已经写了编码怎么还会报错啊。头大！研究了一会，没救。就在琢磨是不是编码问题，改成了gbk。oh 居然成功了！！<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#coding=gbk</span><br></pre></td></tr></table></figure></p>
+<h2 id="获取当前-exe文件执行的文件夹"><a href="#获取当前-exe文件执行的文件夹" class="headerlink" title="获取当前.exe文件执行的文件夹"></a>获取当前.exe文件执行的文件夹</h2><p>这个也是挺纠结的一个问题，通过一遍遍测试得出下边的结论。</p>
+<blockquote>
+<p>ios_dis_path = os.path.split(sys.argv[0])[0]</p>
+</blockquote>
+<h2 id="执行过程显示"><a href="#执行过程显示" class="headerlink" title="执行过程显示"></a>执行过程显示</h2><p>.exe执行的时候，肯定想知道一些反馈信息，所以在代码过程中打印了log信息。但是有个问题，命名执行完后命令提示框一闪而过，根本看不到。<br>加上以上代码可以将提示框停住。</p>
+<blockquote>
+<p>raw_input(“输入回车退出”)</p>
+</blockquote>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><p>代码已经脱敏处理了,因为有个问题就是发布完APP之后，要验证完之后才能正式修改sqlite数据库，所以作者加了一个输入框等待用户输入，当发布人员发布完成并且验证成功之后，输入本次升级的版本，然后按回车即可发布成功<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment">#coding=gbk</span></span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> shutil</span><br><span class="line"><span class="keyword">import</span> sqlite3</span><br><span class="line"></span><br><span class="line">database_name = <span class="string">'apidb.db3'</span></span><br><span class="line">date_dir = time.strftime(<span class="string">"%Y%m%d"</span>, time.localtime())</span><br><span class="line">root_path = <span class="string">'C:\\xxx\\xx'</span></span><br><span class="line"></span><br><span class="line">ios_dis_path = os.path.split(sys.argv[<span class="number">0</span>])[<span class="number">0</span>]</span><br><span class="line"><span class="comment">#ios_dis_path = "C:\\xx\\Desktop\\ios"</span></span><br><span class="line"><span class="comment"># 备份数据库</span></span><br><span class="line">print(<span class="string">'########开始备份数据库########\n'</span>)</span><br><span class="line"></span><br><span class="line">back_database_path = os.path.join(root_path, <span class="string">'backup/数据库/'</span>+date_dir)</span><br><span class="line"><span class="keyword">if</span> <span class="keyword">not</span> os.path.exists(back_database_path):</span><br><span class="line">    os.mkdir(back_database_path)</span><br><span class="line">shutil.copy(os.path.join(root_path, database_name), back_database_path)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 备份xx_project_name.html</span></span><br><span class="line">print(<span class="string">'########  备份数据库完成！开始备份xx_project_name.html  ########\n'</span>)</span><br><span class="line"></span><br><span class="line">index_path = root_path+<span class="string">'/xx_project_name.html'</span></span><br><span class="line">back_index_path = os.path.join(root_path, <span class="string">'backup/xx_project_name/'</span>+date_dir)</span><br><span class="line"><span class="keyword">if</span> <span class="keyword">not</span> os.path.exists(back_index_path):</span><br><span class="line">    os.mkdir(back_index_path)</span><br><span class="line">shutil.copy(index_path, back_index_path)</span><br><span class="line">shutil.copy(os.path.join(ios_dis_path,<span class="string">'xx_project_name.html'</span>), index_path)</span><br><span class="line"><span class="comment">#备份安装包</span></span><br><span class="line">print(<span class="string">'########  复制xx_project_name.html完成！开始备份安装包  ########\n'</span>)</span><br><span class="line"></span><br><span class="line">project_path = os.path.join(root_path, <span class="string">'download/images/ios/xx_project_name'</span>)</span><br><span class="line">backup_ipa_path = os.path.join(project_path, date_dir)</span><br><span class="line"><span class="keyword">if</span> os.path.exists(backup_ipa_path):</span><br><span class="line">    shutil.rmtree(backup_ipa_path)</span><br><span class="line">shutil.copytree(project_path+<span class="string">'/latest'</span>, backup_ipa_path)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 复制新的安装包</span></span><br><span class="line">print(<span class="string">'########  备份安装包完成！开始复制新的安装包  ########\n'</span>)</span><br><span class="line"></span><br><span class="line">shutil.copy(os.path.join(ios_dis_path, <span class="string">'xx_project_name.ipa'</span>), project_path+<span class="string">'/latest'</span>)</span><br><span class="line">shutil.copy(ios_dis_path+<span class="string">'/manifest.plist'</span>, project_path+<span class="string">'/latest'</span>)</span><br><span class="line">print(<span class="string">"########  复制新的安装包完成！开始修改数据库中App的版本########\n"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改数据库</span></span><br><span class="line"></span><br><span class="line">version = raw_input(<span class="string">"请输入此次发布的版本号:"</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">update_version</span><span class="params">(version)</span>:</span></span><br><span class="line">    print(<span class="string">"########  开始修改数据库中的版本号！########\n"</span>)</span><br><span class="line">    date = time.strftime(<span class="string">"%Y/%m/%d %H:%M:00"</span>, time.localtime())</span><br><span class="line">    conn = sqlite3.connect(os.path.join(root_path, database_name))</span><br><span class="line">    conn.execute(<span class="string">'update api set version=(?),update_time=(?) where api_name = "xx_project_name"'</span>, (version, date))</span><br><span class="line">    conn.commit()</span><br><span class="line">    conn.close()</span><br><span class="line">    print(<span class="string">"########  修改数据库中的版本号成功！########\n"</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">update_version(version)</span><br><span class="line"></span><br><span class="line">print(<span class="string">'--------- APP全部发布成功！ -----------\n'</span>)</span><br><span class="line">raw_input(<span class="string">"输入回车退出"</span>)</span><br></pre></td></tr></table></figure></p>
+<h2 id="效果图"><a href="#效果图" class="headerlink" title="效果图"></a>效果图</h2><p><img src="https://upload-images.jianshu.io/upload_images/6644906-dba402400d4357cf.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="1520923800618.jpg"></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Python/" rel="tag"># Python</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/12/Python基础知识分享/" rel="next" title="Python基础知识分享">
+                <i class="fa fa-chevron-left"></i> Python基础知识分享
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/14/算法(二位数组查找)/" rel="prev" title="算法(二位数组查找)">
+                算法(二位数组查找) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="vcomments"></div>
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="FlyOceanFish" />
+            
+              <p class="site-author-name" itemprop="name">FlyOceanFish</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">76</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://kyson.cn/" title="kyson的技术博客" target="_blank">kyson的技术博客</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#介绍"><span class="nav-number">1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#历程"><span class="nav-number">2.</span> <span class="nav-text">历程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#脚本运行的问题"><span class="nav-number">2.1.</span> <span class="nav-text">脚本运行的问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#平台的问题"><span class="nav-number">2.2.</span> <span class="nav-text">平台的问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#服务器上运行"><span class="nav-number">2.3.</span> <span class="nav-text">服务器上运行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#灵机一现"><span class="nav-number">2.4.</span> <span class="nav-text">灵机一现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编写正式脚本"><span class="nav-number">2.5.</span> <span class="nav-text">编写正式脚本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#获取当前-exe文件执行的文件夹"><span class="nav-number">2.6.</span> <span class="nav-text">获取当前.exe文件执行的文件夹</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#执行过程显示"><span class="nav-number">2.7.</span> <span class="nav-text">执行过程显示</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#代码"><span class="nav-number">3.</span> <span class="nav-text">代码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#效果图"><span class="nav-number">3.1.</span> <span class="nav-text">效果图</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">FlyOceanFish</span>
+
+  
+</div>
+
+<!--
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.3</div>
+
+-->
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_lines.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine@1.1.6/dist/Valine.min.js"></script>
+  <script type="text/javascript">
+    new Valine({
+        av: AV,
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        app_id: 'BUyek27xhBJW608unzBEyhWI-gzGzoHsz',
+        app_key: 'lT2NUWTMwPfNYl6xMQUtUxDv',
+        placeholder: '请输入评论'
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.3"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=5.1.3"></script>
+
+
+  
+
+</body>
+</html>
+<script type="text/javascript" src="/js/src/love.js"></script>
