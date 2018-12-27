@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="FlyOceanFish&#39; Blog">
 <meta property="og:description" content="沙盒完整性检查通过fork()函数检测。如果沙盒被越狱工具破坏或者是程序在沙盒外运行，那么fork()函数将会执行成功。如果沙盒仍处于激活状态，你的程序就会执行失败，这就说明沙盒没有被篡改。 123456int result = fork();if(!result)    exit(0);if (result&amp;gt;=0) &amp;#123;    //沙盒被破坏，处于越狱环境&amp;#125; 文件系统检测">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-01-22T05:56:56.000Z">
+<meta property="og:updated_time" content="2017-11-11T02:59:56.834Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS越狱检查">
 <meta name="twitter:description" content="沙盒完整性检查通过fork()函数检测。如果沙盒被越狱工具破坏或者是程序在沙盒外运行，那么fork()函数将会执行成功。如果沙盒仍处于激活状态，你的程序就会执行失败，这就说明沙盒没有被篡改。 123456int result = fork();if(!result)    exit(0);if (result&amp;gt;=0) &amp;#123;    //沙盒被破坏，处于越狱环境&amp;#125; 文件系统检测">
@@ -374,8 +374,8 @@
 
       
         <h2 id="沙盒完整性检查"><a href="#沙盒完整性检查" class="headerlink" title="沙盒完整性检查"></a>沙盒完整性检查</h2><p>通过<code>fork()</code>函数检测。如果沙盒被越狱工具破坏或者是程序在沙盒外运行，那么<code>fork()</code>函数将会执行成功。如果沙盒仍处于激活状态，你的程序就会执行失败，这就说明沙盒没有被篡改。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">int result = fork();</span><br><span class="line">if(!result)</span><br><span class="line">    exit(0);</span><br><span class="line">if (result&gt;=0) &#123;</span><br><span class="line">    //沙盒被破坏，处于越狱环境</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="文件系统检测"><a href="#文件系统检测" class="headerlink" title="文件系统检测"></a>文件系统检测</h2><h3 id="越狱文件是否存在"><a href="#越狱文件是否存在" class="headerlink" title="越狱文件是否存在"></a>越狱文件是否存在</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#import &lt;sys/stat.h&gt;</span><br><span class="line"></span><br><span class="line">struct stat s;</span><br><span class="line">int is_jailbroken = stat(&quot;/Application/Cydia.app&quot;, &amp;s) == 0;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">int result = fork();</div><div class="line">if(!result)</div><div class="line">    exit(0);</div><div class="line">if (result&gt;=0) &#123;</div><div class="line">    //沙盒被破坏，处于越狱环境</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="文件系统检测"><a href="#文件系统检测" class="headerlink" title="文件系统检测"></a>文件系统检测</h2><h3 id="越狱文件是否存在"><a href="#越狱文件是否存在" class="headerlink" title="越狱文件是否存在"></a>越狱文件是否存在</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">#import &lt;sys/stat.h&gt;</div><div class="line"></div><div class="line">struct stat s;</div><div class="line">int is_jailbroken = stat(&quot;/Application/Cydia.app&quot;, &amp;s) == 0;</div></pre></td></tr></table></figure>
 <p>我们同时也可以检测其他文件列表</p>
 <ul>
 <li>/Application/Cydia.app Cydia安装目录</li>
@@ -390,11 +390,11 @@
 <li>/etc/ssh/sshd_config sshd的配置文件</li>
 <li>/etc/apt apt配置文件路径</li>
 </ul>
-<h3 id="etc-fstab-文件大小"><a href="#etc-fstab-文件大小" class="headerlink" title="/etc/fstab 文件大小"></a>/etc/fstab 文件大小</h3><p>fstab文件包含文件系统挂载点，这个文件通常被越狱工具替换用于将root分区读写打开。我们程序不能读取该文件，但是可以使用stat函数查看文件大小。通常80B，越狱的只有65B。也有可能随着系统变化的<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#import &lt;sys/stat.h&gt;</span><br><span class="line"></span><br><span class="line">struct stat s;</span><br><span class="line">stat(&quot;/etc/fstab&quot;, &amp;s);</span><br><span class="line">s.st_size;</span><br></pre></td></tr></table></figure></p>
+<h3 id="etc-fstab-文件大小"><a href="#etc-fstab-文件大小" class="headerlink" title="/etc/fstab 文件大小"></a>/etc/fstab 文件大小</h3><p>fstab文件包含文件系统挂载点，这个文件通常被越狱工具替换用于将root分区读写打开。我们程序不能读取该文件，但是可以使用stat函数查看文件大小。通常80B，越狱的只有65B。也有可能随着系统变化的<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">#import &lt;sys/stat.h&gt;</div><div class="line"></div><div class="line">struct stat s;</div><div class="line">stat(&quot;/etc/fstab&quot;, &amp;s);</div><div class="line">s.st_size;</div></pre></td></tr></table></figure></p>
 <h3 id="符号链接检测"><a href="#符号链接检测" class="headerlink" title="符号链接检测"></a>符号链接检测</h3><p>通过lstat函数，可以检查/Applications是一个目录还是一个符号链接，如果是一个链接，可以确认设备已经越狱。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">struct stat s;</span><br><span class="line">if (lstat(&quot;/Applications&quot;, &amp;s)!=0) &#123;</span><br><span class="line">    if (s.st_mode&amp;S_IFLNK) &#123;</span><br><span class="line">        /*设备被越狱*/</span><br><span class="line">        exit(-1);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">struct stat s;</div><div class="line">if (lstat(&quot;/Applications&quot;, &amp;s)!=0) &#123;</div><div class="line">    if (s.st_mode&amp;S_IFLNK) &#123;</div><div class="line">        /*设备被越狱*/</div><div class="line">        exit(-1);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h3 id="分页执行检查"><a href="#分页执行检查" class="headerlink" title="分页执行检查"></a>分页执行检查</h3><p>内存分页不能标记为可执行属性，但是越狱可以修改这一限制。通过vm_protect函数检测内核完整性，当内核未被修改时，该函数会调用失败</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">#import &lt;sys/stat.h&gt;</span><br><span class="line">#import &lt;mach/mach_init.h&gt;</span><br><span class="line">#import &lt;mach/vm_map.h&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">void *mem = malloc(getpagesize()+15);</span><br><span class="line">void *ptr = (void *)(((uintptr_t)mem+15) &amp; ~0x0F);</span><br><span class="line">vm_address_t pagePtr = (uintptr_t)ptr/getpagesize()*getpagesize();</span><br><span class="line">int is_jailbroken = vm_protect(mach_task_self(), (vm_address_t)pagePtr, getpagesize(), FALSE, VM_PROT_READ|VM_PROT_WRITE|VM_PROT_EXECUTE) == 0;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">#import &lt;sys/stat.h&gt;</div><div class="line">#import &lt;mach/mach_init.h&gt;</div><div class="line">#import &lt;mach/vm_map.h&gt;</div><div class="line"></div><div class="line"></div><div class="line">void *mem = malloc(getpagesize()+15);</div><div class="line">void *ptr = (void *)(((uintptr_t)mem+15) &amp; ~0x0F);</div><div class="line">vm_address_t pagePtr = (uintptr_t)ptr/getpagesize()*getpagesize();</div><div class="line">int is_jailbroken = vm_protect(mach_task_self(), (vm_address_t)pagePtr, getpagesize(), FALSE, VM_PROT_READ|VM_PROT_WRITE|VM_PROT_EXECUTE) == 0;</div></pre></td></tr></table></figure>
 
       
     </div>
@@ -524,7 +524,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">75</span>
+                  <span class="site-state-item-count">76</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -535,7 +535,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -546,7 +546,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-count">23</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

@@ -90,7 +90,7 @@
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/6644906-39e67a7b9138b591.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/6644906-c37c70459c0bee8d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/6644906-b7b42037ef20691c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2018-01-22T05:56:56.000Z">
+<meta property="og:updated_time" content="2017-10-16T13:34:48.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="在mac上快速搭建Android、iOS自动打包环境(三)">
 <meta name="twitter:description" content="接上一篇iOS自动打包文章，本文将介绍Android的自动打包。 准备工作　　Android的SDK已经安装好（这个网上教程一大堆，如果不会的可以自行搜索，实在搞不定的可以留言） Android自动打包　　其实Android的自动打包与iOS的自动打包基本一样，主要由于开发工具的不同，所以不同点都是由于开发工具不同造成。本文将写出与iOS的不同的地方，前边几步相同的就省略了1、 配置gradle">
@@ -373,7 +373,7 @@
 <li>找到“构建”-&gt;“增加构建步骤”-&gt;“Excute Shell”。这一步由于服务器上的gradlew一直获取不到权限<br><img src="http://upload-images.jianshu.io/upload_images/6644906-39e67a7b9138b591.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="4ADDE352-E751-4379-8BA2-2402F36ECB5C.png"></li>
 <li>找到“构建”-&gt;“增加构建步骤”-&gt;“Invoke Gradle Script”，选择”Use Gradle Wrapper”。其中Build File 代表build.gradle的路径<br><img src="http://upload-images.jianshu.io/upload_images/6644906-c37c70459c0bee8d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="83CAA3F9-9675-46DE-9332-A8B3C4D579C0.png"></li>
 </ul>
-<p>2、配置上传apk脚本<br>      curl -F “file=@app/build/outputs/apk/app-debug.apk” -F “uKey=4acbf7559e513f1f6081294723ea4d0f” -F “_api_key=d9e87e9febbf20dd4f384876bdf72a22” <a href="https://qiniu-storage.pgyer.com/apiv1/app/upload" target="_blank" rel="noopener">https://qiniu-storage.pgyer.com/apiv1/app/upload</a></p>
+<p>2、配置上传apk脚本<br>      curl -F “file=@app/build/outputs/apk/app-debug.apk” -F “uKey=4acbf7559e513f1f6081294723ea4d0f” -F “_api_key=d9e87e9febbf20dd4f384876bdf72a22” <a href="https://qiniu-storage.pgyer.com/apiv1/app/upload" target="_blank" rel="external">https://qiniu-storage.pgyer.com/apiv1/app/upload</a></p>
 <p>3、如果构建的时候报找不到“ ANDROID_HOME”，则就在“系统设置”-&gt;“全局属性”中增加，然后“系统管理”-&gt;“读取设置”重新启动Jenkins。<br><img src="http://upload-images.jianshu.io/upload_images/6644906-b7b42037ef20691c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="A658B2DA-D10F-484F-8782-0F77210CC615.png"></p>
 <p>　　很庆幸自己坚持了这么久了，已经把《在mac上快速搭建Android、iOS自动打包环境》这一个系列完成。感性简友的支持。如果自己在搭建过程中有任何问题可以联系我。</p>
 
@@ -503,7 +503,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">75</span>
+                  <span class="site-state-item-count">76</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -514,7 +514,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -525,7 +525,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-count">23</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
