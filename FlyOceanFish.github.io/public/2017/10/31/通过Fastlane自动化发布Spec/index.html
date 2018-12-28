@@ -88,7 +88,7 @@
 <meta property="og:description" content="在程序的世界里，很多程序的产生其实就是由于作者本身’懒’的原因，所以就做了一个程序，方便了自己也方便了大家。在做组件化的时候，大家肯定遇到过繁琐的发布spec。既要提交git又要发布到自己的私有仓库，通过命令来实现也有很多条，那有没有发布只要执行一条语句，就能帮我们自动执行我们想要的所有语句呢？答案肯定是有的！这就需要fastlane来帮忙了。一个自动化工具，可以帮忙打包Android或iOS的不">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/6644906-dd339fee102b460d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2018-01-22T05:56:56.000Z">
+<meta property="og:updated_time" content="2017-11-11T02:59:56.837Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="通过Fastlane自动化发布Spec">
 <meta name="twitter:description" content="在程序的世界里，很多程序的产生其实就是由于作者本身’懒’的原因，所以就做了一个程序，方便了自己也方便了大家。在做组件化的时候，大家肯定遇到过繁琐的发布spec。既要提交git又要发布到自己的私有仓库，通过命令来实现也有很多条，那有没有发布只要执行一条语句，就能帮我们自动执行我们想要的所有语句呢？答案肯定是有的！这就需要fastlane来帮忙了。一个自动化工具，可以帮忙打包Android或iOS的不">
@@ -375,8 +375,8 @@
 <h2 id="Fastfile文件准备"><a href="#Fastfile文件准备" class="headerlink" title="Fastfile文件准备"></a>Fastfile文件准备</h2><p>如果我们没有执行<code>fastlane init</code>命令，此时需要我们在根目录中创建<br>一个文件夹fastlane，然后在文件夹下创建一个<code>Fastfile</code>文件</p>
 <p>如下图的目录结构:</p>
 <p><img src="http://upload-images.jianshu.io/upload_images/6644906-dd339fee102b460d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="5BC4EE94-95EA-4E97-9151-721FB2D19C5C.png"></p>
-<h2 id="Fastfile文件的编写"><a href="#Fastfile文件的编写" class="headerlink" title="Fastfile文件的编写"></a>Fastfile文件的编写</h2><p>这个文件其实就是将Fastlane官方已经做好的有关Action放在一起，即可实现我们想要的<br>功能。<a href="https://docs.fastlane.tools/actions/" target="_blank" rel="noopener">Actions</a></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">desc &quot;发布Spec自动化通过YTOSpec命令&quot;</span><br><span class="line">lane :FOFSpecRelease do |options|</span><br><span class="line">  tag_version = options[:tag]</span><br><span class="line">  target = options[:target]</span><br><span class="line">  repoName = options[:repo]</span><br><span class="line">  #pod install</span><br><span class="line">  cocoapods(</span><br><span class="line">    clean: true,</span><br><span class="line">    podfile: &quot;./Example/#&#123;target&#125;&quot;</span><br><span class="line">  )</span><br><span class="line">  #pod lib lint</span><br><span class="line">  pod_lib_lint(verbose: true,allow_warnings: true)</span><br><span class="line">  version_bump_podspec(path: &quot;#&#123;target&#125;.podspec&quot;, version_number: &quot;#&#123;tag_version&#125;&quot;)</span><br><span class="line">  #1、git add .</span><br><span class="line">  git_add</span><br><span class="line">  #2、git commit</span><br><span class="line">  git_commit(path: &quot;.&quot;, message: &quot;升级&quot;)</span><br><span class="line">  #3、git push</span><br><span class="line"></span><br><span class="line">  #4、git tag</span><br><span class="line">  add_git_tag(</span><br><span class="line">    tag: &quot;#&#123;tag_version&#125;&quot;</span><br><span class="line">)</span><br><span class="line">  push_to_git_remote(</span><br><span class="line">  remote: &quot;origin&quot;,         # optional, default: &quot;origin&quot;</span><br><span class="line">  local_branch: &quot;master&quot;,  # optional, aliased by &quot;branch&quot;, default: &quot;master&quot;</span><br><span class="line">  remote_branch: &quot;master&quot;, # optional, default is set to local_branch</span><br><span class="line">  force: false,    # optional, default: false</span><br><span class="line">  tags: true     # optional, default: true</span><br><span class="line">  )</span><br><span class="line">  pod_push(path: &quot;#&#123;target&#125;.podspec&quot;, repo: &quot;#&#123;repoName&#125;&quot;,allow_warnings: true)</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+<h2 id="Fastfile文件的编写"><a href="#Fastfile文件的编写" class="headerlink" title="Fastfile文件的编写"></a>Fastfile文件的编写</h2><p>这个文件其实就是将Fastlane官方已经做好的有关Action放在一起，即可实现我们想要的<br>功能。<a href="https://docs.fastlane.tools/actions/" target="_blank" rel="external">Actions</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">desc &quot;发布Spec自动化通过YTOSpec命令&quot;</div><div class="line">lane :FOFSpecRelease do |options|</div><div class="line">  tag_version = options[:tag]</div><div class="line">  target = options[:target]</div><div class="line">  repoName = options[:repo]</div><div class="line">  #pod install</div><div class="line">  cocoapods(</div><div class="line">    clean: true,</div><div class="line">    podfile: &quot;./Example/#&#123;target&#125;&quot;</div><div class="line">  )</div><div class="line">  #pod lib lint</div><div class="line">  pod_lib_lint(verbose: true,allow_warnings: true)</div><div class="line">  version_bump_podspec(path: &quot;#&#123;target&#125;.podspec&quot;, version_number: &quot;#&#123;tag_version&#125;&quot;)</div><div class="line">  #1、git add .</div><div class="line">  git_add</div><div class="line">  #2、git commit</div><div class="line">  git_commit(path: &quot;.&quot;, message: &quot;升级&quot;)</div><div class="line">  #3、git push</div><div class="line"></div><div class="line">  #4、git tag</div><div class="line">  add_git_tag(</div><div class="line">    tag: &quot;#&#123;tag_version&#125;&quot;</div><div class="line">)</div><div class="line">  push_to_git_remote(</div><div class="line">  remote: &quot;origin&quot;,         # optional, default: &quot;origin&quot;</div><div class="line">  local_branch: &quot;master&quot;,  # optional, aliased by &quot;branch&quot;, default: &quot;master&quot;</div><div class="line">  remote_branch: &quot;master&quot;, # optional, default is set to local_branch</div><div class="line">  force: false,    # optional, default: false</div><div class="line">  tags: true     # optional, default: true</div><div class="line">  )</div><div class="line">  pod_push(path: &quot;#&#123;target&#125;.podspec&quot;, repo: &quot;#&#123;repoName&#125;&quot;,allow_warnings: true)</div><div class="line">end</div></pre></td></tr></table></figure>
 <p>上边这些命令在官网都有相应的解释，而且官网还有其他众多强大的Action<br>现在实现的其实还是有点有问题的。就是我们在打tag的时候如果tag已经存在<br>我们则要手工删除tag才能继续进行。判断tag是否存在已经有对应的Action<br>但是木有删除tag的Action，所以此时我们需要自定义一个Action才行</p>
 
       
@@ -507,7 +507,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">75</span>
+                  <span class="site-state-item-count">76</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -518,7 +518,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -529,7 +529,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-count">23</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

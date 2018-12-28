@@ -94,7 +94,7 @@
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/6644906-5a36325fcfffb06b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/6644906-3fc1812e14302597.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/6644906-8fcf2c9181285933.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2018-01-22T05:56:56.000Z">
+<meta property="og:updated_time" content="2017-11-11T02:59:56.835Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS逆向之工具使用">
 <meta name="twitter:description" content="上一篇已经大体给大家介绍了几款工具，相信大家都有所了解了。如果不了解可以再去看看。哈哈。言归正传，接下来就是通过一个案例展示一下Hopper、ios-deploy等这些工具的结合使用；另一方面就是让大家体验下lldb中break等调试语句的使用 这次给大家演示的是通过这些工具获取当前应用对应的视图控制器(接下来整个流程看着很复杂，其实这个过程只是展示工具的使用，如果真想实现这个功能有个更简单的方法">
@@ -398,7 +398,7 @@
 <blockquote>
 <p>br set -n viewWillAppear:</p>
 </blockquote>
-<p>这个时候只要进入任何界面都会停住同时终端会如下显示(关于lldb中break等语句的使用推荐大家看这篇文章<a href="http://blog.csdn.net/quanqinyang/article/details/51321338" target="_blank" rel="noopener">lldb使用技巧</a>)</p>
+<p>这个时候只要进入任何界面都会停住同时终端会如下显示(关于lldb中break等语句的使用推荐大家看这篇文章<a href="http://blog.csdn.net/quanqinyang/article/details/51321338" target="_blank" rel="external">lldb使用技巧</a>)</p>
 <p><img src="http://upload-images.jianshu.io/upload_images/6644906-ce25bacf06f61740.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="0653D621-991E-4DF4-B916-7952B0C343EE.png"></p>
 <p>图中我标出的1代表断点的名称，删除等操作用的到</p>
 <p>操作APP，这时候会停住，终端如下图：</p>
@@ -416,7 +416,7 @@
 <p>大家看有的教程是<code>po $r0</code> 这是命令是对应32位机器操作的；<code>po $x0</code>是对应64位的命令</p>
 <p><img src="http://upload-images.jianshu.io/upload_images/6644906-9290ec48aea4acd1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="1DB7FB69-8138-4231-BB7F-5461BCC2E14F.png"></p>
 <p><strong>上边是通过断点的方式获取到了当前视图控制器的名字，接下来给大家展示另一种方式</strong></p>
-<p>第二种：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">(lldb) e UIApplication *$app = [UIApplication sharedApplication]</span><br><span class="line">(lldb) e UIWindow *$keyWindow = $app.keyWindow</span><br><span class="line"></span><br><span class="line">(lldb) po $keyWindow.rootViewController</span><br><span class="line">&lt;MMTabBarController: 0x138947000&gt;</span><br><span class="line"></span><br><span class="line">(lldb) e MMTabBarController *$tab = $keyWindow.rootViewController</span><br><span class="line"></span><br><span class="line">(lldb) po $tab.viewControllers</span><br><span class="line">&lt;__NSArrayM 0x139775c50&gt;(</span><br><span class="line">&lt;MMUINavigationController: 0x1380a2a00&gt;,</span><br><span class="line">&lt;MMUINavigationController: 0x138938a00&gt;,</span><br><span class="line">&lt;MMUINavigationController: 0x13893d600&gt;,</span><br><span class="line">&lt;MMUINavigationController: 0x138943600&gt;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">(lldb)e MMUINavigationController *$navi2 = $tab.viewControllers[2]</span><br><span class="line"></span><br><span class="line">(lldb) po $navi2.visibleViewController</span><br><span class="line"></span><br><span class="line">(SeePeopleNearbyViewController *) $8 = 0x00000001398f55c0</span><br></pre></td></tr></table></figure></p>
+<p>第二种：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">(lldb) e UIApplication *$app = [UIApplication sharedApplication]</div><div class="line">(lldb) e UIWindow *$keyWindow = $app.keyWindow</div><div class="line"></div><div class="line">(lldb) po $keyWindow.rootViewController</div><div class="line">&lt;MMTabBarController: 0x138947000&gt;</div><div class="line"></div><div class="line">(lldb) e MMTabBarController *$tab = $keyWindow.rootViewController</div><div class="line"></div><div class="line">(lldb) po $tab.viewControllers</div><div class="line">&lt;__NSArrayM 0x139775c50&gt;(</div><div class="line">&lt;MMUINavigationController: 0x1380a2a00&gt;,</div><div class="line">&lt;MMUINavigationController: 0x138938a00&gt;,</div><div class="line">&lt;MMUINavigationController: 0x13893d600&gt;,</div><div class="line">&lt;MMUINavigationController: 0x138943600&gt;</div><div class="line">)</div><div class="line"></div><div class="line">(lldb)e MMUINavigationController *$navi2 = $tab.viewControllers[2]</div><div class="line"></div><div class="line">(lldb) po $navi2.visibleViewController</div><div class="line"></div><div class="line">(SeePeopleNearbyViewController *) $8 = 0x00000001398f55c0</div></pre></td></tr></table></figure></p>
 <p>这种方式其实就是通过lldb远程调试中的<code>e</code>语法能够执行任何oc语句的特性与Cycript类似</p>
 <p>第三种：</p>
 <p>直接打开Xcode的View Debug Hierarchy即可。😁😁</p>
@@ -429,7 +429,7 @@
 </li>
 <li><p>模块偏移前基地址：这个其实就是Hopper解析我们应用中的所显示的地址</p>
 </li>
-<li><p><a href="http://blog.csdn.net/better0332/article/details/5262990" target="_blank" rel="noopener">ASLR(Address Space Layout Randomization,地址空间格局的随机化)</a>偏移量：这是ASLR所随机产生的一个内存地址.其实就是一个安全措施，<code>模块偏移前基地址</code>通过任何汇编工具都很容易能够拿到，不过要想拿到<code>ASLR</code>偏移量就没那么简单。</p>
+<li><p><a href="http://blog.csdn.net/better0332/article/details/5262990" target="_blank" rel="external">ASLR(Address Space Layout Randomization,地址空间格局的随机化)</a>偏移量：这是ASLR所随机产生的一个内存地址.其实就是一个安全措施，<code>模块偏移前基地址</code>通过任何汇编工具都很容易能够拿到，不过要想拿到<code>ASLR</code>偏移量就没那么简单。</p>
 </li>
 </ul>
 <h3 id="ASLR偏移量"><a href="#ASLR偏移量" class="headerlink" title="ASLR偏移量"></a>ASLR偏移量</h3><blockquote>
@@ -584,7 +584,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">75</span>
+                  <span class="site-state-item-count">76</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -595,7 +595,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -606,7 +606,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-count">23</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
