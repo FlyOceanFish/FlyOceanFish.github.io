@@ -82,15 +82,15 @@
 <meta name="description" content="前一篇《设计模式之感悟和实践(一)》介绍了如何去掉if...else和switch...case的应用场景，这篇文章我们将介绍另外一种场景的综合运用 如果没有看前一篇文章的，建议首先看一下。 具体使用场景回忆前一篇文章我们是使用责任链设计模式教大家消除判断语句，具体如下格式: 123456789//点击事件- (IBAction)actionButton1:(id)sender &amp;#123;  /">
 <meta name="keywords" content="设计模式">
 <meta property="og:type" content="article">
-<meta property="og:title" content="设计模式之感悟和实践1">
+<meta property="og:title" content="设计模式之感悟和实践(二)">
 <meta property="og:url" content="http://yoursite.com/2019/01/08/设计模式实践(二)/index.html">
 <meta property="og:site_name" content="FlyOceanFish&#39; Blog">
 <meta property="og:description" content="前一篇《设计模式之感悟和实践(一)》介绍了如何去掉if...else和switch...case的应用场景，这篇文章我们将介绍另外一种场景的综合运用 如果没有看前一篇文章的，建议首先看一下。 具体使用场景回忆前一篇文章我们是使用责任链设计模式教大家消除判断语句，具体如下格式: 123456789//点击事件- (IBAction)actionButton1:(id)sender &amp;#123;  /">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/6644906-23bd10685af0a455.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2019-01-10T03:03:51.000Z">
+<meta property="og:updated_time" content="2019-01-10T03:13:35.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="设计模式之感悟和实践1">
+<meta name="twitter:title" content="设计模式之感悟和实践(二)">
 <meta name="twitter:description" content="前一篇《设计模式之感悟和实践(一)》介绍了如何去掉if...else和switch...case的应用场景，这篇文章我们将介绍另外一种场景的综合运用 如果没有看前一篇文章的，建议首先看一下。 具体使用场景回忆前一篇文章我们是使用责任链设计模式教大家消除判断语句，具体如下格式: 123456789//点击事件- (IBAction)actionButton1:(id)sender &amp;#123;  /">
 <meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/6644906-23bd10685af0a455.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
@@ -128,7 +128,7 @@
 
 
 
-  <title>设计模式之感悟和实践1 | FlyOceanFish' Blog</title>
+  <title>设计模式之感悟和实践(二) | FlyOceanFish' Blog</title>
   
 
 
@@ -292,7 +292,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">设计模式之感悟和实践1</h2>
+          <h2 class="post-title" itemprop="name headline">设计模式之感悟和实践(二)</h2>
         
 
         <div class="post-meta">
@@ -364,7 +364,7 @@
       
 
       
-        <p>前一篇《设计模式之感悟和实践(一)》介绍了如何去掉<code>if...else</code>和<code>switch...case</code>的应用场景，这篇文章我们将介绍另外一种场景的综合运用</p>
+        <p>前一篇<a href="http://flyoceanfish.top/2018/12/14/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E6%84%9F%E6%82%9F%E5%92%8C%E5%AE%9E%E8%B7%B51/" target="_blank" rel="noopener">《设计模式之感悟和实践(一)》</a>介绍了如何去掉<code>if...else</code>和<code>switch...case</code>的应用场景，这篇文章我们将介绍另外一种场景的综合运用</p>
 <p>如果没有看前一篇文章的，建议首先看一下。</p>
 <h1 id="具体使用"><a href="#具体使用" class="headerlink" title="具体使用"></a>具体使用</h1><h2 id="场景回忆"><a href="#场景回忆" class="headerlink" title="场景回忆"></a>场景回忆</h2><p>前一篇文章我们是使用责任链设计模式教大家消除判断语句，具体如下格式:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">//点击事件</span><br><span class="line">- (IBAction)actionButton1:(id)sender &#123;</span><br><span class="line">  //这是伪代码,一个点击事件对应两种情况的处理</span><br><span class="line">  if(EVENT1)&#123;</span><br><span class="line">    //code处理</span><br><span class="line">  &#125;else if(EVENT2)&#123;</span><br><span class="line">    //code处理</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
