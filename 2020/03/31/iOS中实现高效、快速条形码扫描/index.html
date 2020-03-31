@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="iOS," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="背景条形码、二维码是日常生活中用的较多的功能，我们在开发中之前用的都是ZXing、Zbar这两个开源库。不过在iOS7之后，苹果系统自己实现了一套api，终于可以丢弃第三方，用上苹果爸爸自己的功能了。 首先说说ZXing、Zbar这两个开源库。由于ZXing是用java实现的，Zbar是用C语音实现了，所以Zbar的识别效率远远高于ZXing,所以Zbar一般都是开发者的首选。不过iOS7系统出现">
+<meta name="keywords" content="iOS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS中Zbar实现高效、快速条形码扫描">
+<meta property="og:url" content="http://yoursite.com/2020/03/31/iOS中实现高效、快速条形码扫描/index.html">
+<meta property="og:site_name" content="FlyOceanFish&#39; Blog">
+<meta property="og:description" content="背景条形码、二维码是日常生活中用的较多的功能，我们在开发中之前用的都是ZXing、Zbar这两个开源库。不过在iOS7之后，苹果系统自己实现了一套api，终于可以丢弃第三方，用上苹果爸爸自己的功能了。 首先说说ZXing、Zbar这两个开源库。由于ZXing是用java实现的，Zbar是用C语音实现了，所以Zbar的识别效率远远高于ZXing,所以Zbar一般都是开发者的首选。不过iOS7系统出现">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-03-31T03:15:46.058Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS中Zbar实现高效、快速条形码扫描">
+<meta name="twitter:description" content="背景条形码、二维码是日常生活中用的较多的功能，我们在开发中之前用的都是ZXing、Zbar这两个开源库。不过在iOS7之后，苹果系统自己实现了一套api，终于可以丢弃第三方，用上苹果爸爸自己的功能了。 首先说说ZXing、Zbar这两个开源库。由于ZXing是用java实现的，Zbar是用C语音实现了，所以Zbar的识别效率远远高于ZXing,所以Zbar一般都是开发者的首选。不过iOS7系统出现">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/03/31/iOS中实现高效、快速条形码扫描/"/>
+
+
+
+
+
+  <title>iOS中Zbar实现高效、快速条形码扫描 | FlyOceanFish' Blog</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?8f73d05f1a471433ed938c462af80741";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <a href="https://github.com/FlyOceanFish"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">FlyOceanFish' Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">You Believe,You Can</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/31/iOS中实现高效、快速条形码扫描/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="FlyOceanFish">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FlyOceanFish' Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">iOS中Zbar实现高效、快速条形码扫描</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-31T09:44:00+08:00">
+                2020-03-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>条形码、二维码是日常生活中用的较多的功能，我们在开发中之前用的都是ZXing、Zbar这两个开源库。不过在iOS7之后，苹果系统自己实现了一套api，终于可以丢弃第三方，用上苹果爸爸自己的功能了。</p>
+<p>首先说说ZXing、Zbar这两个开源库。由于ZXing是用java实现的，Zbar是用C语音实现了，所以Zbar的识别效率远远高于ZXing,所以Zbar一般都是开发者的首选。不过iOS7系统出现自己的api后，系统的自然成为了首选。</p>
+<p>按照识别速度来排序的话：系统api&gt;Zbar&gt;ZXing。系统的api识别速度非常的快，而且有效距离比其他两个也大。最主要是系统自带的api在识别条形码的时候即使成90度垂直状，仍然可以很快的识别出来。所以疑问来了，那就直接用系统api就行了呗。</p>
+<p>话说本人也是这么想的，不过在实际过程中发现一个重大的问题！！有一些条形码居然识别不了！经过分析此条形码的Code是EAN-128Code这是国内自己定义的，所以苹果不支持。但是实际情况线下还挺多这种条形码的，所以最后不得不换成Zbar。</p>
+<h2 id="Zbar脱坑记"><a href="#Zbar脱坑记" class="headerlink" title="Zbar脱坑记"></a>Zbar脱坑记</h2><p>Zbar的集成非常简单，通过Cocopods直接导入即可。然后通过以下代码使用<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">self.readerView = [[ZBarReaderView alloc] init];</span><br><span class="line">self.readerView.frame = CGRectMake(<span class="number">0</span>,<span class="number">0</span>, preView.frame.size.width, preView.frame.size.height);</span><br><span class="line">self.readerView.tracksSymbols = NO;</span><br><span class="line">self.readerView.readerDelegate = self;</span><br><span class="line">self.readerView.torchMode = <span class="number">0</span>;</span><br><span class="line">self.readerView.allowsPinchZoom = NO;</span><br><span class="line">ZBarImageScanner *scanner = self.readerView.scanner;</span><br><span class="line">[scanner setSymbology:<span class="number">0</span> config:ZBAR_CFG_ENABLE to:<span class="number">0</span>];</span><br><span class="line">[scanner setSymbology:ZBAR_CODE128 config:ZBAR_CFG_ENABLE to:<span class="number">1</span>];</span><br><span class="line">[scanner setSymbology:ZBAR_CODE93 config:ZBAR_CFG_ENABLE to:<span class="number">1</span>];</span><br><span class="line">[scanner setSymbology:ZBAR_CODE39 config:ZBAR_CFG_ENABLE to:<span class="number">1</span>];</span><br></pre></td></tr></table></figure></p>
+<p>很简单，大功告成！</p>
+<h3 id="问题1"><a href="#问题1" class="headerlink" title="问题1"></a>问题1</h3><p>遇到第一个问题则是，发现同一个单号再次扫描反应非常迟钝，而且扫描速度不是非常的快。这个时候点进去<code>ZBarReaderView</code>看了一下属性。发现<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// this flag still works, but its use is deprecated</span></span><br><span class="line">@property (nonatomic) BOOL enableCache;</span><br></pre></td></tr></table></figure></p>
+<p>初步怀疑跟这个属性有关，所以通过设置此属性为NO,然后再次测试，发现此问题解决。同时扫描速度提速了</p>
+<h2 id="再次提速"><a href="#再次提速" class="headerlink" title="再次提速"></a>再次提速</h2><p>虽然通过设置<code>enableCache</code>属性能够加快扫描速度，不过感觉还是有点慢，因为Zbar默认是全屏幕扫，即当条形码出现在预览框就可以识别到。</p>
+<p>通过观察属性发现了<code>scanCrop</code>，缩小扫描区域<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">self.readerView.scanCrop = CGRectMake((_previewH/<span class="number">2</span><span class="number">-150</span>)/_previewH, <span class="number">0</span>, <span class="number">300</span>/_previewH, <span class="number">1</span>);<span class="comment">//中间区域高度为300的扫描区域</span></span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>这个扫描区域的设置要非常的注意。我们预览框看到的图片与实际图片不一样，它是一个90度放倒的图片。说白了就是我们预览框x、y坐标对应实际照片的y、x坐标；高对应宽，宽对应高。而且这里所有的值都是小于1的。scanCrop默认值是(0,0,1,1)所以会是全屏扫描</p>
+</blockquote>
+<p>不过通过设置下来，近距离扫描确实已经非常快了。但是满足不了我们的要求。得离着20cm左右扫描速度非常快，离着远了识别速度非常的慢，甚至识别不了。</p>
+<p><code>ZBarReaderView</code>所有的属性都翻了一个遍，也没有发现相关属性。</p>
+<p>最终迫不得已只能去翻看Zbar源码，试试能不能改善了</p>
+<h2 id="终极优化"><a href="#终极优化" class="headerlink" title="终极优化"></a>终极优化</h2><p>在网上转了一圈没搜到相关信息，所以只能研究研究代码。</p>
+<p>通过翻看代码发现，其实Zbar可以通俗的讲分成两部分。通过1、通过预览获取图片数据；2、通过C语言核心逻辑去解析<br>第二步通过确认没有问题，所以问题出在第一步。由于第一步其实有点老生常谈，所以看了代码之后马上发现了问题。即<code>ZBarReaderViewImpl_Capture</code>代码的实现</p>
+<p>此代码很多年没有维护了，所以获取预览图片的时候，也是按照当时设备最大分辨率设置。随着时间的发展，设备分辨率也提高了非常多</p>
+<p>原来代码<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> ([session canSetSessionPreset:AVCaptureSessionPreset640x480])</span><br><span class="line">&#123;</span><br><span class="line">    [session setSessionPreset:AVCaptureSessionPreset640x480];</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> ([session canSetSessionPreset:AVCaptureSessionPreset352x288])</span><br><span class="line">&#123;</span><br><span class="line">    [self.session setSessionPreset:AVCaptureSessionPreset352x288];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>原来代码支持图片的分辨率最高是640*480非常的小</p>
+<p>改后的代码<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> ([session canSetSessionPreset:AVCaptureSessionPreset1920x1080]) &#123;</span><br><span class="line">    [session setSessionPreset:AVCaptureSessionPreset1920x1080];</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> ([session canSetSessionPreset:AVCaptureSessionPreset1280x720])</span><br><span class="line">&#123;</span><br><span class="line">    [session setSessionPreset:AVCaptureSessionPreset1280x720];</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> ([session canSetSessionPreset:AVCaptureSessionPreset640x480])</span><br><span class="line">&#123;</span><br><span class="line">    [session setSessionPreset:AVCaptureSessionPreset640x480];</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> ([session canSetSessionPreset:AVCaptureSessionPreset352x288])</span><br><span class="line">&#123;</span><br><span class="line">    [self.session setSessionPreset:AVCaptureSessionPreset352x288];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>我们增加了图片的分辨率即可。此时可以高效、快速、远距离的识别到条形码了。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>解决这个问题也是循序渐进式，通过自己的努力最终解决了问题。当我们在使用第三方的代码库的时候，遇到问题还是要多看看源码，只有这样我们才能了然于胸。遇到问题解决起来也会游刃有余。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/12/14/设计模式之感悟和实践1/" rel="next" title="设计模式之感悟和实践1">
+                <i class="fa fa-chevron-left"></i> 设计模式之感悟和实践1
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="vcomments"></div>
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="FlyOceanFish" />
+            
+              <p class="site-author-name" itemprop="name">FlyOceanFish</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">77</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://kyson.cn/" title="kyson的技术博客" target="_blank">kyson的技术博客</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#背景"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Zbar脱坑记"><span class="nav-number">2.</span> <span class="nav-text">Zbar脱坑记</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题1"><span class="nav-number">2.1.</span> <span class="nav-text">问题1</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#再次提速"><span class="nav-number">3.</span> <span class="nav-text">再次提速</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#终极优化"><span class="nav-number">4.</span> <span class="nav-text">终极优化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">FlyOceanFish</span>
+
+  
+</div>
+
+<!--
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.3</div>
+
+-->
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_lines.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine@1.1.6/dist/Valine.min.js"></script>
+  <script type="text/javascript">
+    new Valine({
+        av: AV,
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        app_id: 'BUyek27xhBJW608unzBEyhWI-gzGzoHsz',
+        app_key: 'lT2NUWTMwPfNYl6xMQUtUxDv',
+        placeholder: '请输入评论'
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.3"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=5.1.3"></script>
+
+
+  
+
+</body>
+</html>
+<script type="text/javascript" src="/js/src/love.js"></script>
