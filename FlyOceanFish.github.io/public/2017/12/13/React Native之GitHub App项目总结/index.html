@@ -90,7 +90,7 @@
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/6644906-40e210e960b5f809.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/6644906-d315b1e8c38dbcac.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/6644906-7a805a40f9a4ef25.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2017-12-15T11:02:02.490Z">
+<meta property="og:updated_time" content="2018-01-22T05:56:55.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="React Native之GitHub Popular App项目总结">
 <meta name="twitter:description" content="React Native现在所谓如火如荼，所以作者也不例外，赶紧来凑凑热闹。写这篇文章正式12月份了，也算是实现今年的目标，熟练使用React Native。到现在一共写了2个项目了，已经能够熟练写RN项目，现在也算是实现了这个小目标。 之前写过一篇文章也是一个项目总结React Native项目实践总结。不过这个项目比较小，最多能够让你入门吧，所以就想找个大的项目练练手。有幸发现了一个GitHu">
@@ -367,9 +367,9 @@
 
       
         <p>React Native现在所谓如火如荼，所以作者也不例外，赶紧来凑凑热闹。写这篇文章正式12月份了，也算是实现今年的目标，熟练使用React Native。到现在一共写了2个项目了，已经能够熟练写RN项目，现在也算是实现了这个小目标。</p>
-<p>之前写过一篇文章也是一个项目总结<a href="http://flyoceanfish.top/2017/10/16/React%20Native%E9%A1%B9%E7%9B%AE%E5%AE%9E%E8%B7%B5%E6%80%BB%E7%BB%93/" target="_blank" rel="external">React Native项目实践总结</a>。不过这个项目比较小，最多能够让你入门吧，所以就想找个大的项目练练手。有幸发现了一个GitHub Popular这个APP，所以也就根据视频动手实现一下。</p>
+<p>之前写过一篇文章也是一个项目总结<a href="http://flyoceanfish.top/2017/10/16/React%20Native%E9%A1%B9%E7%9B%AE%E5%AE%9E%E8%B7%B5%E6%80%BB%E7%BB%93/" target="_blank" rel="noopener">React Native项目实践总结</a>。不过这个项目比较小，最多能够让你入门吧，所以就想找个大的项目练练手。有幸发现了一个GitHub Popular这个APP，所以也就根据视频动手实现一下。</p>
 <h2 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h2><p>gif有点大，想看效果的可以点击下边链接</p>
-<p><a href="https://github.com/FlyOceanFish/react-native-github/blob/master/%E6%95%88%E6%9E%9C%E5%9B%BE.gif" target="_blank" rel="external">效果图</a></p>
+<p><a href="https://github.com/FlyOceanFish/react-native-github/blob/master/%E6%95%88%E6%9E%9C%E5%9B%BE.gif" target="_blank" rel="noopener">效果图</a></p>
 <h2 id="差异"><a href="#差异" class="headerlink" title="差异"></a>差异</h2><ol>
 <li><p>首先原来的GitHub Popular这个APP有些技术比较老了，比如<code>Listview</code>已经被废弃。作者采用了<code>FlatList</code>这个官方推荐的控件，相比<code>Listview</code>，<code>FlatList</code>性能比较高，具体想了解的可以去官网查看</p>
 </li>
@@ -407,8 +407,8 @@
 <li>数据改变后通知刷新视图，视图未刷新</li>
 </ul>
 <p>在收藏子模块中，如果取消收藏了。我们则要在相应的最热、趋势模块也做相应的视图刷新，经过调试之后发现不会刷新，经过不断调试发现是由于异步调用造成的，采用延迟通知即可</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">this</span>.timer = setTimeout(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</div><div class="line">  <span class="comment">//一定要适当的延迟一下，因为AsyncStorage可能还没完全移除掉相应的key。</span></div><div class="line">  DeviceEventEmitter.emit(<span class="string">'ACTION_HOME'</span>,ACTION_HOME.A_UPDATE_FAVORITE);</div><div class="line">&#125;,<span class="number">500</span>)</div></pre></td></tr></table></figure>
-<p><font color="red">这里的<code>timer</code>一定要在<code>componentWillUnmount()</code>方法进行释放</font><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">componentWillUnmount()&#123;</div><div class="line">  this.timer&amp;&amp;clearTimeout(this.timer);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span>.timer = setTimeout(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">  <span class="comment">//一定要适当的延迟一下，因为AsyncStorage可能还没完全移除掉相应的key。</span></span><br><span class="line">  DeviceEventEmitter.emit(<span class="string">'ACTION_HOME'</span>,ACTION_HOME.A_UPDATE_FAVORITE);</span><br><span class="line">&#125;,<span class="number">500</span>)</span><br></pre></td></tr></table></figure>
+<p><font color="red">这里的<code>timer</code>一定要在<code>componentWillUnmount()</code>方法进行释放</font><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">componentWillUnmount()&#123;</span><br><span class="line">  this.timer&amp;&amp;clearTimeout(this.timer);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <ul>
 <li>切换主题底部tabbar字体和图片的颜色不能改变</li>
 </ul>
@@ -417,17 +417,17 @@
 <li>自定义视图的时候刷新要在主线程</li>
 </ul>
 <p>在实现趋势的下拉框过程中，点击回调显示下拉框的时候，要在主线程调用。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">dispatch_async(dispatch_get_main_queue(), ^&#123;</div><div class="line">  [KxMenu showMenuInView:[UIApplication sharedApplication].keyWindow</div><div class="line">                fromRect:CGRectMake([dic[@&quot;ox&quot;] floatValue], [dic[@&quot;oy&quot;] floatValue]+20, [dic[@&quot;width&quot;] floatValue], [dic[@&quot;height&quot;] floatValue])</div><div class="line">               menuItems:arrays];</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">dispatch_async(dispatch_get_main_queue(), ^&#123;</span><br><span class="line">  [KxMenu showMenuInView:[UIApplication sharedApplication].keyWindow</span><br><span class="line">                fromRect:CGRectMake([dic[@&quot;ox&quot;] floatValue], [dic[@&quot;oy&quot;] floatValue]+20, [dic[@&quot;width&quot;] floatValue], [dic[@&quot;height&quot;] floatValue])</span><br><span class="line">               menuItems:arrays];</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <ul>
 <li>Can only update a mounted or mounting component…<blockquote>
 <p>Warning:<br>setState(…): Can only update a mounted or mounting component.<br>This usually means you called setState() on an unmounted component.<br>This is a no-op.<br>Please check the code for the xxx component.</p>
 </blockquote>
 </li>
 </ul>
-<p>这个问题也是在趋势模块导航栏自定义标题视图中遇到的一个警告。场景就是导航栏标题视图点击选择[今天,本周,本月],选完之后要更新导航栏显示的文字为用户所选的。这里作者自定义了一个<code>CustomTopBar.js</code>，然后注册了一个通知来监听更新<code>state</code>来刷新顶部文字的显示<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">componentDidMount()&#123;</div><div class="line">  this.listner = DeviceEventEmitter.addListener(ACTION_CUSTOMTOPBAR.CHANGE_TITLE,(title)=&gt;&#123;</div><div class="line">    this.setState(&#123;</div><div class="line">      title:title</div><div class="line">    &#125;)</div><div class="line">  &#125;)</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>查来查去作者想这个<code>component</code>应该没有被unmount，要不怎么会显示出来呢，而且标题也会正常更新，这里只是一个警告。作者就反复看代码，发现了一个问题就是作者的<code>listner</code>没有被释放，所以就加入了释放代码,居然神奇般的警告就消失了<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">componentWillUnmount()&#123;</div><div class="line">  if (this.listner) &#123;</div><div class="line">    this.listner.remove();</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这个问题也是在趋势模块导航栏自定义标题视图中遇到的一个警告。场景就是导航栏标题视图点击选择[今天,本周,本月],选完之后要更新导航栏显示的文字为用户所选的。这里作者自定义了一个<code>CustomTopBar.js</code>，然后注册了一个通知来监听更新<code>state</code>来刷新顶部文字的显示<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">componentDidMount()&#123;</span><br><span class="line">  this.listner = DeviceEventEmitter.addListener(ACTION_CUSTOMTOPBAR.CHANGE_TITLE,(title)=&gt;&#123;</span><br><span class="line">    this.setState(&#123;</span><br><span class="line">      title:title</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>查来查去作者想这个<code>component</code>应该没有被unmount，要不怎么会显示出来呢，而且标题也会正常更新，这里只是一个警告。作者就反复看代码，发现了一个问题就是作者的<code>listner</code>没有被释放，所以就加入了释放代码,居然神奇般的警告就消失了<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">componentWillUnmount()&#123;</span><br><span class="line">  if (this.listner) &#123;</span><br><span class="line">    this.listner.remove();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <h2 id="感悟"><a href="#感悟" class="headerlink" title="感悟"></a>感悟</h2><p>第一个项目写的时候比较生疏，写第二个的时候就有点孰能生巧的感觉，所以写的会比较快。看视频的时候最好别按部就班的去写，最好一边看然后暂停一下，自己去实现一下或者尝试不同的实现方式去写。有时候看视频其实也会忽略一些细节，导致项目报错，这时候不要慌，我们要充分利用debug模式配合Chrome来断点远程调试，一点一点的运行最终肯定会找到问题所在。</p>
-<p><a href="https://github.com/FlyOceanFish/react-native-github" target="_blank" rel="external">此项目源码传送门</a></p>
+<p><a href="https://github.com/FlyOceanFish/react-native-github" target="_blank" rel="noopener">此项目源码传送门</a></p>
 
       
     </div>
@@ -557,7 +557,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">77</span>
+                  <span class="site-state-item-count">82</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -579,7 +579,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-count">24</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -648,7 +648,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2020</span>
+        <div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

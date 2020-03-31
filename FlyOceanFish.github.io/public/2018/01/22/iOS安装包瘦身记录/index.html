@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="FlyOceanFish&#39; Blog">
 <meta property="og:description" content="随着项目时间越来越久，大家自然而然的一定会面对一个问题:APP安装包越来越大。那就不禁自问一下了，安装包里边的东西都是需要的吗？答案肯定是：不是的!即使都是需要的那有没有优化空间呢？当然肯定也会有的。接下里介绍一下作者安装包瘦身的一次经历。 瘦身结果安装包从68.9M减少到23.M  大家别急着想作者做了什么居然能减少这么大呢？这里其中有一个狗血的事情。虽然不是每个人都会遇到，但是还是小心为妙！">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-01-23T13:24:03.260Z">
+<meta property="og:updated_time" content="2018-01-24T01:21:56.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS安装包瘦身记录">
 <meta name="twitter:description" content="随着项目时间越来越久，大家自然而然的一定会面对一个问题:APP安装包越来越大。那就不禁自问一下了，安装包里边的东西都是需要的吗？答案肯定是：不是的!即使都是需要的那有没有优化空间呢？当然肯定也会有的。接下里介绍一下作者安装包瘦身的一次经历。 瘦身结果安装包从68.9M减少到23.M  大家别急着想作者做了什么居然能减少这么大呢？这里其中有一个狗血的事情。虽然不是每个人都会遇到，但是还是小心为妙！">
@@ -382,7 +382,7 @@
 <h1 id="开始瘦身"><a href="#开始瘦身" class="headerlink" title="开始瘦身"></a>开始瘦身</h1><p>本人开发的APP之前半年之久，从0开始，所以历史包袱没有。但是发现开发的APP达到将近70M的时候，其实第一反应是不可思议。正好项目有点空闲时间内了，就开始着手瘦身这一事情了。</p>
 <h2 id="原生资源处理"><a href="#原生资源处理" class="headerlink" title="原生资源处理"></a>原生资源处理</h2><p>图片资源其实在大部分项目中占据了不少比例的。</p>
 <h3 id="图片资源处理"><a href="#图片资源处理" class="headerlink" title="图片资源处理"></a>图片资源处理</h3><ul>
-<li>删除无用和重复图片的<br><a href="https://github.com/tinymind/LSUnusedResources" target="_blank" rel="external">LSUnusedResources</a>一个Mac工程，下载下来直接运行。可以用来扫描工程中没有用到的图片。<br><a href="https://github.com/adrianlopezroche/fdupes" target="_blank" rel="external">fdupes</a>可以在指定的目录及子目录中查找重复的文件。fdupes通过对比文件的MD5签名，以及逐字节比较文件来识别重复内容。<blockquote>
+<li>删除无用和重复图片的<br><a href="https://github.com/tinymind/LSUnusedResources" target="_blank" rel="noopener">LSUnusedResources</a>一个Mac工程，下载下来直接运行。可以用来扫描工程中没有用到的图片。<br><a href="https://github.com/adrianlopezroche/fdupes" target="_blank" rel="noopener">fdupes</a>可以在指定的目录及子目录中查找重复的文件。fdupes通过对比文件的MD5签名，以及逐字节比较文件来识别重复内容。<blockquote>
 <p>fdupes -r  xxx/Images.xcassets</p>
 </blockquote>
 </li>
@@ -392,7 +392,7 @@
 <li>压缩图片<br>其实很多设计给到的切图质量都很高，没有经过压缩。我们手机端使用的图片可以适当的做压缩处理。这个效果比较明显减少了5.4M</li>
 </ul>
 <p><strong>狗血的事情</strong><br>这里压缩过程中，作者居然在工程中发现了一张41.6M的图片！！！。所以建议大家在使用设计给到的图片一定要看看大小！</p>
-<p><a href="https://tinypng.com/" target="_blank" rel="external">TinyPNG</a>很不错的一个图片免费在线压缩工具</p>
+<p><a href="https://tinypng.com/" target="_blank" rel="noopener">TinyPNG</a>很不错的一个图片免费在线压缩工具</p>
 <p>我压缩了工程中用到的比较大的图片（几十K以上的），小的就没有去压缩。另一个大家一定要注意APP的欢迎页，质量都比较高，尤其大。要不同机型的欢迎页都要压缩一下。</p>
 <ul>
 <li>压缩gif<br>由于项目中欢迎页使用几个gif，所以这里压缩了一下，效果还凑合着吧，减少0.3M</li>
@@ -401,7 +401,7 @@
 <h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><p>这里由于没有历史包袱代码层面我们现在项目可优化的不是很大。这里其实主要就是没有用的文件和第三方的引用导致安装包变大。所以没用到的文件肯定要删除，针对比较大的第三方做个取舍。代码重复扫描的话对安装包瘦身效果不是很明显，不过大家可以用来重构项目也是有用的，做个参考</p>
 <h2 id="查看APP中各个文件的大小"><a href="#查看APP中各个文件的大小" class="headerlink" title="查看APP中各个文件的大小"></a>查看APP中各个文件的大小</h2><ol>
 <li>LinkMap文件是Xcode产生可执行文件的同时生成的链接信息，用来描述可执行文件的构造成分，包括代码段（<strong>TEXT）和数据段（</strong>DATA）的分布情况。只要设置Project-&gt;Build Settings-&gt;Write Link Map File为YES，build完后就可以在设置的路径看到LinkMap文件了。</li>
-<li>从linkmap中统计出每个.o目标文件占用的体积和每个.a静态库占用的体积 <a href="https://link.jianshu.com/?t=https://gist.github.com/bang590/8f3e9704f1c2661836cd" target="_blank" rel="external">脚本链接</a><h1 id="我的博客"><a href="#我的博客" class="headerlink" title="我的博客"></a>我的博客</h1><a href="http://flyoceanfish.top/" target="_blank" rel="external">FlyOceanFish</a></li>
+<li>从linkmap中统计出每个.o目标文件占用的体积和每个.a静态库占用的体积 <a href="https://link.jianshu.com/?t=https://gist.github.com/bang590/8f3e9704f1c2661836cd" target="_blank" rel="noopener">脚本链接</a><h1 id="我的博客"><a href="#我的博客" class="headerlink" title="我的博客"></a>我的博客</h1><a href="http://flyoceanfish.top/" target="_blank" rel="noopener">FlyOceanFish</a></li>
 </ol>
 
       
@@ -530,7 +530,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">77</span>
+                  <span class="site-state-item-count">82</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -552,7 +552,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-count">24</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -621,7 +621,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2020</span>
+        <div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

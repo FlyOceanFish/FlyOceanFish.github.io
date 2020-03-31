@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="FlyOceanFish&#39; Blog">
 <meta property="og:description" content="不知道大家有没有发现微信聊天历史列表、苹果自带的通讯录历史记录等应用如隐藏的长按功能。哈哈，如果没有也不要气馁，也不要怀疑人生。要不就要换手机了，要不就要升级系统了！ 这个功能看着挺炫的，也挺方便的吧，如果看历史记录等等其他快捷操作的一个入口。如果没有想到正确的实现方法，可能会实现起来很难，或者效果没有这么好。如果找到了正确的方法，其实实现起来非常简单。 其实这个效果就是利用了苹果的3Dtouch">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-11-11T02:59:56.831Z">
+<meta property="og:updated_time" content="2018-01-22T05:56:55.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS实现微信列表长按效果">
 <meta name="twitter:description" content="不知道大家有没有发现微信聊天历史列表、苹果自带的通讯录历史记录等应用如隐藏的长按功能。哈哈，如果没有也不要气馁，也不要怀疑人生。要不就要换手机了，要不就要升级系统了！ 这个功能看着挺炫的，也挺方便的吧，如果看历史记录等等其他快捷操作的一个入口。如果没有想到正确的实现方法，可能会实现起来很难，或者效果没有这么好。如果找到了正确的方法，其实实现起来非常简单。 其实这个效果就是利用了苹果的3Dtouch">
@@ -366,24 +366,24 @@
 <p>这个功能看着挺炫的，也挺方便的吧，如果看历史记录等等其他快捷操作的一个入口。如果没有想到正确的实现方法，可能会实现起来很难，或者效果没有这么好。如果找到了正确的方法，其实实现起来非常简单。</p>
 <p>其实这个效果就是利用了苹果的3Dtouch，不支持3Dtouch的手机或系统就没法体验到了。</p>
 <p>卖了一个大关子，也索罗了一顿，接下来让我看看如何实现的。哈哈。</p>
-<h3 id="给需要的UIView注册3DTouch行为"><a href="#给需要的UIView注册3DTouch行为" class="headerlink" title="给需要的UIView注册3DTouch行为"></a>给需要的UIView注册3DTouch行为</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[self registerForPreviewingWithDelegate:self sourceView:cell];</div></pre></td></tr></table></figure>
+<h3 id="给需要的UIView注册3DTouch行为"><a href="#给需要的UIView注册3DTouch行为" class="headerlink" title="给需要的UIView注册3DTouch行为"></a>给需要的UIView注册3DTouch行为</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[self registerForPreviewingWithDelegate:self sourceView:cell];</span><br></pre></td></tr></table></figure>
 <p>这个方法其实就是<code>UIViewController</code>的方法，最后一个参数就是指定需要添加3DTouch的View，这里我们要加的是我们自己的tableviewcell.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath&#123;</div><div class="line">    MYTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@&quot;MYTableViewCell&quot; forIndexPath:indexPath];</div><div class="line">    [self registerForPreviewingWithDelegate:self sourceView:cell];</div><div class="line">    return cell;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath&#123;</span><br><span class="line">    MYTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@&quot;MYTableViewCell&quot; forIndexPath:indexPath];</span><br><span class="line">    [self registerForPreviewingWithDelegate:self sourceView:cell];</span><br><span class="line">    return cell;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="实现UIViewControllerPreviewingDelegate协议"><a href="#实现UIViewControllerPreviewingDelegate协议" class="headerlink" title="实现UIViewControllerPreviewingDelegate协议"></a>实现<code>UIViewControllerPreviewingDelegate</code>协议</h3><p>这个协议有两个方法我们都要实现</p>
 <ul>
 <li>第一个<code>- (nullable UIViewController *)previewingContext:(id &lt;UIViewControllerPreviewing&gt;)previewingContext viewControllerForLocation:(CGPoint)location</code></li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">- (nullable UIViewController *)previewingContext:(id &lt;UIViewControllerPreviewing&gt;)previewingContext viewControllerForLocation:(CGPoint)location&#123;</div><div class="line">    PreViewController *vc = [[PreViewController alloc] init];</div><div class="line">    return vc;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">- (nullable UIViewController *)previewingContext:(id &lt;UIViewControllerPreviewing&gt;)previewingContext viewControllerForLocation:(CGPoint)location&#123;</span><br><span class="line">    PreViewController *vc = [[PreViewController alloc] init];</span><br><span class="line">    return vc;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>这个协议方法就是我们3DTouch之后要显示的视图，想显示什么就自己实现，完全可以由自己来控制</p>
 <ul>
 <li>第二个<code>- (void)previewingContext:(id &lt;UIViewControllerPreviewing&gt;)previewingContext commitViewController:(UIViewController *)viewControllerToCommit</code></li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">- (void)previewingContext:(id &lt;UIViewControllerPreviewing&gt;)previewingContext commitViewController:(UIViewController *)viewControllerToCommit&#123;</div><div class="line">    [self showViewController:viewControllerToCommit sender:self];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">- (void)previewingContext:(id &lt;UIViewControllerPreviewing&gt;)previewingContext commitViewController:(UIViewController *)viewControllerToCommit&#123;</span><br><span class="line">    [self showViewController:viewControllerToCommit sender:self];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>这个协议方法就是将我们的视图显示出来</p>
 <hr>
 <p>华丽的分割线，到这里基本就实现了长按弹出视图的效果，细心的人可能发现其实还有一个效果就是长按出现视图之后可以向上滑动出现，之后出现了几个按钮。接下来让我们看看怎么加上那几个按钮。</p>
 <p>其实加这几个按钮也非常简单。找到我们之前定义的<code>PreViewController</code>这个类，然后重写<code>-(NSArray&lt;id&lt;UIPreviewActionItem&gt;&gt; *)previewActionItems</code> 这个方法也是<code>UIViewController</code>中本身自带的。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">-(NSArray&lt;id&lt;UIPreviewActionItem&gt;&gt; *)previewActionItems</div><div class="line">&#123;</div><div class="line">    UIPreviewAction *p1 = [UIPreviewAction actionWithTitle:@&quot;删除&quot; style:UIPreviewActionStyleDefault handler:^(UIPreviewAction * _Nonnull action, UIViewController * _Nonnull previewViewController) &#123;</div><div class="line">        NSLog(@&quot;点击了删除&quot;);</div><div class="line">    &#125;];</div><div class="line"></div><div class="line"></div><div class="line">    UIPreviewAction *p2 = [UIPreviewAction actionWithTitle:@&quot;撤销&quot; style:UIPreviewActionStyleSelected handler:^(UIPreviewAction * _Nonnull action, UIViewController * _Nonnull previewViewController) &#123;</div><div class="line">        NSLog(@&quot;点击了撤销&quot;);</div><div class="line">    &#125;];</div><div class="line"></div><div class="line">    return @[p1,p2];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">-(NSArray&lt;id&lt;UIPreviewActionItem&gt;&gt; *)previewActionItems</span><br><span class="line">&#123;</span><br><span class="line">    UIPreviewAction *p1 = [UIPreviewAction actionWithTitle:@&quot;删除&quot; style:UIPreviewActionStyleDefault handler:^(UIPreviewAction * _Nonnull action, UIViewController * _Nonnull previewViewController) &#123;</span><br><span class="line">        NSLog(@&quot;点击了删除&quot;);</span><br><span class="line">    &#125;];</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    UIPreviewAction *p2 = [UIPreviewAction actionWithTitle:@&quot;撤销&quot; style:UIPreviewActionStyleSelected handler:^(UIPreviewAction * _Nonnull action, UIViewController * _Nonnull previewViewController) &#123;</span><br><span class="line">        NSLog(@&quot;点击了撤销&quot;);</span><br><span class="line">    &#125;];</span><br><span class="line"></span><br><span class="line">    return @[p1,p2];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -511,7 +511,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">77</span>
+                  <span class="site-state-item-count">82</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -533,7 +533,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-count">24</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -602,7 +602,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2020</span>
+        <div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
