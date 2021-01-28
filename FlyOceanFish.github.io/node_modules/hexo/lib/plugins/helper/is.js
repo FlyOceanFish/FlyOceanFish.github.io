@@ -1,13 +1,11 @@
 'use strict';
 
 function isCurrentHelper(path = '/', strict) {
-  const currentPath = this.path.replace(/^[^\/].*/, _ => // eslint-disable-line no-useless-escape
-    `/${_}`);
+  const currentPath = this.path.replace(/^[^/].*/, '/$&');
 
   if (strict) {
     if (path[path.length - 1] === '/') path += 'index.html';
-    path = path.replace(/^[^\/].*/, _ => // eslint-disable-line no-useless-escape
-      `/${_}`);
+    path = path.replace(/^[^/].*/, '/$&');
 
     return currentPath === path;
   }
@@ -16,10 +14,9 @@ function isCurrentHelper(path = '/', strict) {
 
   if (path === '/') return currentPath === '/index.html';
 
-  path = path.replace(/^[^\/].*/, _ => // eslint-disable-line no-useless-escape
-    `/${_}`);
+  path = path.replace(/^[^/].*/, '/$&');
 
-  return currentPath.substring(0, path.length) === path;
+  return currentPath.startsWith(path);
 }
 
 function isHomeHelper() {
@@ -39,7 +36,7 @@ function isArchiveHelper() {
 }
 
 function isYearHelper(year) {
-  const page = this.page;
+  const { page } = this;
   if (!page.archive) return false;
 
   if (year) {
@@ -50,7 +47,7 @@ function isYearHelper(year) {
 }
 
 function isMonthHelper(year, month) {
-  const page = this.page;
+  const { page } = this;
   if (!page.archive) return false;
 
   if (year) {

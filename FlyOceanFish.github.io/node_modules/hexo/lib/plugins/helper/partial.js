@@ -1,30 +1,25 @@
 'use strict';
 
-const pathFn = require('path');
-const _ = require('lodash');
-const chalk = require('chalk');
+const { dirname, join } = require('path');
 
-module.exports = ctx => function partial(name, locals, options) {
+module.exports = ctx => function partial(name, locals, options = {}) {
   if (typeof name !== 'string') throw new TypeError('name must be a string!');
 
-  options = options || {};
-
-  const cache = options.cache;
+  const { cache } = options;
   const viewDir = this.view_dir;
   const currentView = this.filename.substring(viewDir.length);
-  const path = pathFn.join(pathFn.dirname(currentView), name);
+  const path = join(dirname(currentView), name);
   const view = ctx.theme.getView(path) || ctx.theme.getView(name);
   const viewLocals = { layout: false };
 
   if (!view) {
-    ctx.log.warn('Partial %s does not exist. %s', chalk.magenta(name), chalk.gray(`(in ${currentView})`));
-    return '';
+    throw new Error(`Partial ${name} does not exist. (in ${currentView})`);
   }
 
   if (options.only) {
-    _.assign(viewLocals, locals);
+    Object.assign(viewLocals, locals);
   } else {
-    _.assign(viewLocals, this, locals);
+    Object.assign(viewLocals, this, locals);
   }
 
   // Partial don't need layout
