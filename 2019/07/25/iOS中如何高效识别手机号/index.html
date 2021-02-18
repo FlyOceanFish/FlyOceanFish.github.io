@@ -6,10 +6,10 @@
 
 
 <html class="theme-next pisces use-motion" lang="zh-Hans">
-<head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="theme-color" content="#222">
 
 
@@ -20,8 +20,8 @@
 
 
 
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
 
 
 
@@ -40,7 +40,7 @@
 
   
   
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
 
 
 
@@ -48,9 +48,9 @@
 
 
 
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
 
-<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css">
 
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="iOS,OCR," />
+  <meta name="keywords" content="iOS,OCR,">
 
 
 
@@ -124,7 +124,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/07/25/iOS中如何高效识别手机号/"/>
+  <link rel="canonical" href="http://yoursite.com/2019/07/25/iOS中如何高效识别手机号/">
 
 
 
@@ -168,7 +168,7 @@
     
 
     <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
+      <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">FlyOceanFish' Blog</span>
         <span class="logo-line-after"><i></i></span>
@@ -198,7 +198,7 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
             
             首页
           </a>
@@ -208,7 +208,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
             
             归档
           </a>
@@ -218,7 +218,7 @@
         <li class="menu-item menu-item-categories">
           <a href="/categories/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
             
             分类
           </a>
@@ -228,7 +228,7 @@
         <li class="menu-item menu-item-tags">
           <a href="/tags/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
             
             标签
           </a>
@@ -238,7 +238,7 @@
         <li class="menu-item menu-item-about">
           <a href="/about/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
             
             关于
           </a>
@@ -281,7 +281,7 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="FlyOceanFish">
-      <meta itemprop="description" content="">
+      <meta itemprop="description" content>
       <meta itemprop="image" content="/images/avatar.png">
     </span>
 
@@ -317,7 +317,7 @@
           </span>
 
           
-            <span class="post-category" >
+            <span class="post-category">
             
               <span class="post-meta-divider">|</span>
             
@@ -417,7 +417,7 @@
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">G8Tesseract *tesseract = [[G8Tesseract alloc] initWithLanguage:@<span class="string">"chi_sim"</span>];</span><br><span class="line">tesseract.engineMode = G8OCREngineModeTesseractOnly;<span class="comment">//必须要设置此模式</span></span><br><span class="line">tesseract.pageSegmentationMode = G8PageSegmentationModeSparseText;<span class="comment">//此模式识别率最高</span></span><br><span class="line"> tesseract.charWhitelist = @<span class="string">"0123456789"</span>;<span class="comment">//白名单</span></span><br><span class="line">tesseract.charBlacklist = @<span class="string">"abcdefghigklmnopqrstuvwxyz-_"</span>;<span class="comment">//黑名单</span></span><br><span class="line">tesseract.image = newImage;</span><br><span class="line">tesseract.rect = CGRectMake((KSCREEN_WIDTH<span class="number">-210</span><span class="number">-16</span>)/<span class="number">2</span>, <span class="number">62</span><span class="number">-2</span>, <span class="number">210</span>, <span class="number">20</span>+<span class="number">4</span>);</span><br><span class="line">tesseract.maximumRecognitionTime = <span class="number">5</span>;</span><br><span class="line">[tesseract recognize];</span><br></pre></td></tr></table></figure>
 <p>是不断的使用中，发现一个问题，用户手机与纸的距离是个问题，如果用户离着太远识别率非常低，只有在一个适当的距离能基本很快就能识别出来，而且正确率非常高。</p>
 <p>我的解决方案就是通过在扫描界面上增加一个框，这里能够有效控制用户的距离</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/6644906-01feb1320aa10ae0.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/6644906-01feb1320aa10ae0.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>最终实现了手机号的识别，不过这个识别速度要2到3秒，稍微慢了点，而且那个距离的解决也不是最好的。各位如果有什么好的解决方案可以与我联系</p>
 <p><a href="https://github.com/FlyOceanFish/chi_sim.traineddata" target="_blank" rel="noopener">chi_sim最新合成库</a></p>
 
@@ -534,9 +534,7 @@
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
-              <img class="site-author-image" itemprop="image"
-                src="/images/avatar.png"
-                alt="FlyOceanFish" />
+              <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="FlyOceanFish">
             
               <p class="site-author-name" itemprop="name">FlyOceanFish</p>
               <p class="site-description motion-element" itemprop="description"></p>
@@ -640,7 +638,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2020</span>
+        <div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
@@ -711,9 +709,6 @@
 
 
 
-  
-  
-
 
 
 
@@ -748,16 +743,6 @@
   
   
     <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/three/three.min.js"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/three/canvas_lines.min.js"></script>
   
 
 
