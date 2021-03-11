@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="数据结构,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="背景数据结构是我们开发过程中最常用到的基本知识，比如表，方法调用栈等等。熟练的掌握基本的数据结构，有助于提升我们对数据的增删查的效率。我在这里简单总结了我们常见的数据结构知识，包括表、栈、队列和二叉树。 表表的有两种常见的实现方式：数组和链表    结构 优点 缺点     数组实现 get和set调用常数时间 插入和删除代价昂贵   链表实现 插入和删除开下很小 不容易索引，get调用昂贵">
+<meta name="keywords" content="数据结构">
+<meta property="og:type" content="article">
+<meta property="og:title" content="常见数据结构">
+<meta property="og:url" content="http://yoursite.com/2018/11/09/常见数据结构/index.html">
+<meta property="og:site_name" content="FlyOceanFish&#39; Blog">
+<meta property="og:description" content="背景数据结构是我们开发过程中最常用到的基本知识，比如表，方法调用栈等等。熟练的掌握基本的数据结构，有助于提升我们对数据的增删查的效率。我在这里简单总结了我们常见的数据结构知识，包括表、栈、队列和二叉树。 表表的有两种常见的实现方式：数组和链表    结构 优点 缺点     数组实现 get和set调用常数时间 插入和删除代价昂贵   链表实现 插入和删除开下很小 不容易索引，get调用昂贵">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-12-16T14:25:32.589Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="常见数据结构">
+<meta name="twitter:description" content="背景数据结构是我们开发过程中最常用到的基本知识，比如表，方法调用栈等等。熟练的掌握基本的数据结构，有助于提升我们对数据的增删查的效率。我在这里简单总结了我们常见的数据结构知识，包括表、栈、队列和二叉树。 表表的有两种常见的实现方式：数组和链表    结构 优点 缺点     数组实现 get和set调用常数时间 插入和删除代价昂贵   链表实现 插入和删除开下很小 不容易索引，get调用昂贵">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/11/09/常见数据结构/">
+
+
+
+
+
+  <title>常见数据结构 | FlyOceanFish' Blog</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?8f73d05f1a471433ed938c462af80741";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <a href="https://github.com/FlyOceanFish"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">FlyOceanFish' Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">You Believe,You Can</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/09/常见数据结构/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="FlyOceanFish">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FlyOceanFish' Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">常见数据结构</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-09T09:45:00+08:00">
+                2018-11-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据结构和算法/" itemprop="url" rel="index">
+                    <span itemprop="name">数据结构和算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>数据结构是我们开发过程中最常用到的基本知识，比如表，方法调用栈等等。熟练的掌握基本的数据结构，有助于提升我们对数据的增删查的效率。我在这里简单总结了我们常见的数据结构知识，包括表、栈、队列和二叉树。</p>
+<h1 id="表"><a href="#表" class="headerlink" title="表"></a>表</h1><p>表的有两种常见的实现方式：数组和链表</p>
+<table>
+<thead>
+<tr>
+<th>结构</th>
+<th>优点</th>
+<th>缺点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>数组实现</td>
+<td>get和set调用常数时间</td>
+<td>插入和删除代价昂贵</td>
+</tr>
+<tr>
+<td>链表实现</td>
+<td>插入和删除开下很小</td>
+<td>不容易索引，get调用昂贵</td>
+</tr>
+</tbody>
+</table>
+<h1 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h1><p>栈是限制插入和删除只能在一个位置上进行的表，该位置是表的末端，叫做栈的顶。对栈的基本操作有push(进栈)和pop(出栈)，前者相当于插入，后者则是删除最后插入的元素。</p>
+<h2 id="栈的实现"><a href="#栈的实现" class="headerlink" title="栈的实现"></a>栈的实现</h2><p>数组和链表均可实现栈，效率相当。</p>
+<h2 id="栈的应用"><a href="#栈的应用" class="headerlink" title="栈的应用"></a>栈的应用</h2><ul>
+<li>平衡符号</li>
+</ul>
+<p>检验是否每件事情都能成对出现。序列[()]是合法的</p>
+<blockquote>
+<p>做一个空栈。读入字符直到文件结尾。如果字符是一个开发符号，则将其推入栈中。如果字符是一个封闭符号，则当栈空时报错。否则，将栈元素弹出。如果弹出的符号不是对应的开发符号，则报错。在文件结尾，如果栈非空则报错。</p>
+</blockquote>
+<ul>
+<li>后缀表达式</li>
+</ul>
+<blockquote>
+<p>4.99*1.06+5.99+6.99*1.06=</p>
+</blockquote>
+<p>可以书写如下:</p>
+<blockquote>
+<p>4.99 1.06*5.99+6.00 1.06*+</p>
+</blockquote>
+<p>例如: 6 5 2 3 + 8 <em> + 3 </em></p>
+<p>读入前4个数字，栈中的值3 2 6 5(栈尾)；<br>下一个读到”+”号，所以3和2从栈中弹出并且它们的和5被压入栈中，栈中的值5 5 6(栈尾);<br>接着8进栈，栈中的值8 5 5 6(栈尾)</p>
+<ul>
+<li>方法调用栈</li>
+</ul>
+<p>当调用一个新方法时，主调例程的所有局部变量需要由系统存储起来，否则被调用的新方法将会重写由主调例程的变量所使用的内存。</p>
+<p>需要存储的所有重要信息，诸如寄存器的值(对应变量的名字)和返回地址等信息称为活动记录或叫作栈帧</p>
+<h1 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h1><p>像栈一样，队列也是表。队列是插入在一端进行而删除则在另一端进行。<br>队列的基本操作是入队，在表的末端插入一个元素。和出队它是删除在表的开头元素</p>
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><p>数组和链表均可实现，效率相当。链表实现比较简单。</p>
+<h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><ul>
+<li>打印机的实现</li>
+<li>排队买票</li>
+</ul>
+<h1 id="二叉树"><a href="#二叉树" class="headerlink" title="二叉树"></a>二叉树</h1><p>对于大量的输入数据，链表的线性访问时间太慢，不宜使用，而二叉树的大部分操作运行时间平均为O(logN)。</p>
+<p><code>二叉树</code>是一个树，其中每个节点都不能多于两个的儿子</p>
+<p>树的实现是通过链表</p>
+<p><strong>二叉树的一种重要的应用是<code>查找</code></strong></p>
+<h2 id="二叉查找树"><a href="#二叉查找树" class="headerlink" title="二叉查找树"></a>二叉查找树</h2><p>对于树中的每个节点，它的左子树中所有项的值小于X中的项，而它的右子树中所有的值大于X中的项</p>
+<p>此树对于查找效率比较高。</p>
+<h2 id="AVL树"><a href="#AVL树" class="headerlink" title="AVL树"></a>AVL树</h2><p>AVL树是带有平衡条件的二叉查找树。<br>一棵AVL树是其每个节点的左子树和右子树的高度最多差1的二叉查找树<br>如果打破了平衡，则通过旋转来解决平衡</p>
+<ul>
+<li>单旋转</li>
+<li>双旋转</li>
+</ul>
+<h2 id="B树"><a href="#B树" class="headerlink" title="B树"></a>B树</h2><p>减少高度，增加分支，从而能够减少深度。<br>阶为M的B树。如5阶B树，即是5个分叉</p>
+<p>应用场景:磁盘数据的查找</p>
+<h2 id="二叉堆"><a href="#二叉堆" class="headerlink" title="二叉堆"></a>二叉堆</h2><p>堆是一棵完全填满的二叉树。例外就是底层，底层上的元素从左到右填入。又称完全二叉树。</p>
+<p>完全二叉树可以用一个数组表示而不需要使用链</p>
+<p>插入：上滤<br>删除：下滤</p>
+<h3 id="最小堆"><a href="#最小堆" class="headerlink" title="最小堆"></a>最小堆</h3><p>最小元素在根上。任意子树也是一个堆，任意节点都小于它的所有后裔。</p>
+<h3 id="最大堆"><a href="#最大堆" class="headerlink" title="最大堆"></a>最大堆</h3><h3 id="左式堆"><a href="#左式堆" class="headerlink" title="左式堆"></a>左式堆</h3><p>对于堆中的每一个节点X，左儿子的零路径长不小于右儿子的零路径长</p>
+<blockquote>
+<p>任一节点X的零路径长npl(X)定义为从X到一个不具有两个儿子的节点的最短路径的长。具有0个或一个儿子的节点的npl为0。</p>
+</blockquote>
+<p>左式堆的基本操作是<code>合并</code></p>
+<h2 id="红黑树"><a href="#红黑树" class="headerlink" title="红黑树"></a>红黑树</h2><p>红黑树是AVL树的一种变种。</p>
+<p>红黑色是具有下列着色性质的二叉查找树：</p>
+<ul>
+<li>每一个节点或者着成红色，或者着成黑色</li>
+<li>根是黑色的</li>
+<li>如果一个节点是红色的，那么它的子节点必须是黑色的</li>
+<li>从一个节点到一个null引用的每一条路径必须包含相同数目的黑色节点。</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/数据结构/" rel="tag"># 数据结构</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/09/27/iOS之xib和Storyboard加载原理/" rel="next" title="iOS之xib和Storyboard加载原理">
+                <i class="fa fa-chevron-left"></i> iOS之xib和Storyboard加载原理
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/11/21/散列/" rel="prev" title="散列">
+                散列 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="vcomments"></div>
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="FlyOceanFish">
+            
+              <p class="site-author-name" itemprop="name">FlyOceanFish</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">83</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://kyson.cn/" title="kyson的技术博客" target="_blank">kyson的技术博客</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#背景"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#表"><span class="nav-number">2.</span> <span class="nav-text">表</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#栈"><span class="nav-number">3.</span> <span class="nav-text">栈</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#栈的实现"><span class="nav-number">3.1.</span> <span class="nav-text">栈的实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#栈的应用"><span class="nav-number">3.2.</span> <span class="nav-text">栈的应用</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#队列"><span class="nav-number">4.</span> <span class="nav-text">队列</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#实现"><span class="nav-number">4.1.</span> <span class="nav-text">实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#应用"><span class="nav-number">4.2.</span> <span class="nav-text">应用</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二叉树"><span class="nav-number">5.</span> <span class="nav-text">二叉树</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#二叉查找树"><span class="nav-number">5.1.</span> <span class="nav-text">二叉查找树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AVL树"><span class="nav-number">5.2.</span> <span class="nav-text">AVL树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#B树"><span class="nav-number">5.3.</span> <span class="nav-text">B树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二叉堆"><span class="nav-number">5.4.</span> <span class="nav-text">二叉堆</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#最小堆"><span class="nav-number">5.4.1.</span> <span class="nav-text">最小堆</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#最大堆"><span class="nav-number">5.4.2.</span> <span class="nav-text">最大堆</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#左式堆"><span class="nav-number">5.4.3.</span> <span class="nav-text">左式堆</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#红黑树"><span class="nav-number">5.5.</span> <span class="nav-text">红黑树</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">FlyOceanFish</span>
+
+  
+</div>
+
+<!--
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.3</div>
+
+-->
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine@1.1.6/dist/Valine.min.js"></script>
+  <script type="text/javascript">
+    new Valine({
+        av: AV,
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        app_id: 'BUyek27xhBJW608unzBEyhWI-gzGzoHsz',
+        app_key: 'lT2NUWTMwPfNYl6xMQUtUxDv',
+        placeholder: '请输入评论'
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.3"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=5.1.3"></script>
+
+
+  
+
+</body>
+</html>
+<script type="text/javascript" src="/js/src/love.js"></script>

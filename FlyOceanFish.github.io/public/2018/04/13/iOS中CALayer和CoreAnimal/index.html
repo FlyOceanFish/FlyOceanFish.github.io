@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="iOS,CoreAnimal,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="UIKit中我们使用的UIView、UILabel等控件其实显示的载体都是CALayer及其子类，比如CATextLayer、CAScrollLayer等。我们在做Layer层动画的时候则使用的CAShapeLayer比较多。通过CoreAnimal中的CABasicAnimation结合path来实现。 之前都是通过长篇幅的介绍一些理论知识，这次通过一个个的小案例，由简到繁一步步介绍。 画正方形">
+<meta name="keywords" content="iOS,CoreAnimal">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS中CALayer和CoreAnimal以例说教">
+<meta property="og:url" content="http://yoursite.com/2018/04/13/iOS中CALayer和CoreAnimal/index.html">
+<meta property="og:site_name" content="FlyOceanFish&#39; Blog">
+<meta property="og:description" content="UIKit中我们使用的UIView、UILabel等控件其实显示的载体都是CALayer及其子类，比如CATextLayer、CAScrollLayer等。我们在做Layer层动画的时候则使用的CAShapeLayer比较多。通过CoreAnimal中的CABasicAnimation结合path来实现。 之前都是通过长篇幅的介绍一些理论知识，这次通过一个个的小案例，由简到繁一步步介绍。 画正方形">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/6644906-4eef721bb65bc574.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/6644906-dbe55459250ddc87.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/6644906-46ea3a49f2da89b8.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/6644906-7638fd667f8e976c.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/6644906-13134c2bf6b9483d.gif?imageMogr2/auto-orient/strip">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/6644906-1071184cf602e560.gif?imageMogr2/auto-orient/strip">
+<meta property="og:updated_time" content="2018-04-16T03:11:00.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS中CALayer和CoreAnimal以例说教">
+<meta name="twitter:description" content="UIKit中我们使用的UIView、UILabel等控件其实显示的载体都是CALayer及其子类，比如CATextLayer、CAScrollLayer等。我们在做Layer层动画的时候则使用的CAShapeLayer比较多。通过CoreAnimal中的CABasicAnimation结合path来实现。 之前都是通过长篇幅的介绍一些理论知识，这次通过一个个的小案例，由简到繁一步步介绍。 画正方形">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/6644906-4eef721bb65bc574.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/04/13/iOS中CALayer和CoreAnimal/">
+
+
+
+
+
+  <title>iOS中CALayer和CoreAnimal以例说教 | FlyOceanFish' Blog</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?8f73d05f1a471433ed938c462af80741";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <a href="https://github.com/FlyOceanFish"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">FlyOceanFish' Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">You Believe,You Can</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/13/iOS中CALayer和CoreAnimal/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="FlyOceanFish">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FlyOceanFish' Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">iOS中CALayer和CoreAnimal以例说教</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-13T10:00:00+08:00">
+                2018-04-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>UIKit中我们使用的UIView、UILabel等控件其实显示的载体都是CALayer及其子类，比如CATextLayer、CAScrollLayer等。我们在做Layer层动画的时候则使用的CAShapeLayer比较多。通过CoreAnimal中的CABasicAnimation结合path来实现。</p>
+<p>之前都是通过长篇幅的介绍一些理论知识，这次通过一个个的小案例，由简到繁一步步介绍。</p>
+<h1 id="画正方形、圆形、半圆形等"><a href="#画正方形、圆形、半圆形等" class="headerlink" title="画正方形、圆形、半圆形等"></a>画正方形、圆形、半圆形等</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">//    UIBezierPath *path = [UIBezierPath bezierPathWithRect:CGRectMake(50, 50, 100, 100)];</span><br><span class="line">//    UIBezierPath *path = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(50, 50, 100, 120)];//当宽高一样的时候就是圆,否则就是椭圆</span><br><span class="line">//    UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(50, 50, 100, 120) cornerRadius:90];//首先是画一个矩形，然后再设置四个角的角度</span><br><span class="line">UIBezierPath *path = [UIBezierPath bezierPathWithArcCenter:CGPointMake(100, 100) radius:80 startAngle:-M_PI_2 endAngle:M_PI/2 clockwise:YES];//以point为中心，radius的值为半径画弧。此弧的开始角度为startAngle,结束角度为endAngle，这两个数值是弧度，不是角度。clockwise是画此弧是按照顺时针还是逆时针</span><br><span class="line">CAShapeLayer *pointLayer = [CAShapeLayer layer];</span><br><span class="line">pointLayer.path = path.CGPath;</span><br><span class="line">pointLayer.strokeColor = [[UIColor redColor] CGColor];//线条颜色</span><br><span class="line">pointLayer.lineWidth = 10;</span><br><span class="line">//    kCALineCapButt 直角</span><br><span class="line">//    kCALineCapRound 圆角</span><br><span class="line">//    kCALineCapSquare 与kCGLineCapButt是一样的，但是比kCGLineCapButt长一点</span><br><span class="line">pointLayer.lineCap = kCALineCapRound;//当线条是单独的没有与其他线连接的时候，此时线头的形状</span><br><span class="line">[self.view.layer addSublayer:pointLayer];</span><br></pre></td></tr></table></figure>
+<h1 id="strokeStart和strokeEnd属性案例"><a href="#strokeStart和strokeEnd属性案例" class="headerlink" title="strokeStart和strokeEnd属性案例"></a>strokeStart和strokeEnd属性案例</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">UIBezierPath *path = [UIBezierPath bezierPathWithArcCenter:CGPointMake(100, 200) radius:80 startAngle:-M_PI_2 endAngle:M_PI*3/2 clockwise:YES];</span><br><span class="line">CAShapeLayer *layer = [CAShapeLayer layer];</span><br><span class="line">layer.lineWidth = 10;</span><br><span class="line">layer.path = path.CGPath;</span><br><span class="line">layer.strokeColor = [UIColor purpleColor].CGColor;</span><br><span class="line">layer.fillColor = [UIColor orangeColor].CGColor;</span><br><span class="line">layer.strokeStart = 0.5;</span><br><span class="line">layer.strokeEnd = 0.8;</span><br><span class="line">[self.view.layer addSublayer:layer];</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/6644906-4eef721bb65bc574.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="IMG_0160.jpg"><br>strokeStart和strokeEnd就是笔的开始和结束，值的范围是0到1。</p>
+<h1 id="渐变层的使用"><a href="#渐变层的使用" class="headerlink" title="渐变层的使用"></a>渐变层的使用</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">CAGradientLayer *layer = [CAGradientLayer layer];</span><br><span class="line">layer.frame = CGRectMake(100, 300, 20, 100);</span><br><span class="line">UIColor *middleColor = [UIColor colorWithWhite:255/255 alpha:0.8];</span><br><span class="line">NSArray *colors = @[</span><br><span class="line">                    (__bridge id)[UIColor redColor].CGColor,</span><br><span class="line">                    (__bridge id)middleColor.CGColor,</span><br><span class="line">                    (__bridge id)[UIColor redColor].CGColor</span><br><span class="line">                    ];</span><br><span class="line">layer.colors = colors;</span><br><span class="line">[self.view.layer addSublayer:layer];</span><br><span class="line">layer.startPoint = CGPointMake(0, 0);</span><br><span class="line">layer.endPoint = CGPointMake(1, 0);</span><br><span class="line">[self.view.layer addSublayer:layer];</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/6644906-dbe55459250ddc87.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="IMG_0161.jpg"></p>
+<ul>
+<li>frame 渐变层是不支持路径的，是通过frame属性来设置大小的，只有长方形和正方形。</li>
+<li>colors 设置需要渐变的颜色</li>
+<li>startPoint 设置渐变的开始位置，x、y值的范围是0到1</li>
+<li>endPoint 设置渐变结束的位置，x、y值的范围是0到1</li>
+</ul>
+<p>假设我们想通过路径渐变应该怎么办呢？比如一个半圆弧的渐变（可以思考一下怎么实现，下边会有实现的）</p>
+<h1 id="遮罩层"><a href="#遮罩层" class="headerlink" title="遮罩层"></a>遮罩层</h1><p>以下代码是首先画了一个正方形，填充颜色是红色，然后画了一个圆形。圆形是正方形的遮罩层<br>如果大家了解ps的话，其实遮罩层就是ps中的蒙版的概念。<br>遮罩层不会显示出来，<font color="red">遮罩层有颜色的区域才会将被遮罩层显示出来，没有颜色的不会显示出来</font><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, 100, 100) cornerRadius:50];//圆形</span><br><span class="line">CAShapeLayer *maskLayer = [CAShapeLayer layer];</span><br><span class="line">maskLayer.frame = CGRectMake(0, 0, 100, 100);</span><br><span class="line">maskLayer.path = maskPath.CGPath;</span><br><span class="line"></span><br><span class="line">UIBezierPath *path = [UIBezierPath bezierPathWithRect:CGRectMake(0, 0, 100, 100)];//正方形</span><br><span class="line">CAShapeLayer *layer = [CAShapeLayer layer];</span><br><span class="line">layer.frame = CGRectMake(50, 50, 100, 100);</span><br><span class="line">layer.path = path.CGPath;</span><br><span class="line">layer.fillColor = [UIColor redColor].CGColor;</span><br><span class="line">layer.mask = maskLayer;//设置遮罩层</span><br><span class="line">[self.view.layer addSublayer:layer];</span><br></pre></td></tr></table></figure></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/6644906-46ea3a49f2da89b8.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="IMG_0162.jpg"></p>
+<p>上边的问题不知道大家有没有思路了呢？</p>
+<h1 id="fillRule中kCAFillRuleEvenOdd属性"><a href="#fillRule中kCAFillRuleEvenOdd属性" class="headerlink" title="fillRule中kCAFillRuleEvenOdd属性"></a>fillRule中kCAFillRuleEvenOdd属性</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">UIBezierPath *path1 = [UIBezierPath bezierPathWithRect:CGRectMake(0, 0, 100, 100)];//正方形</span><br><span class="line">UIBezierPath *path2 = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, 100, 100) cornerRadius:50];//圆形</span><br><span class="line">[path1 appendPath:path2];//结合两个路径</span><br><span class="line">CAShapeLayer *shapLayer = [CAShapeLayer layer];</span><br><span class="line">shapLayer.frame = CGRectMake(50, 50, 100, 100);</span><br><span class="line">shapLayer.fillColor = [UIColor blackColor].CGColor;</span><br><span class="line">shapLayer.fillRule = kCAFillRuleEvenOdd;</span><br><span class="line">shapLayer.path = path1.CGPath;</span><br><span class="line">shapLayer.lineWidth = 0.5;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[self.view.layer addSublayer:shapLayer];</span><br><span class="line"></span><br><span class="line">CAShapeLayer *layer = [CAShapeLayer layer];</span><br><span class="line">layer.frame = CGRectMake(50, 50, 100, 100);</span><br><span class="line">layer.fillColor = [UIColor redColor].CGColor;</span><br><span class="line">layer.path= path1.CGPath;</span><br><span class="line">[self.view.layer insertSublayer:layer below:shapLayer];//设置一个背景，这样看的效果更好一些</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/6644906-7638fd667f8e976c.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="IMG_0163.jpg"><br>不知道大家看效果图有没有明白这个属性的作用呢？其实就是对于两个path有重叠部分，取其非交集。比如一个矩形中有一个圆，则填充颜色的区域是这两个的非交集部分。比如我们画两个同心圆，一大一小，则能够实现画出一个扇形。</p>
+<h1 id="综合以上属性，比较复杂的效果"><a href="#综合以上属性，比较复杂的效果" class="headerlink" title="综合以上属性，比较复杂的效果"></a>综合以上属性，比较复杂的效果</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line">UIBezierPath *path = [UIBezierPath bezierPathWithArcCenter:CGPointMake(100, 100) radius:80 startAngle:-M_PI_2 endAngle:M_PI/2 clockwise:YES];//以point为中心，radius的值为半径画弧。此弧的开始角度为startAngle,结束角度为endAngle，这两个数值是弧度，不是角度。clockwise是画此弧是按照顺时针还是逆时针</span><br><span class="line">   CAShapeLayer *pointLayer = [CAShapeLayer layer];</span><br><span class="line">   pointLayer.path = path.CGPath;</span><br><span class="line">   pointLayer.strokeColor = [[UIColor blackColor] CGColor];//线条颜色</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">   //    kCAFillModeRemoved 这个是默认值,也就是说当动画开始前和动画结束后,动画对layer都没有影响,动画结束后,layer会恢复到之前的状态（可以理解为动画执行完成后移除）</span><br><span class="line">   //    kCAFillModeForwards 当动画结束后,layer会一直保持着动画最后的状态与CABasicAnimation的removedOnCompletion结合使用</span><br><span class="line">   //    kCAFillModeBackwards 当在动画开始前,你只要把layer加入到一个动画中,layer便立即进入动画的初始状态并等待动画开始.你可以这样设定测试代码,延迟3秒让动画开始,只要动画被加入了layer,layer便处于动画初始状态</span><br><span class="line">   //    pointLayer.fillMode = kCAFillModeBackwards;//是针对动画的，决定当前对象在非active时间段的行为.比如动画开始之前,动画结束之后的状态</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">   pointLayer.fillRule = kCAFillRuleEvenOdd;//对于两个path有重叠部分，取其非交集。比如一个矩形中有一个圆，则填充颜色的区域是这两个的非交集部分</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">   //    kCALineCapButt 直角</span><br><span class="line">   //    kCALineCapRound 圆角</span><br><span class="line">   //    kCALineCapSquare 与kCGLineCapButt是一样的，但是比kCGLineCapButt长一点</span><br><span class="line">   pointLayer.lineCap = kCALineCapRound;//当线条是单独的没有与其他线连接的时候，此时线头的形状</span><br><span class="line"></span><br><span class="line">   //    kCALineJoinMiter 正常连接</span><br><span class="line">   //    kCALineJoinRound 圆角</span><br><span class="line">   //    kCALineJoinBevel 成斜角，是一条斜线</span><br><span class="line">   //    pointLayer.lineJoin = kCALineJoinRound;//当线条与其他线有连接的时候，连接处最外侧线的显示方式</span><br><span class="line">   pointLayer.fillColor = [UIColor clearColor].CGColor;//填充颜色。这里因为是遮罩层，所以设置为无颜色，则这部分不会显示出来</span><br><span class="line">   pointLayer.lineWidth = 10;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">   CASpringAnimation *anim2 = [CASpringAnimation animationWithKeyPath:@&quot;strokeEnd&quot;];//9.0之后才有的阻尼回弹动画</span><br><span class="line">   anim2.fromValue = @0;</span><br><span class="line">   anim2.toValue = @1;</span><br><span class="line">   anim2.duration = 2;</span><br><span class="line">   anim2.timingFunction =</span><br><span class="line">   [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];</span><br><span class="line">   anim2.damping = 8;//阻尼系数，值越大停止的越快</span><br><span class="line">   anim2.stiffness =100;//刚度系数(劲度系数/弹性系数)，刚度系数越大，形变产生的力就越大，运动越快</span><br><span class="line">   anim2.mass = 2;//质量，影响图层运动时的弹簧惯性，质量越大，弹簧拉伸和压缩的幅度越大</span><br><span class="line"></span><br><span class="line">   //initialVelocity:</span><br><span class="line">   //    初始速率，动画视图的初始速度大小</span><br><span class="line">   //    速率为正数时，速度方向与运动方向一致，速率为负数时，速度方向与运动方向相反</span><br><span class="line"></span><br><span class="line">   CAGradientLayer *gradientLayer = [CAGradientLayer layer];</span><br><span class="line">   gradientLayer.frame =CGRectMake(10, 10, 190, 190);</span><br><span class="line">   UIColor *middleColor = [UIColor blueColor];</span><br><span class="line">   NSArray *colors = @[</span><br><span class="line">                       (__bridge id)[UIColor redColor].CGColor,</span><br><span class="line">                       (__bridge id)middleColor.CGColor,</span><br><span class="line">                       ];</span><br><span class="line">   gradientLayer.colors = colors;</span><br><span class="line">   gradientLayer.startPoint =  CGPointMake(0.5, 0.5);</span><br><span class="line">   gradientLayer.endPoint = CGPointMake(0.5, 1);</span><br><span class="line">   gradientLayer.mask = pointLayer;//设置渐变层的遮罩层为我们前边画的半弧，则只会显示板湖那部分区域</span><br><span class="line"></span><br><span class="line">   [self.view.layer addSublayer:gradientLayer];</span><br><span class="line">   [pointLayer addAnimation:anim2 forKey:@&quot;animal&quot;];</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/6644906-13134c2bf6b9483d.gif?imageMogr2/auto-orient/strip" alt="动画.gif"></p>
+<h1 id="关键帧动画"><a href="#关键帧动画" class="headerlink" title="关键帧动画"></a>关键帧动画</h1><p>CAKeyframeAnimation在这里是实现了一个小圆球沿着一个半圆路径一直旋转运动的动画。（圆心在路径上）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">UIBezierPath *circle = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, 10, 10) cornerRadius:5];</span><br><span class="line">CAShapeLayer *circleLayer = [CAShapeLayer layer];</span><br><span class="line">circleLayer.frame = CGRectMake(0, 0, 10, 10);</span><br><span class="line">circleLayer.fillColor = [UIColor orangeColor].CGColor;</span><br><span class="line">circleLayer.path = circle.CGPath;</span><br><span class="line">[self.view.layer addSublayer:circleLayer];</span><br><span class="line"></span><br><span class="line">CAKeyframeAnimation * theAnimation;</span><br><span class="line"></span><br><span class="line">// Create the animation object, specifying the position property as the key path.</span><br><span class="line">theAnimation=[CAKeyframeAnimation animationWithKeyPath:@&quot;position&quot;];</span><br><span class="line">theAnimation.path=thePath;</span><br><span class="line">theAnimation.duration=5.0;</span><br><span class="line">theAnimation.repeatCount = 100;</span><br><span class="line">theAnimation.fillMode = kCAFillModeForwards;</span><br><span class="line">[circleLayer addAnimation:theAnimation forKey:@&quot;position&quot;];</span><br><span class="line"></span><br><span class="line">CAShapeLayer *animalTrack = [CAShapeLayer layer];</span><br><span class="line">animalTrack.path = thePath;</span><br><span class="line">animalTrack.strokeColor = [UIColor redColor].CGColor;</span><br><span class="line">animalTrack.fillColor = [UIColor clearColor].CGColor;</span><br><span class="line">animalTrack.lineWidth = 1;</span><br><span class="line">[self.view.layer addSublayer:animalTrack];</span><br></pre></td></tr></table></figure></p>
+<p>这里一开始有个问题，就是不是圆心沿着路径运动。然后我又换成了UIView试了一下可以的。最后研究主要是circleLayer我们仅仅设置了path,但是frame是没有的，设置了frame之后圆心开始沿着路径运动。<br><img src="https://upload-images.jianshu.io/upload_images/6644906-1071184cf602e560.gif?imageMogr2/auto-orient/strip" alt="帧动画.gif"></p>
+<h1 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h1><p><a href="https://github.com/FlyOceanFish/CoreAnimalCALayer" target="_blank" rel="noopener">Github源码</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+            <a href="/tags/CoreAnimal/" rel="tag"># CoreAnimal</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/03/mmap文件内存映射详解/" rel="next" title="iOS文件内存映射详解(mmap)">
+                <i class="fa fa-chevron-left"></i> iOS文件内存映射详解(mmap)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/18/iOS仿QQ消息动画/" rel="prev" title="iOS仿QQ消息动画">
+                iOS仿QQ消息动画 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="vcomments"></div>
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="FlyOceanFish">
+            
+              <p class="site-author-name" itemprop="name">FlyOceanFish</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">83</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://kyson.cn/" title="kyson的技术博客" target="_blank">kyson的技术博客</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#画正方形、圆形、半圆形等"><span class="nav-number">1.</span> <span class="nav-text">画正方形、圆形、半圆形等</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#strokeStart和strokeEnd属性案例"><span class="nav-number">2.</span> <span class="nav-text">strokeStart和strokeEnd属性案例</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#渐变层的使用"><span class="nav-number">3.</span> <span class="nav-text">渐变层的使用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#遮罩层"><span class="nav-number">4.</span> <span class="nav-text">遮罩层</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#fillRule中kCAFillRuleEvenOdd属性"><span class="nav-number">5.</span> <span class="nav-text">fillRule中kCAFillRuleEvenOdd属性</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#综合以上属性，比较复杂的效果"><span class="nav-number">6.</span> <span class="nav-text">综合以上属性，比较复杂的效果</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#关键帧动画"><span class="nav-number">7.</span> <span class="nav-text">关键帧动画</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#源码"><span class="nav-number">8.</span> <span class="nav-text">源码</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">FlyOceanFish</span>
+
+  
+</div>
+
+<!--
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.3</div>
+
+-->
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine@1.1.6/dist/Valine.min.js"></script>
+  <script type="text/javascript">
+    new Valine({
+        av: AV,
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        app_id: 'BUyek27xhBJW608unzBEyhWI-gzGzoHsz',
+        app_key: 'lT2NUWTMwPfNYl6xMQUtUxDv',
+        placeholder: '请输入评论'
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.3"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=5.1.3"></script>
+
+
+  
+
+</body>
+</html>
+<script type="text/javascript" src="/js/src/love.js"></script>

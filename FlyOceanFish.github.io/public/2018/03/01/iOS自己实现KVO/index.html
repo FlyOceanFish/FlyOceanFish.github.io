@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="iOS,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="KVO是什么一下是摘自苹果官网的一段话  Key-value observing is a mechanism that allows objects to be notified of changes to specified properties of other objects  KVO其实就是可以让开发人员观察到对象特定属性变化的一种机制  重要一点:为了能理解KVO，首先要理解KVC。（">
+<meta name="keywords" content="iOS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS自己实现KVO">
+<meta property="og:url" content="http://yoursite.com/2018/03/01/iOS自己实现KVO/index.html">
+<meta property="og:site_name" content="FlyOceanFish&#39; Blog">
+<meta property="og:description" content="KVO是什么一下是摘自苹果官网的一段话  Key-value observing is a mechanism that allows objects to be notified of changes to specified properties of other objects  KVO其实就是可以让开发人员观察到对象特定属性变化的一种机制  重要一点:为了能理解KVO，首先要理解KVC。（">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/6644906-4217e48d51344443.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2018-04-20T15:50:36.077Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS自己实现KVO">
+<meta name="twitter:description" content="KVO是什么一下是摘自苹果官网的一段话  Key-value observing is a mechanism that allows objects to be notified of changes to specified properties of other objects  KVO其实就是可以让开发人员观察到对象特定属性变化的一种机制  重要一点:为了能理解KVO，首先要理解KVC。（">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/6644906-4217e48d51344443.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/03/01/iOS自己实现KVO/">
+
+
+
+
+
+  <title>iOS自己实现KVO | FlyOceanFish' Blog</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?8f73d05f1a471433ed938c462af80741";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <a href="https://github.com/FlyOceanFish"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">FlyOceanFish' Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">You Believe,You Can</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/01/iOS自己实现KVO/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="FlyOceanFish">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FlyOceanFish' Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">iOS自己实现KVO</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-01T09:52:00+08:00">
+                2018-03-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="KVO是什么"><a href="#KVO是什么" class="headerlink" title="KVO是什么"></a><a href="https://developer.apple.com/library/content/documentation/Cocoa/Conceptual/KeyValueObserving/KeyValueObserving.html#//apple_ref/doc/uid/10000177-BCICJDHA" target="_blank" rel="noopener">KVO</a>是什么</h1><p>一下是摘自苹果官网的一段话</p>
+<blockquote>
+<p>Key-value observing is a mechanism that allows objects to be notified of changes to specified properties of other objects</p>
+</blockquote>
+<p>KVO其实就是可以让开发人员观察到对象特定属性变化的一种机制</p>
+<blockquote>
+<p>重要一点:为了能理解KVO，首先要理解KVC。（<font color="red">因为KVC一定会触发KVO的，如果一个属性没有setXX方法，通过KVC改变属性，同样会触发KVO，所以KVO与属性的setXX方法没有必然联系</font>）</p>
+</blockquote>
+<h1 id="苹果内部实现细节"><a href="#苹果内部实现细节" class="headerlink" title="苹果内部实现细节"></a>苹果内部实现细节</h1><blockquote>
+<p>Automatic key-value observing is implemented using a technique called isa-swizzling.</p>
+</blockquote>
+<p>自动KVO是通过isa-swizzling技术来实现的，所以本文对KVO的实现是对自动KVO的实现，而且也正是苹果官网所说的isa-swizzling技术来实现</p>
+<blockquote>
+<p>When an observer is registered for an attribute of an object the isa pointer of the observed object is modified, pointing to an intermediate class rather than at the true class. As a result the value of the isa pointer does not necessarily reflect the actual class of the instance.</p>
+</blockquote>
+<p>当我们调用方法增加一个属性增加观察的时候，此时苹果系统会通过runtime生成一个原类的子类，名字为<code>NSKVONotifying_原类的名字</code>；同时对象的isa被指向了runtime自己生成的类。通过以下代码可以获得证明</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">_p = [[Person alloc] init];</span><br><span class="line">[_p addObserver:self forKeyPath:@&quot;sex&quot; options:NSKeyValueObservingOptionNew context:nil];</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary&lt;NSKeyValueChangeKey,id&gt; *)change context:(void *)context&#123;</span><br><span class="line">    NSLog(@&quot;%@&quot;,change);</span><br><span class="line">    Class class = object_getClass(_p);</span><br><span class="line">    Class superClass = class_getSuperclass(class);</span><br><span class="line">    NSLog(@&quot;class---%@&quot;,_p.class);//这里打印出的还是Person，苹果做的伪装，此时我们可以通过调式控制台来观察</span><br><span class="line">    NSLog(@&quot;superClass:%@&quot;,superClass);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="http://upload-images.jianshu.io/upload_images/6644906-4217e48d51344443.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="1519874438299.jpg"></p>
+<h1 id="自己具体实现KVO"><a href="#自己具体实现KVO" class="headerlink" title="自己具体实现KVO"></a>自己具体实现KVO</h1><p>整个实现思路也主要就是上边的那些分析，通过runtime创建了一个子类，然后交换isa<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">NSString *setterStr = private_setterForKey(key);</span><br><span class="line"></span><br><span class="line">Method setterMethod = class_getInstanceMethod(self.class, NSSelectorFromString(setterStr));</span><br><span class="line"></span><br><span class="line">NSString *oldClassName = NSStringFromClass(self.class);</span><br><span class="line">NSString *kvoClassName = [@&quot;FOFKVO_&quot; stringByAppendingString:oldClassName];</span><br><span class="line">Class kvoClass;</span><br><span class="line">kvoClass = objc_lookUpClass(kvoClassName.UTF8String);</span><br><span class="line">if (!kvoClass) &#123;</span><br><span class="line">    kvoClass = objc_allocateClassPair(self.class, kvoClassName.UTF8String, 0);</span><br><span class="line">    objc_registerClassPair(kvoClass);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">if (setterMethod) &#123;//直接调用setXX方法改变值</span><br><span class="line">    class_addMethod(kvoClass,NSSelectorFromString(setterStr), (IMP)setterIMP, &quot;v@:@&quot;);//重写setXX方法</span><br><span class="line">&#125;else&#123;//通过kvc改变值,通过method-swizzling</span><br><span class="line">    Method method1 = class_getInstanceMethod(self.class, @selector(setValue:forKey:));</span><br><span class="line">    Method method2 = class_getInstanceMethod(self.class, @selector(swizz_setValue:forKey:));</span><br><span class="line">    method_exchangeImplementations(method1, method2);</span><br><span class="line">&#125;</span><br><span class="line">object_setClass(self, kvoClass);//isa-swizzling实例的isa已经指向我们新创建的</span><br><span class="line">FOFObserverInfo *info = [[FOFObserverInfo alloc] initWithObserver:observer.description key:key block:block];</span><br><span class="line">NSMutableArray *observers = objc_getAssociatedObject(self, kObservers);</span><br><span class="line">if (!observers) &#123;</span><br><span class="line">    observers = [NSMutableArray array];</span><br><span class="line">    objc_setAssociatedObject(self, kObservers, observers, OBJC_ASSOCIATION_RETAIN_NONATOMIC);</span><br><span class="line">&#125;</span><br><span class="line">[observers addObject:info];</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">#pragma mark - Private</span><br><span class="line">#pragma mark swizz</span><br><span class="line">-(void)swizz_setValue:(id)value forKey:(NSString *)key&#123;</span><br><span class="line">    id oldValue = [self valueForKey:key];</span><br><span class="line">    [self swizz_setValue:value forKey:key];//如果这里没报错，说明正常设置值，现在开始回调</span><br><span class="line">    NSMutableArray *observers = objc_getAssociatedObject(self, kObservers);</span><br><span class="line">    for (FOFObserverInfo *temp in observers) &#123;</span><br><span class="line">        if ([temp.key isEqualToString:key]) &#123;</span><br><span class="line">            temp.block(self, key, oldValue, value);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#pragma mark overrid</span><br><span class="line">void setterIMP(id self,SEL _cmd,id newValue)&#123;</span><br><span class="line">    NSString *setterName = NSStringFromSelector(_cmd);</span><br><span class="line">    NSString *temp = private_upperTolower([setterName substringFromIndex:@&quot;set&quot;.length], 0);//去除set并将大写改成小写</span><br><span class="line">    NSString *key = [temp substringToIndex:temp.length-1];//去除冒号</span><br><span class="line">    id oldValue = [self valueForKey:key];</span><br><span class="line">    struct objc_super superClazz = &#123;</span><br><span class="line">        .receiver = self,</span><br><span class="line">        .super_class = class_getSuperclass(object_getClass(self))</span><br><span class="line">    &#125;;</span><br><span class="line">    ((void (*)(void *, SEL, id))objc_msgSendSuper)(&amp;superClazz, _cmd, newValue);</span><br><span class="line">    NSMutableArray *observers = objc_getAssociatedObject(self, kObservers);</span><br><span class="line">    for (FOFObserverInfo *temp in observers) &#123;</span><br><span class="line">        if ([temp.key isEqualToString:key]) &#123;</span><br><span class="line">            temp.block(self, key, oldValue, newValue);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">#pragma mark inline</span><br><span class="line">static force_inline NSString * private_setterForKey(NSString *key)&#123;</span><br><span class="line">    key = private_lowerToUpper(key, 0);</span><br><span class="line">    return [NSString stringWithFormat:@&quot;set%@:&quot;,key];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">static force_inline NSString * private_lowerToUpper(NSString *str,NSInteger location)&#123;</span><br><span class="line">    NSRange range = NSMakeRange(location, 1);</span><br><span class="line">    NSString *lowerLetter = [str substringWithRange:range];</span><br><span class="line">    return [str stringByReplacingCharactersInRange:range withString:lowerLetter.uppercaseString];</span><br><span class="line">&#125;</span><br><span class="line">static force_inline NSString * private_upperTolower(NSString *str,NSInteger location)&#123;</span><br><span class="line">    NSRange range = NSMakeRange(location, 1);</span><br><span class="line">    NSString *lowerLetter = [str substringWithRange:range];</span><br><span class="line">    return [str stringByReplacingCharactersInRange:range withString:lowerLetter.lowercaseString];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h1><p><a href="https://github.com/FlyOceanFish/NSObject-FOFKVO" target="_blank" rel="noopener">github完整代码地址</a></p>
+<h1 id="资料"><a href="#资料" class="headerlink" title="资料"></a>资料</h1><p>以下两篇苹果官方文档很详细，建议大家要想仔细研究KVO和KVC的话，最好先仔细看一下以下两篇文档，这两篇文章基本上够用了。因为网上一些非官方的文档都是自己的理解，不一定对。</p>
+<ul>
+<li><a href="https://developer.apple.com/library/content/documentation/Cocoa/Conceptual/KeyValueObserving/KeyValueObserving.html#//apple_ref/doc/uid/10000177-BCICJDHA" target="_blank" rel="noopener">KVO</a></li>
+<li><a href="https://developer.apple.com/library/content/documentation/Cocoa/Conceptual/KeyValueCoding/index.html#//apple_ref/doc/uid/10000107-SW1" target="_blank" rel="noopener">KVC</a></li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/02/26/iOS11文件存储最佳实践/" rel="next" title="iOS11文件存储最佳实践">
+                <i class="fa fa-chevron-left"></i> iOS11文件存储最佳实践
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/12/Python基础知识分享/" rel="prev" title="Python基础知识分享">
+                Python基础知识分享 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="vcomments"></div>
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="FlyOceanFish">
+            
+              <p class="site-author-name" itemprop="name">FlyOceanFish</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">83</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://kyson.cn/" title="kyson的技术博客" target="_blank">kyson的技术博客</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#KVO是什么"><span class="nav-number">1.</span> <span class="nav-text">KVO是什么</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#苹果内部实现细节"><span class="nav-number">2.</span> <span class="nav-text">苹果内部实现细节</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#自己具体实现KVO"><span class="nav-number">3.</span> <span class="nav-text">自己具体实现KVO</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#完整代码"><span class="nav-number">4.</span> <span class="nav-text">完整代码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#资料"><span class="nav-number">5.</span> <span class="nav-text">资料</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">FlyOceanFish</span>
+
+  
+</div>
+
+<!--
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.3</div>
+
+-->
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine@1.1.6/dist/Valine.min.js"></script>
+  <script type="text/javascript">
+    new Valine({
+        av: AV,
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        app_id: 'BUyek27xhBJW608unzBEyhWI-gzGzoHsz',
+        app_key: 'lT2NUWTMwPfNYl6xMQUtUxDv',
+        placeholder: '请输入评论'
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.3"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=5.1.3"></script>
+
+
+  
+
+</body>
+</html>
+<script type="text/javascript" src="/js/src/love.js"></script>

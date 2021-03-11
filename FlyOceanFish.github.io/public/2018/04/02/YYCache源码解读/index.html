@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="iOS,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="开头俗话说三人行必有我师，所以我们得多向他人学习。于是选了YYCache这一大神开源的缓存框架进行代码的研究和学习。作者这里仅仅做一个自身的总结和将一些感悟写出了。 思路简析YYCache包含两部分：内存缓存(YYMemoryCache)和物理缓存(YYDiskCache)。通过YYCache对两者的封装，提供统一接口，完成了对缓存的实现。 存数据1234- (void)setObject:(id">
+<meta name="keywords" content="iOS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="读YYCache源码总结">
+<meta property="og:url" content="http://yoursite.com/2018/04/02/YYCache源码解读/index.html">
+<meta property="og:site_name" content="FlyOceanFish&#39; Blog">
+<meta property="og:description" content="开头俗话说三人行必有我师，所以我们得多向他人学习。于是选了YYCache这一大神开源的缓存框架进行代码的研究和学习。作者这里仅仅做一个自身的总结和将一些感悟写出了。 思路简析YYCache包含两部分：内存缓存(YYMemoryCache)和物理缓存(YYDiskCache)。通过YYCache对两者的封装，提供统一接口，完成了对缓存的实现。 存数据1234- (void)setObject:(id">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-04-02T03:07:00.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="读YYCache源码总结">
+<meta name="twitter:description" content="开头俗话说三人行必有我师，所以我们得多向他人学习。于是选了YYCache这一大神开源的缓存框架进行代码的研究和学习。作者这里仅仅做一个自身的总结和将一些感悟写出了。 思路简析YYCache包含两部分：内存缓存(YYMemoryCache)和物理缓存(YYDiskCache)。通过YYCache对两者的封装，提供统一接口，完成了对缓存的实现。 存数据1234- (void)setObject:(id">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/04/02/YYCache源码解读/">
+
+
+
+
+
+  <title>读YYCache源码总结 | FlyOceanFish' Blog</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?8f73d05f1a471433ed938c462af80741";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <a href="https://github.com/FlyOceanFish"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">FlyOceanFish' Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">You Believe,You Can</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/02/YYCache源码解读/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="FlyOceanFish">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FlyOceanFish' Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">读YYCache源码总结</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-02T11:07:00+08:00">
+                2018-04-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="开头"><a href="#开头" class="headerlink" title="开头"></a>开头</h1><p>俗话说三人行必有我师，所以我们得多向他人学习。于是选了<code>YYCache</code>这一大神开源的缓存框架进行代码的研究和学习。作者这里仅仅做一个自身的总结和将一些感悟写出了。</p>
+<h1 id="思路简析"><a href="#思路简析" class="headerlink" title="思路简析"></a>思路简析</h1><p><code>YYCache</code>包含两部分：内存缓存(<code>YYMemoryCache</code>)和物理缓存(<code>YYDiskCache</code>)。通过<code>YYCache</code>对两者的封装，提供统一接口，完成了对缓存的实现。</p>
+<h2 id="存数据"><a href="#存数据" class="headerlink" title="存数据"></a>存数据</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">- (void)setObject:(id&lt;NSCoding&gt;)object forKey:(NSString *)key &#123;</span><br><span class="line">    [_memoryCache setObject:object forKey:key];</span><br><span class="line">    [_diskCache setObject:object forKey:key];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>首先是将数据存入缓存，同时在物理硬盘上缓存一份</p>
+<h2 id="取数据"><a href="#取数据" class="headerlink" title="取数据"></a>取数据</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">- (id&lt;NSCoding&gt;)objectForKey:(NSString *)key &#123;</span><br><span class="line">    id&lt;NSCoding&gt; object = [_memoryCache objectForKey:key];</span><br><span class="line">    if (!object) &#123;</span><br><span class="line">        object = [_diskCache objectForKey:key];</span><br><span class="line">        if (object) &#123;</span><br><span class="line">            [_memoryCache setObject:object forKey:key];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return object;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>取数据首先是从内存取(因为内存中读取是比物理硬盘读取速度快很多的)，如果取不到(由于<code>YYMemoryCache</code>对可存大小、时间等的限制，会清除一些内存数据)；<br>这时候从物理硬盘取(其实物理硬盘也是有限制的，所以也不一定能取到),如果取到了<strong><em>同时存入内存中</em></strong>(这样下次取的时候，可以直接从内存中取出，速度会大大提升)</p>
+<blockquote>
+<p>其实大部分的的缓存实现比如<code>SDImageCache</code>等实现思路都是这样的，真正的差别主要是内存缓存和物理硬盘缓存具体实现细节上的差别</p>
+</blockquote>
+<h1 id="YYMemoryCache"><a href="#YYMemoryCache" class="headerlink" title="YYMemoryCache"></a><code>YYMemoryCache</code></h1><p><code>YYMemoryCache</code>采用的是双向链表和Dictionary结合的技术，实现了增删时间复杂度是O(1)。双向链表通过MRU和LRU的思想进行删除和增加<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">- (void)setObject:(id)object forKey:(id)key withCost:(NSUInteger)cost &#123;</span><br><span class="line">    if (!key) return;</span><br><span class="line">    if (!object) &#123;</span><br><span class="line">        [self removeObjectForKey:key];</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    pthread_mutex_lock(&amp;_lock);//使用pthread互斥锁，原先是OSSpinLock，后来作者更换了。不过可能由于后期好久没维护了，所以没使用苹果的os_unfair_lock替换品</span><br><span class="line">    _YYLinkedMapNode *node = CFDictionaryGetValue(_lru-&gt;_dic, (__bridge const void *)(key));//之前存储过的话就取出来并将其放到双向链表的第一个。MRU</span><br><span class="line">    NSTimeInterval now = CACurrentMediaTime();</span><br><span class="line">    if (node) &#123;</span><br><span class="line">        _lru-&gt;_totalCost -= node-&gt;_cost;</span><br><span class="line">        _lru-&gt;_totalCost += cost;</span><br><span class="line">        node-&gt;_cost = cost;</span><br><span class="line">        node-&gt;_time = now;</span><br><span class="line">        node-&gt;_value = object;</span><br><span class="line">        [_lru bringNodeToHead:node];//放到第一个</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        node = [_YYLinkedMapNode new];//如果之前没有存储的话，实例化一个并且插入头部</span><br><span class="line">        node-&gt;_cost = cost;</span><br><span class="line">        node-&gt;_time = now;</span><br><span class="line">        node-&gt;_key = key;</span><br><span class="line">        node-&gt;_value = object;</span><br><span class="line">        [_lru insertNodeAtHead:node];</span><br><span class="line">    &#125;</span><br><span class="line">    if (_lru-&gt;_totalCost &gt; _costLimit) &#123;</span><br><span class="line">        dispatch_async(_queue, ^&#123;</span><br><span class="line">            [self trimToCost:_costLimit];</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    if (_lru-&gt;_totalCount &gt; _countLimit) &#123;</span><br><span class="line">        _YYLinkedMapNode *node = [_lru removeTailNode];//如果超过数量限制，删除链表的最后一个。LRU</span><br><span class="line">        if (_lru-&gt;_releaseAsynchronously) &#123;</span><br><span class="line">            dispatch_queue_t queue = _lru-&gt;_releaseOnMainThread ? dispatch_get_main_queue() : YYMemoryCacheGetReleaseQueue();</span><br><span class="line">            dispatch_async(queue, ^&#123;</span><br><span class="line">                [node class]; //随便调一下方法，目的就是将对象的释放放到子线程里边</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125; else if (_lru-&gt;_releaseOnMainThread &amp;&amp; !pthread_main_np()) &#123;</span><br><span class="line">            dispatch_async(dispatch_get_main_queue(), ^&#123;</span><br><span class="line">                [node class]; //hold and release in queue</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    pthread_mutex_unlock(&amp;_lock);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="YYDiskCache"><a href="#YYDiskCache" class="headerlink" title="YYDiskCache"></a><code>YYDiskCache</code></h1><p><code>YYDiskCache</code>物理缓存采用的是文件和SQLite结合的方式，作者是低于20k存储到SQLite，超过20k存储文件。关于20k的阈值，本人有点疑惑。 <a href="http://www.sqlite.org/intern-v-extern-blob.html" target="_blank" rel="noopener">SQLite 官网的描述</a>官网最后的结论写的是100k，20k有可能YYCache的作者是通过观察实现数据做出的结论吧。<br>物理缓存使用的锁是信号，主要是信号不用消耗CPU<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">- (void)setObject:(id&lt;NSCoding&gt;)object forKey:(NSString *)key &#123;</span><br><span class="line">    if (!key) return;</span><br><span class="line">    if (!object) &#123;</span><br><span class="line">        [self removeObjectForKey:key];</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    NSData *extendedData = [YYDiskCache getExtendedDataFromObject:object];</span><br><span class="line">    NSData *value = nil;</span><br><span class="line">    if (_customArchiveBlock) &#123;</span><br><span class="line">        value = _customArchiveBlock(object);</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        @try &#123;</span><br><span class="line">            value = [NSKeyedArchiver archivedDataWithRootObject:object];</span><br><span class="line">        &#125;</span><br><span class="line">        @catch (NSException *exception) &#123;</span><br><span class="line">            // nothing to do...</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    if (!value) return;</span><br><span class="line">    NSString *filename = nil;</span><br><span class="line">    if (_kv.type != YYKVStorageTypeSQLite) &#123;//YYCache默认使用的是混合模式</span><br><span class="line">        if (value.length &gt; _inlineThreshold) &#123;//是否大于阈值20k，大于的话使用文件存储</span><br><span class="line">            filename = [self _filenameForKey:key];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    Lock();//信号锁</span><br><span class="line">    [_kv saveItemWithKey:key value:value filename:filename extendedData:extendedData];</span><br><span class="line">    Unlock();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="感悟"><a href="#感悟" class="headerlink" title="感悟"></a>感悟</h1><p>本文没有很详细的解析源码，主要提取了一些重要片段进行了解析。因为YYCache的整体源码思路非常清晰，代码很整洁，所以读起来一点不费事，这里主要讲述思路，详细的完整实现建议亲自去读源码。非常佩服YYKit大神的工匠精神，为了写一个YYCache框架其实是调研了许多的第三方框架和资料。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/26/算法(调整奇数偶数顺序)/" rel="next" title="算法(调整奇数偶数顺序)">
+                <i class="fa fa-chevron-left"></i> 算法(调整奇数偶数顺序)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/03/mmap文件内存映射详解/" rel="prev" title="iOS文件内存映射详解(mmap)">
+                iOS文件内存映射详解(mmap) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="vcomments"></div>
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="FlyOceanFish">
+            
+              <p class="site-author-name" itemprop="name">FlyOceanFish</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">83</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://kyson.cn/" title="kyson的技术博客" target="_blank">kyson的技术博客</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#开头"><span class="nav-number">1.</span> <span class="nav-text">开头</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#思路简析"><span class="nav-number">2.</span> <span class="nav-text">思路简析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#存数据"><span class="nav-number">2.1.</span> <span class="nav-text">存数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#取数据"><span class="nav-number">2.2.</span> <span class="nav-text">取数据</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#YYMemoryCache"><span class="nav-number">3.</span> <span class="nav-text">YYMemoryCache</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#YYDiskCache"><span class="nav-number">4.</span> <span class="nav-text">YYDiskCache</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#感悟"><span class="nav-number">5.</span> <span class="nav-text">感悟</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">FlyOceanFish</span>
+
+  
+</div>
+
+<!--
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.3</div>
+
+-->
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine@1.1.6/dist/Valine.min.js"></script>
+  <script type="text/javascript">
+    new Valine({
+        av: AV,
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        app_id: 'BUyek27xhBJW608unzBEyhWI-gzGzoHsz',
+        app_key: 'lT2NUWTMwPfNYl6xMQUtUxDv',
+        placeholder: '请输入评论'
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.3"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=5.1.3"></script>
+
+
+  
+
+</body>
+</html>
+<script type="text/javascript" src="/js/src/love.js"></script>

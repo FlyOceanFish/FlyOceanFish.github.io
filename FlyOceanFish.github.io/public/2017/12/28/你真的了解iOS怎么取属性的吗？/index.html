@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="iOS,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="如果iOS中谈到取属性，相信大家都会夸夸其谈，不就是get方法吗？或者大谈kvc取属性的机制。不得不说这些也是对的。这时大家可能就疑惑了，那你还要说啥的！！大家不妨想想，这些都是代码层的实现，其实我们的代码最终都会被编译，然后加载到内存中，那你在内存中是怎么取到属性的呢？？对的我们讨论就是它！ 指针如果说到内存，不知道大家会不会想到指针呢？这里简单介绍一下，让大家有个简单的理解。如果理解不了的话，">
+<meta name="keywords" content="iOS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="你真的了解iOS怎么取属性的吗？">
+<meta property="og:url" content="http://yoursite.com/2017/12/28/你真的了解iOS怎么取属性的吗？/index.html">
+<meta property="og:site_name" content="FlyOceanFish&#39; Blog">
+<meta property="og:description" content="如果iOS中谈到取属性，相信大家都会夸夸其谈，不就是get方法吗？或者大谈kvc取属性的机制。不得不说这些也是对的。这时大家可能就疑惑了，那你还要说啥的！！大家不妨想想，这些都是代码层的实现，其实我们的代码最终都会被编译，然后加载到内存中，那你在内存中是怎么取到属性的呢？？对的我们讨论就是它！ 指针如果说到内存，不知道大家会不会想到指针呢？这里简单介绍一下，让大家有个简单的理解。如果理解不了的话，">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/6644906-477a0927a87fd05e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2018-01-16T13:28:44.807Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="你真的了解iOS怎么取属性的吗？">
+<meta name="twitter:description" content="如果iOS中谈到取属性，相信大家都会夸夸其谈，不就是get方法吗？或者大谈kvc取属性的机制。不得不说这些也是对的。这时大家可能就疑惑了，那你还要说啥的！！大家不妨想想，这些都是代码层的实现，其实我们的代码最终都会被编译，然后加载到内存中，那你在内存中是怎么取到属性的呢？？对的我们讨论就是它！ 指针如果说到内存，不知道大家会不会想到指针呢？这里简单介绍一下，让大家有个简单的理解。如果理解不了的话，">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/6644906-477a0927a87fd05e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/12/28/你真的了解iOS怎么取属性的吗？/">
+
+
+
+
+
+  <title>你真的了解iOS怎么取属性的吗？ | FlyOceanFish' Blog</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?8f73d05f1a471433ed938c462af80741";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <a href="https://github.com/FlyOceanFish"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">FlyOceanFish' Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">You Believe,You Can</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/28/你真的了解iOS怎么取属性的吗？/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="FlyOceanFish">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FlyOceanFish' Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">你真的了解iOS怎么取属性的吗？</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-28T13:10:00+08:00">
+                2017-12-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>如果iOS中谈到取属性，相信大家都会夸夸其谈，不就是get方法吗？或者大谈kvc取属性的机制。不得不说这些也是对的。这时大家可能就疑惑了，那你还要说啥的！！大家不妨想想，这些都是代码层的实现，其实我们的代码最终都会被编译，然后加载到内存中，那你在内存中是怎么取到属性的呢？？对的我们讨论就是它！</p>
+<h2 id="指针"><a href="#指针" class="headerlink" title="指针"></a>指针</h2><p>如果说到内存，不知道大家会不会想到<strong>指针</strong>呢？这里简单介绍一下，让大家有个简单的理解。如果理解不了的话，建议大家找一个C语言的教程，学一下指针。</p>
+<blockquote>
+<p>指针（Pointer）是编程语言中的一个对象，利用地址，它的值直接指向（points to）存在电脑存储器中另一个地方的值。由于通过地址能找到所需的变量单元，可以说，地址指向该变量单元。因此，将地址形象化的称为“指针”。意思是通过它能找到以它为地址的内存单元。</p>
+</blockquote>
+<ul>
+<li>那到底什么是指针呢？？<blockquote>
+<p>类型 * 变量名</p>
+</blockquote>
+</li>
+</ul>
+<p>这就是声明了一个指针变量</p>
+<ul>
+<li>指针类型有什么作用呢？</li>
+</ul>
+<p>比如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">int* num;</div></pre></td></tr></table></figure></p>
+<p><font color="red">指针变量的类型决定了通过这个指针找到变量的首地址以后，连续操作多少个字节空间</font><br>为什么会说连续操作多少个字节空间？？主要是指针有算术运算加减，说白了就是指针的移动。</p>
+<ul>
+<li><p>指针是int* 连续操作4个字节</p>
+</li>
+<li><p>指针是double* 连续操作8个字节</p>
+</li>
+</ul>
+<p>比如:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">int* p = &amp;num;</div><div class="line">p++;</div></pre></td></tr></table></figure></p>
+<p>当指针+1的时候，这时候指针要移动1个单元，而不是1个字节！！<br>那到底这1个单元是多大呢？其实1个单元的大小就是指针类型的大小。这里是<code>int</code>型，所以移动了4个字节</p>
+<hr>
+<p>以上就是简单给大家做了<strong>指针</strong>介绍，其实理解了指针，对于我们出现的一些野指针的bug、runtime源码中的一些机制等等是有所帮助的。言归正传。接下来让我看一道题，真正的去了解内存和指针的关系。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">int num1 = 10;</div><div class="line">int num = 20;</div><div class="line">int* p = &amp;num;</div><div class="line">p++;</div><div class="line">printf(&quot;%d\n&quot;,*p);//打印为10，因为p++，指针已经移动了4个字节，下一个内存存储10正好是4个字节</div></pre></td></tr></table></figure>
+<p>这里其实是前边声明了一个num1，正好是4个字节，所以就将10取出来了。（说白了就是内存中下一个连续的4个字节存的是什么取出来就是什么）</p>
+<p>说了这么多都是指针和内存，建议大家搞明白以上内容再读以下的内容，如果上边都搞不明白的话，下边有关iOS中runtime取属性的内容有可能就会云里雾里。</p>
+<h2 id="iOS中成员变量与属性"><a href="#iOS中成员变量与属性" class="headerlink" title="iOS中成员变量与属性"></a>iOS中成员变量与属性</h2><p>以下题目是sunnyxx习题中的一题，网上也有详细的<a href="http://blog.csdn.net/shznt/article/details/50481819" target="_blank" rel="external">答案</a>。这里作者就简述一下自己的理解，如果想看非常详细的答案的话可以点击上边的链接。</p>
+<p>下面代码会? Compile Error / Runtime Crash / NSLog…?</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div></pre></td><td class="code"><pre><div class="line">@interface Sark : NSObject</div><div class="line"></div><div class="line">@property (nonatomic, copy) NSString *name;</div><div class="line"></div><div class="line">@end</div><div class="line"></div><div class="line">@implementation Sark</div><div class="line"></div><div class="line">- (void)speak</div><div class="line"></div><div class="line">&#123;</div><div class="line"></div><div class="line">    NSLog(@&quot;my name is %@&quot;, self.name);</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line">@end</div><div class="line"></div><div class="line">@interface Test : NSObject</div><div class="line"></div><div class="line">@end</div><div class="line"></div><div class="line">@implementation Test</div><div class="line"></div><div class="line">- (instancetype)init</div><div class="line"></div><div class="line">&#123;</div><div class="line"></div><div class="line">    self = [super init];</div><div class="line"></div><div class="line">    if (self) &#123;</div><div class="line"></div><div class="line">        id cls = [Sark class];</div><div class="line"></div><div class="line">        void *obj = &amp;cls;</div><div class="line"></div><div class="line">        [(__bridge id)obj speak];</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    return self;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line">@end</div><div class="line"></div><div class="line">int main(int argc, const char * argv[]) &#123;</div><div class="line"></div><div class="line">    @autoreleasepool &#123;</div><div class="line"></div><div class="line">        [[Test alloc] init];</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    return 0;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>答案：代码正常输出，输出结果为：</p>
+<blockquote>
+<p>2014-11-07 14:08:25.698 Test[1097:57255] my name is</p>
+</blockquote>
+<ul>
+<li>为什么能够正常运行，并调用到speak方法？</li>
+</ul>
+<p>计算机将我们的<code>Sark</code>类信息通过<br><code>id cls = [Sark class];</code>这一行加载到内存中，并且取得了<code>cls</code>变量。这个时候其实我们只要知道<code>cls</code>这个变量的地址就行了,其实相当于类的对象的地址。<code>void *obj = &amp;cls;</code>这句话就让我们获得了对象的地址。(平时我们<code>new</code>对象的时候就干了两件事：1、申请内存；2、获取内存的地址(对象变量的地址就是内存的地址)，这里的对象与我们<code>new</code>出来的对象有所不同。但是虽然不是new对象,iOS中<code>Class</code>对象已经存储了我们需要的东西。比如有关变量的内存<strong>偏移</strong>、方法等等所有的信息）接下来可以干我们想干的任何事情了。</p>
+<blockquote>
+<p>iOS中<code>Class</code>中存储了我们想要的东西，这一块的知识要上升到了runtime的源码，上边给到的链接中有详细介绍。其实大家想想编译完之后肯定得有一个类或者其他东西存储着有关内存等等相关的信息的。</p>
+</blockquote>
+<ul>
+<li>为什么self.name会输出?</li>
+</ul>
+<p>我们程序在编译之后其实就是一堆的汇编指令，汇编操作的就是<strong>内存地址</strong>。所以当我们程序运行的时候都是<strong>寄存器</strong>一条条的执行汇编指令。其实执行汇编指令最重要的就是变量、方法、对象等等的一大堆地址，因为寄存器有限，所以会把有限的数据从内存中加载到寄存器。所以总得来说是操作寄存器的地址和内存地址。如果没有地址那怎么知道执行什么呢？所以只要有地址了就好办了。</p>
+<p>指令如下图：<br><img src="http://upload-images.jianshu.io/upload_images/6644906-477a0927a87fd05e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p>变量对应于runtime的objc_ivar代码如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">struct objc_ivar &#123;</div><div class="line"></div><div class="line">    char *ivar_name                                          OBJC2_UNAVAILABLE;</div><div class="line"></div><div class="line">    char *ivar_type                                          OBJC2_UNAVAILABLE;</div><div class="line"></div><div class="line">    int ivar_offset                                          OBJC2_UNAVAILABLE;</div><div class="line"></div><div class="line">#ifdef __LP64__</div><div class="line"></div><div class="line">    int space                                                OBJC2_UNAVAILABLE;</div><div class="line"></div><div class="line">#endif</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>其中 <code>ivar_offset</code>就是变量的地址偏移字节。</p>
+<blockquote>
+<p>变量地址=对象地址 ＋ 基类大小 + ivar偏移字节</p>
+</blockquote>
+<p>到这里再结合我上边指针的铺垫相信大家应该明白了为什么为什self.name会输出吧。</p>
+<p>其实通过这里我们也知道了其实iOS中取对象就是指针的偏移。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">Student *student = [[Student alloc] init];</div><div class="line"></div><div class="line">  Ivar age_ivar = class_getInstanceVariable(object_getClass(student), &quot;age&quot;);</div><div class="line"></div><div class="line">  int *age_pointer = (int *)((__bridge void *)(student) + ivar_getOffset(age_ivar));</div><div class="line"></div><div class="line">  NSLog(@&quot;age ivar offset = %td&quot;, ivar_getOffset(age_ivar));</div><div class="line"></div><div class="line">  *age_pointer = 10;</div><div class="line"></div><div class="line">  NSLog(@&quot;%@&quot;, student);</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/12/20/iOS带有placeholder的输入框/" rel="next" title="iOS带有placeholder的输入框">
+                <i class="fa fa-chevron-left"></i> iOS带有placeholder的输入框
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/09/iOS中类、元类、isa/" rel="prev" title="iOS中类、元类、isa详解">
+                iOS中类、元类、isa详解 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="vcomments"></div>
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="FlyOceanFish">
+            
+              <p class="site-author-name" itemprop="name">FlyOceanFish</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">83</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://kyson.cn/" title="kyson的技术博客" target="_blank">kyson的技术博客</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#指针"><span class="nav-number">1.</span> <span class="nav-text">指针</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#iOS中成员变量与属性"><span class="nav-number">2.</span> <span class="nav-text">iOS中成员变量与属性</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">FlyOceanFish</span>
+
+  
+</div>
+
+<!--
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.3</div>
+
+-->
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine@1.1.6/dist/Valine.min.js"></script>
+  <script type="text/javascript">
+    new Valine({
+        av: AV,
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        app_id: 'BUyek27xhBJW608unzBEyhWI-gzGzoHsz',
+        app_key: 'lT2NUWTMwPfNYl6xMQUtUxDv',
+        placeholder: '请输入评论'
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.3"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=5.1.3"></script>
+
+
+  
+
+</body>
+</html>
+<script type="text/javascript" src="/js/src/love.js"></script>
